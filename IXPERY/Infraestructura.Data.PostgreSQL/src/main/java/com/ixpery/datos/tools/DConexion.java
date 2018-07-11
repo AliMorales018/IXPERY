@@ -7,7 +7,7 @@ public class DConexion {
     }
 
     public Datacnx ConectarBD() throws Exception{
-        return new Datacnx("192.168.0.20", "5432", "IXPERY2", "postgres", "admin");
+        return new Datacnx("192.168.0.22", "5432", "IXPERY2", "postgres", "admin");
     }
 
 
