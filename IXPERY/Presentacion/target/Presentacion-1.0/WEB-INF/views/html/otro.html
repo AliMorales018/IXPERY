@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .ocultar{
+            display: none;}
+        #capa1{ position:absolute; z-index:1; }
+        #capa2{ position:absolute; z-index:0; }
+        #caja, #s{
+            width: 100px;
+        }
+        #s{
+            outline:0px;
+        }
+
+
+    </style>
+    <script src="../../../resources/js/jquery-3.3.1.js"></script>
+
+</head>
+<body>
+<div><h1>TEST</h1></div>
+<div id="capa1"><input type="text" placeholder="seleccionar" id="caja"></div>
+<div id="capa2">
+    <select id="s">
+        <option>aaa</option>
+        <option>bbb</option>
+        <option>ccc</option>
+        <option>aaa</option>
+        <option>bbb</option>
+        <option>ccc</option>
+        <option>aaa</option>
+        <option>bbb</option>
+        <option>ccc</option>
+        <option>bbb</option>
+        <option>ccc</option>
+        <option>aaa</option>
+        <option>bbb</option>
+        <option>ccc</option>
+    </select>
+</div>
+<div><h1>11111111111111111111111111111111111</h1></div>
+<div><h1>22222222222222222222222222222222222</h1></div>
+<div><h1>33333333333333333333333333333333333</h1></div>
+<script>
+    // $(document).ready(function(){
+    //     $('.click').click(function(){
+    //         $('#s').attr('size',$('#s option').length);
+    //     });
+    // });
+
+    // $('textarea').keyup(function(e){
+    //     if(e.keyCode == 13)
+    //     {
+    //         $(this).trigger("enterKey");
+    //     }
+    // });
+
+    $(document).ready(function(){
+
+
+        $('#caja').keyup(function(e){
+            if(e.keyCode == 13){
+                $('#s').attr('size', function(){
+                    var length = $('#s option').length;
+                    if(length <= 4){
+                        return length;
+                    }
+                    else{
+                        return 4;
+                    }
+                });
+                //$('#s').click();
+                // if(window.location.hash){
+                //     $('#s').prev.click();
+                // }
+
+                $(this).addClass("ocultar");
+
+            }
+        });
+
+
+        $('#s option').click(function(){
+            $(this).attr('selected', true);
+            $('#s').attr('size', false);
+            $('#caja').val(this.value).removeClass("ocultar");
+        });
+
+
+
+
+
+
+
+
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,4889 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="IXPERY2@192.168.0.18">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="4.9">
+    <root id="1">
+      <ServerVersion>10.4</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="IXPER">
+      <ObjectId>56574</ObjectId>
+    </database>
+    <database id="3" parent="1" name="IXPERY">
+      <ObjectId>16393</ObjectId>
+    </database>
+    <database id="4" parent="1" name="IXPERY2">
+      <ObjectId>54996</ObjectId>
+      <IntrospectionStateNumber>116</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <database id="5" parent="1" name="bd_maqueta">
+      <ObjectId>16460</ObjectId>
+    </database>
+    <database id="6" parent="1" name="ixper">
+      <ObjectId>46878</ObjectId>
+    </database>
+    <database id="7" parent="1" name="postgres">
+      <ObjectId>12938</ObjectId>
+      <Comment>default administrative connection database</Comment>
+    </database>
+    <role id="8" parent="1" name="pg_monitor">
+      <ObjectId>3373</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="9" parent="1" name="pg_read_all_settings">
+      <ObjectId>3374</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="10" parent="1" name="pg_read_all_stats">
+      <ObjectId>3375</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="11" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="12" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="13" parent="1" name="postgres">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <Replication>1</Replication>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <BypassRls>1</BypassRls>
+    </role>
+    <schema id="14" parent="4" name="LOG">
+      <ObjectId>54998</ObjectId>
+      <IntrospectionTimestamp>2018-07-11.10:07:14.755</IntrospectionTimestamp>
+      <IntrospectionStateNumber>11308</IntrospectionStateNumber>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="15" parent="4" name="RHH">
+      <ObjectId>54999</ObjectId>
+      <IntrospectionTimestamp>2018-07-11.10:07:14.755</IntrospectionTimestamp>
+      <IntrospectionStateNumber>11976</IntrospectionStateNumber>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="16" parent="4" name="SYS">
+      <ObjectId>56052</ObjectId>
+      <IntrospectionTimestamp>2018-07-11.10:07:14.755</IntrospectionTimestamp>
+      <IntrospectionStateNumber>8033</IntrospectionStateNumber>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="17" parent="4" name="information_schema">
+      <ObjectId>12648</ObjectId>
+    </schema>
+    <schema id="18" parent="4" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+      <Comment>system catalog schema</Comment>
+    </schema>
+    <schema id="19" parent="4" name="pg_temp_1">
+      <ObjectId>11736</ObjectId>
+    </schema>
+    <schema id="20" parent="4" name="pg_temp_10">
+      <ObjectId>55778</ObjectId>
+    </schema>
+    <schema id="21" parent="4" name="pg_temp_11">
+      <ObjectId>58172</ObjectId>
+    </schema>
+    <schema id="22" parent="4" name="pg_temp_12">
+      <ObjectId>55883</ObjectId>
+    </schema>
+    <schema id="23" parent="4" name="pg_temp_13">
+      <ObjectId>56033</ObjectId>
+    </schema>
+    <schema id="24" parent="4" name="pg_temp_14">
+      <ObjectId>58150</ObjectId>
+    </schema>
+    <schema id="25" parent="4" name="pg_temp_15">
+      <ObjectId>58393</ObjectId>
+    </schema>
+    <schema id="26" parent="4" name="pg_temp_16">
+      <ObjectId>58161</ObjectId>
+    </schema>
+    <schema id="27" parent="4" name="pg_temp_17">
+      <ObjectId>55736</ObjectId>
+    </schema>
+    <schema id="28" parent="4" name="pg_temp_18">
+      <ObjectId>59017</ObjectId>
+    </schema>
+    <schema id="29" parent="4" name="pg_temp_19">
+      <ObjectId>57688</ObjectId>
+    </schema>
+    <schema id="30" parent="4" name="pg_temp_20">
+      <ObjectId>69223</ObjectId>
+    </schema>
+    <schema id="31" parent="4" name="pg_temp_21">
+      <ObjectId>55980</ObjectId>
+    </schema>
+    <schema id="32" parent="4" name="pg_temp_22">
+      <ObjectId>55994</ObjectId>
+    </schema>
+    <schema id="33" parent="4" name="pg_temp_23">
+      <ObjectId>57865</ObjectId>
+    </schema>
+    <schema id="34" parent="4" name="pg_temp_24">
+      <ObjectId>57838</ObjectId>
+    </schema>
+    <schema id="35" parent="4" name="pg_temp_25">
+      <ObjectId>57840</ObjectId>
+    </schema>
+    <schema id="36" parent="4" name="pg_temp_26">
+      <ObjectId>57854</ObjectId>
+    </schema>
+    <schema id="37" parent="4" name="pg_temp_27">
+      <ObjectId>57870</ObjectId>
+    </schema>
+    <schema id="38" parent="4" name="pg_temp_28">
+      <ObjectId>57884</ObjectId>
+    </schema>
+    <schema id="39" parent="4" name="pg_temp_29">
+      <ObjectId>58025</ObjectId>
+    </schema>
+    <schema id="40" parent="4" name="pg_temp_30">
+      <ObjectId>57889</ObjectId>
+    </schema>
+    <schema id="41" parent="4" name="pg_temp_31">
+      <ObjectId>57897</ObjectId>
+    </schema>
+    <schema id="42" parent="4" name="pg_temp_32">
+      <ObjectId>57902</ObjectId>
+    </schema>
+    <schema id="43" parent="4" name="pg_temp_33">
+      <ObjectId>57907</ObjectId>
+    </schema>
+    <schema id="44" parent="4" name="pg_temp_34">
+      <ObjectId>57915</ObjectId>
+    </schema>
+    <schema id="45" parent="4" name="pg_temp_35">
+      <ObjectId>57926</ObjectId>
+    </schema>
+    <schema id="46" parent="4" name="pg_temp_36">
+      <ObjectId>57927</ObjectId>
+    </schema>
+    <schema id="47" parent="4" name="pg_temp_37">
+      <ObjectId>57939</ObjectId>
+    </schema>
+    <schema id="48" parent="4" name="pg_temp_38">
+      <ObjectId>57944</ObjectId>
+    </schema>
+    <schema id="49" parent="4" name="pg_temp_39">
+      <ObjectId>60557</ObjectId>
+    </schema>
+    <schema id="50" parent="4" name="pg_temp_40">
+      <ObjectId>58042</ObjectId>
+    </schema>
+    <schema id="51" parent="4" name="pg_temp_41">
+      <ObjectId>58059</ObjectId>
+    </schema>
+    <schema id="52" parent="4" name="pg_temp_42">
+      <ObjectId>63558</ObjectId>
+    </schema>
+    <schema id="53" parent="4" name="pg_temp_43">
+      <ObjectId>59083</ObjectId>
+    </schema>
+    <schema id="54" parent="4" name="pg_temp_44">
+      <ObjectId>63773</ObjectId>
+    </schema>
+    <schema id="55" parent="4" name="pg_temp_45">
+      <ObjectId>61336</ObjectId>
+    </schema>
+    <schema id="56" parent="4" name="pg_temp_46">
+      <ObjectId>63838</ObjectId>
+    </schema>
+    <schema id="57" parent="4" name="pg_temp_47">
+      <ObjectId>63843</ObjectId>
+    </schema>
+    <schema id="58" parent="4" name="pg_temp_48">
+      <ObjectId>63854</ObjectId>
+    </schema>
+    <schema id="59" parent="4" name="pg_temp_49">
+      <ObjectId>63928</ObjectId>
+    </schema>
+    <schema id="60" parent="4" name="pg_temp_5">
+      <ObjectId>55896</ObjectId>
+    </schema>
+    <schema id="61" parent="4" name="pg_temp_50">
+      <ObjectId>63951</ObjectId>
+    </schema>
+    <schema id="62" parent="4" name="pg_temp_51">
+      <ObjectId>63974</ObjectId>
+    </schema>
+    <schema id="63" parent="4" name="pg_temp_52">
+      <ObjectId>64000</ObjectId>
+    </schema>
+    <schema id="64" parent="4" name="pg_temp_53">
+      <ObjectId>64029</ObjectId>
+    </schema>
+    <schema id="65" parent="4" name="pg_temp_54">
+      <ObjectId>64115</ObjectId>
+    </schema>
+    <schema id="66" parent="4" name="pg_temp_55">
+      <ObjectId>64195</ObjectId>
+    </schema>
+    <schema id="67" parent="4" name="pg_temp_56">
+      <ObjectId>64209</ObjectId>
+    </schema>
+    <schema id="68" parent="4" name="pg_temp_57">
+      <ObjectId>64229</ObjectId>
+    </schema>
+    <schema id="69" parent="4" name="pg_temp_58">
+      <ObjectId>64270</ObjectId>
+    </schema>
+    <schema id="70" parent="4" name="pg_temp_59">
+      <ObjectId>64386</ObjectId>
+    </schema>
+    <schema id="71" parent="4" name="pg_temp_6">
+      <ObjectId>56028</ObjectId>
+    </schema>
+    <schema id="72" parent="4" name="pg_temp_60">
+      <ObjectId>64589</ObjectId>
+    </schema>
+    <schema id="73" parent="4" name="pg_temp_61">
+      <ObjectId>64597</ObjectId>
+    </schema>
+    <schema id="74" parent="4" name="pg_temp_62">
+      <ObjectId>64617</ObjectId>
+    </schema>
+    <schema id="75" parent="4" name="pg_temp_63">
+      <ObjectId>64640</ObjectId>
+    </schema>
+    <schema id="76" parent="4" name="pg_temp_64">
+      <ObjectId>64669</ObjectId>
+    </schema>
+    <schema id="77" parent="4" name="pg_temp_65">
+      <ObjectId>64680</ObjectId>
+    </schema>
+    <schema id="78" parent="4" name="pg_temp_66">
+      <ObjectId>64685</ObjectId>
+    </schema>
+    <schema id="79" parent="4" name="pg_temp_67">
+      <ObjectId>64690</ObjectId>
+    </schema>
+    <schema id="80" parent="4" name="pg_temp_69">
+      <ObjectId>66846</ObjectId>
+    </schema>
+    <schema id="81" parent="4" name="pg_temp_7">
+      <ObjectId>55865</ObjectId>
+    </schema>
+    <schema id="82" parent="4" name="pg_temp_70">
+      <ObjectId>66863</ObjectId>
+    </schema>
+    <schema id="83" parent="4" name="pg_temp_71">
+      <ObjectId>66895</ObjectId>
+    </schema>
+    <schema id="84" parent="4" name="pg_temp_8">
+      <ObjectId>55860</ObjectId>
+    </schema>
+    <schema id="85" parent="4" name="pg_temp_9">
+      <ObjectId>59057</ObjectId>
+    </schema>
+    <schema id="86" parent="4" name="pg_toast">
+      <ObjectId>99</ObjectId>
+      <Comment>reserved schema for TOAST tables</Comment>
+    </schema>
+    <schema id="87" parent="4" name="pg_toast_temp_1">
+      <ObjectId>11737</ObjectId>
+    </schema>
+    <schema id="88" parent="4" name="pg_toast_temp_10">
+      <ObjectId>55779</ObjectId>
+    </schema>
+    <schema id="89" parent="4" name="pg_toast_temp_11">
+      <ObjectId>58173</ObjectId>
+    </schema>
+    <schema id="90" parent="4" name="pg_toast_temp_12">
+      <ObjectId>55884</ObjectId>
+    </schema>
+    <schema id="91" parent="4" name="pg_toast_temp_13">
+      <ObjectId>56034</ObjectId>
+    </schema>
+    <schema id="92" parent="4" name="pg_toast_temp_14">
+      <ObjectId>58151</ObjectId>
+    </schema>
+    <schema id="93" parent="4" name="pg_toast_temp_15">
+      <ObjectId>58394</ObjectId>
+    </schema>
+    <schema id="94" parent="4" name="pg_toast_temp_16">
+      <ObjectId>58162</ObjectId>
+    </schema>
+    <schema id="95" parent="4" name="pg_toast_temp_17">
+      <ObjectId>55737</ObjectId>
+    </schema>
+    <schema id="96" parent="4" name="pg_toast_temp_18">
+      <ObjectId>59018</ObjectId>
+    </schema>
+    <schema id="97" parent="4" name="pg_toast_temp_19">
+      <ObjectId>57689</ObjectId>
+    </schema>
+    <schema id="98" parent="4" name="pg_toast_temp_20">
+      <ObjectId>69227</ObjectId>
+    </schema>
+    <schema id="99" parent="4" name="pg_toast_temp_21">
+      <ObjectId>55981</ObjectId>
+    </schema>
+    <schema id="100" parent="4" name="pg_toast_temp_22">
+      <ObjectId>55995</ObjectId>
+    </schema>
+    <schema id="101" parent="4" name="pg_toast_temp_23">
+      <ObjectId>57866</ObjectId>
+    </schema>
+    <schema id="102" parent="4" name="pg_toast_temp_24">
+      <ObjectId>57839</ObjectId>
+    </schema>
+    <schema id="103" parent="4" name="pg_toast_temp_25">
+      <ObjectId>57842</ObjectId>
+    </schema>
+    <schema id="104" parent="4" name="pg_toast_temp_26">
+      <ObjectId>57855</ObjectId>
+    </schema>
+    <schema id="105" parent="4" name="pg_toast_temp_27">
+      <ObjectId>57871</ObjectId>
+    </schema>
+    <schema id="106" parent="4" name="pg_toast_temp_28">
+      <ObjectId>57885</ObjectId>
+    </schema>
+    <schema id="107" parent="4" name="pg_toast_temp_29">
+      <ObjectId>58026</ObjectId>
+    </schema>
+    <schema id="108" parent="4" name="pg_toast_temp_30">
+      <ObjectId>57891</ObjectId>
+    </schema>
+    <schema id="109" parent="4" name="pg_toast_temp_31">
+      <ObjectId>57898</ObjectId>
+    </schema>
+    <schema id="110" parent="4" name="pg_toast_temp_32">
+      <ObjectId>57903</ObjectId>
+    </schema>
+    <schema id="111" parent="4" name="pg_toast_temp_33">
+      <ObjectId>57908</ObjectId>
+    </schema>
+    <schema id="112" parent="4" name="pg_toast_temp_34">
+      <ObjectId>57916</ObjectId>
+    </schema>
+    <schema id="113" parent="4" name="pg_toast_temp_35">
+      <ObjectId>57928</ObjectId>
+    </schema>
+    <schema id="114" parent="4" name="pg_toast_temp_36">
+      <ObjectId>57930</ObjectId>
+    </schema>
+    <schema id="115" parent="4" name="pg_toast_temp_37">
+      <ObjectId>57940</ObjectId>
+    </schema>
+    <schema id="116" parent="4" name="pg_toast_temp_38">
+      <ObjectId>57945</ObjectId>
+    </schema>
+    <schema id="117" parent="4" name="pg_toast_temp_39">
+      <ObjectId>60573</ObjectId>
+    </schema>
+    <schema id="118" parent="4" name="pg_toast_temp_40">
+      <ObjectId>58043</ObjectId>
+    </schema>
+    <schema id="119" parent="4" name="pg_toast_temp_41">
+      <ObjectId>58060</ObjectId>
+    </schema>
+    <schema id="120" parent="4" name="pg_toast_temp_42">
+      <ObjectId>63559</ObjectId>
+    </schema>
+    <schema id="121" parent="4" name="pg_toast_temp_43">
+      <ObjectId>59084</ObjectId>
+    </schema>
+    <schema id="122" parent="4" name="pg_toast_temp_44">
+      <ObjectId>63774</ObjectId>
+    </schema>
+    <schema id="123" parent="4" name="pg_toast_temp_45">
+      <ObjectId>61337</ObjectId>
+    </schema>
+    <schema id="124" parent="4" name="pg_toast_temp_46">
+      <ObjectId>63839</ObjectId>
+    </schema>
+    <schema id="125" parent="4" name="pg_toast_temp_47">
+      <ObjectId>63844</ObjectId>
+    </schema>
+    <schema id="126" parent="4" name="pg_toast_temp_48">
+      <ObjectId>63855</ObjectId>
+    </schema>
+    <schema id="127" parent="4" name="pg_toast_temp_49">
+      <ObjectId>63929</ObjectId>
+    </schema>
+    <schema id="128" parent="4" name="pg_toast_temp_5">
+      <ObjectId>55897</ObjectId>
+    </schema>
+    <schema id="129" parent="4" name="pg_toast_temp_50">
+      <ObjectId>63952</ObjectId>
+    </schema>
+    <schema id="130" parent="4" name="pg_toast_temp_51">
+      <ObjectId>63975</ObjectId>
+    </schema>
+    <schema id="131" parent="4" name="pg_toast_temp_52">
+      <ObjectId>64001</ObjectId>
+    </schema>
+    <schema id="132" parent="4" name="pg_toast_temp_53">
+      <ObjectId>64030</ObjectId>
+    </schema>
+    <schema id="133" parent="4" name="pg_toast_temp_54">
+      <ObjectId>64116</ObjectId>
+    </schema>
+    <schema id="134" parent="4" name="pg_toast_temp_55">
+      <ObjectId>64196</ObjectId>
+    </schema>
+    <schema id="135" parent="4" name="pg_toast_temp_56">
+      <ObjectId>64210</ObjectId>
+    </schema>
+    <schema id="136" parent="4" name="pg_toast_temp_57">
+      <ObjectId>64230</ObjectId>
+    </schema>
+    <schema id="137" parent="4" name="pg_toast_temp_58">
+      <ObjectId>64271</ObjectId>
+    </schema>
+    <schema id="138" parent="4" name="pg_toast_temp_59">
+      <ObjectId>64387</ObjectId>
+    </schema>
+    <schema id="139" parent="4" name="pg_toast_temp_6">
+      <ObjectId>56029</ObjectId>
+    </schema>
+    <schema id="140" parent="4" name="pg_toast_temp_60">
+      <ObjectId>64590</ObjectId>
+    </schema>
+    <schema id="141" parent="4" name="pg_toast_temp_61">
+      <ObjectId>64598</ObjectId>
+    </schema>
+    <schema id="142" parent="4" name="pg_toast_temp_62">
+      <ObjectId>64618</ObjectId>
+    </schema>
+    <schema id="143" parent="4" name="pg_toast_temp_63">
+      <ObjectId>64641</ObjectId>
+    </schema>
+    <schema id="144" parent="4" name="pg_toast_temp_64">
+      <ObjectId>64670</ObjectId>
+    </schema>
+    <schema id="145" parent="4" name="pg_toast_temp_65">
+      <ObjectId>64681</ObjectId>
+    </schema>
+    <schema id="146" parent="4" name="pg_toast_temp_66">
+      <ObjectId>64686</ObjectId>
+    </schema>
+    <schema id="147" parent="4" name="pg_toast_temp_67">
+      <ObjectId>64691</ObjectId>
+    </schema>
+    <schema id="148" parent="4" name="pg_toast_temp_69">
+      <ObjectId>66850</ObjectId>
+    </schema>
+    <schema id="149" parent="4" name="pg_toast_temp_7">
+      <ObjectId>55866</ObjectId>
+    </schema>
+    <schema id="150" parent="4" name="pg_toast_temp_70">
+      <ObjectId>66864</ObjectId>
+    </schema>
+    <schema id="151" parent="4" name="pg_toast_temp_71">
+      <ObjectId>66896</ObjectId>
+    </schema>
+    <schema id="152" parent="4" name="pg_toast_temp_8">
+      <ObjectId>55861</ObjectId>
+    </schema>
+    <schema id="153" parent="4" name="pg_toast_temp_9">
+      <ObjectId>59058</ObjectId>
+    </schema>
+    <schema id="154" parent="4" name="public">
+      <ObjectId>2200</ObjectId>
+      <Comment>standard public schema</Comment>
+      <IntrospectionTimestamp>2018-07-11.10:07:14.755</IntrospectionTimestamp>
+      <IntrospectionStateNumber>11986</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <access-method id="155" parent="4" name="btree">
+      <ObjectId>403</ObjectId>
+      <Comment>b-tree index access method</Comment>
+      <Handler>pg_catalog.bthandler</Handler>
+      <HandlerId>330</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="156" parent="4" name="hash">
+      <ObjectId>405</ObjectId>
+      <Comment>hash index access method</Comment>
+      <Handler>pg_catalog.hashhandler</Handler>
+      <HandlerId>331</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="157" parent="4" name="gist">
+      <ObjectId>783</ObjectId>
+      <Comment>GiST index access method</Comment>
+      <Handler>pg_catalog.gisthandler</Handler>
+      <HandlerId>332</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="158" parent="4" name="gin">
+      <ObjectId>2742</ObjectId>
+      <Comment>GIN index access method</Comment>
+      <Handler>pg_catalog.ginhandler</Handler>
+      <HandlerId>333</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="159" parent="4" name="spgist">
+      <ObjectId>4000</ObjectId>
+      <Comment>SP-GiST index access method</Comment>
+      <Handler>pg_catalog.spghandler</Handler>
+      <HandlerId>334</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="160" parent="4" name="brin">
+      <ObjectId>3580</ObjectId>
+      <Comment>block range index (BRIN) access method</Comment>
+      <Handler>pg_catalog.brinhandler</Handler>
+      <HandlerId>335</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <table id="161" parent="14" name="TBC_ACTIVIDAD">
+      <ObjectId>55052</ObjectId>
+      <StateNumber>4484</StateNumber>
+    </table>
+    <table id="162" parent="14" name="TBC_CATEGORIA">
+      <ObjectId>55055</ObjectId>
+      <StateNumber>3875</StateNumber>
+    </table>
+    <table id="163" parent="14" name="TBC_CLIENTE">
+      <ObjectId>55058</ObjectId>
+      <StateNumber>4469</StateNumber>
+    </table>
+    <table id="164" parent="14" name="TBC_CONTACTOEMPRESA">
+      <ObjectId>55061</ObjectId>
+      <StateNumber>3851</StateNumber>
+    </table>
+    <table id="165" parent="14" name="TBC_DEPARTAMENTO">
+      <ObjectId>55067</ObjectId>
+      <StateNumber>3862</StateNumber>
+    </table>
+    <table id="166" parent="14" name="TBC_EMPRESA">
+      <ObjectId>55070</ObjectId>
+      <StateNumber>3863</StateNumber>
+    </table>
+    <table id="167" parent="14" name="TBC_EQUIPO">
+      <ObjectId>55077</ObjectId>
+      <StateNumber>6761</StateNumber>
+    </table>
+    <table id="168" parent="14" name="TBC_ESTADO">
+      <ObjectId>55080</ObjectId>
+      <StateNumber>6316</StateNumber>
+    </table>
+    <table id="169" parent="14" name="TBC_FAMILIA">
+      <ObjectId>55019</ObjectId>
+      <StateNumber>3850</StateNumber>
+    </table>
+    <table id="170" parent="14" name="TBC_OTROSERVICIO">
+      <ObjectId>55083</ObjectId>
+      <StateNumber>3873</StateNumber>
+    </table>
+    <table id="171" parent="14" name="TBC_PREREGISTROPRODUCTO">
+      <ObjectId>60595</ObjectId>
+      <StateNumber>11303</StateNumber>
+    </table>
+    <table id="172" parent="14" name="TBC_PREREGISTROSERVICIO">
+      <ObjectId>55097</ObjectId>
+      <StateNumber>3860</StateNumber>
+    </table>
+    <table id="173" parent="14" name="TBC_PRODUCTO">
+      <ObjectId>55100</ObjectId>
+      <StateNumber>7435</StateNumber>
+    </table>
+    <table id="174" parent="14" name="TBC_PROVEEDOR">
+      <ObjectId>55106</ObjectId>
+      <StateNumber>3871</StateNumber>
+    </table>
+    <table id="175" parent="14" name="TBC_PROVINCIA">
+      <ObjectId>55109</ObjectId>
+      <StateNumber>3867</StateNumber>
+    </table>
+    <table id="176" parent="14" name="TBC_PROYECTO">
+      <ObjectId>55112</ObjectId>
+      <StateNumber>6795</StateNumber>
+    </table>
+    <table id="177" parent="14" name="TBC_REQUERIMIENTO">
+      <ObjectId>55115</ObjectId>
+      <StateNumber>3866</StateNumber>
+    </table>
+    <table id="178" parent="14" name="TBC_SERVICIO">
+      <ObjectId>55118</ObjectId>
+      <StateNumber>3868</StateNumber>
+    </table>
+    <table id="179" parent="14" name="TBC_SERVICIOSSOLICITADOS">
+      <ObjectId>55121</ObjectId>
+      <StateNumber>3872</StateNumber>
+    </table>
+    <table id="180" parent="14" name="TBC_SOLUCION">
+      <ObjectId>55124</ObjectId>
+      <StateNumber>6794</StateNumber>
+    </table>
+    <table id="181" parent="14" name="TBC_UBIGEO">
+      <ObjectId>55127</ObjectId>
+      <StateNumber>3867</StateNumber>
+    </table>
+    <table id="182" parent="14" name="TBC_UMEDIDA">
+      <ObjectId>55130</ObjectId>
+      <StateNumber>3861</StateNumber>
+    </table>
+    <table id="183" parent="14" name="TBD_ACTIVIDADCARGO">
+      <ObjectId>56063</ObjectId>
+      <StateNumber>11307</StateNumber>
+    </table>
+    <table id="184" parent="14" name="TBD_PERSONALTRANSITO">
+      <ObjectId>55133</ObjectId>
+      <StateNumber>3868</StateNumber>
+    </table>
+    <table id="185" parent="14" name="TBD_PRODUCTOPROVEEDOR">
+      <ObjectId>55136</ObjectId>
+      <StateNumber>6812</StateNumber>
+    </table>
+    <table id="186" parent="14" name="TBD_PRODUCTOSOLUCION">
+      <ObjectId>55139</ObjectId>
+      <StateNumber>7435</StateNumber>
+    </table>
+    <table id="187" parent="14" name="TBD_SERVICIOPROVEEDOR">
+      <ObjectId>55142</ObjectId>
+      <StateNumber>3874</StateNumber>
+    </table>
+    <table id="188" parent="14" name="TBD_SERVICIOSOLUCION">
+      <ObjectId>55145</ObjectId>
+      <StateNumber>3874</StateNumber>
+    </table>
+    <table id="189" parent="15" name="TBC_AREA">
+      <ObjectId>55148</ObjectId>
+      <StateNumber>3877</StateNumber>
+    </table>
+    <table id="190" parent="15" name="TBC_CARGOLABORAL">
+      <ObjectId>55151</ObjectId>
+      <StateNumber>6825</StateNumber>
+    </table>
+    <table id="191" parent="15" name="TBC_EMPLEADO">
+      <ObjectId>55154</ObjectId>
+      <StateNumber>11976</StateNumber>
+    </table>
+    <table id="192" parent="15" name="TBD_HISTORIALCARGO">
+      <ObjectId>55157</ObjectId>
+      <StateNumber>6839</StateNumber>
+    </table>
+    <table id="193" parent="16" name="TBC_APLICACION">
+      <ObjectId>55160</ObjectId>
+      <StateNumber>4410</StateNumber>
+    </table>
+    <table id="194" parent="16" name="TBC_MENU">
+      <ObjectId>55163</ObjectId>
+      <StateNumber>4411</StateNumber>
+    </table>
+    <table id="195" parent="16" name="TBC_PERFIL">
+      <ObjectId>55166</ObjectId>
+      <StateNumber>4412</StateNumber>
+    </table>
+    <table id="196" parent="16" name="TBC_USER">
+      <ObjectId>55170</ObjectId>
+      <StateNumber>4413</StateNumber>
+    </table>
+    <table id="197" parent="16" name="TBD_MENUPERFIL">
+      <ObjectId>55173</ObjectId>
+      <StateNumber>4414</StateNumber>
+    </table>
+    <table id="198" parent="16" name="TBD_PERFILUSER">
+      <ObjectId>55176</ObjectId>
+      <StateNumber>4415</StateNumber>
+    </table>
+    <table id="199" parent="154" name="persona">
+      <ObjectId>55179</ObjectId>
+      <StateNumber>3783</StateNumber>
+    </table>
+    <table id="200" parent="154" name="tabla_general">
+      <ObjectId>59594</ObjectId>
+      <StateNumber>6805</StateNumber>
+    </table>
+    <table id="201" parent="154" name="tabla_general2">
+      <ObjectId>59610</ObjectId>
+      <StateNumber>6817</StateNumber>
+    </table>
+    <table id="202" parent="154" name="test">
+      <ObjectId>55188</ObjectId>
+      <StateNumber>3787</StateNumber>
+    </table>
+    <routine id="203" parent="154" name="actualizar_preregistroproducto">
+      <ObjectId>67637</ObjectId>
+      <StateNumber>11343</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="204" parent="154" name="filtrar_contacto">
+      <ObjectId>59486</ObjectId>
+      <StateNumber>11346</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>integer, character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="205" parent="154" name="filtrar_empleado">
+      <ObjectId>58845</ObjectId>
+      <StateNumber>6277</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomemp character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="206" parent="154" name="filtrar_empresa_cliente">
+      <ObjectId>58846</ObjectId>
+      <StateNumber>6317</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="207" parent="154" name="filtrar_empresa_proveedor">
+      <ObjectId>59587</ObjectId>
+      <StateNumber>7985</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="208" parent="154" name="filtrar_historial_precio">
+      <ObjectId>61381</ObjectId>
+      <StateNumber>7991</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idprov integer, idprod integer</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="209" parent="154" name="filtrar_producto">
+      <ObjectId>59645</ObjectId>
+      <StateNumber>11348</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomprod text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="210" parent="154" name="filtrar_producto2parametros">
+      <ObjectId>59644</ObjectId>
+      <StateNumber>6864</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idprodprov integer, nomprod text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="211" parent="154" name="filtrar_producto_insumo">
+      <ObjectId>61749</ObjectId>
+      <StateNumber>8221</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomprod text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="212" parent="154" name="filtrar_producto_nobbdd_solucion">
+      <ObjectId>61390</ObjectId>
+      <StateNumber>11337</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idsol integer</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="213" parent="154" name="filtrar_producto_proveedor2">
+      <ObjectId>61384</ObjectId>
+      <StateNumber>7999</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idprov integer</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="214" parent="154" name="filtrar_proyecto_empresa">
+      <ObjectId>59487</ObjectId>
+      <StateNumber>6732</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idempresa integer, nompy character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="215" parent="154" name="filtrar_proyectoporempresa">
+      <ObjectId>68495</ObjectId>
+      <StateNumber>11986</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idempresa integer</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="216" parent="154" name="filtrar_requerimiento">
+      <ObjectId>59056</ObjectId>
+      <StateNumber>6466</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>integer, character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="217" parent="154" name="filtrar_requerimiento_proyecto">
+      <ObjectId>59488</ObjectId>
+      <StateNumber>6735</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idproyecto integer, nomrq character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="218" parent="154" name="filtrar_solucion_requerimiento">
+      <ObjectId>59566</ObjectId>
+      <StateNumber>6793</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idrq integer</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="219" parent="154" name="gen_actualizar">
+      <ObjectId>55002</ObjectId>
+      <StateNumber>4354</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>data_json text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>void</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="220" parent="154" name="gen_eliminar">
+      <ObjectId>55003</ObjectId>
+      <StateNumber>3904</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>numtbl text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>void</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="221" parent="154" name="gen_filtrar">
+      <ObjectId>55004</ObjectId>
+      <StateNumber>6324</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>numtbl text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="222" parent="154" name="gen_filtrar_like">
+      <ObjectId>55005</ObjectId>
+      <StateNumber>5052</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>numtbl text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="223" parent="154" name="gen_filtrar_like_empresa">
+      <ObjectId>61393</ObjectId>
+      <StateNumber>8430</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>numtbl text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="224" parent="154" name="gen_filtrar_prueba">
+      <ObjectId>55006</ObjectId>
+      <StateNumber>3944</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>numtbl text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="225" parent="154" name="gen_insertar_historialprecio">
+      <ObjectId>60324</ObjectId>
+      <StateNumber>8014</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>data_json text, OUT reporte text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="226" parent="154" name="gen_insertar_json">
+      <ObjectId>55007</ObjectId>
+      <StateNumber>4218</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>data_json text, OUT reporte text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="227" parent="154" name="gen_listar">
+      <ObjectId>55009</ObjectId>
+      <StateNumber>3668</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>tabla text</ArgumentsDefinition>
+      <ResultsDefinition>SETOF record</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="228" parent="154" name="gen_retornaid">
+      <ObjectId>55010</ObjectId>
+      <StateNumber>4002</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>numtabla text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="229" parent="154" name="gen_set">
+      <ObjectId>55011</ObjectId>
+      <StateNumber>4457</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>data_json text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="230" parent="154" name="gen_tabla_json">
+      <ObjectId>55012</ObjectId>
+      <StateNumber>4089</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomtbl text, consulta text, OUT consultajson text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="231" parent="154" name="gen_verificar_json">
+      <ObjectId>55013</ObjectId>
+      <StateNumber>4090</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>data_json text, OUT reporte text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="232" parent="154" name="gen_where">
+      <ObjectId>55015</ObjectId>
+      <StateNumber>4092</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomtabla text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="233" parent="154" name="gen_where2">
+      <ObjectId>55016</ObjectId>
+      <StateNumber>4091</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomtabla text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="234" parent="154" name="gen_where_like">
+      <ObjectId>55017</ObjectId>
+      <StateNumber>4094</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomtabla text, campos text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="235" parent="154" name="getfamilia">
+      <ObjectId>55018</ObjectId>
+      <StateNumber>4095</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>TABLE(idfamlia integer, nomfamilia character varying)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="236" parent="154" name="insertar_equipo">
+      <ObjectId>59642</ObjectId>
+      <StateNumber>6859</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>numero integer</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="237" parent="154" name="insertar_pregistroproducto">
+      <ObjectId>60720</ObjectId>
+      <StateNumber>7507</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>cadena text</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="238" parent="154" name="json_tabla_">
+      <ObjectId>55023</ObjectId>
+      <StateNumber>3680</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>nomtabla text, data_json json</ArgumentsDefinition>
+      <ResultsDefinition>SETOF record</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="239" parent="154" name="jsonf_jsont">
+      <ObjectId>55024</ObjectId>
+      <StateNumber>4097</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>data_jsonf json</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(key text, value json)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="240" parent="154" name="listar_empleado">
+      <ObjectId>59080</ObjectId>
+      <StateNumber>6472</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="241" parent="154" name="listar_empresa">
+      <ObjectId>59074</ObjectId>
+      <StateNumber>6451</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="242" parent="154" name="log_categoria_selectall">
+      <ObjectId>55026</ObjectId>
+      <StateNumber>3683</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>TABLE(data_json json)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="243" parent="154" name="log_obtener_estado_tipo">
+      <ObjectId>58848</ObjectId>
+      <StateNumber>6270</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>codigo character varying</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(idestado integer, nomestado character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="244" parent="154" name="log_obtener_estado_tipo_json">
+      <ObjectId>59082</ObjectId>
+      <StateNumber>6480</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>codigo character varying</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="245" parent="154" name="log_proyecto_listar">
+      <ObjectId>55028</ObjectId>
+      <StateNumber>3685</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idestado character varying, empresa character varying</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(id_proyecto integer, id_empresa integer, nom_proyecto character varying, jefe_proyecto character varying, fecha_inicio timestamp without time zone, fecha_fin timestamp without time zone, fecha_p_fin timestamp without time zone, tiempo_estim_coti integer, estado bit, inv_estim money, id_estado bit, cant_rq integer, fecha_registro timestamp without time zone, user_registro character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="246" parent="154" name="log_proyecto_listar_fecha">
+      <ObjectId>55029</ObjectId>
+      <StateNumber>3686</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>fecinicio timestamp without time zone, fecfin timestamp without time zone</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(id_proyecto integer, id_empresa integer, nom_proyecto character varying, jefe_proyecto character varying, fecha_inicio timestamp without time zone, fecha_fin timestamp without time zone, fecha_p_fin timestamp without time zone, tiempo_estim_coti integer, estado bit, inv_estim money, id_estado bit, cant_rq integer, fecha_registro timestamp without time zone, user_registro character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="247" parent="154" name="log_proyecto_listarporempresayestado">
+      <ObjectId>58839</ObjectId>
+      <StateNumber>6244</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>empresa integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(id_proyecto integer, id_empresa integer, nom_proyecto character varying, jefe_proyecto character varying, fecha_inicio timestamp without time zone, fecha_fin timestamp without time zone, fecha_p_fin timestamp without time zone, tiempo_estim_coti integer, estado bit, inv_estim money, id_estado integer, cant_rq integer, fecha_registro timestamp without time zone, user_registro character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="248" parent="154" name="log_tbc_empresa_proyecto_rq">
+      <ObjectId>55031</ObjectId>
+      <StateNumber>3688</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idempresa integer, idproyecto integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;ID_RQ&quot; integer, &quot;ID_PROYECTO&quot; integer, &quot;NOM_RQ&quot; character varying, &quot;NIVEL&quot; character varying, &quot;ESTADO&quot; bit, &quot;ID_ESTADO&quot; integer, &quot;FECHA_REGISTRO&quot; timestamp without time zone, &quot;USER_REGISTRO&quot; character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="249" parent="154" name="log_xtbd_perfil_buscar">
+      <ObjectId>55032</ObjectId>
+      <StateNumber>3689</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idusuario integer, idaplicacion integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;PERFIL&quot; character varying, &quot;ESTADO&quot; bit, &quot;APLICACION&quot; character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="250" parent="154" name="obtenerpk">
+      <ObjectId>55033</ObjectId>
+      <StateNumber>3690</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>character varying</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(pk character varying)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="251" parent="154" name="pa_consultaprueba">
+      <ObjectId>55034</ObjectId>
+      <StateNumber>4105</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>xtabla text</ArgumentsDefinition>
+      <ResultsDefinition>SETOF record</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="252" parent="154" name="pruebalo">
+      <ObjectId>55035</ObjectId>
+      <StateNumber>3692</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="253" parent="154" name="sys_aplicacion_perfil_menu_listar">
+      <ObjectId>55039</ObjectId>
+      <StateNumber>6041</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idapli integer, idperfil integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;IdMenu&quot; integer, &quot;IdPadre&quot; integer, &quot;Descripcion&quot; text, &quot;Check&quot; bit)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="254" parent="154" name="sys_lista_menu_padre_hijos">
+      <ObjectId>55040</ObjectId>
+      <StateNumber>11879</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idperfil integer</ArgumentsDefinition>
+      <ResultsDefinition>text</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="255" parent="154" name="sys_tbc_menu_aplicacion_buscar">
+      <ObjectId>55041</ObjectId>
+      <StateNumber>5746</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idmenu integer, idapli integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;DESCRIPCION&quot; character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="256" parent="154" name="sys_tbc_menu_idperfil_listar">
+      <ObjectId>55042</ObjectId>
+      <StateNumber>5750</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idperfil integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;IdPerfil&quot; integer, &quot;IdMenu&quot; integer, &quot;Descripcion&quot; character varying, &quot;IdPadre&quot; integer, &quot;Posicion&quot; integer, &quot;Icono&quot; character varying, &quot;Habilitado&quot; bit, &quot;Url&quot; character varying, &quot;IdApli&quot; integer)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="257" parent="154" name="sys_tbc_menu_por_aplicacion_perfil">
+      <ObjectId>55043</ObjectId>
+      <StateNumber>5755</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idaplicacion integer, idperfil integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;IdPerfil&quot; integer, &quot;IdMenu&quot; integer, &quot;Descripcion&quot; text, &quot;IdPadre&quot; integer, &quot;Posicion&quot; integer, &quot;Icono&quot; character varying, &quot;Habilitado&quot; bit, &quot;Url&quot; character varying, &quot;IdApli&quot; integer)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="258" parent="154" name="sys_tbc_perfildescripcionmenu_listar">
+      <ObjectId>55044</ObjectId>
+      <StateNumber>5757</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>TABLE(&quot;IdPerfil&quot; integer, &quot;Descripcion&quot; text)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="259" parent="154" name="sys_tbc_user_buscar">
+      <ObjectId>55045</ObjectId>
+      <StateNumber>5758</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>concatenar text</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(iduser integer, nomcompleto text)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="260" parent="154" name="sys_tbc_user_buscar_id">
+      <ObjectId>55046</ObjectId>
+      <StateNumber>5759</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>valor integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;ID USER&quot; integer, login character varying, nombres character varying, &quot;APELIDO PATERNO&quot; character varying, &quot;APELLIDO MATERNO&quot; character varying, estado bit, clave character varying, &quot;ID PERSONAL&quot; integer)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="261" parent="154" name="sys_tbc_user_correologin_buscar">
+      <ObjectId>55047</ObjectId>
+      <StateNumber>5760</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>valor text</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(login character varying, nombres character varying, &quot;Apellido Paterno&quot; character varying, &quot;Apellido Materno&quot; character varying, estado bit, clave character varying, idpersonal integer, correo character varying)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="262" parent="154" name="sys_tbc_user_ingresar">
+      <ObjectId>55048</ObjectId>
+      <StateNumber>5761</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>login character varying, clave character varying</ArgumentsDefinition>
+      <ResultsDefinition>integer</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <Cost>100.0</Cost>
+    </routine>
+    <routine id="263" parent="154" name="sys_tbd_aplicacion_user_buscar">
+      <ObjectId>55894</ObjectId>
+      <StateNumber>5762</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>iduser integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;ID&quot; integer, &quot;APLICACION&quot; character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="264" parent="154" name="sys_tbd_perfil_aplicacion_usuario_buscar">
+      <ObjectId>55956</ObjectId>
+      <StateNumber>5769</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>iduser integer, idaplicacion integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;ID&quot; integer, &quot;PERFIL&quot; character varying)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="265" parent="154" name="sys_tbd_perfil_menu_listar">
+      <ObjectId>55038</ObjectId>
+      <StateNumber>5770</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ArgumentsDefinition>idapli integer, idperfil integer</ArgumentsDefinition>
+      <ResultsDefinition>TABLE(&quot;IDPERFIL&quot; integer, &quot;IDMENU&quot; integer, &quot;IDPADRE&quot; integer, &quot;DESCRIPCION&quot; character varying, &quot;CHECK&quot; bit)</ResultsDefinition>
+      <LanguageName>plpgsql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="266" parent="154" name="tabla_constraint">
+      <ObjectId>55036</ObjectId>
+      <StateNumber>3693</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>TABLE(nom_tabla character varying, nom_constraint character varying, tipo_constraint character varying, nom_campo character varying, references_table character varying)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <routine id="267" parent="154" name="tabla_general">
+      <ObjectId>55037</ObjectId>
+      <StateNumber>3694</StateNumber>
+      <VolatilityKind>volatile</VolatilityKind>
+      <ResultsDefinition>TABLE(idtabla oid, esquema character varying, tabla name, idcampo text, campo name, tipo_dato character varying)</ResultsDefinition>
+      <LanguageName>sql</LanguageName>
+      <RoutineKind>function</RoutineKind>
+      <ReturnsSet>1</ReturnsSet>
+      <Cost>100.0</Cost>
+      <Rows>1000.0</Rows>
+    </routine>
+    <column id="268" parent="161" name="n_idactividad">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3709</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="269" parent="161" name="n_idservicio">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="270" parent="161" name="v_nomactividad">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="271" parent="161" name="v_descripcion">
+      <Position>4</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="272" parent="161" name="n_cantidad">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="273" parent="161" name="n_riesgo">
+      <Position>6</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="274" parent="161" name="n_subtotal">
+      <Position>7</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="275" parent="161" name="n_porcenttransito">
+      <Position>8</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="276" parent="161" name="n_total">
+      <Position>9</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="277" parent="161" name="n_totalmostrar">
+      <Position>10</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="278" parent="161" name="s_estado">
+      <Position>11</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="279" parent="161" name="n_idestado">
+      <Position>12</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="280" parent="161" name="d_fecharegistro">
+      <Position>13</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="281" parent="161" name="v_userregistro">
+      <Position>14</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3709</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="282" parent="161" name="pk_tbc_actividad">
+      <ObjectId>55193</ObjectId>
+      <ColNames>n_idactividad</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="283" parent="161" name="pk_tbc_actividad">
+      <ObjectId>55194</ObjectId>
+      <ColNames>n_idactividad</ColNames>
+      <UnderlyingIndexName>pk_tbc_actividad</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="284" parent="161" name="fk_tbc_actividad_tbc_servicio">
+      <ObjectId>55291</ObjectId>
+      <ColNames>n_idservicio</ColNames>
+      <RefTableId>55118</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_SERVICIO</RefTableName>
+      <RefKeyName>pk_tbc_servicio</RefKeyName>
+      <RefColNames>n_idservicio</RefColNames>
+    </foreign-key>
+    <column id="285" parent="162" name="n_idcategoria">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3711</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="286" parent="162" name="v_nomcategoria">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3711</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="287" parent="162" name="n_idfamilia">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3711</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="288" parent="162" name="pk_tbc_categoria">
+      <ObjectId>55195</ObjectId>
+      <ColNames>n_idcategoria</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="289" parent="162" name="uq_v_nomcategoria_tbc_categoria">
+      <ObjectId>55247</ObjectId>
+      <ColNames>v_nomcategoria</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="290" parent="162" name="pk_tbc_categoria">
+      <ObjectId>55196</ObjectId>
+      <ColNames>n_idcategoria</ColNames>
+      <UnderlyingIndexName>pk_tbc_categoria</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="291" parent="162" name="uq_v_nomcategoria_tbc_categoria">
+      <ObjectId>55248</ObjectId>
+      <ColNames>v_nomcategoria</ColNames>
+      <UnderlyingIndexName>uq_v_nomcategoria_tbc_categoria</UnderlyingIndexName>
+    </key>
+    <foreign-key id="292" parent="162" name="fk_tbc_categoria_tbc_familia">
+      <ObjectId>55296</ObjectId>
+      <ColNames>n_idfamilia</ColNames>
+      <RefTableId>55019</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_FAMILIA</RefTableName>
+      <RefKeyName>pk_tbc_familia</RefKeyName>
+      <RefColNames>n_idfamilia</RefColNames>
+    </foreign-key>
+    <column id="293" parent="163" name="n_idcliente">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3713</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="294" parent="163" name="n_totalcompras">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>4468</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="295" parent="163" name="n_cantpy">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>4469</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="296" parent="163" name="pk_tbc_cliente">
+      <ObjectId>55197</ObjectId>
+      <ColNames>n_idcliente</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="297" parent="163" name="pk_tbc_cliente">
+      <ObjectId>55198</ObjectId>
+      <ColNames>n_idcliente</ColNames>
+      <UnderlyingIndexName>pk_tbc_cliente</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="298" parent="164" name="n_idcontacto">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3715</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="299" parent="164" name="n_idempresa">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="300" parent="164" name="v_nomcontacto">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="301" parent="164" name="v_apellpaterno">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="302" parent="164" name="v_apellmaterno">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="303" parent="164" name="v_direccion">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="304" parent="164" name="v_telefono">
+      <Position>7</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="305" parent="164" name="s_estado">
+      <Position>8</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="306" parent="164" name="v_ciudad">
+      <Position>9</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="307" parent="164" name="v_cargo">
+      <Position>10</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="308" parent="164" name="v_dni">
+      <Position>11</Position>
+      <DataType>char(8)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1042</TypeId>
+    </column>
+    <column id="309" parent="164" name="v_correo">
+      <Position>12</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="310" parent="164" name="d_fecharegistro">
+      <Position>13</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="311" parent="164" name="v_userregistro">
+      <Position>14</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3715</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="312" parent="164" name="pk_tbc_contactoempresa">
+      <ObjectId>55199</ObjectId>
+      <ColNames>n_idcontacto</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="313" parent="164" name="uq_v_dni_tbc_contactoempresa">
+      <ObjectId>55245</ObjectId>
+      <ColNames>v_dni</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="314" parent="164" name="pk_tbc_contactoempresa">
+      <ObjectId>55200</ObjectId>
+      <ColNames>n_idcontacto</ColNames>
+      <UnderlyingIndexName>pk_tbc_contactoempresa</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="315" parent="164" name="uq_v_dni_tbc_contactoempresa">
+      <ObjectId>55246</ObjectId>
+      <ColNames>v_dni</ColNames>
+      <UnderlyingIndexName>uq_v_dni_tbc_contactoempresa</UnderlyingIndexName>
+    </key>
+    <foreign-key id="316" parent="164" name="fk_tbc_contactoempresa_tbc_empresa">
+      <ObjectId>55301</ObjectId>
+      <ColNames>n_idempresa</ColNames>
+      <RefTableId>55070</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_EMPRESA</RefTableName>
+      <RefKeyName>pk_tbc_empresa</RefKeyName>
+      <RefColNames>n_idempresa</RefColNames>
+    </foreign-key>
+    <column id="317" parent="165" name="v_iddepartamento">
+      <Position>1</Position>
+      <DataType>varchar(2)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3717</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="318" parent="165" name="v_nomdepartamento">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3717</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="319" parent="165" name="pk_tbc_departamento">
+      <ObjectId>55201</ObjectId>
+      <ColNames>v_iddepartamento</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="320" parent="165" name="pk_tbc_departamento">
+      <ObjectId>55202</ObjectId>
+      <ColNames>v_iddepartamento</ColNames>
+      <UnderlyingIndexName>pk_tbc_departamento</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="321" parent="166" name="n_idempresa">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3719</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="322" parent="166" name="n_idproveedor">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="323" parent="166" name="v_ruc">
+      <Position>3</Position>
+      <DataType>varchar(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="324" parent="166" name="v_nomempresa">
+      <Position>4</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="325" parent="166" name="v_direccion">
+      <Position>5</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="326" parent="166" name="v_correo">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="327" parent="166" name="v_telefono">
+      <Position>7</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="328" parent="166" name="v_nomcomercial">
+      <Position>8</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="329" parent="166" name="v_dirfiscal">
+      <Position>9</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="330" parent="166" name="s_estado">
+      <Position>10</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="331" parent="166" name="v_codigopostal">
+      <Position>11</Position>
+      <DataType>varchar(6)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <DefaultExpression>&apos;+051&apos;::character varying</DefaultExpression>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="332" parent="166" name="v_descripcion">
+      <Position>12</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="333" parent="166" name="v_referencia">
+      <Position>13</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="334" parent="166" name="v_idubigeo">
+      <Position>14</Position>
+      <DataType>varchar(6)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="335" parent="166" name="v_rubro">
+      <Position>15</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="336" parent="166" name="v_sitioweb">
+      <Position>16</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="337" parent="166" name="v_logo">
+      <Position>17</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="338" parent="166" name="n_idestado">
+      <Position>18</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="339" parent="166" name="v_nomsituacion">
+      <Position>19</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="340" parent="166" name="n_idcliente">
+      <Position>20</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="341" parent="166" name="d_frpr">
+      <Position>21</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="342" parent="166" name="v_userregistro">
+      <Position>22</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="343" parent="166" name="v_empleador">
+      <Position>23</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="344" parent="166" name="v_empleadopr">
+      <Position>24</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="345" parent="166" name="d_frr">
+      <Position>25</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <StateNumber>3719</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="346" parent="166" name="pk_tbc_empresa">
+      <ObjectId>55203</ObjectId>
+      <ColNames>n_idempresa</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="347" parent="166" name="uq_v_ruc_tbc_empresa">
+      <ObjectId>55251</ObjectId>
+      <ColNames>v_ruc</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="348" parent="166" name="pk_tbc_empresa">
+      <ObjectId>55204</ObjectId>
+      <ColNames>n_idempresa</ColNames>
+      <UnderlyingIndexName>pk_tbc_empresa</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="349" parent="166" name="uq_v_ruc_tbc_empresa">
+      <ObjectId>55252</ObjectId>
+      <ColNames>v_ruc</ColNames>
+      <UnderlyingIndexName>uq_v_ruc_tbc_empresa</UnderlyingIndexName>
+    </key>
+    <foreign-key id="350" parent="166" name="fk_tbc_empresa_tbc_proveedo">
+      <ObjectId>55311</ObjectId>
+      <ColNames>n_idproveedor</ColNames>
+      <RefTableId>55106</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PROVEEDOR</RefTableName>
+      <RefKeyName>pk_xtbc_proveedor</RefKeyName>
+      <RefColNames>n_idproveedor</RefColNames>
+    </foreign-key>
+    <foreign-key id="351" parent="166" name="fk_tbc_empresa_tbc_ubigeo">
+      <ObjectId>55316</ObjectId>
+      <ColNames>v_idubigeo</ColNames>
+      <RefTableId>55127</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_UBIGEO</RefTableName>
+      <RefKeyName>pk_tbc_ubigeo</RefKeyName>
+      <RefColNames>v_idubigeo</RefColNames>
+    </foreign-key>
+    <foreign-key id="352" parent="166" name="fk_tbc_empresa_tbc_cliente">
+      <ObjectId>55306</ObjectId>
+      <ColNames>n_idcliente</ColNames>
+      <RefTableId>55058</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_CLIENTE</RefTableName>
+      <RefKeyName>pk_tbc_cliente</RefKeyName>
+      <RefColNames>n_idcliente</RefColNames>
+    </foreign-key>
+    <column id="353" parent="167" name="n_idequipo">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3721</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="354" parent="167" name="n_idsolucion">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3721</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="355" parent="167" name="v_nomequipo">
+      <Position>3</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <StateNumber>3721</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="356" parent="167" name="n_total">
+      <Position>4</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6760</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="357" parent="167" name="n_totalmostrar">
+      <Position>5</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6761</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="358" parent="167" name="s_estado">
+      <Position>6</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3721</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="359" parent="167" name="n_idestado">
+      <Position>7</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3721</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="360" parent="167" name="d_fecharegistro">
+      <Position>8</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3721</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="361" parent="167" name="v_userregistro">
+      <Position>9</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3721</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="362" parent="167" name="pk_tbc_equipo">
+      <ObjectId>55205</ObjectId>
+      <ColNames>n_idequipo</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="363" parent="167" name="pk_tbc_equipo">
+      <ObjectId>55206</ObjectId>
+      <ColNames>n_idequipo</ColNames>
+      <UnderlyingIndexName>pk_tbc_equipo</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="364" parent="167" name="fk_tbc_equipo_tbc_solucion">
+      <ObjectId>55321</ObjectId>
+      <ColNames>n_idsolucion</ColNames>
+      <RefTableId>55124</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_SOLUCION</RefTableName>
+      <RefKeyName>pk_tbc_solucion</RefKeyName>
+      <RefColNames>n_idsolucion</RefColNames>
+    </foreign-key>
+    <column id="365" parent="168" name="n_idestado">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3723</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="366" parent="168" name="v_nomestado">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3723</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="367" parent="168" name="v_nomtabla">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3723</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="368" parent="168" name="s_estado">
+      <Position>4</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3723</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="369" parent="168" name="v_cod">
+      <Position>5</Position>
+      <DataType>varchar|0s</DataType>
+      <StateNumber>4367</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="370" parent="168" name="s_check">
+      <Position>6</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>6315</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="371" parent="168" name="s_combo">
+      <Position>7</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>6316</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <index id="372" parent="168" name="pk_tbc_estado">
+      <ObjectId>55207</ObjectId>
+      <ColNames>n_idestado</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="373" parent="168" name="pk_tbc_estado">
+      <ObjectId>55208</ObjectId>
+      <ColNames>n_idestado</ColNames>
+      <UnderlyingIndexName>pk_tbc_estado</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="374" parent="169" name="n_idfamilia">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3677</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="375" parent="169" name="v_nomfamilia">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3677</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="376" parent="169" name="pk_tbc_familia">
+      <ObjectId>55209</ObjectId>
+      <ColNames>n_idfamilia</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="377" parent="169" name="uq_v_nomfamilia_tbc_familia">
+      <ObjectId>55249</ObjectId>
+      <ColNames>v_nomfamilia</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="378" parent="169" name="pk_tbc_familia">
+      <ObjectId>55210</ObjectId>
+      <ColNames>n_idfamilia</ColNames>
+      <UnderlyingIndexName>pk_tbc_familia</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="379" parent="169" name="uq_v_nomfamilia_tbc_familia">
+      <ObjectId>55250</ObjectId>
+      <ColNames>v_nomfamilia</ColNames>
+      <UnderlyingIndexName>uq_v_nomfamilia_tbc_familia</UnderlyingIndexName>
+    </key>
+    <column id="380" parent="170" name="n_idoserv">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3725</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="381" parent="170" name="n_idsolucion">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="382" parent="170" name="v_nomservicio">
+      <Position>3</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="383" parent="170" name="v_descripcion">
+      <Position>4</Position>
+      <DataType>varchar(250)|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="384" parent="170" name="n_totalmostrar">
+      <Position>5</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="385" parent="170" name="s_estado">
+      <Position>6</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="386" parent="170" name="n_idestado">
+      <Position>7</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="387" parent="170" name="d_fecharegistro">
+      <Position>8</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="388" parent="170" name="v_userregistro">
+      <Position>9</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3725</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="389" parent="170" name="pk_tbc_otroservicio">
+      <ObjectId>55211</ObjectId>
+      <ColNames>n_idoserv</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="390" parent="170" name="pk_tbc_otroservicio">
+      <ObjectId>55212</ObjectId>
+      <ColNames>n_idoserv</ColNames>
+      <UnderlyingIndexName>pk_tbc_otroservicio</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="391" parent="170" name="fk_tbc_otroservicio_tbc_solucion">
+      <ObjectId>55326</ObjectId>
+      <ColNames>n_idsolucion</ColNames>
+      <RefTableId>55124</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_SOLUCION</RefTableName>
+      <RefKeyName>pk_tbc_solucion</RefKeyName>
+      <RefColNames>n_idsolucion</RefColNames>
+    </foreign-key>
+    <column id="392" parent="171" name="n_idprereg">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>7435</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="393" parent="171" name="n_idprodsol">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>7435</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="394" parent="171" name="n_idproducto">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>7435</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="395" parent="171" name="v_nomproducto">
+      <Position>4</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>8015</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="396" parent="171" name="v_umedida">
+      <Position>5</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>8016</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="397" parent="171" name="n_cantidad">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>8017</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="398" parent="171" name="s_estado">
+      <Position>7</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>11303</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <index id="399" parent="171" name="pk_preregistroproducto">
+      <ObjectId>60598</ObjectId>
+      <ColNames>n_idprereg</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="400" parent="171" name="pk_preregistroproducto">
+      <ObjectId>60599</ObjectId>
+      <ColNames>n_idprereg</ColNames>
+      <UnderlyingIndexName>pk_preregistroproducto</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="401" parent="171" name="fk_tbc_preregistroproducto_tbd_productosolucion">
+      <ObjectId>60605</ObjectId>
+      <ColNames>n_idprodsol</ColNames>
+      <RefTableId>55139</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBD_PRODUCTOSOLUCION</RefTableName>
+      <RefKeyName>pk_tbd_productosolucion</RefKeyName>
+      <RefColNames>n_idprodsol</RefColNames>
+    </foreign-key>
+    <foreign-key id="402" parent="171" name="fk_tbc_preregistroproducto_tbc_producto">
+      <ObjectId>60600</ObjectId>
+      <ColNames>n_idproducto</ColNames>
+      <RefTableId>55100</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PRODUCTO</RefTableName>
+      <RefKeyName>pk_xtbc_producto</RefKeyName>
+      <RefColNames>n_idproducto</RefColNames>
+    </foreign-key>
+    <column id="403" parent="172" name="n_idpreregserv">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3730</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="404" parent="172" name="n_idservsol">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3730</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="405" parent="172" name="n_idservicsolu">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3730</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="406" parent="172" name="pk_tbc_preregistroservicio">
+      <ObjectId>55213</ObjectId>
+      <ColNames>n_idpreregserv</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="407" parent="172" name="pk_tbc_preregistroservicio">
+      <ObjectId>55214</ObjectId>
+      <ColNames>n_idpreregserv</ColNames>
+      <UnderlyingIndexName>pk_tbc_preregistroservicio</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="408" parent="172" name="fk_tbc_preregistroservicio_tbc_serviciossolicitados">
+      <ObjectId>55341</ObjectId>
+      <ColNames>n_idservsol</ColNames>
+      <RefTableId>55121</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_SERVICIOSSOLICITADOS</RefTableName>
+      <RefKeyName>pk_tbc_serviciossolicitados</RefKeyName>
+      <RefColNames>n_idservsol</RefColNames>
+    </foreign-key>
+    <foreign-key id="409" parent="172" name="fk_tbc_preregistroservicio_tbd_serviciosolucion">
+      <ObjectId>55346</ObjectId>
+      <ColNames>n_idservicsolu</ColNames>
+      <RefTableId>55145</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBD_SERVICIOSOLUCION</RefTableName>
+      <RefKeyName>pk_tbd_serviciosolucion</RefKeyName>
+      <RefColNames>n_idservicsolu</RefColNames>
+    </foreign-key>
+    <column id="410" parent="173" name="n_idproducto">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3732</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="411" parent="173" name="n_idcategoria">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3732</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="412" parent="173" name="n_idumedida">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3732</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="413" parent="173" name="v_nomumed">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3732</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="414" parent="173" name="n_codigo">
+      <Position>19</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>6493</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="415" parent="173" name="v_nomproducto">
+      <Position>20</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>6494</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="416" parent="173" name="s_estado">
+      <Position>21</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>6495</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="417" parent="173" name="n_saldo">
+      <Position>22</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6496</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="418" parent="173" name="n_stockminimo">
+      <Position>23</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6497</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="419" parent="173" name="v_modelo">
+      <Position>24</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>6498</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="420" parent="173" name="v_marca">
+      <Position>25</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>6499</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="421" parent="173" name="d_fecharegistro">
+      <Position>26</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>6501</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="422" parent="173" name="v_userregistro">
+      <Position>27</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>6502</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="423" parent="173" name="n_insumo">
+      <Position>28</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>6503</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="424" parent="173" name="n_pfinal">
+      <Position>29</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>6504</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="425" parent="173" name="n_estadoinsumo">
+      <Position>30</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>6505</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="426" parent="173" name="n_estadopfinal">
+      <Position>31</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>6506</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="427" parent="173" name="pk_xtbc_producto">
+      <ObjectId>55241</ObjectId>
+      <ColNames>n_idproducto</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="428" parent="173" name="pk_xtbc_producto">
+      <ObjectId>55242</ObjectId>
+      <ColNames>n_idproducto</ColNames>
+      <UnderlyingIndexName>pk_xtbc_producto</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="429" parent="173" name="fk_xtbc_producto_xtbc_categoria">
+      <ObjectId>55421</ObjectId>
+      <ColNames>n_idcategoria</ColNames>
+      <RefTableId>55055</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_CATEGORIA</RefTableName>
+      <RefKeyName>pk_tbc_categoria</RefKeyName>
+      <RefColNames>n_idcategoria</RefColNames>
+    </foreign-key>
+    <foreign-key id="430" parent="173" name="fk_tbc_producto_tbc_umedida">
+      <ObjectId>55351</ObjectId>
+      <ColNames>n_idumedida</ColNames>
+      <RefTableId>55130</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_UMEDIDA</RefTableName>
+      <RefKeyName>pk_tbc_umedida</RefKeyName>
+      <RefColNames>n_idumedida</RefColNames>
+    </foreign-key>
+    <column id="431" parent="174" name="n_idproveedor">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3734</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="432" parent="174" name="n_totalventas">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3734</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="433" parent="174" name="n_cantpy">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3734</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="434" parent="174" name="pk_xtbc_proveedor">
+      <ObjectId>55243</ObjectId>
+      <ColNames>n_idproveedor</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="435" parent="174" name="pk_xtbc_proveedor">
+      <ObjectId>55244</ObjectId>
+      <ColNames>n_idproveedor</ColNames>
+      <UnderlyingIndexName>pk_xtbc_proveedor</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="436" parent="175" name="v_idprovincia">
+      <Position>1</Position>
+      <DataType>varchar(4)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3736</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="437" parent="175" name="v_nomprovincia">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3736</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="438" parent="175" name="v_iddepartamento">
+      <Position>3</Position>
+      <DataType>varchar(2)|0s</DataType>
+      <StateNumber>3736</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="439" parent="175" name="pk_tbc_provincia">
+      <ObjectId>55215</ObjectId>
+      <ColNames>v_idprovincia</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="440" parent="175" name="pk_tbc_provincia">
+      <ObjectId>55216</ObjectId>
+      <ColNames>v_idprovincia</ColNames>
+      <UnderlyingIndexName>pk_tbc_provincia</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="441" parent="175" name="fk_tbc_provincia_tbc_departamento">
+      <ObjectId>55356</ObjectId>
+      <ColNames>v_iddepartamento</ColNames>
+      <RefTableId>55067</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_DEPARTAMENTO</RefTableName>
+      <RefKeyName>pk_tbc_departamento</RefKeyName>
+      <RefColNames>v_iddepartamento</RefColNames>
+    </foreign-key>
+    <column id="442" parent="176" name="n_idproyecto">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3738</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="443" parent="176" name="n_idempresa">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3738</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="444" parent="176" name="v_nomproyecto">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="445" parent="176" name="v_jefeproyecto">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="446" parent="176" name="d_fechainicio">
+      <Position>5</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6795</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="447" parent="176" name="d_fechafin">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6795</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="448" parent="176" name="d_fechapfinal">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6795</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="449" parent="176" name="n_tiempoestimcoti">
+      <Position>8</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="450" parent="176" name="s_estado">
+      <Position>9</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="451" parent="176" name="n_inverestim">
+      <Position>10</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="452" parent="176" name="n_idestado">
+      <Position>11</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="453" parent="176" name="n_cantrq">
+      <Position>12</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="454" parent="176" name="d_fecharegistro">
+      <Position>13</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="455" parent="176" name="v_userregistro">
+      <Position>14</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3738</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="456" parent="176" name="pk_tbc_proyecto">
+      <ObjectId>55217</ObjectId>
+      <ColNames>n_idproyecto</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="457" parent="176" name="pk_tbc_proyecto">
+      <ObjectId>55218</ObjectId>
+      <ColNames>n_idproyecto</ColNames>
+      <UnderlyingIndexName>pk_tbc_proyecto</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="458" parent="176" name="fk_tbc_proyecto_tbc_empresa">
+      <ObjectId>55361</ObjectId>
+      <ColNames>n_idempresa</ColNames>
+      <RefTableId>55070</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_EMPRESA</RefTableName>
+      <RefKeyName>pk_tbc_empresa</RefKeyName>
+      <RefColNames>n_idempresa</RefColNames>
+    </foreign-key>
+    <column id="459" parent="177" name="n_idrequerimiento">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3740</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="460" parent="177" name="n_idproyecto">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3740</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="461" parent="177" name="v_nomrequerimiento">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3740</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="462" parent="177" name="v_nivel">
+      <Position>4</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3740</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="463" parent="177" name="s_estado">
+      <Position>5</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3740</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="464" parent="177" name="n_idestado">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3740</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="465" parent="177" name="d_fecharegistro">
+      <Position>7</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3740</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="466" parent="177" name="v_userregistro">
+      <Position>8</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3740</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="467" parent="177" name="pk_tbc_requerimiento">
+      <ObjectId>55219</ObjectId>
+      <ColNames>n_idrequerimiento</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="468" parent="177" name="pk_tbc_requerimiento">
+      <ObjectId>55220</ObjectId>
+      <ColNames>n_idrequerimiento</ColNames>
+      <UnderlyingIndexName>pk_tbc_requerimiento</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="469" parent="177" name="fk_tbc_requerimiento_tbc_proyecto">
+      <ObjectId>55366</ObjectId>
+      <ColNames>n_idproyecto</ColNames>
+      <RefTableId>55112</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PROYECTO</RefTableName>
+      <RefKeyName>pk_tbc_proyecto</RefKeyName>
+      <RefColNames>n_idproyecto</RefColNames>
+    </foreign-key>
+    <column id="470" parent="178" name="n_idservicio">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3742</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="471" parent="178" name="n_idsolucion">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="472" parent="178" name="v_nomservicio">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="473" parent="178" name="n_subtotal">
+      <Position>4</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="474" parent="178" name="n_numcuadrillas">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="475" parent="178" name="n_unitactividad">
+      <Position>6</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="476" parent="178" name="n_porcentdepreciacion">
+      <Position>7</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="477" parent="178" name="n_aumento">
+      <Position>8</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="478" parent="178" name="n_total">
+      <Position>9</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="479" parent="178" name="s_estado">
+      <Position>10</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="480" parent="178" name="n_idestado">
+      <Position>11</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="481" parent="178" name="d_fecharegistro">
+      <Position>12</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="482" parent="178" name="v_userregistro">
+      <Position>13</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3742</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="483" parent="178" name="pk_tbc_servicio">
+      <ObjectId>55221</ObjectId>
+      <ColNames>n_idservicio</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="484" parent="178" name="pk_tbc_servicio">
+      <ObjectId>55222</ObjectId>
+      <ColNames>n_idservicio</ColNames>
+      <UnderlyingIndexName>pk_tbc_servicio</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="485" parent="178" name="fk_tbc_servicio_tbc_solucion">
+      <ObjectId>55371</ObjectId>
+      <ColNames>n_idsolucion</ColNames>
+      <RefTableId>55124</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_SOLUCION</RefTableName>
+      <RefKeyName>pk_tbc_solucion</RefKeyName>
+      <RefColNames>n_idsolucion</RefColNames>
+    </foreign-key>
+    <column id="486" parent="179" name="n_idservsol">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3744</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="487" parent="179" name="n_idestado">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3744</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="488" parent="179" name="v_nomactividad">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3744</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="489" parent="179" name="s_estado">
+      <Position>4</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3744</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="490" parent="179" name="d_fecharegistro">
+      <Position>5</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3744</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="491" parent="179" name="v_userregistro">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3744</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="492" parent="179" name="pk_tbc_serviciossolicitados">
+      <ObjectId>55223</ObjectId>
+      <ColNames>n_idservsol</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="493" parent="179" name="pk_tbc_serviciossolicitados">
+      <ObjectId>55224</ObjectId>
+      <ColNames>n_idservsol</ColNames>
+      <UnderlyingIndexName>pk_tbc_serviciossolicitados</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="494" parent="180" name="n_idsolucion">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3746</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="495" parent="180" name="n_idrequerimiento">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="496" parent="180" name="v_nomsolucion">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="497" parent="180" name="v_descripcion">
+      <Position>4</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="498" parent="180" name="v_encargadosol">
+      <Position>5</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="499" parent="180" name="d_fechacreacion">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6794</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="500" parent="180" name="d_fechaenvio">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6794</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="501" parent="180" name="n_totalsolucion">
+      <Position>8</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6763</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="502" parent="180" name="n_totalmostrar">
+      <Position>9</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6764</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="503" parent="180" name="s_estado">
+      <Position>10</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="504" parent="180" name="n_idestado">
+      <Position>11</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="505" parent="180" name="d_fecharegistro">
+      <Position>12</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="506" parent="180" name="v_userregistro">
+      <Position>13</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3746</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="507" parent="180" name="pk_tbc_solucion">
+      <ObjectId>55225</ObjectId>
+      <ColNames>n_idsolucion</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="508" parent="180" name="pk_tbc_solucion">
+      <ObjectId>55226</ObjectId>
+      <ColNames>n_idsolucion</ColNames>
+      <UnderlyingIndexName>pk_tbc_solucion</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="509" parent="180" name="fk_tbc_solucion_tbc_requerimiento">
+      <ObjectId>55376</ObjectId>
+      <ColNames>n_idrequerimiento</ColNames>
+      <RefTableId>55115</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_REQUERIMIENTO</RefTableName>
+      <RefKeyName>pk_tbc_requerimiento</RefKeyName>
+      <RefColNames>n_idrequerimiento</RefColNames>
+    </foreign-key>
+    <column id="510" parent="181" name="v_idubigeo">
+      <Position>1</Position>
+      <DataType>varchar(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3748</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="511" parent="181" name="v_nomubigeo">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3748</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="512" parent="181" name="v_idprovincia">
+      <Position>3</Position>
+      <DataType>varchar(4)|0s</DataType>
+      <StateNumber>3748</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="513" parent="181" name="pk_tbc_ubigeo">
+      <ObjectId>55227</ObjectId>
+      <ColNames>v_idubigeo</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="514" parent="181" name="pk_tbc_ubigeo">
+      <ObjectId>55228</ObjectId>
+      <ColNames>v_idubigeo</ColNames>
+      <UnderlyingIndexName>pk_tbc_ubigeo</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="515" parent="181" name="fk_tbc_ubigeo_tbc_provincia">
+      <ObjectId>55381</ObjectId>
+      <ColNames>v_idprovincia</ColNames>
+      <RefTableId>55109</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PROVINCIA</RefTableName>
+      <RefKeyName>pk_tbc_provincia</RefKeyName>
+      <RefColNames>v_idprovincia</RefColNames>
+    </foreign-key>
+    <column id="516" parent="182" name="n_idumedida">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3750</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="517" parent="182" name="v_nomumedida">
+      <Position>2</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <StateNumber>3750</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="518" parent="182" name="pk_tbc_umedida">
+      <ObjectId>55229</ObjectId>
+      <ColNames>n_idumedida</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="519" parent="182" name="uq_tbc_umedida">
+      <ObjectId>58962</ObjectId>
+      <ColNames>v_nomumedida</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="520" parent="182" name="pk_tbc_umedida">
+      <ObjectId>55230</ObjectId>
+      <ColNames>n_idumedida</ColNames>
+      <UnderlyingIndexName>pk_tbc_umedida</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="521" parent="182" name="uq_tbc_umedida">
+      <ObjectId>58963</ObjectId>
+      <ColNames>v_nomumedida</ColNames>
+      <UnderlyingIndexName>uq_tbc_umedida</UnderlyingIndexName>
+    </key>
+    <column id="522" parent="183" name="n_idactividad">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>4484</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="523" parent="183" name="n_idcargo">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>4484</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="524" parent="183" name="n_cantidad">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>4484</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="525" parent="183" name="n_horas">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>4484</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="526" parent="183" name="n_subtotallaboral">
+      <Position>5</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>11306</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="527" parent="183" name="n_totallaboral">
+      <Position>6</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>11308</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <index id="528" parent="183" name="pk_tbd_actividadcargo">
+      <ObjectId>56066</ObjectId>
+      <ColNames>n_idactividad
+n_idcargo</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="529" parent="183" name="pk_tbd_actividadcargo">
+      <ObjectId>56067</ObjectId>
+      <ColNames>n_idactividad
+n_idcargo</ColNames>
+      <UnderlyingIndexName>pk_tbd_actividadcargo</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="530" parent="183" name="fk_tbd_actividadcargo_tbc_actividad">
+      <ObjectId>56068</ObjectId>
+      <ColNames>n_idactividad</ColNames>
+      <RefTableId>55052</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_ACTIVIDAD</RefTableName>
+      <RefKeyName>pk_tbc_actividad</RefKeyName>
+      <RefColNames>n_idactividad</RefColNames>
+    </foreign-key>
+    <foreign-key id="531" parent="183" name="fk_tbd_actividadcargo_tbc_cargolaboral">
+      <ObjectId>56073</ObjectId>
+      <ColNames>n_idcargo</ColNames>
+      <RefTableId>55151</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefSchemaName>RHH</RefSchemaName>
+      <RefTableName>TBC_CARGOLABORAL</RefTableName>
+      <RefKeyName>pk_tbc_cargolaboral</RefKeyName>
+      <RefColNames>n_idcargo</RefColNames>
+    </foreign-key>
+    <column id="532" parent="184" name="n_idperstran">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3752</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="533" parent="184" name="n_idservicio">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="534" parent="184" name="v_cargolaboral">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="535" parent="184" name="n_cantidad">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="536" parent="184" name="n_horas">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="537" parent="184" name="n_subttotal">
+      <Position>6</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="538" parent="184" name="n_total">
+      <Position>7</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="539" parent="184" name="d_fecharegistro">
+      <Position>8</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="540" parent="184" name="v_userregistro">
+      <Position>9</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3752</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="541" parent="184" name="pk_tbd_personaltransito">
+      <ObjectId>55231</ObjectId>
+      <ColNames>n_idperstran</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="542" parent="184" name="pk_tbd_personaltransito">
+      <ObjectId>55232</ObjectId>
+      <ColNames>n_idperstran</ColNames>
+      <UnderlyingIndexName>pk_tbd_personaltransito</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="543" parent="184" name="fk_tbd_personaltransito_tbc_servicio">
+      <ObjectId>55386</ObjectId>
+      <ColNames>n_idservicio</ColNames>
+      <RefTableId>55118</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_SERVICIO</RefTableName>
+      <RefKeyName>pk_tbc_servicio</RefKeyName>
+      <RefColNames>n_idservicio</RefColNames>
+    </foreign-key>
+    <column id="544" parent="185" name="n_idprodprov">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3754</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="545" parent="185" name="n_idproducto">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3754</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="546" parent="185" name="n_idproveedor">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3754</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="547" parent="185" name="n_preciocompra">
+      <Position>4</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6747</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="548" parent="185" name="n_precioventa">
+      <Position>5</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6748</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="549" parent="185" name="d_fechainicio">
+      <Position>6</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6812</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="550" parent="185" name="d_fechafin">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6812</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="551" parent="185" name="s_estado">
+      <Position>8</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3754</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="552" parent="185" name="n_precioventaminimo">
+      <Position>9</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6749</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="553" parent="185" name="d_fecharegistro">
+      <Position>10</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3754</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="554" parent="185" name="v_userregistro">
+      <Position>11</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3754</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="555" parent="185" name="pk_tbd_productoproveedor">
+      <ObjectId>55233</ObjectId>
+      <ColNames>n_idprodprov</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="556" parent="185" name="pk_tbd_productoproveedor">
+      <ObjectId>55234</ObjectId>
+      <ColNames>n_idprodprov</ColNames>
+      <UnderlyingIndexName>pk_tbd_productoproveedor</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="557" parent="185" name="fk_pk_tbd_productoproveedor_tbc_producto">
+      <ObjectId>55281</ObjectId>
+      <ColNames>n_idproducto</ColNames>
+      <RefTableId>55100</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PRODUCTO</RefTableName>
+      <RefKeyName>pk_xtbc_producto</RefKeyName>
+      <RefColNames>n_idproducto</RefColNames>
+    </foreign-key>
+    <foreign-key id="558" parent="185" name="fk_pk_tbd_productoproveedor_tbc_proveedor">
+      <ObjectId>55286</ObjectId>
+      <ColNames>n_idproveedor</ColNames>
+      <RefTableId>55106</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PROVEEDOR</RefTableName>
+      <RefKeyName>pk_xtbc_proveedor</RefKeyName>
+      <RefColNames>n_idproveedor</RefColNames>
+    </foreign-key>
+    <column id="559" parent="186" name="n_idprodsol">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3756</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="560" parent="186" name="n_idequipo">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="561" parent="186" name="n_idprodprov">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="562" parent="186" name="n_cantidad">
+      <Position>4</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="563" parent="186" name="n_preciounit">
+      <Position>5</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6743</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="564" parent="186" name="n_total">
+      <Position>6</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6744</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="565" parent="186" name="n_subtotal">
+      <Position>7</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6745</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="566" parent="186" name="s_estado">
+      <Position>8</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="567" parent="186" name="d_fecharegistro">
+      <Position>9</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="568" parent="186" name="v_userregistro">
+      <Position>10</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="569" parent="186" name="n_idproducto">
+      <Position>11</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="570" parent="186" name="s_enviadocotizar">
+      <Position>12</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="571" parent="186" name="s_cotizado">
+      <Position>13</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="572" parent="186" name="n_idprereg">
+      <Position>14</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3756</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="573" parent="186" name="d_fechasolucion">
+      <Position>15</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>6751</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <index id="574" parent="186" name="pk_tbd_productosolucion">
+      <ObjectId>55235</ObjectId>
+      <ColNames>n_idprodsol</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="575" parent="186" name="pk_tbd_productosolucion">
+      <ObjectId>55236</ObjectId>
+      <ColNames>n_idprodsol</ColNames>
+      <UnderlyingIndexName>pk_tbd_productosolucion</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="576" parent="186" name="fk_tbd_productosolucion_tbc_equipo">
+      <ObjectId>55391</ObjectId>
+      <ColNames>n_idequipo</ColNames>
+      <RefTableId>55077</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_EQUIPO</RefTableName>
+      <RefKeyName>pk_tbc_equipo</RefKeyName>
+      <RefColNames>n_idequipo</RefColNames>
+    </foreign-key>
+    <foreign-key id="577" parent="186" name="fk_tbd_productosolucion_tbc_solucion">
+      <ObjectId>55396</ObjectId>
+      <ColNames>n_idprodprov</ColNames>
+      <RefTableId>55136</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBD_PRODUCTOPROVEEDOR</RefTableName>
+      <RefKeyName>pk_tbd_productoproveedor</RefKeyName>
+      <RefColNames>n_idprodprov</RefColNames>
+    </foreign-key>
+    <column id="578" parent="187" name="n_idservprov">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3758</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="579" parent="187" name="n_idservsol">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3758</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="580" parent="187" name="n_idproveedor">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3758</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="581" parent="187" name="n_precio">
+      <Position>4</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3758</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="582" parent="187" name="s_estado">
+      <Position>5</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3758</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="583" parent="187" name="d_fecharegistro">
+      <Position>6</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3758</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="584" parent="187" name="v_userregistro">
+      <Position>7</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3758</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="585" parent="187" name="pk_tbd_servicioproveedor">
+      <ObjectId>55237</ObjectId>
+      <ColNames>n_idservprov</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="586" parent="187" name="pk_tbd_servicioproveedor">
+      <ObjectId>55238</ObjectId>
+      <ColNames>n_idservprov</ColNames>
+      <UnderlyingIndexName>pk_tbd_servicioproveedor</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="587" parent="187" name="fk_tbd_servicioproveedor_tbc_serviciossolicitados">
+      <ObjectId>55406</ObjectId>
+      <ColNames>n_idservsol</ColNames>
+      <RefTableId>55121</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_SERVICIOSSOLICITADOS</RefTableName>
+      <RefKeyName>pk_tbc_serviciossolicitados</RefKeyName>
+      <RefColNames>n_idservsol</RefColNames>
+    </foreign-key>
+    <foreign-key id="588" parent="187" name="fk_tbd_servicioproveedor_tbc_proveedor">
+      <ObjectId>55401</ObjectId>
+      <ColNames>n_idproveedor</ColNames>
+      <RefTableId>55106</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PROVEEDOR</RefTableName>
+      <RefKeyName>pk_xtbc_proveedor</RefKeyName>
+      <RefColNames>n_idproveedor</RefColNames>
+    </foreign-key>
+    <column id="589" parent="188" name="n_idservicsolu">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3760</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="590" parent="188" name="n_idoserv">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="591" parent="188" name="n_idservprov">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="592" parent="188" name="v_nomservicio">
+      <Position>4</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="593" parent="188" name="v_descripcion">
+      <Position>5</Position>
+      <DataType>varchar(200)|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="594" parent="188" name="n_cantidad">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="595" parent="188" name="n_subtotal">
+      <Position>7</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="596" parent="188" name="n_total">
+      <Position>8</Position>
+      <DataType>money|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>790</TypeId>
+    </column>
+    <column id="597" parent="188" name="s_estado">
+      <Position>9</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="598" parent="188" name="d_fecharegistro">
+      <Position>10</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="599" parent="188" name="v_userregistro">
+      <Position>11</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3760</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="600" parent="188" name="pk_tbd_serviciosolucion">
+      <ObjectId>55239</ObjectId>
+      <ColNames>n_idservicsolu</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="601" parent="188" name="pk_tbd_serviciosolucion">
+      <ObjectId>55240</ObjectId>
+      <ColNames>n_idservicsolu</ColNames>
+      <UnderlyingIndexName>pk_tbd_serviciosolucion</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="602" parent="188" name="fk_tbd_serviciosolucion_tbc_otroservicio">
+      <ObjectId>55411</ObjectId>
+      <ColNames>n_idoserv</ColNames>
+      <RefTableId>55083</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_OTROSERVICIO</RefTableName>
+      <RefKeyName>pk_tbc_otroservicio</RefKeyName>
+      <RefColNames>n_idoserv</RefColNames>
+    </foreign-key>
+    <foreign-key id="603" parent="188" name="fk_tbd_serviciosolucion_tbd_servicioproveedor">
+      <ObjectId>55416</ObjectId>
+      <ColNames>n_idservprov</ColNames>
+      <RefTableId>55142</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBD_SERVICIOPROVEEDOR</RefTableName>
+      <RefKeyName>pk_tbd_servicioproveedor</RefKeyName>
+      <RefColNames>n_idservprov</RefColNames>
+    </foreign-key>
+    <column id="604" parent="189" name="n_idarea">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3762</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="605" parent="189" name="v_nomarea">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3762</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="606" parent="189" name="s_estado">
+      <Position>3</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3762</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="607" parent="189" name="n_idestado">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3762</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="608" parent="189" name="d_fecharegistro">
+      <Position>5</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3762</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="609" parent="189" name="v_userregistro">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3762</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="610" parent="189" name="pk_tbc_area">
+      <ObjectId>55253</ObjectId>
+      <ColNames>n_idarea</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="611" parent="189" name="pk_tbc_area">
+      <ObjectId>55254</ObjectId>
+      <ColNames>n_idarea</ColNames>
+      <UnderlyingIndexName>pk_tbc_area</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="612" parent="190" name="n_idcargo">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3764</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="613" parent="190" name="n_idarea">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3764</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="614" parent="190" name="v_nomcargo">
+      <Position>3</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3764</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="615" parent="190" name="n_salario">
+      <Position>4</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6825</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="616" parent="190" name="s_estado">
+      <Position>5</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3764</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="617" parent="190" name="n_idestado">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3764</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="618" parent="190" name="d_fecharegistro">
+      <Position>7</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3764</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="619" parent="190" name="v_userregistro">
+      <Position>8</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>3764</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="620" parent="190" name="pk_tbc_cargolaboral">
+      <ObjectId>55255</ObjectId>
+      <ColNames>n_idcargo</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="621" parent="190" name="pk_tbc_cargolaboral">
+      <ObjectId>55256</ObjectId>
+      <ColNames>n_idcargo</ColNames>
+      <UnderlyingIndexName>pk_tbc_cargolaboral</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="622" parent="190" name="fk_tbc_cargolaboral_tbc_area">
+      <ObjectId>55426</ObjectId>
+      <ColNames>n_idarea</ColNames>
+      <RefTableId>55148</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_AREA</RefTableName>
+      <RefKeyName>pk_tbc_area</RefKeyName>
+      <RefColNames>n_idarea</RefColNames>
+    </foreign-key>
+    <column id="623" parent="191" name="n_idempleado">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="624" parent="191" name="n_idarea">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="625" parent="191" name="v_dni">
+      <Position>3</Position>
+      <DataType>char(8)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1042</TypeId>
+    </column>
+    <column id="626" parent="191" name="v_nombre">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="627" parent="191" name="v_apellidopaterno">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="628" parent="191" name="v_apellidomaterno">
+      <Position>6</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="629" parent="191" name="v_telefono">
+      <Position>7</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="630" parent="191" name="v_direccion">
+      <Position>8</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="631" parent="191" name="d_fechanac">
+      <Position>9</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>11976</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="632" parent="191" name="v_sexo">
+      <Position>10</Position>
+      <DataType>char|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1042</TypeId>
+    </column>
+    <column id="633" parent="191" name="s_estado">
+      <Position>11</Position>
+      <DataType>bit|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3766</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <index id="634" parent="191" name="pk_tbc_empleado">
+      <ObjectId>55257</ObjectId>
+      <ColNames>n_idempleado</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="635" parent="191" name="uq_v_dni_tbc_empleado">
+      <ObjectId>55261</ObjectId>
+      <ColNames>v_dni</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="636" parent="191" name="pk_tbc_empleado">
+      <ObjectId>55258</ObjectId>
+      <ColNames>n_idempleado</ColNames>
+      <UnderlyingIndexName>pk_tbc_empleado</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="637" parent="191" name="uq_v_dni_tbc_empleado">
+      <ObjectId>55262</ObjectId>
+      <ColNames>v_dni</ColNames>
+      <UnderlyingIndexName>uq_v_dni_tbc_empleado</UnderlyingIndexName>
+    </key>
+    <foreign-key id="638" parent="191" name="fk_tbc_empleado_tbc_area">
+      <ObjectId>55431</ObjectId>
+      <ColNames>n_idarea</ColNames>
+      <RefTableId>55148</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_AREA</RefTableName>
+      <RefKeyName>pk_tbc_area</RefKeyName>
+      <RefColNames>n_idarea</RefColNames>
+    </foreign-key>
+    <column id="639" parent="192" name="n_idcargo">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3768</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="640" parent="192" name="d_fechainicio">
+      <Position>2</Position>
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>6839</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="641" parent="192" name="d_fechafin">
+      <Position>3</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>6839</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="642" parent="192" name="n_salario">
+      <Position>4</Position>
+      <DataType>numeric(9,2 digit)|0s</DataType>
+      <StateNumber>6838</StateNumber>
+      <TypeId>1700</TypeId>
+    </column>
+    <column id="643" parent="192" name="s_estado">
+      <Position>5</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3768</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <index id="644" parent="192" name="pk_tbd_historialcargo">
+      <ObjectId>55259</ObjectId>
+      <ColNames>n_idcargo</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="645" parent="192" name="pk_tbd_historialcargo">
+      <ObjectId>55260</ObjectId>
+      <ColNames>n_idcargo</ColNames>
+      <UnderlyingIndexName>pk_tbd_historialcargo</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="646" parent="192" name="fk_tbd_historialcargo_tbc_cargolaboral">
+      <ObjectId>55436</ObjectId>
+      <ColNames>n_idcargo</ColNames>
+      <RefTableId>55151</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_CARGOLABORAL</RefTableName>
+      <RefKeyName>pk_tbc_cargolaboral</RefKeyName>
+      <RefColNames>n_idcargo</RefColNames>
+    </foreign-key>
+    <column id="647" parent="193" name="n_idapli">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3770</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="648" parent="193" name="v_aplicacion">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3770</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="649" parent="193" name="s_estado">
+      <Position>3</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3770</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="650" parent="193" name="n_version">
+      <Position>4</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <StateNumber>3770</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="651" parent="193" name="v_abreviatura">
+      <Position>5</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <StateNumber>3770</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="652" parent="193" name="pk_tbc_aplicacion">
+      <ObjectId>55263</ObjectId>
+      <ColNames>n_idapli</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="653" parent="193" name="uq_v_aplicacion_tbc_aplicacion">
+      <ObjectId>55275</ObjectId>
+      <ColNames>v_aplicacion</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="654" parent="193" name="pk_tbc_aplicacion">
+      <ObjectId>55264</ObjectId>
+      <ColNames>n_idapli</ColNames>
+      <UnderlyingIndexName>pk_tbc_aplicacion</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="655" parent="193" name="uq_v_aplicacion_tbc_aplicacion">
+      <ObjectId>55276</ObjectId>
+      <ColNames>v_aplicacion</ColNames>
+      <UnderlyingIndexName>uq_v_aplicacion_tbc_aplicacion</UnderlyingIndexName>
+    </key>
+    <column id="656" parent="194" name="n_idmenu">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3772</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="657" parent="194" name="v_descripcion">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3772</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="658" parent="194" name="n_idpadre">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3772</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="659" parent="194" name="n_posicion">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3772</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="660" parent="194" name="v_icono">
+      <Position>5</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>8033</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="661" parent="194" name="s_habilitado">
+      <Position>6</Position>
+      <DataType>bit|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3772</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="662" parent="194" name="v_url">
+      <Position>7</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3772</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="663" parent="194" name="n_idapli">
+      <Position>8</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3772</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="664" parent="194" name="pk_tbc_menu">
+      <ObjectId>55265</ObjectId>
+      <ColNames>n_idmenu</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="665" parent="194" name="pk_tbc_menu">
+      <ObjectId>55266</ObjectId>
+      <ColNames>n_idmenu</ColNames>
+      <UnderlyingIndexName>pk_tbc_menu</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="666" parent="194" name="fk_tbc_menu_tbc_aplicacion">
+      <ObjectId>55441</ObjectId>
+      <ColNames>n_idapli</ColNames>
+      <RefTableId>55160</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_APLICACION</RefTableName>
+      <RefKeyName>pk_tbc_aplicacion</RefKeyName>
+      <RefColNames>n_idapli</RefColNames>
+    </foreign-key>
+    <column id="667" parent="195" name="n_idperfil">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3775</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="668" parent="195" name="n_idapli">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3775</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="669" parent="195" name="v_perfil">
+      <Position>3</Position>
+      <DataType>varchar(40)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3775</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="670" parent="195" name="s_estado">
+      <Position>4</Position>
+      <DataType>bit|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3775</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="671" parent="195" name="d_fechacreacion">
+      <Position>5</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3775</StateNumber>
+      <DefaultExpression>(CURRENT_DATE + CURRENT_TIME)</DefaultExpression>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="672" parent="195" name="v_usuariocreacion">
+      <Position>6</Position>
+      <DataType>varchar(80)|0s</DataType>
+      <StateNumber>3775</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="673" parent="195" name="d_fechamodificacion">
+      <Position>7</Position>
+      <DataType>timestamp|0s</DataType>
+      <StateNumber>3775</StateNumber>
+      <TypeId>1114</TypeId>
+    </column>
+    <column id="674" parent="195" name="v_usuariomodificacion">
+      <Position>8</Position>
+      <DataType>varchar(80)|0s</DataType>
+      <StateNumber>3775</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="675" parent="195" name="pk_tbc_perfil">
+      <ObjectId>55267</ObjectId>
+      <ColNames>n_idperfil</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="676" parent="195" name="uq_v_perfil_tbc_perfil">
+      <ObjectId>55279</ObjectId>
+      <ColNames>v_perfil</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="677" parent="195" name="pk_tbc_perfil">
+      <ObjectId>55268</ObjectId>
+      <ColNames>n_idperfil</ColNames>
+      <UnderlyingIndexName>pk_tbc_perfil</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="678" parent="195" name="uq_v_perfil_tbc_perfil">
+      <ObjectId>55280</ObjectId>
+      <ColNames>v_perfil</ColNames>
+      <UnderlyingIndexName>uq_v_perfil_tbc_perfil</UnderlyingIndexName>
+    </key>
+    <column id="679" parent="196" name="n_iduser">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3777</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="680" parent="196" name="v_login">
+      <Position>2</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3777</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="681" parent="196" name="v_nombres">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3777</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="682" parent="196" name="v_paterno">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3777</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="683" parent="196" name="v_materno">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3777</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="684" parent="196" name="s_estado">
+      <Position>6</Position>
+      <DataType>bit|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3777</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="685" parent="196" name="v_clave">
+      <Position>7</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>4103</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="686" parent="196" name="n_idpersonal">
+      <Position>8</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3777</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="687" parent="196" name="v_correo">
+      <Position>9</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <StateNumber>3777</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="688" parent="196" name="pk_tbc_user">
+      <ObjectId>55269</ObjectId>
+      <ColNames>n_iduser</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="689" parent="196" name="uq_v_login_tbc_user">
+      <ObjectId>55277</ObjectId>
+      <ColNames>v_login</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="690" parent="196" name="pk_tbc_user">
+      <ObjectId>55270</ObjectId>
+      <ColNames>n_iduser</ColNames>
+      <UnderlyingIndexName>pk_tbc_user</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="691" parent="196" name="uq_v_login_tbc_user">
+      <ObjectId>55278</ObjectId>
+      <ColNames>v_login</ColNames>
+      <UnderlyingIndexName>uq_v_login_tbc_user</UnderlyingIndexName>
+    </key>
+    <column id="692" parent="197" name="n_idmenu">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3779</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="693" parent="197" name="n_idperfil">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3779</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="694" parent="197" name="s_visible">
+      <Position>3</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3779</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <column id="695" parent="197" name="s_estado">
+      <Position>4</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3779</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <index id="696" parent="197" name="pk_xtbd_menuperfil">
+      <ObjectId>55273</ObjectId>
+      <ColNames>n_idmenu
+n_idperfil</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="697" parent="197" name="pk_xtbd_menuperfil">
+      <ObjectId>55274</ObjectId>
+      <ColNames>n_idmenu
+n_idperfil</ColNames>
+      <UnderlyingIndexName>pk_xtbd_menuperfil</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="698" parent="197" name="fk_xtbd_menuperfil_tbc_menu">
+      <ObjectId>55456</ObjectId>
+      <ColNames>n_idmenu</ColNames>
+      <RefTableId>55163</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_MENU</RefTableName>
+      <RefKeyName>pk_tbc_menu</RefKeyName>
+      <RefColNames>n_idmenu</RefColNames>
+    </foreign-key>
+    <foreign-key id="699" parent="197" name="fk_xtbd_menuperfil_tbc_perfil">
+      <ObjectId>55461</ObjectId>
+      <ColNames>n_idperfil</ColNames>
+      <RefTableId>55166</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PERFIL</RefTableName>
+      <RefKeyName>pk_tbc_perfil</RefKeyName>
+      <RefColNames>n_idperfil</RefColNames>
+    </foreign-key>
+    <column id="700" parent="198" name="n_iduser">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3781</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="701" parent="198" name="n_idperfil">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>3781</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="702" parent="198" name="s_estado">
+      <Position>3</Position>
+      <DataType>bit|0s</DataType>
+      <StateNumber>3781</StateNumber>
+      <TypeId>1560</TypeId>
+    </column>
+    <index id="703" parent="198" name="pk_tbd_perfiluser">
+      <ObjectId>55271</ObjectId>
+      <ColNames>n_iduser
+n_idperfil</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="704" parent="198" name="pk_tbd_perfiluser">
+      <ObjectId>55272</ObjectId>
+      <ColNames>n_iduser
+n_idperfil</ColNames>
+      <UnderlyingIndexName>pk_tbd_perfiluser</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="705" parent="198" name="fk_tbd_perfiluser_tbc_user">
+      <ObjectId>55451</ObjectId>
+      <ColNames>n_iduser</ColNames>
+      <RefTableId>55170</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_USER</RefTableName>
+      <RefKeyName>pk_tbc_user</RefKeyName>
+      <RefColNames>n_iduser</RefColNames>
+    </foreign-key>
+    <foreign-key id="706" parent="198" name="fk_tbd_perfiluser_tbc_perfil">
+      <ObjectId>55446</ObjectId>
+      <ColNames>n_idperfil</ColNames>
+      <RefTableId>55166</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>TBC_PERFIL</RefTableName>
+      <RefKeyName>pk_tbc_perfil</RefKeyName>
+      <RefColNames>n_idperfil</RefColNames>
+    </foreign-key>
+    <column id="707" parent="199" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>3783</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="708" parent="200" name="idtabla">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>6805</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="709" parent="200" name="esquema">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <StateNumber>6805</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="710" parent="200" name="tabla">
+      <Position>3</Position>
+      <DataType>name|0s</DataType>
+      <StateNumber>6805</StateNumber>
+      <TypeId>19</TypeId>
+    </column>
+    <column id="711" parent="200" name="idcampo">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>6805</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="712" parent="200" name="campo">
+      <Position>5</Position>
+      <DataType>name|0s</DataType>
+      <StateNumber>6805</StateNumber>
+      <TypeId>19</TypeId>
+    </column>
+    <column id="713" parent="200" name="tipo_dato">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>6805</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="714" parent="201" name="idtabla">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>6817</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="715" parent="201" name="esquema">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <StateNumber>6817</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="716" parent="201" name="tabla">
+      <Position>3</Position>
+      <DataType>name|0s</DataType>
+      <StateNumber>6817</StateNumber>
+      <TypeId>19</TypeId>
+    </column>
+    <column id="717" parent="201" name="idcampo">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>6817</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="718" parent="201" name="campo">
+      <Position>5</Position>
+      <DataType>name|0s</DataType>
+      <StateNumber>6817</StateNumber>
+      <TypeId>19</TypeId>
+    </column>
+    <column id="719" parent="201" name="tipo_dato">
+      <Position>6</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <StateNumber>6817</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="720" parent="202" name="multiprocess">
+      <Position>1</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <StateNumber>3787</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="721" parent="202" name="http_referer">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>3787</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <argument id="722" parent="203" name="campos">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="723" parent="203">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="724" parent="204">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="725" parent="204">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="726" parent="204">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="727" parent="205" name="nomemp">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="728" parent="205">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="729" parent="206">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="730" parent="206">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="731" parent="207">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="732" parent="207">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="733" parent="208" name="idprov">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="734" parent="208" name="idprod">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="735" parent="208">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="736" parent="209" name="nomprod">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="737" parent="209">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="738" parent="210" name="idprodprov">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="739" parent="210" name="nomprod">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="740" parent="210">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="741" parent="211" name="nomprod">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="742" parent="211">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="743" parent="212" name="idsol">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="744" parent="212">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="745" parent="213" name="idprov">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="746" parent="213">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="747" parent="214" name="idempresa">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="748" parent="214" name="nompy">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="749" parent="214">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="750" parent="215" name="idempresa">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="751" parent="215">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="752" parent="216">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="753" parent="216">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="754" parent="216">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="755" parent="217" name="idproyecto">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="756" parent="217" name="nomrq">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="757" parent="217">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="758" parent="218" name="idrq">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="759" parent="218">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="760" parent="219" name="data_json">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="761" parent="219" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="762" parent="219">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>void|0s</DataType>
+    </argument>
+    <argument id="763" parent="220" name="numtbl">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="764" parent="220" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="765" parent="220">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>void|0s</DataType>
+    </argument>
+    <argument id="766" parent="221" name="numtbl">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="767" parent="221" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="768" parent="221">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="769" parent="222" name="numtbl">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="770" parent="222" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="771" parent="222">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="772" parent="223" name="numtbl">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="773" parent="223" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="774" parent="223">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="775" parent="224" name="numtbl">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="776" parent="224" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="777" parent="224">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="778" parent="225" name="data_json">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="779" parent="225" name="reporte">
+      <Position>2</Position>
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="780" parent="225">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="781" parent="226" name="data_json">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="782" parent="226" name="reporte">
+      <Position>2</Position>
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="783" parent="226">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="784" parent="227" name="tabla">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="785" parent="227">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>setof() record|0s</DataType>
+    </argument>
+    <argument id="786" parent="228" name="numtabla">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="787" parent="228">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="788" parent="229" name="data_json">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="789" parent="229">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="790" parent="230" name="nomtbl">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="791" parent="230" name="consulta">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="792" parent="230" name="consultajson">
+      <Position>3</Position>
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="793" parent="230">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="794" parent="231" name="data_json">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="795" parent="231" name="reporte">
+      <Position>2</Position>
+      <ArgumentDirection>O</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="796" parent="231">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="797" parent="232" name="nomtabla">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="798" parent="232" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="799" parent="232">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="800" parent="233" name="nomtabla">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="801" parent="233" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="802" parent="233">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="803" parent="234" name="nomtabla">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="804" parent="234" name="campos">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="805" parent="234">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="806" parent="235">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(idfamlia integer, nomfamilia varchar)|0v</DataType>
+    </argument>
+    <argument id="807" parent="236" name="numero">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="808" parent="236">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="809" parent="237" name="cadena">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="810" parent="237">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="811" parent="238" name="nomtabla">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="812" parent="238" name="data_json">
+      <Position>2</Position>
+      <DataType>json|0s</DataType>
+    </argument>
+    <argument id="813" parent="238">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>setof() record|0s</DataType>
+    </argument>
+    <argument id="814" parent="239" name="data_jsonf">
+      <Position>1</Position>
+      <DataType>json|0s</DataType>
+    </argument>
+    <argument id="815" parent="239">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(key text, value json)|0v</DataType>
+    </argument>
+    <argument id="816" parent="240">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="817" parent="241">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="818" parent="242">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(data_json json)|0v</DataType>
+    </argument>
+    <argument id="819" parent="243" name="codigo">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="820" parent="243">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(idestado integer, nomestado varchar)|0v</DataType>
+    </argument>
+    <argument id="821" parent="244" name="codigo">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="822" parent="244">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="823" parent="245" name="idestado">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="824" parent="245" name="empresa">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="825" parent="245">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(id_proyecto integer, id_empresa integer, nom_proyecto varchar, jefe_proyecto varchar, fecha_inicio timestamp, fecha_fin timestamp, fecha_p_fin timestamp, tiempo_estim_coti integer, estado bit, inv_estim money, id_estado bit, cant_rq integer, fecha_registro timestamp, user_registro varchar)|0v</DataType>
+    </argument>
+    <argument id="826" parent="246" name="fecinicio">
+      <Position>1</Position>
+      <DataType>timestamp|0s</DataType>
+    </argument>
+    <argument id="827" parent="246" name="fecfin">
+      <Position>2</Position>
+      <DataType>timestamp|0s</DataType>
+    </argument>
+    <argument id="828" parent="246">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(id_proyecto integer, id_empresa integer, nom_proyecto varchar, jefe_proyecto varchar, fecha_inicio timestamp, fecha_fin timestamp, fecha_p_fin timestamp, tiempo_estim_coti integer, estado bit, inv_estim money, id_estado bit, cant_rq integer, fecha_registro timestamp, user_registro varchar)|0v</DataType>
+    </argument>
+    <argument id="829" parent="247" name="empresa">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="830" parent="247">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(id_proyecto integer, id_empresa integer, nom_proyecto varchar, jefe_proyecto varchar, fecha_inicio timestamp, fecha_fin timestamp, fecha_p_fin timestamp, tiempo_estim_coti integer, estado bit, inv_estim money, id_estado integer, cant_rq integer, fecha_registro timestamp, user_registro varchar)|0v</DataType>
+    </argument>
+    <argument id="831" parent="248" name="idempresa">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="832" parent="248" name="idproyecto">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="833" parent="248">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(ID_RQ integer, ID_PROYECTO integer, NOM_RQ varchar, NIVEL varchar, ESTADO bit, ID_ESTADO integer, FECHA_REGISTRO timestamp, USER_REGISTRO varchar)|0v</DataType>
+    </argument>
+    <argument id="834" parent="249" name="idusuario">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="835" parent="249" name="idaplicacion">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="836" parent="249">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(PERFIL varchar, ESTADO bit, APLICACION varchar)|0v</DataType>
+    </argument>
+    <argument id="837" parent="250">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="838" parent="250">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(pk varchar)|0v</DataType>
+    </argument>
+    <argument id="839" parent="251" name="xtabla">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="840" parent="251">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>setof() record|0s</DataType>
+    </argument>
+    <argument id="841" parent="252">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="842" parent="253" name="idapli">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="843" parent="253" name="idperfil">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="844" parent="253">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(IdMenu integer, IdPadre integer, Descripcion text, Check bit)|0v</DataType>
+    </argument>
+    <argument id="845" parent="254" name="idperfil">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="846" parent="254">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="847" parent="255" name="idmenu">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="848" parent="255" name="idapli">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="849" parent="255">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(DESCRIPCION varchar)|0v</DataType>
+    </argument>
+    <argument id="850" parent="256" name="idperfil">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="851" parent="256">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(IdPerfil integer, IdMenu integer, Descripcion varchar, IdPadre integer, Posicion integer, Icono varchar, Habilitado bit, Url varchar, IdApli integer)|0v</DataType>
+    </argument>
+    <argument id="852" parent="257" name="idaplicacion">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="853" parent="257" name="idperfil">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="854" parent="257">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(IdPerfil integer, IdMenu integer, Descripcion text, IdPadre integer, Posicion integer, Icono varchar, Habilitado bit, Url varchar, IdApli integer)|0v</DataType>
+    </argument>
+    <argument id="855" parent="258">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(IdPerfil integer, Descripcion text)|0v</DataType>
+    </argument>
+    <argument id="856" parent="259" name="concatenar">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="857" parent="259">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(iduser integer, nomcompleto text)|0v</DataType>
+    </argument>
+    <argument id="858" parent="260" name="valor">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="859" parent="260">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(ID USER integer, login varchar, nombres varchar, APELIDO PATERNO varchar, APELLIDO MATERNO varchar, estado bit, clave varchar, ID PERSONAL integer)|0v</DataType>
+    </argument>
+    <argument id="860" parent="261" name="valor">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </argument>
+    <argument id="861" parent="261">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(login varchar, nombres varchar, Apellido Paterno varchar, Apellido Materno varchar, estado bit, clave varchar, idpersonal integer, correo varchar)|0v</DataType>
+    </argument>
+    <argument id="862" parent="262" name="login">
+      <Position>1</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="863" parent="262" name="clave">
+      <Position>2</Position>
+      <DataType>varchar|0s</DataType>
+    </argument>
+    <argument id="864" parent="262">
+      <ArgumentDirection>R</ArgumentDirection>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="865" parent="263" name="iduser">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="866" parent="263">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(ID integer, APLICACION varchar)|0v</DataType>
+    </argument>
+    <argument id="867" parent="264" name="iduser">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="868" parent="264" name="idaplicacion">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="869" parent="264">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(ID integer, PERFIL varchar)|0v</DataType>
+    </argument>
+    <argument id="870" parent="265" name="idapli">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="871" parent="265" name="idperfil">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+    </argument>
+    <argument id="872" parent="265">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(IDPERFIL integer, IDMENU integer, IDPADRE integer, DESCRIPCION varchar, CHECK bit)|0v</DataType>
+    </argument>
+    <argument id="873" parent="266">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(nom_tabla varchar, nom_constraint varchar, tipo_constraint varchar, nom_campo varchar, references_table varchar)|0v</DataType>
+    </argument>
+    <argument id="874" parent="267">
+      <ArgumentDirection>T</ArgumentDirection>
+      <DataType>table(idtabla oid, esquema varchar, tabla name, idcampo text, campo name, tipo_dato varchar)|0v</DataType>
+    </argument>
+  </database-model>
+</dataSource>

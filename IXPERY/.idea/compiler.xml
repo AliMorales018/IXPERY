@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Dominio.Core.Entities" />
+        <module name="Dominio.Main.Module" />
+        <module name="DominioCoreEntities" />
+        <module name="DominioMainModule" />
+        <module name="Infraestructura.Data.PostgreSQL" />
+        <module name="InfraestructuraDataPostgreSQL" />
+        <module name="Presentacion" />
+        <module name="Utilitario" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

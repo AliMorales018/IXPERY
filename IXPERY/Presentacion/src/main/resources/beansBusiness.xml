@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Beans Config -->
+    <!-- Beans Test -->
+    <bean id="prueba" class="com.ixpery.negocio.tools.BTest" />
+
+    <!-- Beans Sistema -->
+    <bean id="beanMenu" class="com.ixpery.negocio.sys.BMenu" />
+    <bean id="beanMenuPerfil" class="com.ixpery.negocio.sys.BMenuPerfil" />
+    <bean id="beanAplicacion" class="com.ixpery.negocio.sys.BAplicacion" />
+    <bean id="beanUsuario" class="com.ixpery.negocio.sys.BUsuario" />
+    <bean id="beanPerfil" class="com.ixpery.negocio.sys.BPerfil" />
+    <bean id="beanPerfilUsuario" class="com.ixpery.negocio.sys.BPerfilUsuario" />
+
+    <!-- Beans Logistica -->
+    <bean id="beanProyecto" class="com.ixpery.negocio.log.BProyecto" />
+    <bean id="beanRequerimiento" class="com.ixpery.negocio.log.BRequerimiento" />
+    <bean id="beanEquipo" class="com.ixpery.negocio.log.BEquipo" />
+    <bean id="beanEstado" class="com.ixpery.negocio.log.BEstado" />
+    <bean id="beanEmpresa" class="com.ixpery.negocio.log.BEmpresa" />
+    <bean id="beanCliente" class="com.ixpery.negocio.log.BCliente" />
+    <bean id="beanDepartamento" class="com.ixpery.negocio.log.BDepartamento" />
+    <bean id="beanProvincia" class="com.ixpery.negocio.log.BProvincia" />
+    <bean id="beanUbigeo" class="com.ixpery.negocio.log.BUbigeo" />
+    <bean id="beanProducto" class="com.ixpery.negocio.log.BProducto" />
+    <bean id="beanFamilia" class="com.ixpery.negocio.log.BFamilia" />
+    <bean id="beanCategoria" class="com.ixpery.negocio.log.BCategoria" />
+    <bean id="beanUmedida" class="com.ixpery.negocio.log.BUmedida" />
+    <bean id="beanSolucion" class="com.ixpery.negocio.log.BSolucion" />
+    <bean id="beanProductoSolucion" class="com.ixpery.negocio.log.BProductoSolucion" />
+    <bean id="beanProveedor" class="com.ixpery.negocio.log.BProveedor" />
+    <bean id="beanContactoEmpresa" class="com.ixpery.negocio.log.BContactoEmpresa" />
+    <bean id="beanPreRegistroProducto" class="com.ixpery.negocio.log.BPreRegistroProducto" />
+
+    <!-- Beans RRHH -->
+    <bean id="beanEmpleado" class="com.ixpery.negocio.rhh.BEmpleado" />
+    <bean id="beanArea" class="com.ixpery.negocio.rhh.BArea" />
+
+<!-- End Beans Config -->
+</beans>

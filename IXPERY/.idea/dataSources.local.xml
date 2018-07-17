@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="IXPERY13@localhost" uuid="cc247ef0-7337-476d-8ae0-168681475222">
+      <database-info product="PostgreSQL" version="10.4" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <introspection-schemas>IXPERY13:LOG,RHH,SYS,public</introspection-schemas>
+    </data-source>
+    <data-source name="IXPERY15@localhost" uuid="49812fe8-3821-4952-bbab-6f7787c82c0d">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>postgres</user-name>
+      <introspection-schemas>IXPERY15:LOG,RHH,SYS,public</introspection-schemas>
+    </data-source>
+    <data-source name="IXPERY2@192.168.0.18" uuid="3e7c215e-3147-41b3-8fce-665ac221fc5f">
+      <database-info product="PostgreSQL" version="10.4" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <introspection-schemas>IXPERY2:LOG,RHH,SYS,public</introspection-schemas>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,9 @@
+.selected{
+    cursor: pointer;
+}
+.selected:hover{
+    background-color: #E6E6E6;
+}
+.seleccionada{
+    background-color: #E6E6E6;
+}

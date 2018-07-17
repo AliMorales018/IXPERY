@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="IXPERY13@localhost" uuid="cc247ef0-7337-476d-8ae0-168681475222">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/IXPERY13</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="IXPERY15@localhost" uuid="49812fe8-3821-4952-bbab-6f7787c82c0d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/IXPERY15</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="IXPERY2@192.168.0.18" uuid="3e7c215e-3147-41b3-8fce-665ac221fc5f">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://192.168.0.18:5432/IXPERY2</jdbc-url>
+    </data-source>
+  </component>
+</project>
