@@ -69,4 +69,40 @@ public class DPreRegistroProducto {
             com.DeshaceTransaccion();
         }
     }
+
+    public List<EPreRegistroProducto> BuscarPreRegProducto(String campos) throws Exception {
+
+        if(!campos.equals("/")) {
+            //SEPARAMOS POR COMAS PARA PODER AGREGAR EL NOMBRE DE LA COLUMNA(CODIGO)
+            String[] addColumna = campos.split(",");
+            for (int i = 0; i < addColumna.length; i++){
+                if (addColumna[i].equals("%")) {
+                    addColumna[i] = "";
+                }
+            }
+            campos = getKeyId() + "," + addColumna[0];
+            System.out.println("Campos: " + campos);
+        }
+
+        listaParametros.clear();
+        SqlParameter pTabla = new SqlParameter("tabla", getNameTable());
+        SqlParameter pCampos = new SqlParameter("campos", campos);
+        listaParametros.add(pTabla);
+        listaParametros.add(pCampos);
+
+        String jsonResult = com.EjecutaConsultaJson("gen_filtrar", listaParametros);
+
+        List<EPreRegistroProducto> listPreRegProd = new ArrayList<EPreRegistroProducto>();
+        if(!jsonResult.equals("")) {
+            //CONVERTIR JSON A LISTA DE ARRAY
+            JsonParcellable parser = new JsonParcellable();
+            List<Object> listObject = parser.getListObjectJson(jsonResult, new EPreRegistroProducto());
+            for (int i = 0; i < listObject.size(); i++) {
+                EPreRegistroProducto oprod= (EPreRegistroProducto) listObject.get(i);
+                listPreRegProd.add(oprod);
+            }
+        }
+        return listPreRegProd;
+    }
+
 }

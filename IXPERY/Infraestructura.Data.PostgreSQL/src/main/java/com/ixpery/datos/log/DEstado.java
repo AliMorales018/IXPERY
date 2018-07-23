@@ -21,6 +21,7 @@ public class DEstado {
     public static String getNomTabEstado() { return "46114"; }
     public String RetornaTB(){ return "46114"; }
 
+
     //TAMBIEN DEFINIMOS AQUI LOS PARAMETROS DE BUSQUEDA DE LAS ENTIDADES
     public static String getKeyId() { return "461141"; }
     public static String getKeyCodTabla() { return "461145"; }

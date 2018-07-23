@@ -13,5 +13,8 @@ public class BProductoSolucion {
     public void Insertar(List<EProductoSolucion> listProSol){
         odProductoSolucion.InsertarProductoSolucion(listProSol);
     }
+    public List<EProductoSolucion> Buscar(String campos)throws Exception {
+        return odProductoSolucion.BuscarProductoSolucion(campos);
+    }
 
 }

@@ -413,6 +413,24 @@ function ObtenerValores_tbl_preempresa(nFilas) {
     return arrayConjunto;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //METODOS AJAX
 function elimRegistro_preempresa(posicionFila) {
 

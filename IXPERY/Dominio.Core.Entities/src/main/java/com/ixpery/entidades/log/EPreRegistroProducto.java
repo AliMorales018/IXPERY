@@ -23,7 +23,13 @@ public class EPreRegistroProducto {
     private Integer cantidad;
 
     @SerializedName("467437")
-    private Integer estado;
+    private String estado;
+
+    @SerializedName("467438")
+    private String modelo;
+
+    @SerializedName("467439")
+    private String marca;
 
     public EPreRegistroProducto() {
     }
@@ -32,17 +38,7 @@ public class EPreRegistroProducto {
         this.idprereg = idprereg;
     }
 
-    public EPreRegistroProducto(Integer idprereg, EProductoSolucion idprodsol, EProducto idproducto, String nomproducto, String umedida, Integer cantidad, Integer estado) {
-        this.idprereg = idprereg;
-        this.idprodsol = idprodsol;
-        this.idproducto = idproducto;
-        this.nomproducto = nomproducto;
-        this.umedida = umedida;
-        this.cantidad = cantidad;
-        this.estado = estado;
-    }
-
-    public Integer getIdprereg() {
+     public Integer getIdprereg() {
         return idprereg;
     }
 
@@ -90,11 +86,39 @@ public class EPreRegistroProducto {
         this.cantidad = cantidad;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public EPreRegistroProducto(Integer idprereg, EProductoSolucion idprodsol, EProducto idproducto, String nomproducto, String umedida, Integer cantidad, String estado, String modelo, String marca) {
+        this.idprereg = idprereg;
+        this.idprodsol = idprodsol;
+        this.idproducto = idproducto;
+        this.nomproducto = nomproducto;
+        this.umedida = umedida;
+        this.cantidad = cantidad;
+        this.estado = estado;
+        this.modelo = modelo;
+        this.marca = marca;
     }
 }

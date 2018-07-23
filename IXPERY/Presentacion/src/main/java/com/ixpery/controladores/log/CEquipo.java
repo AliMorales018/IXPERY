@@ -2,6 +2,7 @@ package com.ixpery.controladores.log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ixpery.datos.tools.JsonParcellable;
 import com.ixpery.entidades.log.*;
 import com.ixpery.entidades.sys.EPerfil;
 import com.ixpery.negocio.log.*;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,185 +32,144 @@ public class CEquipo {
     BPreRegistroProducto obPreReProducto = (BPreRegistroProducto) applicationContext.getBean("beanPreRegistroProducto");
     BProducto obProducto =(BProducto) applicationContext.getBean("beanProducto");
     BEmpresa obEmpresa =(BEmpresa) applicationContext.getBean("beanEmpresa");
+
+
+
     @RequestMapping("/equipo")
     public ModelAndView Equipo(){
         ModelAndView modelAndView = new ModelAndView("logistica/equipo");
         return modelAndView;
     }
 
-    @RequestMapping(value="equipo/register", method = RequestMethod.POST)
-    public @ResponseBody String RegistrarEquipo(
-            HttpServletRequest request,
-            @RequestBody Map<String,List<String[]>> values
-    ) throws Exception{
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        HttpSession session = request.getSession();
-        Integer sizeList = values.get("values").size();
-
-        List<EEquipo> listEE = new ArrayList<>();
-        List<EProductoSolucion> listProSol = new ArrayList<>();
-
-        EEquipo oeEquipo = new EEquipo();
-        oeEquipo.setIdEquipo(0);
-//        oeEquipo.setIdSolucion(new ESolucion(Integer.parseInt(session.getAttribute("solucion").toString())));
-        oeEquipo.setIdSolucion(new ESolucion(1));
-
-        oeEquipo.setEstado(1);
-        listEE.add(oeEquipo);
-
-        EProductoSolucion oeProductoSolucion;
-        String[] row;
-
-        for(int i = 0; i < sizeList; i++){
-            oeProductoSolucion = new EProductoSolucion();
-            row =  values.get("values").get(i);
-            oeProductoSolucion.setIdProductoSolucion(0);
-            oeProductoSolucion.setIdEquipo(new EEquipo(1));
-            oeProductoSolucion.setIdProducto(Integer.parseInt(row[0]));
-            oeProductoSolucion.setCantidad(Integer.parseInt(row[1]));
-            oeProductoSolucion.setEstado(1);
-            oeProductoSolucion.setFechaReg(timestamp);
-            oeProductoSolucion.setUserReg("1");
-            oeProductoSolucion.setEnvCotizar(1);
-            listProSol.add(oeProductoSolucion);
-            System.out.println("a "+listProSol);
-        }
-        System.out.println("b"+listProSol);
-
-
-//        for(int i = 0; i < array.length; ++i){
-//            oeProductoSolucion = new EProductoSolucion();
-//            oeProductoSolucion.setIdProductoSolucion(0);
-//            oeProductoSolucion.setIdEquipo(new EEquipo(1));
-////            oeProductoSolucion.setIdProductoProveedor(0);
-//            oeProductoSolucion.setIdProducto(Integer.parseInt(array[0]));
-//            oeProductoSolucion.setCantidad(Integer.parseInt(array[1]));
-//            oeProductoSolucion.setEstado(1);
-//            oeProductoSolucion.setFechaReg(timestamp);
-////            oeProductoSolucion.setUserReg(session.getAttribute("access").toString());
-//            oeProductoSolucion.setUserReg("1");
-//            oeProductoSolucion.setEnvCotizar(1);
-//            listProSol.add(oeProductoSolucion);
-//        }
-
-        obEquipo.Insetar(listEE);
-        obProductoSolucion.Insertar(listProSol);
-        return "";
-    }
-
-    @RequestMapping(value="equipo/preregister", method = RequestMethod.POST)
-    public @ResponseBody String PreRegistrarProducto(
-            @RequestBody Map<String,List<String[]>> values
-    ) throws Exception{
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//        HttpSession session = request.getSession();
-        Integer sizeList = values.get("values").size();
-
-        List<EPreRegistroProducto> listPreProd = new ArrayList<>();
-        List<EProductoSolucion> listProSol = new ArrayList<>();
-
-//        EEquipo oeEquipo = new EEquipo();
-//        oeEquipo.setIdEquipo(0);
-////        oeEquipo.setIdSolucion(new ESolucion(Integer.parseInt(session.getAttribute("solucion").toString())));
-//        oeEquipo.setIdSolucion(new ESolucion(1));
-//
-//        oeEquipo.setEstado(1);
-//        listEE.add(oeEquipo);
-
-        EProductoSolucion oeProductoSolucion;
-        EPreRegistroProducto oePreReProd;
-        String[] row;
-
-        for(int i = 0; i < sizeList; i++){
-            oeProductoSolucion = new EProductoSolucion();
-            row =  values.get("values").get(i);
-            oeProductoSolucion.setIdProductoSolucion(0);
-            oeProductoSolucion.setIdEquipo(new EEquipo(1));
-            oeProductoSolucion.setIdProducto(1);
-            oeProductoSolucion.setCantidad(Integer.parseInt(row[2]));
-            oeProductoSolucion.setEstado(1);
-            oeProductoSolucion.setFechaReg(timestamp);
-            oeProductoSolucion.setUserReg("1");
-            oeProductoSolucion.setEnvCotizar(1);
-            listProSol.add(oeProductoSolucion);
-            System.out.println("a "+listProSol);
-        }
-        System.out.println("b"+listProSol);
-
-        for(int i = 0; i < sizeList; i++){
-            oePreReProd = new EPreRegistroProducto();
-            row =  values.get("values").get(i);
-            oePreReProd.setIdprereg(0);
-            oePreReProd.setIdprodsol(new EProductoSolucion(1));
-            oePreReProd.setIdproducto(new EProducto(1));
-            oePreReProd.setNomproducto(row[0]);
-            oePreReProd.setUmedida(row[1]);
-            oePreReProd.setCantidad(Integer.parseInt(row[2]));
-            oePreReProd.setEstado(1);
-
-            listPreProd.add(oePreReProd);
-
-            System.out.println("a "+listProSol);
-        }
-        obProductoSolucion.Insertar(listProSol);
-        obPreReProducto.Insertar(listPreProd);
-        return "";
-    }
-
-
-    @RequestMapping(value = "/equipo/clientes", method=RequestMethod.POST)
+    @RequestMapping(value="/equipo/register", method = RequestMethod.POST)
     public @ResponseBody
-    String Clientes() throws Exception {
-        String data = obEquipo.ConsultarCliente(1);
-        System.out.println(data.getClass());
-        System.out.println(data.toString());
-        return data;
-    }
+    String RegistrarEquipo(@RequestBody Map<String,List<String[]>> values) throws Exception{
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-    /*@RequestMapping(value = "/equipo/productos", method = RequestMethod.POST)
-    public @ResponseBody String Productos(
-            @RequestParam(value = "prod") String prod
-    ) throws Exception{
-        String data = obEquipo.ConsultarProducto(prod);
-        System.out.println(data);
-        return data;
-    }*/
-//DESDE AQUÍ PARA ABAJO EMPECE LUIS AZALDE
-    @RequestMapping(value="/equipo/productos", method=RequestMethod.POST)
-    public @ResponseBody String BuscarProductos(
-            @RequestParam(value="prod") String busProd
-    ) throws Exception{
-        String campos = "";
-        campos = busProd+"";
+        Integer sizeListEqSol = values.get("values0").size();
+        Integer sizeListEqReg = values.get("values1").size();
+        Integer sizeListEqNoReg = values.get("values2").size();
 
-        List<EProducto> listProdBus= obProducto.Buscar(campos);
+        //REGISTRAMOS EN TABLA EQUIPOS
+        List<EEquipo> listEquipo = new ArrayList<EEquipo>();
+        EEquipo oeEquipo;
+        String[] rowSol;
 
-        List<String[]> lista = new ArrayList<>();
-        //SI EXISTEN RESULTADOS
-        if (listProdBus.size()!=0) {
-            for (int i = 0; i < listProdBus.size(); i++) {
-                String[] row = {
-                        listProdBus.get(i).getIdproducto().toString(),
-                        listProdBus.get(i).getNomumed(),
-                        listProdBus.get(i).getCodigo(),
-                        listProdBus.get(i).getNomproducto(),
-                        listProdBus.get(i).getModelo(),
-                        listProdBus.get(i).getMarca()
-                };
-                lista.add(row);
+        for (int i =0; i < sizeListEqSol; i++){
+            oeEquipo = new EEquipo();
+            rowSol = values.get("values0").get(i);
+            oeEquipo.setIdEquipo(0);
+            oeEquipo.setIdSolucion(new ESolucion(Integer.parseInt(rowSol[0])));
+            oeEquipo.setEstado("1");
+            oeEquipo.setFechaReg(timestamp.toString());
+            //CAMBIAR LUEGO POR LA SESSIÓN
+            oeEquipo.setUserReg("LUIS AZALDE LEYVA");
+            listEquipo.add(oeEquipo);
+        }
+
+        //REGISTRAMOS EN TABLA PRODUCTO SOLUCION
+        List<EProductoSolucion> listProdSolucion = new ArrayList<EProductoSolucion>();
+        EProductoSolucion oeProdSolucion;
+        String[] rowProdSol;
+
+        for (int i =0; i < sizeListEqReg; i++){
+            oeProdSolucion = new EProductoSolucion();
+            rowProdSol = values.get("values1").get(i);
+            oeProdSolucion.setIdprodsol(0);
+            oeProdSolucion.setIdequipo(new EEquipo(0));
+            oeProdSolucion.setCantidad(Integer.parseInt(rowProdSol[5]));
+            oeProdSolucion.setEstado("1");
+            oeProdSolucion.setFecharegistro(timestamp.toString());
+            //CAMBIAR LUEGO POR LA SESSIÓN
+            oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
+            oeProdSolucion.setIdproducto(Integer.parseInt(rowProdSol[0]));
+            oeProdSolucion.setEnviadocotizar("1");
+            listProdSolucion.add(oeProdSolucion);
+        }
+
+        //REGISTRAMOS EN TABLA PREREGISTRO PRODUCTOS
+        List<EPreRegistroProducto> listPreRegProducto = new ArrayList<EPreRegistroProducto>();
+        EPreRegistroProducto oePreRegProducto;
+        String[] rowPreRegProducto;
+
+        if(sizeListEqNoReg==1) {
+            for (int i = 0; i < sizeListEqNoReg; i++) {
+                rowPreRegProducto = values.get("values2").get(i);
+
+                oePreRegProducto = new EPreRegistroProducto();
+                oePreRegProducto.setIdprereg(0);
+                oePreRegProducto.setIdprodsol(new EProductoSolucion(0));
+                oePreRegProducto.setNomproducto(rowPreRegProducto[0]);
+                oePreRegProducto.setUmedida(rowPreRegProducto[4]);
+                if(rowPreRegProducto[5].equals("")){
+                    oePreRegProducto.setCantidad(0);
+                }else{
+                    oePreRegProducto.setCantidad(Integer.parseInt(rowPreRegProducto[5]));
+                }
+
+                oePreRegProducto.setEstado("1");
+                oePreRegProducto.setModelo(rowPreRegProducto[2]);
+                oePreRegProducto.setMarca(rowPreRegProducto[3]);
+
+                listPreRegProducto.add(oePreRegProducto);
             }
         }
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(lista);
-        //System.out.println(json);
-        return json;
+        else
+        {
+            for (int i = 0; i < sizeListEqNoReg; i++) {
+                rowPreRegProducto = values.get("values2").get(i);
+
+                oePreRegProducto = new EPreRegistroProducto();
+                oePreRegProducto.setIdprereg(0);
+                oePreRegProducto.setIdprodsol(new EProductoSolucion(0));
+                oePreRegProducto.setNomproducto(rowPreRegProducto[0]);
+                oePreRegProducto.setUmedida(rowPreRegProducto[4]);
+                oePreRegProducto.setCantidad(Integer.parseInt(rowPreRegProducto[5]));
+                oePreRegProducto.setEstado("1");
+                oePreRegProducto.setModelo(rowPreRegProducto[2]);
+                oePreRegProducto.setMarca(rowPreRegProducto[3]);
+
+                listPreRegProducto.add(oePreRegProducto);
+            }
+        }
+
+        //ENVIAMOS A PONER IDS A CADA LISTA DE OBJETOS
+        String msjResult = obEquipo.PonerIds(listEquipo,listProdSolucion,listPreRegProducto);
+
+        if(msjResult.equals("0")){
+            return "";
+        }
+        else{
+            return msjResult;
+        }
     }
 
-    //Busqueda Solución por Empresa.
+//DESDE AQUÍ PARA ABAJO EMPECE LUIS AZALDE
+      //Busqueda Solución por Empresa.
     @RequestMapping(value = "/equipo/busempresa", produces = "application/json")
     public @ResponseBody String BuscarEmpresasReq(
             @RequestParam(value="q") String var
     ) throws Exception {
         return obEmpresa.BuscarEmpresaSolucionCombo(var);
+    }
+    //Busqueda Producto Combo de Tabla
+    @RequestMapping(value = "/equipo/busproducto", produces = "application/json")
+    public @ResponseBody String BuscarProducto(
+            @RequestParam(value="q") String var
+    ) throws Exception {
+        return obProducto.BuscarProductoEquipoCombo(var);
+    }
+
+    //Búsqueda de Equipos Solución
+    @RequestMapping(value="/equipo/buscarequiposol", method=RequestMethod.POST)
+    public @ResponseBody String BuscarEquipoSol(
+            @RequestParam(value="idsol") String busIdsol
+    ) throws Exception{
+
+         String rpta= obEquipo.BuscarSolucionEquipo(busIdsol);
+
+             return rpta;
+
+
     }
 }
