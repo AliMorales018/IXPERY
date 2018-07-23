@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 
 public class EProductoSolucion {
     @SerializedName("467281")
-    private Integer idProductoSolucion;
+    private Integer idprodsol;
 
     @SerializedName("467282")
-    private EEquipo idEquipo;
+    private EEquipo idequipo;
 
     @SerializedName("467283")
-    private EProductoProveedor idProdProv;
+    private EProductoProveedor idprodprov;
 
     @SerializedName("467284")
     private Integer cantidad;
@@ -27,19 +27,19 @@ public class EProductoSolucion {
     private Integer subtotal;
 
     @SerializedName("467288")
-    private Integer estado;
+    private String estado;
 
     @SerializedName("467289")
-    private Timestamp fechaReg;
+    private String fecharegistro;
 
     @SerializedName("4672810")
-    private String userReg;
+    private String userregistro;
 
     @SerializedName("4672811")
-    private Integer idProducto;
+    private Integer idproducto;
 
     @SerializedName("4672812")
-    private Integer envCotizar;
+    private String enviadocotizar;
 
     @SerializedName("4672813")
     private Integer cotizado;
@@ -48,40 +48,37 @@ public class EProductoSolucion {
     private Integer idprereg;
 
     @SerializedName("4672815")
-    private Integer fchsolucion;
+    private Integer fechasolucion;
 
     public EProductoSolucion() {
     }
 
-    public EProductoSolucion(Integer idProductoSolucion) {
-        this.idProductoSolucion = idProductoSolucion;
+    public EProductoSolucion(Integer idprodsol) {
+        this.idprodsol = idprodsol;
     }
 
-    public EProductoSolucion(Integer idProductoSolucion, EEquipo idEquipo, Integer cantidad, Integer estado, Timestamp fechaReg, String userReg, Integer idProducto, Integer envCotizar) {
-        this.idProductoSolucion = idProductoSolucion;
-        this.idEquipo = idEquipo;
-        this.cantidad = cantidad;
-        this.estado = estado;
-        this.fechaReg = fechaReg;
-        this.userReg = userReg;
-        this.idProducto = idProducto;
-        this.envCotizar = envCotizar;
+    public Integer getIdprodsol() {
+        return idprodsol;
     }
 
-    public Integer getIdProductoSolucion() {
-        return idProductoSolucion;
+    public void setIdprodsol(Integer idprodsol) {
+        this.idprodsol = idprodsol;
     }
 
-    public void setIdProductoSolucion(Integer idProductoSolucion) {
-        this.idProductoSolucion = idProductoSolucion;
+    public EEquipo getIdequipo() {
+        return idequipo;
     }
 
-    public EEquipo getIdEquipo() {
-        return idEquipo;
+    public void setIdequipo(EEquipo idequipo) {
+        this.idequipo = idequipo;
     }
 
-    public void setIdEquipo(EEquipo idEquipo) {
-        this.idEquipo = idEquipo;
+    public EProductoProveedor getIdprodprov() {
+        return idprodprov;
+    }
+
+    public void setIdprodprov(EProductoProveedor idprodprov) {
+        this.idprodprov = idprodprov;
     }
 
     public Integer getCantidad() {
@@ -92,43 +89,109 @@ public class EProductoSolucion {
         this.cantidad = cantidad;
     }
 
-    public Integer getEstado() {
+    public Integer getPreciounit() {
+        return preciounit;
+    }
+
+    public void setPreciounit(Integer preciounit) {
+        this.preciounit = preciounit;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public Integer getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Integer subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public Timestamp getFechaReg() {
-        return fechaReg;
+    public String getFecharegistro() {
+        return fecharegistro;
     }
 
-    public void setFechaReg(Timestamp fechaReg) {
-        this.fechaReg = fechaReg;
+    public void setFecharegistro(String fecharegistro) {
+        this.fecharegistro = fecharegistro;
     }
 
-    public String getUserReg() {
-        return userReg;
+    public String getUserregistro() {
+        return userregistro;
     }
 
-    public void setUserReg(String userReg) {
-        this.userReg = userReg;
+    public void setUserregistro(String userregistro) {
+        this.userregistro = userregistro;
     }
 
-    public Integer getIdProducto() {
-        return idProducto;
+    public Integer getIdproducto() {
+        return idproducto;
     }
 
-    public void setIdProducto(Integer idProducto) {
-        this.idProducto = idProducto;
+    public void setIdproducto(Integer idproducto) {
+        this.idproducto = idproducto;
     }
 
-    public Integer getEnvCotizar() {
-        return envCotizar;
+    public String getEnviadocotizar() {
+        return enviadocotizar;
     }
 
-    public void setEnvCotizar(Integer envCotizar) {
-        this.envCotizar = envCotizar;
+    public void setEnviadocotizar(String enviadocotizar) {
+        this.enviadocotizar = enviadocotizar;
+    }
+
+    public Integer getCotizado() {
+        return cotizado;
+    }
+
+    public void setCotizado(Integer cotizado) {
+        this.cotizado = cotizado;
+    }
+
+    public Integer getIdprereg() {
+        return idprereg;
+    }
+
+    public void setIdprereg(Integer idprereg) {
+        this.idprereg = idprereg;
+    }
+
+    public Integer getFechasolucion() {
+        return fechasolucion;
+    }
+
+    public void setFechasolucion(Integer fechasolucion) {
+        this.fechasolucion = fechasolucion;
+    }
+
+    public EProductoSolucion(Integer idprodsol, EEquipo idequipo, EProductoProveedor idprodprov, Integer cantidad, Integer preciounit, Integer total, Integer subtotal, String estado, String fecharegistro, String userregistro, Integer idproducto, String enviadocotizar, Integer cotizado, Integer idprereg, Integer fechasolucion) {
+        this.idprodsol = idprodsol;
+        this.idequipo = idequipo;
+        this.idprodprov = idprodprov;
+        this.cantidad = cantidad;
+        this.preciounit = preciounit;
+        this.total = total;
+        this.subtotal = subtotal;
+        this.estado = estado;
+        this.fecharegistro = fecharegistro;
+        this.userregistro = userregistro;
+        this.idproducto = idproducto;
+        this.enviadocotizar = enviadocotizar;
+        this.cotizado = cotizado;
+        this.idprereg = idprereg;
+        this.fechasolucion = fechasolucion;
     }
 }

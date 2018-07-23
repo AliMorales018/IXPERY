@@ -6,13 +6,16 @@ import com.ixpery.entidades.log.EPreRegistroProducto;
 import java.util.List;
 
 public class BPreRegistroProducto {
-    DPreRegistroProducto obPreReProd = new DPreRegistroProducto();
+    DPreRegistroProducto odPreReProd = new DPreRegistroProducto();
 
     public BPreRegistroProducto() throws Exception{
     }
 
     public void Insertar(List<EPreRegistroProducto> listProSol){
-        obPreReProd.InsertarProductoSolucion(listProSol);
+        odPreReProd.InsertarProductoSolucion(listProSol);
+    }
+    public List<EPreRegistroProducto> Buscar(String campos)throws Exception {
+        return odPreReProd.BuscarPreRegProducto(campos);
     }
 
 

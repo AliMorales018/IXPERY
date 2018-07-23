@@ -57,6 +57,16 @@ public class BProducto {
     public String ListarProInusmo(String valor)throws Exception {
         return odProducto.ListarProdInsumo(valor);
     }
+    //LUIS 17/07/2018 10:00 AM
+    public String BuscarProductoEquipoCombo(String var) throws Exception{
+        return odProducto.BuscarProductoEquipoCombo(var);
+    }
+//FIN LUIS
+// LUIS 23/07/2018 10:00 AM
+    public String BuscarProveProductoCombo(String var) throws Exception{
+        return odProducto.BuscarProveProductoCombo(var);
+    }
+//FIN LUIS
 
 }
 

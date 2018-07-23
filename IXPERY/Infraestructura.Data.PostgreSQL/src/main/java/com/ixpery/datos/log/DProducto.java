@@ -200,7 +200,22 @@ public class DProducto {
         System.out.println(jsonResult);
         return jsonResult;
     }
-
+    //LUIS 18/07/18 23:16 -- PARA LLENAR COMBO EN FILAS
+    public String BuscarProductoEquipoCombo(String var) throws Exception{
+        listaParametros.clear();
+        SqlParameter pValorLike = new SqlParameter("varLike", var);
+        listaParametros.add(pValorLike);
+        return com.EjecutaConsultaJson("filtrar_producto", listaParametros);
+    }
+    //FIN LUIS
+    // LUIS 23/07/18 10:00 am -- PARA LLENAR COMBO EN FILAS
+    public String BuscarProveProductoCombo(String var) throws Exception{
+        listaParametros.clear();
+        SqlParameter pValorLike = new SqlParameter("varLike", var);
+        listaParametros.add(pValorLike);
+        return com.EjecutaConsultaJson("filtrar_precio_proveedor", listaParametros);
+    }
+    //FIN LUIS
     public String VerHistorialPrecios(EProductoProveedor oeProvProd) throws Exception {
         listaParametros.clear();
         SqlParameter pIdProv = new SqlParameter("idProv", oeProvProd.getIdProveedor().getIdproveedor());

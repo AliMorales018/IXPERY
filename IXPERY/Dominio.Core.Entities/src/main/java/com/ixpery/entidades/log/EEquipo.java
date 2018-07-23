@@ -19,7 +19,7 @@ public class EEquipo {
     private String totalMostrar;
 
     @SerializedName("467026")
-    private Integer estado;
+    private String estado;
 
     @SerializedName("467027")
     private String idEstado;
@@ -70,11 +70,11 @@ public class EEquipo {
         this.totalMostrar = totalMostrar;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -109,7 +109,7 @@ public class EEquipo {
         this.idEquipo = idEquipo;
     }
 
-    public EEquipo(Integer idEquipo, ESolucion idSolucion, String nomEquipo, String total, String totalMostrar, Integer estado, String idEstado, String fechaReg, String userReg) {
+    public EEquipo(Integer idEquipo, ESolucion idSolucion, String nomEquipo, String total, String totalMostrar, String estado, String idEstado, String fechaReg, String userReg) {
         this.idEquipo = idEquipo;
         this.idSolucion = idSolucion;
         this.nomEquipo = nomEquipo;

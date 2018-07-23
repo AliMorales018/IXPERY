@@ -18,6 +18,7 @@ public class DProductoSolucion {
 
     public static String getNameTable() { return "46728"; }
     public static String getKeyId() { return "467281"; }
+    public static String getKeyIdEquipo() { return "467282"; }
     List<SqlParameter> listaParametros = new ArrayList<SqlParameter>();
 
     public String ReturnJson(Object object){
@@ -46,10 +47,9 @@ public class DProductoSolucion {
 
     public List<EProductoSolucion> AddListId(List<EProductoSolucion> listAddId){
         Integer nextId = NextId();
-        Integer size = listAddId.size();
-        for(int i = 0; i < size; ++i){
-            listAddId.get(i).setIdProductoSolucion(nextId);
-            ++nextId;
+        for(int i = 0; i < listAddId.size(); i++){
+            listAddId.get(i).setIdprodsol(nextId);
+            nextId++;
         }
         return listAddId;
     }
@@ -68,9 +68,38 @@ public class DProductoSolucion {
         }
     }
 
+    public List<EProductoSolucion> BuscarProductoSolucion(String campos) throws Exception {
 
+        if(!campos.equals("/")) {
+            //SEPARAMOS POR COMAS PARA PODER AGREGAR EL NOMBRE DE LA COLUMNA(CODIGO)
+            String[] addColumna = campos.split(",");
+            for (int i = 0; i < addColumna.length; i++){
+                if (addColumna[i].equals("%")) {
+                    addColumna[i] = "";
+                }
+            }
+            campos = getKeyIdEquipo() + "," + addColumna[0];
+            System.out.println("Campos: " + campos);
+        }
 
+        listaParametros.clear();
+        SqlParameter pTabla = new SqlParameter("tabla", getNameTable());
+        SqlParameter pCampos = new SqlParameter("campos", campos);
+        listaParametros.add(pTabla);
+        listaParametros.add(pCampos);
 
+        String jsonResult = com.EjecutaConsultaJson("gen_filtrar", listaParametros);
 
-
+        List<EProductoSolucion> listProdSol = new ArrayList<EProductoSolucion>();
+        if(!jsonResult.equals("")) {
+            //CONVERTIR JSON A LISTA DE ARRAY
+            JsonParcellable parser = new JsonParcellable();
+            List<Object> listObject = parser.getListObjectJson(jsonResult, new EProductoSolucion());
+            for (int i = 0; i < listObject.size(); i++) {
+                EProductoSolucion oprod= (EProductoSolucion) listObject.get(i);
+                listProdSol.add(oprod);
+            }
+        }
+        return listProdSol;
+    }
 }
