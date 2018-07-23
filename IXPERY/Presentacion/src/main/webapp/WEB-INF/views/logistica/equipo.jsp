@@ -360,6 +360,22 @@
                         );
                         borrar_select2();
                         clonar_select2(1);
+
+                        //EQUIPOS NO REGISTRADOS
+                        conta_filas_equiponr=1;
+                        $("#tbody_equiponr").empty();
+                        $("#equiponr_1 tbody").append(
+                        "<tr id='equiponr_1_fila_1'>"+
+                            "<td><div><p id='p_num_equiponr1' class='text-center'>1</p></div></td>"+
+                            "<td><div><input type='text' id='txt_equiponr_nompro1' name='txt_equiponr_nompro1' class='form-control'/></div></td>"+
+                            "<td><div><input type='text' id='txt_equiponr_codpro1' name='txt_equiponr_codpro1' class='form-control'/></div></td>"+
+                            "<td><div><input type='text' id='txt_equiponr_modpro1' name='txt_equiponr_modpro1' class='form-control'/></div></td>"+
+                            "<td><div><input type='text' id='txt_equiponr_marpro1' name='txt_equiponr_marpro1' class='form-control'/></div></td>"+
+                            "<td><div><input type='text' id='txt_equiponr_medpro1' name='txt_equiponr_medpro1' class='form-control'/></div></td>"+
+                            "<td><div><input type='text' id='txt_equiponr_canpro1' name='txt_equiponr_canpro1' class='form-control'/></div></td>"+
+                            "<td><div class='text-center'><button id='equiponr_1_btn_elim_1' type='button' class='btn btn-sm-delete' onclick='eliminar_fila_tabla_equiposnr(this);'><i class='icon icon-bin'></i></button></div></td>"+
+                        "</tr>"
+                        );
                     }
                 },
                 error: function errores(msg) {
