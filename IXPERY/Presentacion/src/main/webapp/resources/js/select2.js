@@ -723,7 +723,7 @@ function setOptions(id, eventName){
                 // Adapted from the function created by @ShadowScripter
                 // and adapted by @BillBarry on the Stack Exchange Code Review website.
                 // The original code can be found at
-                // http://codereview.stackexchange.com/q/13338
+                // http://codereview.stackexchange.com/q/338
                 // and was designed to be used with the Sizzle selector engine.
 
                 var $el = $(el);
@@ -4578,7 +4578,7 @@ function setOptions(id, eventName){
             // English
             return {
                 errorLoading: function () {
-                    return 'The results could not be loaded.';
+                    return 'Los resultados no pudieron ser cargados.';
                 },
                 inputTooLong: function (args) {
                     var overChars = args.input.length - args.maximum;
@@ -4594,12 +4594,12 @@ function setOptions(id, eventName){
                 inputTooShort: function (args) {
                     var remainingChars = args.minimum - args.input.length;
 
-                    var message = 'Please enter ' + remainingChars + ' or more characters';
+                    var message = 'Por favor ingrese ' + remainingChars + ' o más caracteres';
 
                     return message;
                 },
                 loadingMore: function () {
-                    return 'Loading more resultsâ€¦';
+                    return 'Cargar mas resultados . . .';
                 },
                 maximumSelected: function (args) {
                     var message = 'You can only select ' + args.maximum + ' item';
@@ -4614,7 +4614,7 @@ function setOptions(id, eventName){
                     return 'No se encontraron resultados';
                 },
                 searching: function () {
-                    return 'Searchingâ€¦';
+                    return 'Buscando . . .';
                 }
             };
         });
@@ -5467,12 +5467,8 @@ function setOptions(id, eventName){
                             self.close();
 
                             evt.preventDefault();
-                        } else if (key === KEYS.ENTER) {
+                        } else if (key === KEYS.SPACE) {
                             self.trigger('results:select', {});
-
-                            evt.preventDefault();
-                        } else if ((key === KEYS.SPACE && evt.ctrlKey)) {
-                            self.trigger('results:toggle', {});
 
                             evt.preventDefault();
                         } else if (key === KEYS.UP) {
