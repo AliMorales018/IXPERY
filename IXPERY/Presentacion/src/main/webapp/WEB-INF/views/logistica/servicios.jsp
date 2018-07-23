@@ -1,14 +1,99 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <spring:url value="/resources" var="urlPublic"></spring:url>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Servicios</title>
     <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
+    <link rel="stylesheet" href="${urlPublic}/css//select2.css">
+    <style>
+        .select_actividad_cargolab:focus{
+            -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+        }
+        .icon-add-row-service{
+            background-color: #D34539;
+            border-radius: 50%;
+            color:white;
+            padding: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .icon-minus-row-service{
+            background-color: #D34539;
+            border-radius: 50%;
+            color:white;
+            padding: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .add-actividad{
+            background:#D34539;
+            font-size:25px;
+            color:#fff;
+            cursor:pointer;
+            position: fixed;
+            bottom:20px;
+            right:20px;
+            cursor:pointer;
+            padding: 20px;
+            border-radius: 50%;
+        }
+
+        .actividad{
+            border-bottom: 1px solid #D9D9D9;
+            margin-bottom: 15px;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 25.15px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 23px;
+        }
+
+        .delete_actividad{
+            margin-left: 15px;
+        }
+
+        .select2-result-cargolab{
+            font-size: 9.55px;
+            padding: 5px 15px 10px;
+        }
+        .select2-result-area{
+            font-size: 9.55px;
+            padding: 0px 15px 5px;
+        }
+        .select2-span-result{
+            font-size: 9.9px;
+        }
+        .form-service{
+            line-height: 1.56;
+        }
+        .table-personal-transito{
+            font-size: 11.5px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .table-personal-transito thead{
+            background-color: #E6E6E6;
+            color: #666666;
+        }
+        .table-personal-transito thead tr th{
+            height: 14px;
+            padding: 8px 8px 8px 8px;
+        }
+        .span-personalt{
+            padding: 15px;
+            font-size: 11px;
+        }
+    </style>
 </head>
 <body>
+<span onclick="addActividad();" class="add-actividad" for="Agregar actividad"><i class="icon-plus2"></i></span>
 <!-- Buttons -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos">
     <div class="cell small-12 medium-4 text-white">
@@ -26,11 +111,7 @@
     <div class="cell small-12 medium-4">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" class="btn btn-light" id="btn_servicio_nue" >Nuevo</button>
-                <button type="button" class="btn btn-light" id="btn_servicio_nue_reload" style="display:none">Nuevo</button>
-            </div>
-            <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_servicio_save" class="btn btn-secondary">Guardar</button>
+                <button type="button" id="btn_servicio_save" class="btn btn-secondary" onclick="guardar_actividades_servicio();">Guardar</button>
             </div>
         </div>
     </div>
@@ -44,86 +125,179 @@
 <div class="l-container-sm">
     <div class="grid-x grid-padding-x">
         <div class="cell large-12">
-            <label class="text-f" id="lbl_servicio_fecha" >${fecha}</label>
+            <label class="text-f" id="lbl_servicio_fecha">${fecha}</label>
         </div>
     </div>
 </div>
 <!-- End Date -->
 
-<!-- Input y Personal en Transito -->
-<div class="l-container">
-    <div class="grid-x align-center-middle grid-padding-x">
+<!-- Input-->
+<div class="grid-container">
+    <div class="grid-x grid-padding-x">
+        <div class="cell large-5">
+            <div class="form-group">
+                <label class="label text-primary"><b>Solución:</b></label>
+                    <tr><select id="select_solucion_servicio" style="width: 100%;"></select></tr>
+            </div>
+        </div>
         <div class="cell large-3">
             <div class="form-group">
-                <label class="label text-primary"><b>Número de Cuadrilla:</b></label>
-                <input type="text" class="form-control" type="text" id="txt_num_cuadrilla" placeholder="Número de Cuadrilla">
+                <label class="label text-primary"><b>Número de Cuadrillas:</b></label>
+                <input type="number" class="form-control form-service" type="text" id="txt_num_cuadrilla" placeholder="Número de Cuadrillas">
             </div>
         </div>
         <div class="cell large-3">
             <div class="form-group">
                 <label class="label text-primary"><b>Porcentaje de Depreciación:</b></label>
-                <input type="text" class="form-control" type="text" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
+                <input type="number" class="form-control form-service" type="text" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
             </div>
         </div>
     </div>
 </div>
-<!-- End Input y Personal en Transito -->
+<!-- End Input -->
+
+<!-- Personal en Transito -->
+<div id="container_personal_transito" style="margin-top: 15px;">
+    <div class="grid-container">
+        <!-- Titulo -->
+        <div class="grid-x grid-padding-x" style="margin-bottom:10px">
+            <div class="cell large-12">
+                <label class="text-primary" style="font-size: 12px"><b>Personal en tránsito: </b></label>
+            </div>
+        </div>
+        <!-- Titulo -->
+
+        <!-- Table -->
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-7">
+                <table class="table-personal-transito">
+                    <thead>
+                        <tr>
+                            <th style="width: 370px">Cargo Laboral</th>
+                            <th>Cantidad</th>
+                            <th>Tiempo (Horas)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_personal_transito">
+                        <tr><td colspan='3' class='text-center'><div class='p-3'>Seleccione cargo laboral.</div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End Table -->
+
+    </div>
+</div>
+<!-- Personal en Transito -->
 
 <!-- Actividades -->
-<div class="l-container">
-    <div class="grid-x align-center-middle grid-padding-x">
-        <div class="cell large-4">
-            <div class="form-group">
-                <label class="label text-primary"><b>Nombre de actividad:</b></label>
-                <input type="text" class="form-control" type="text" placeholder="Nombre de actividad">
+<div id="container_actividades" style="margin-top: 15px;">
+    <div id="actividad_1" class="actividad grid-container">
+        <!-- Titulo -->
+        <div class="grid-x grid-padding-x" style="margin-bottom:10px">
+            <div class="cell large-12">
+                <label class="text-primary title_actividad" style="font-size: 20px"><b>Actividad 1</b><i id="delete_actividad_1" onclick="eliminar_contenedor_actividad(this);" class="icon-minus-row-service icon-minus2 delete_actividad"></i></label>
             </div>
         </div>
+        <!-- Titulo -->
 
-        <div class="cell large-3">
-            <div class="form-group">
-                <label class="label text-primary"><b>Descripción:</b></label>
-                <input type="text" class="form-control" type="text"  placeholder="Descripcion">
-            </div>
+        <!-- Cabecera de tabla -->
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-4"><div class="form-group"><label class="label text-primary"><b>Nombre de actividad:</b></label><input type="text" class="data-control form-control" type="text" placeholder="Nombre de actividad"></div></div>
+            <div class="cell large-4"><div class="form-group"><label class="label text-primary"><b>Descripción:</b></label><input type="text" class="data-control form-control" type="text"  placeholder="Descripcion"></div></div>
+            <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Cantidad:</b></label><input type="number" class="data-control form-control" type="number" placeholder="Cantidad"></div></div>
+            <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Riesgo:</b></label><input type="text" class="data-control form-control" type="number" placeholder="Riesgo"></div></div>
         </div>
+        <!-- Cabecera de tabla -->
 
-        <div class="cell large-2">
-            <div class="form-group">
-                <label class="label text-primary"><b>Cantidad:</b></label>
-                <input type="text" class="form-control" type="text" placeholder="Cantidad">
+        <!-- Table -->
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-12">
+                <table class="table">
+                    <thead class="thead-primary">
+                    <tr>
+                        <th id="add_row_actividad_1" class="text-center" onclick="addCargoLaboral(this);"><i class="icon-plus2 icon-add-row-service"></i></th>
+                        <th>Cargo Laboral</th>
+                        <th>Cantidad</th>
+                        <th>Tiempo (Horas)</th>
+                        <th class="text-center"><i class="icon icon-bin"></i></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="actividad_1_fila_1">
+                        <td><div><p class="text-center">1</p></div></td>
+                        <td><div class="data-cargolab"><select class="select_actividad_cargolab" style="width: 100%;"></select></div></td>
+                        <td><div class="data-cargolab"><input type="number" class="form-control" /></div></td>
+                        <td><div class="data-cargolab"><input type="number" class="form-control" /></div></td>
+                        <td><div class="text-center"><button id="actividad_1_btn_elim_1" type="button" class="btn btn-sm-delete" onclick="eliminar_fila_tabla_cargolab(this);"><i class="icon icon-bin"></i></button></div></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="cell large-2">
-            <div class="form-group">
-                <label class="label text-primary"><b>Riesgo:</b></label>
-                <input type="text" class="form-control" type="text" placeholder="Riesgo">
-            </div>
-        </div>
+        <!-- End Table -->
     </div>
-    <!-- Table -->
-    <div class="grid-x grid-padding-x l-container">
-        <div class="cell large-12">
-            <table class="table" id="tbl_servicios">
-                <thead class="thead-primary">
-                <tr>
-                    <th class="p-3">Cargo Laboral</th>
-                    <th class="p-3">Cantidad</th>
-                    <th class="p-3">Tiempo</th>
-                </tr>
-                </thead>
-                <tbody id="tbody_contactoempresa" >
-                <tr id="firstRowBody_contactoempresa">
-                    <td><div id="campo1_tbl_contactoempresa"><p id="p_num_contactoempresa1" class="text-center">1</p></div></td>
-                    <td><div id="campo2_tbl_contactoempresa"><input type="text" id="txt_contactoempresa_nombre1" name="txt_contactoempresa_nombre1" class="form-control" /></div></td>
-                    <td><div id="campo3_tbl_contactoempresa"><input type="text" id="txt_contactoempresa_apep1" name="txt_contactoempresa_apep1" class="form-control" /></div></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <!-- End Table -->
 </div>
 <!-- Actividades -->
+
+<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
+<script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
+<script src="${urlPublic}/js/select2.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $(".select_actividad_cargolab").select2({
+            ajax: {
+                url: "/servicios/listarcargolaboral",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term.toUpperCase()
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar cargo laboral / area . . .',
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 2,
+            templateResult: formatRepo_servicio,
+            templateSelection: formatRepoSelection_servicio
+        });
+
+
+        $(".select_actividad_cargolab").on("select2.select",function (e) {
+            alert("selected");
+        });
+
+        $("#select_solucion_servicio").select2({
+            placeholder: 'Buscar solución . . .',
+        });
+    });
+
+    function formatRepo_servicio (repo) {
+        if (repo.loading) {
+            return repo.text;
+        }
+
+        var markup = "<div class='select2-result-cargolab'><span class='select2-span-result'>CARGO: </span>"+repo.cargo+"</div>"+
+                     "<div class='select2-result-area'><span class='select2-span-result'>AREA: </span>"+repo.area+"</span></div>";
+
+        return markup;
+    }
+
+    function formatRepoSelection_servicio (repo) {
+        return repo.text || repo.cargo;
+    }
+
+</script>
 
 </body>
 </html>
+
 
