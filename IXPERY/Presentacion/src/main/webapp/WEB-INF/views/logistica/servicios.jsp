@@ -276,7 +276,7 @@
         });
 
         $("#select_solucion_servicio").select2({
-            placeholder: 'Buscar solución . . .',
+            placeholder: 'Buscar solució . . .',
         });
     });
 
