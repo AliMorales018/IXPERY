@@ -46,6 +46,9 @@ public class EActividad {
     @SerializedName("4617214")
     private String userregistro;
 
+    @SerializedName("4617215")
+    private Double adicional;
+
     public EActividad() {
     }
 
@@ -163,5 +166,13 @@ public class EActividad {
 
     public void setUserregistro(String userregistro) {
         this.userregistro = userregistro;
+    }
+
+    public Double getAdicional() {
+        return adicional;
+    }
+
+    public void setAdicional(Double adicional) {
+        this.adicional = adicional;
     }
 }

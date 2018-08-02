@@ -77,23 +77,43 @@
             font-size: 11.5px;
             margin-bottom: 20px;
             width: 100%;
+            background-color: #ffffffb5;
         }
         .table-personal-transito thead{
             background-color: #E6E6E6;
             color: #666666;
         }
-        .table-personal-transito thead tr th{
+        .table-personal-transito thead tr td{
             height: 14px;
             padding: 8px 8px 8px 8px;
         }
-        .span-personalt{
-            padding: 15px;
-            font-size: 11px;
+        .select2-result-empresa{
+            font-size: 9.55px;
+            padding: 5px 15px 10px;
+        }
+        .select2-result-proyecto{
+            font-size: 9.55px;
+            padding: 0px 15px 10px;
+        }
+        .select2-result-solucion{
+            font-size: 9.55px;
+            padding: 0px 15px 5px;
+        }
+
+        input[type="text"]:disabled, input[type="number"]:disabled{
+            cursor: not-allowed;
+        }
+
+        button:disabled, button:disabled span, button:disabled i{
+            cursor: not-allowed;
+        }
+        select:disabled{
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-<span onclick="addActividad();" class="add-actividad" for="Agregar actividad"><i class="icon-plus2"></i></span>
+<button onclick="addActividad();" disabled><span  class="add-actividad" for="Agregar actividad"><i class="icon-plus2"></i></span></button>
 <!-- Buttons -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos">
     <div class="cell small-12 medium-4 text-white">
@@ -111,7 +131,7 @@
     <div class="cell small-12 medium-4">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_servicio_save" class="btn btn-secondary" onclick="guardar_actividades_servicio();">Guardar</button>
+                <button type="button" disabled id="btn_servicio_save" class="btn btn-secondary" onclick="guardar_actividades_servicio();">Enviar a cotizar</button>
             </div>
         </div>
     </div>
@@ -134,22 +154,16 @@
 <!-- Input-->
 <div class="grid-container">
     <div class="grid-x grid-padding-x">
-        <div class="cell large-5">
+        <div class="cell large-6">
             <div class="form-group">
-                <label class="label text-primary"><b>Solución:</b></label>
-                    <tr><select id="select_solucion_servicio" style="width: 100%;"></select></tr>
+                <label class="label text-primary"><b>Buscar por empresa o solución:</b></label>
+                <select id="select_solucion_servicio_cl" style="width: 100%;" onchange="BuscarSolucionServiciosCL($(this).val())"></select>
             </div>
         </div>
         <div class="cell large-3">
             <div class="form-group">
-                <label class="label text-primary"><b>Número de Cuadrillas:</b></label>
-                <input type="number" class="form-control form-service" type="text" id="txt_num_cuadrilla" placeholder="Número de Cuadrillas">
-            </div>
-        </div>
-        <div class="cell large-3">
-            <div class="form-group">
-                <label class="label text-primary"><b>Porcentaje de Depreciación:</b></label>
-                <input type="number" class="form-control form-service" type="text" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
+                <label class="label text-primary"><b>Depreciación de herramientas (%):</b></label>
+                <input type="number" disabled class="form-control form-service" type="text" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
             </div>
         </div>
     </div>
@@ -169,17 +183,18 @@
 
         <!-- Table -->
         <div class="grid-x grid-padding-x">
-            <div class="cell large-7">
-                <table class="table-personal-transito">
+            <div class="cell large-9">
+                <table class="table table-personal-transito">
                     <thead>
                         <tr>
-                            <th style="width: 370px">Cargo Laboral</th>
-                            <th>Cantidad</th>
-                            <th>Tiempo (Horas)</th>
+                            <td>N°</td>
+                            <td class="text-center" style="width: 370px">Cargo Laboral</td>
+                            <td class="text-center">Cantidad</td>
+                            <td class="text-center">Días pago</td>
                         </tr>
                     </thead>
                     <tbody id="tbody_personal_transito">
-                        <tr><td colspan='3' class='text-center'><div class='p-3'>Seleccione cargo laboral.</div></td></tr>
+                        <tr><td colspan='5' class='text-center'><div style="padding: 4px; font-size: 10px">Seleccione cargo laboral.</div></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -203,10 +218,11 @@
 
         <!-- Cabecera de tabla -->
         <div class="grid-x grid-padding-x">
-            <div class="cell large-4"><div class="form-group"><label class="label text-primary"><b>Nombre de actividad:</b></label><input type="text" class="data-control form-control" type="text" placeholder="Nombre de actividad"></div></div>
-            <div class="cell large-4"><div class="form-group"><label class="label text-primary"><b>Descripción:</b></label><input type="text" class="data-control form-control" type="text"  placeholder="Descripcion"></div></div>
-            <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Cantidad:</b></label><input type="number" class="data-control form-control" type="number" placeholder="Cantidad"></div></div>
-            <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Riesgo:</b></label><input type="text" class="data-control form-control" type="number" placeholder="Riesgo"></div></div>
+            <div class="cell large-3"><div class="form-group"><label class="label text-primary"><b>Nombre de actividad:</b></label><input disabled type="text" class="data-control form-control" type="text" placeholder="Nombre de actividad"></div></div>
+            <div class="cell large-3"><div class="form-group"><label class="label text-primary"><b>Descripción:</b></label><input disabled type="text" class="data-control form-control" type="text"  placeholder="Descripcion"></div></div>
+            <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Cantidad:</b></label><input disabled type="number" class="data-control form-control" type="number" placeholder="Cantidad"></div></div>
+            <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Riesgo:</b></label><input disabled type="text" class="data-control form-control" type="number" placeholder="Riesgo"></div></div>
+            <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Adicionales:</b></label><input disabled type="text" class="data-control form-control" type="number" placeholder="Adicionales"></div></div>
         </div>
         <!-- Cabecera de tabla -->
 
@@ -216,19 +232,19 @@
                 <table class="table">
                     <thead class="thead-primary">
                     <tr>
-                        <th id="add_row_actividad_1" class="text-center" onclick="addCargoLaboral(this);"><i class="icon-plus2 icon-add-row-service"></i></th>
-                        <th>Cargo Laboral</th>
+                        <th id="add_row_actividad_1" class="text-center"><button disabled><i class="icon-plus2 icon-add-row-service" onclick="addCargoLaboral(this);"></i></button></th>
+                        <th style="width:450px">Cargo Laboral</th>
                         <th>Cantidad</th>
-                        <th>Tiempo (Horas)</th>
+                        <th>Días laborables</th>
                         <th class="text-center"><i class="icon icon-bin"></i></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr id="actividad_1_fila_1">
                         <td><div><p class="text-center">1</p></div></td>
-                        <td><div class="data-cargolab"><select class="select_actividad_cargolab" style="width: 100%;"></select></div></td>
-                        <td><div class="data-cargolab"><input type="number" class="form-control" /></div></td>
-                        <td><div class="data-cargolab"><input type="number" class="form-control" /></div></td>
+                        <td><div class="data-cargolab"><select disabled id="selectcl_1" class="select_actividad_cargolab" style="width: 100%;" onchange="generar_personal_transito(this);"></select></div></td>
+                        <td><div class="data-cargolab"><input type="number" disabled class="form-control" placeholder="Cantidad"/></div></td>
+                        <td><div class="data-cargolab"><input type="number" disabled class="form-control" placeholder="Días laborables" /></div></td>
                         <td><div class="text-center"><button id="actividad_1_btn_elim_1" type="button" class="btn btn-sm-delete" onclick="eliminar_fila_tabla_cargolab(this);"><i class="icon icon-bin"></i></button></div></td>
                     </tr>
                     </tbody>
@@ -246,6 +262,30 @@
 
 <script>
     $(document).ready(function(){
+        $("#select_solucion_servicio_cl").select2({
+            ajax: {
+                url: "/equipo/busempresa",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term.toUpperCase()
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar solución . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: formatRepo_servicio_solucion,
+            templateSelection: formatRepoSelection_servicio_solucion
+        });
+
         $(".select_actividad_cargolab").select2({
             ajax: {
                 url: "/servicios/listarcargolaboral",
@@ -264,19 +304,10 @@
                 cache: true
             },
             placeholder: 'Buscar cargo laboral / area . . .',
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            escapeMarkup: function (markup) { return markup; },
             minimumInputLength: 2,
             templateResult: formatRepo_servicio,
             templateSelection: formatRepoSelection_servicio
-        });
-
-
-        $(".select_actividad_cargolab").on("select2.select",function (e) {
-            alert("selected");
-        });
-
-        $("#select_solucion_servicio").select2({
-            placeholder: 'Buscar solució . . .',
         });
     });
 
@@ -285,14 +316,27 @@
             return repo.text;
         }
 
-        var markup = "<div class='select2-result-cargolab'><span class='select2-span-result'>CARGO: </span>"+repo.cargo+"</div>"+
-                     "<div class='select2-result-area'><span class='select2-span-result'>AREA: </span>"+repo.area+"</span></div>";
-
-        return markup;
+        return  "<div class='select2-result-cargolab'><span class='select2-span-result'>CARGO: </span>"+repo.cargo+"</div>"+
+                "<div class='select2-result-area'><span class='select2-span-result'>AREA: </span>"+repo.area+"</span></div>";
     }
 
     function formatRepoSelection_servicio (repo) {
-        return repo.text || repo.cargo;
+        return  repo.text || repo.cargo + " - " + repo.area;
+    }
+
+    //COMBO SOLUCION
+    function formatRepo_servicio_solucion (repo) {
+        if (repo.loading) {
+            return repo.text;
+        }
+
+        return "<div class='select2-result-empresa'><span class='select2-span-result'>EMPRESA: </span>"+repo.nomempresa+" - "+repo.ruc+"</div>"+
+               "<div class='select2-result-proyecto'><span class='select2-span-result'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
+               "<div class='select2-result-solucion'><span class='select2-span-result'>SOLUCION: </span>"+repo.solucion+"</span></div>";
+    }
+
+    function formatRepoSelection_servicio_solucion (repo) {
+        return repo.text || repo.solucion + " - " + repo.nomempresa;
     }
 
 </script>

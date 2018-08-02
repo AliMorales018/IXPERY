@@ -2,10 +2,7 @@ package com.ixpery.datos.log;
 
 import com.ixpery.datos.tools.DConexion;
 import com.ixpery.datos.tools.JsonParcellable;
-import com.ixpery.entidades.log.EActividad;
-import com.ixpery.entidades.log.EActividadCargo;
-import com.ixpery.entidades.log.EEquipo;
-import com.ixpery.entidades.log.EServicio;
+import com.ixpery.entidades.log.*;
 import com.ixpery.utilitario.Datacnx;
 import com.ixpery.utilitario.DtUtilitario;
 import com.ixpery.utilitario.ParameterDirection;
@@ -20,14 +17,16 @@ public class DServicio {
     Datacnx dataCnx = new DConexion().ConectarBD();
     DtUtilitario com = new DtUtilitario(dataCnx);
     DActividad odactividad = new DActividad();
+    DPersonalTransito odperstran = new DPersonalTransito();
 
     public static String getNameTable() { return "46162"; }
-    public String NameTableActividad = odactividad.getNameTable();
+    public String NameTableActividad = "46172";
     public String NameTableActividadCargo = "56063";
+    public String NameTablePersonalTran = "46182";
     public DServicio() throws Exception {
     }
 
-    public String ValidarDatosDB(EServicio oservicio, List<EActividad> lisActividades , List<List<EActividadCargo>> listAC) throws Exception{
+    public String ValidarDatosDB(EServicio oservicio, List<EActividad> lisActividades , List<List<EActividadCargo>> listAC, List<EPersonalTransito> listPersonalTran) throws Exception{
         try{
             //SERVICIO
             oservicio = AddId(oservicio);
@@ -52,9 +51,13 @@ public class DServicio {
             }
             //CARGOSLABORALES
 
-            String json = ReturnJson(oservicio,lisActividades,listaCLConId);
+            //PERSONAL TRANSITO
+            listPersonalTran = odperstran.AddListId(listPersonalTran,idServicio);
+            //PERSONAL TRANSITO
 
-            listaParametros.clear();
+            String json = ReturnJson(oservicio,lisActividades,listaCLConId,listPersonalTran);
+
+            /*listaParametros.clear();
             SqlParameter paramJson = new SqlParameter("@json", json);
             SqlParameter paramSalid = new SqlParameter("@reporte", "");
             paramSalid.Direction = ParameterDirection.Output;
@@ -68,7 +71,9 @@ public class DServicio {
             }
             else{
                 return a;
-            }
+            }*/
+            //Borrar este return
+            return "0";
         }
         catch (Exception ex){
             throw ex;
@@ -84,6 +89,18 @@ public class DServicio {
             com.TransUnica("gen_insertar_json", listaParametros);
         }
         catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    public String VerServicio(Integer idSolucion) throws Exception {
+        try {
+            listaParametros.clear();
+            SqlParameter pId = new SqlParameter("@id",idSolucion);
+            listaParametros.add(pId);
+            return com.EjecutaConsultaJson("filtrar_servicio_item2_json",listaParametros);
+        }
+        catch (Exception ex){
             throw ex;
         }
     }
@@ -109,11 +126,12 @@ public class DServicio {
         return oeServicio;
     }
 
-    public String ReturnJson(Object objectS, Object objectA, Object objectCL){
+    public String ReturnJson(Object objectS, Object objectA, Object objectCL, Object objectPT){
         JsonParcellable parser = new JsonParcellable();
         parser.addObjectParse(getNameTable(), objectS);
         parser.addObjectParse(NameTableActividad, objectA);
         parser.addObjectParse(NameTableActividadCargo, objectCL);
+        parser.addObjectParse(NameTablePersonalTran, objectPT);
         String jsonParse = parser.getJsonParcellable(1);
         System.out.println(jsonParse);
         return jsonParse;

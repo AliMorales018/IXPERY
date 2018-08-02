@@ -1,9 +1,6 @@
 package com.ixpery.controladores.log;
 
-import com.ixpery.entidades.log.EActividad;
-import com.ixpery.entidades.log.EActividadCargo;
-import com.ixpery.entidades.log.EServicio;
-import com.ixpery.entidades.log.ESolucion;
+import com.ixpery.entidades.log.*;
 import com.ixpery.entidades.rhh.ECargoLaboral;
 import com.ixpery.negocio.log.BCargoLaboral;
 import com.ixpery.negocio.log.BServicio;
@@ -66,6 +63,7 @@ public class CServicios {
             oactividad.setDescripcion(row[1]);
             oactividad.setCantidad(Integer.parseInt(row[2]));
             oactividad.setRiesgo(Integer.parseInt(row[3]));
+            oactividad.setAdicional(Double.parseDouble(row[4]));
             listActividades.add(oactividad);
         }
         //ACTIVIDADES
@@ -75,13 +73,13 @@ public class CServicios {
         List<EActividadCargo> listAC;
         List<String[]> tabla;
         Integer sizeTabla;
-        Integer sizeListActiCargo = values.get("cargoslaborales").size();
+        Integer sizeListActiCargo = values.get("cargoslab").size();
         EActividadCargo oeActividadCargo;
         String[] rowC;
 
         for(int i = 0; i < sizeListActiCargo; i++){
-            sizeTabla = values.get("cargoslaborales").get(i).size();
-            tabla = values.get("cargoslaborales").get(i);
+            sizeTabla = values.get("cargoslab").get(i).size();
+            tabla = values.get("cargoslab").get(i);
             listAC = new ArrayList<>();
             for(int j = 0; j < sizeTabla; j++){
                 rowC = tabla.get(j);
@@ -94,12 +92,45 @@ public class CServicios {
             listActividadCargoC.add(listAC);
         }
         //CARGOS LABORALES
-        String result = obServicio.ValidarDatosServicio(oeServicio,listActividades,listActividadCargoC);
+
+        //PERSONAL DE TRANSITO
+        List<EPersonalTransito> listPersTran = new ArrayList<>();
+        Integer sizeListPersTra = values.get("personaltransito").get(0).size();
+        EPersonalTransito oePersTran;
+        String[] rowPT;
+        for(int i = 0; i < sizeListPersTra; i++){
+            oePersTran = new EPersonalTransito();
+            row = values.get("personaltransito").get(0).get(i);
+            oePersTran.setIdcargo(new ECargoLaboral(Integer.parseInt(row[0])));
+            oePersTran.setCargolaboral(row[1]);
+            oePersTran.setCantidad(Integer.parseInt(row[2]));
+            oePersTran.setHoras(Integer.parseInt(row[3]));
+            listPersTran.add(oePersTran);
+        }
+        //PERSONAL DE TRANSITO
+
+        String result = obServicio.ValidarDatosServicio(oeServicio,listActividades,listActividadCargoC,listPersTran);
         if (result.equals("0")){
             return "";
         }
         else{
             return result;
         }
+    }
+
+    @RequestMapping("/servicios/cotizacion")
+    public ModelAndView ServiciosCotizacion() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateParse = sdf.format(date);
+        ModelAndView modelView = new ModelAndView("logistica/cotizacionservicio");
+        modelView.addObject("fecha",dateParse);
+        return modelView;
+    }
+    @RequestMapping(value = "/servicios/verservicio", method = RequestMethod.POST)
+    public @ResponseBody String VerServicio(
+            @RequestParam(value="id") Integer idSolucion
+    ) throws  Exception{
+        return obServicio.VerServicio(idSolucion);
     }
 }
