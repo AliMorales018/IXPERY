@@ -74,7 +74,7 @@ public class GeneralHTML {
                         }
                         break;
                     case "span": html+= RetornaSpanHtml(id,valor,cont);
-                                break;
+                        break;
                     default:
                         html += "<td><div>Elemento no Soportado</div></td>";
                         break;

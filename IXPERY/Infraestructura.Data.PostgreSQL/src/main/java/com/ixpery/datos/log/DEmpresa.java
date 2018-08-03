@@ -83,7 +83,7 @@ public class DEmpresa {
             throw ex;
         }
     }
-//LUIS 17/07/2018 10:00 AM
+    //LUIS 17/07/2018 10:00 AM
     public String ValidarDatosUpdate(List<EEmpresa> listEmpr,Integer tipoReg) throws Exception {
         try{
             listEmpr = addListId(listEmpr,tipoReg);

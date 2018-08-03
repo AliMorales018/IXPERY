@@ -311,5 +311,100 @@ public class JsonGeneral {
 //        return jsonGeneral.JsonConvertInvert(cadena,"/");
     }
 
+    //Luis
+    public String JsonITEM1(String jsonString){
+        String json = "";
+        Boolean jsonInsert = false;
+        ArrayList<String> fks = new ArrayList<>();
+
+        if(!jsonString.equals("")){
+            JsonParser parser = new JsonParser();
+            JsonObject root = parser.parse(jsonString).getAsJsonObject();
+            JsonObject newRoot = new JsonObject();
+
+            for(Map.Entry<String, JsonElement> entryRoot : root.entrySet()){
+                String keyRoot = entryRoot.getKey();
+                JsonArray arrayValue = entryRoot.getValue().getAsJsonArray();
+                Map<String, String> diccionario = diccionarioMap.Buscar(keyRoot);
+
+                String newKeyRoot = diccionario.get(keyRoot);
+                Integer id = NextId(newKeyRoot);
+
+                JsonArray newArrayValue = new JsonArray();
+                for(JsonElement jsonElement : arrayValue){
+                    JsonObject newObjectChild = new JsonObject();
+
+                    for(Map.Entry<String, JsonElement> entryChild : jsonElement.getAsJsonObject().entrySet()) {
+                        String keyChild = entryChild.getKey();
+
+                        String newKeyChild = diccionario.get(keyChild);
+
+                        if(entryChild.getValue().isJsonObject()) {
+                            JsonObject lastObject = new JsonObject();
+                            Integer noFk = 0;
+                            for(Map.Entry<String, JsonElement> entryLast : entryChild.getValue().getAsJsonObject().entrySet()) {
+                                String keyLast = entryLast.getKey().substring(0,3);
+                                Map<String, String> dic = diccionarioMap.Buscar(keyLast);
+                                String newKeyLast = dic.get(entryLast.getKey()).substring(0,5);
+                                String idNewKeyLast = newKeyLast + "1";
+
+
+                                Integer contFks = 0;
+                                if(entryLast.getKey().equals(keyLast + "1") && entryLast.getValue().toString().equals("0")){
+
+                                    for(String fk : fks){
+                                        if(fk.equals(entryLast.getKey())){
+                                            ++contFks;
+                                        }
+                                    }
+
+                                    Integer idFK = NextId(newKeyLast);
+
+
+                                    lastObject.addProperty(idNewKeyLast, idFK+contFks);
+                                    fks.add(entryLast.getKey());
+                                    noFk = idFK+contFks;
+
+                                }
+                                else{
+                                    lastObject.add(idNewKeyLast, entryLast.getValue());
+                                    noFk = entryLast.getValue().getAsInt();
+                                }
+                            }
+
+                            if(keyChild.equals("pso11") || keyChild.equals("pso14")){
+                                newObjectChild.addProperty(newKeyChild, noFk);
+                            }
+                            else{
+                                newObjectChild.add(newKeyChild, lastObject);
+                            }
+
+                        }
+                        else{
+                            if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
+                                newObjectChild.addProperty(newKeyRoot + "1", id);
+                                jsonInsert = true;
+                            }
+                            else{
+                                newObjectChild.add(newKeyChild, entryChild.getValue());
+                            }
+                        }
+
+                    }
+                    newArrayValue.add(newObjectChild);
+
+                    if(jsonInsert){
+                        ++id;
+                    }
+
+                }
+                newRoot.add(newKeyRoot, newArrayValue);
+            }
+            json = newRoot.toString();
+
+        }
+        return  json;
+    }
+    //Luis
 
 }

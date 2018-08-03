@@ -46,5 +46,14 @@ public class BEquipo {
         return odEquipo.RetornaTB();
 
     }
+    //LUIS 26/07 15:25
+
+    public String GuardarFull(String json) throws Exception{
+        String result = "";
+        odEquipo.GuardarFull(json);
+        return result;
+    }
+
+    //FIN LUIS
 
 }

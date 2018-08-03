@@ -1,13 +1,20 @@
 package com.ixpery.controladores.log;
 
-import com.google.gson.*;
-import com.ixpery.entidades.log.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.ixpery.entidades.log.EEquipo;
+import com.ixpery.entidades.log.EPreRegistroProducto;
+import com.ixpery.entidades.log.EProductoSolucion;
+import com.ixpery.entidades.log.ESolucion;
 import com.ixpery.negocio.log.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
@@ -16,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class CEquipo {
+public class COtroServicio {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BEquipo obEquipo = (BEquipo) applicationContext.getBean("beanEquipo");
     BProductoSolucion obProductoSolucion = (BProductoSolucion) applicationContext.getBean("beanProductoSolucion");
@@ -24,14 +31,24 @@ public class CEquipo {
     BProducto obProducto =(BProducto) applicationContext.getBean("beanProducto");
     BEmpresa obEmpresa =(BEmpresa) applicationContext.getBean("beanEmpresa");
 
-    @RequestMapping("/equipo")
+
+
+    @RequestMapping("/otroservicio")
     public ModelAndView Equipo(){
-        ModelAndView modelAndView = new ModelAndView("logistica/equipo");
+        ModelAndView modelAndView = new ModelAndView("logistica/otroservicio");
         return modelAndView;
     }
 
-    /*
-     * guardarfull*/
+    //Busqueda Producto Combo de Tabla
+    @RequestMapping(value = "/otroservi/buservsolic", produces = "application/json")
+    public @ResponseBody String BuscarServSolic(
+            @RequestParam(value="q") String var
+    ) throws Exception {
+        return obProducto.BuscarProductoEquipoCombo(var);
+    }
+
+    /* *//*
+     * guardarfull*//*
     @RequestMapping(value="/equipo/register", method = RequestMethod.POST)
     public @ResponseBody
     String RegistrarEquipo(@RequestBody Map<String,List<String[]>> values) throws Exception{
@@ -206,5 +223,5 @@ public class CEquipo {
 
         System.out.println("ENTRE EN REGISTER");
         return "";
-    }
+    }*/
 }

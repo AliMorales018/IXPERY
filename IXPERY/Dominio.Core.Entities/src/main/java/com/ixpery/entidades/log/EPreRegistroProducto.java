@@ -38,7 +38,7 @@ public class EPreRegistroProducto {
         this.idprereg = idprereg;
     }
 
-     public Integer getIdprereg() {
+    public Integer getIdprereg() {
         return idprereg;
     }
 

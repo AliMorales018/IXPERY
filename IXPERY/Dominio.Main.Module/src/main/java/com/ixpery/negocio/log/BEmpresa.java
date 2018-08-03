@@ -55,7 +55,7 @@ public class BEmpresa {
         return odEmpresa.BuscarEmpresaProyectoCombo(var);
     }
 
-//LUIS 17/07/2018 10:00 AM
+    //LUIS 17/07/2018 10:00 AM
     public String BuscarEmpresaSolucionCombo(String var) throws Exception{
         return odEmpresa.BuscarEmpresaSolucionCombo(var);
     }

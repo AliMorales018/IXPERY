@@ -1,5 +1,5 @@
-var JSONobjGeneralEq;
-var estOperaEq=0;//0: guardar simple//1:updatetotal(sav-updt-del)
+var JSONobjGeneralOtSer;
+var estOperaOtSer=0;//0: guardar simple//1:updatetotal(sav-updt-del)
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowProdSolEq="";
 // var rowEquiObjIn = {};
@@ -470,10 +470,10 @@ function InsUpdDelEquipo() {
 
 
 
-var conta_filas_equipo=1;
+var conta_filas_otroservi=1;
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS
-function addEquipos_equipo(obj){
-    conta_filas_equipo++;
+function addOtroServ_otroservi(obj){
+    conta_filas_otroservi++;
     var id = obj.id;
     var Equipo = id.split("add_row_");
     //alert(Equipo[1]);
@@ -481,27 +481,27 @@ function addEquipos_equipo(obj){
 
     childs++;
 
-    var trval="equipo_1_fila_"+childs;
+    var trval="otroservi_1_fila_"+childs;
     $("#"+Equipo[1]+" tbody").append(
-        "<tr id='"+Equipo[1]+"_fila_"+childs+"' class='equipo-insert'>"+
+        "<tr id='"+Equipo[1]+"_fila_"+childs+"' class='otroservi-insert'>"+
         "<td><div><p class='text-center'>"+childs+"</p></></td>"+
-        "<td><div><select id='cmb_equipo_nompro"+conta_filas_equipo+"' name='cmb_equipo_nompro' class='select_equipo_equipos' onchange='selCmbProd(this)' style='width: 100%;'></select></div></td>"+
-        "<td><div><span id='spn_equipo_codpro'></span></div></td>"+
-        "<td><div><span id='spn_equipo_modpro'></span></div></td>"+
-        "<td><div><span id='spn_equipo_marpro'></span></div></td>"+
-        "<td><div><span id='spn_equipo_umepro'></span></div></td>"+
-        "<td><div><input id='txt_equipo_canpro' type='text' type='text' class='form-control' /></div></td>"+
-        "<td hidden><div><span id='spn_equipo_idprod'></span></div></td>"+
-        "<td hidden><div><span id='spn_equipo_idprodsol'></span></div></td>"+
-        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_equipos(`"+trval+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
+        "<td><div><select id='cmb_otroservi_nompro"+conta_filas_otroservi+"' name='cmb_otroservi_nompro' class='select_otroservi_otroservis' onchange='selCmbProd(this)' style='width: 100%;'></select></div></td>"+
+        "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
+        "<td><div><span id='spn_otroservi_modpro'></span></div></td>"+
+        "<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
+        "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+
+        "<td><div><input id='txt_otroservi_canpro' type='text' type='text' class='form-control' /></div></td>"+
+        "<td hidden><div><span id='spn_otroservi_idprod'></span></div></td>"+
+        "<td hidden><div><span id='spn_otroservi_idprodsol'></span></div></td>"+
+        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservis(`"+trval+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
         "</tr>"
     );
     // contPrimervez++;
     borrar_select2();
-    clonar_select2(conta_filas_equipo);
+    clonar_select2(conta_filas_otroservi);
 }
 function clonar_select2(fila){
-    $('#cmb_equipo_nompro'+fila).select2({
+    $('#cmb_otroservi_nompro'+fila).select2({
         ajax: {
             url: "/equipo/busproducto",
             dataType: 'json',
@@ -518,7 +518,7 @@ function clonar_select2(fila){
             },
             cache: true
         },
-        placeholder: 'Buscar por producto . . .',
+        placeholder: 'Buscar por servicio . . .',
         escapeMarkup: function (markup) { return markup; },
         minimumInputLength: 3,
         templateResult: formatRepoProd,
@@ -542,13 +542,13 @@ function selCmbProd(obj){
 }
 
 //FUNCIONES QUE OPERAN A NIVEL DE TABLA DENTRO DE CONTENEDOR DE ACTIVIDAD
-function eliminar_fila_tabla_equipos(fila){
-    var equiporeg="equipo_1";
-    var childs = $("#"+equiporeg + " tbody tr").length;
+function eliminar_fila_tabla_otroservis(fila){
+    var otroservi="otroservi_1";
+    var childs = $("#"+otroservi + " tbody tr").length;
     if(childs > 1){
         $("#"+fila).remove();
-        reordernar_num_tabla_equipos(equiporeg);
-        conta_filas_equipo--;
+        reordernar_num_tabla_equipos(otroservi);
+        conta_filas_otroservi--;
     }
 }
 
@@ -559,12 +559,12 @@ function reordernar_num_tabla_equipos(idEquipo){
 
     $(obj).each(function () {
         $(this).removeAttr('id');
-        $(this).attr("id","equipo_1_fila_"+contador);
+        $(this).attr("id","otroservi_1_fila_"+contador);
         $(this).find("p").text(contador);
         $(this).find("button").removeAttr('onclick');
-        $(this).find("button").attr("onclick","eliminar_fila_tabla_equipos('equipo_1_fila_"+contador+"')");
+        $(this).find("button").attr("onclick","eliminar_fila_tabla_otroservis('otroservi_1_fila_"+contador+"')");
         $(this).find("select").removeAttr('id');
-        $(this).find("select").attr("id","cmb_equipo_nompro"+contador);
+        $(this).find("select").attr("id","cmb_otroservi_nompro"+contador);
         $(this).find("select").removeAttr('onchange');
         $(this).find("select").attr("onchange","selCmbProd(this)");
         contador++;
@@ -582,42 +582,41 @@ function reordernar_num_tabla_equipos(idEquipo){
 * */
 //INICIO DE FUNCIONES PARA EQUIPOS NO REGISTRADOS
 
-var conta_filas_equiponr=1;
+var conta_filas_otroservinr=1;
 
-function addEquipos_equiponr(objnr){
-    conta_filas_equiponr++;
+function addOtroServi_otroservinr(objnr){
+    conta_filas_otroservinr++;
 
     var idnr = objnr.id;
-    var Equiponr = idnr.split("add_row_");
+    var OtroServinr = idnr.split("add_row_");
 
-    var childsnr = $("#"+Equiponr[1] + " tbody tr").length;
+    var childsnr = $("#"+OtroServinr[1] + " tbody tr").length;
     childsnr++;
-    var trvalnr="equiponr_1_fila_"+childsnr;
+    var trvalnr="otroservinr_1_fila_"+childsnr;
 
-    $("#"+Equiponr[1]+" tbody").append(
-        "<tr id='"+Equiponr[1]+"_fila_"+childsnr+"' class='equiponr-insert'>"+
+    $("#"+OtroServinr[1]+" tbody").append(
+        "<tr id='"+OtroServinr[1]+"_fila_"+childsnr+"' class='otroservinr-insert'>"+
         "<td><div><p class='text-center'>"+childsnr+"</p></div></td>"+
-        "<td><div><input id='txt_equiponr_nompro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_modpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_marpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_umepro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_canpro' type='text' class='form-control' /></div></td>"+
-        "<td hidden><div><span id='spn_equiponr_idpreg'></span></div></td>"+
-        // "<td hidden><div><input id='txt_equiponr_idpreg' type='text' class='form-control' /></div></td>"+
-        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_equiposnr(`"+trvalnr+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
+        "<td><div><input id='txt_otroservinr_nompro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_otroservinr_modpro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_otroservinr_marpro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_otroservinr_umepro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_otroservinr_canpro' type='text' class='form-control' /></div></td>"+
+        "<td hidden><div><span id='spn_otroservinr_idpreg'></span></div></td>"+
+        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservisnr(`"+trvalnr+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
         "</tr>"
     );
 }
 
 //FUNCIONES QUE OPERAN A NIVEL DE TABLA DENTRO DE CONTENEDOR DE ACTIVIDAD
-function eliminar_fila_tabla_equiposnr(fila){
-    var equiponoreg="equiponr_1";
-    var childsnr = $("#"+equiponoreg + " tbody tr").length;
+function eliminar_fila_tabla_otroservisnr(fila){
+    var otroservinr="otroservinr_1";
+    var childsnr = $("#"+otroservinr + " tbody tr").length;
 
     if(childsnr > 1){
         $("#"+fila).remove();
-        reordernar_num_tabla_equiposnr(equiponoreg);
-        conta_filas_equiponr--;
+        reordernar_num_tabla_equiposnr(otroservinr);
+        conta_filas_otroservinr--;
     }
 }
 
@@ -627,10 +626,10 @@ function reordernar_num_tabla_equiposnr(idEquiponr){
 
     $(obj).each(function () {
         $(this).removeAttr('id');
-        $(this).attr("id","equiponr_1_fila_"+contadornr);
+        $(this).attr("id","otroservinr_1_fila_"+contadornr);
         $(this).find("p").text(contadornr);
         $(this).find("button").removeAttr('onclick');
-        $(this).find("button").attr("onclick","eliminar_fila_tabla_equiposnr('equiponr_1_fila_"+contadornr+"')");
+        $(this).find("button").attr("onclick","eliminar_fila_tabla_otroservisnr('otroservinr_1_fila_"+contadornr+"')");
         contadornr++;
     });
 }
@@ -701,7 +700,7 @@ function RegistrarEquipo_equipo() {
 
             var filaData = [];
 
-            if(conta_filas_equiponr===1){
+            if(conta_filas_otroservinr===1){
                 if(nomnr!=="" && modnr!=="" && mrcnr!=="" && umenr!=="" && cntnr!=="") {
                     filaOkEqNoReg=1;
                     filaData.push(nomnr);
@@ -732,6 +731,8 @@ function RegistrarEquipo_equipo() {
                     return false;
                 }
             }
+
+
         });
         //}
         if(filaOkEqReg===1 && filaOkEqNoReg===1){
@@ -767,7 +768,7 @@ function RegistrarEquipo_equipo() {
     }
 }
 
-function addEquiposUpdate_equipo(obj){
+function addOtroServisUpdate_otroservi(obj){
     conta_filas_equipo=0;
     $( "#tbody_equipo" ).empty();
     var JSONobj = JSON.parse(obj);
@@ -800,14 +801,14 @@ function addEquiposUpdate_equipo(obj){
     });
 
     //SI EXISTEN
-    conta_filas_equiponr=0;
+    conta_filas_otroservinr=0;
     $( "#tbody_equiponr" ).empty();
     $.each(JSONobj.items[2].items3, function (obj, item) {
-        conta_filas_equiponr++;
+        conta_filas_otroservinr++;
 
         $("#equiponr_1 tbody").append(
-            "<tr id='equiponr_1_fila_"+conta_filas_equiponr+"' class='equiponr-edit'>"+
-            "<td><div><p class='text-center'>"+conta_filas_equiponr+"</p></div></td>"+
+            "<tr id='equiponr_1_fila_"+conta_filas_otroservinr+"' class='equiponr-edit'>"+
+            "<td><div><p class='text-center'>"+conta_filas_otroservinr+"</p></div></td>"+
             "<td><div><input id='txt_equiponr_nompro' type='text' class='form-control' value='"+item.nomproducto+"'/></div></td>"+
             "<td><div><input id='txt_equiponr_modpro' type='text' class='form-control' value='"+item.modelo+"'/></div></td>"+
             "<td><div><input id='txt_equiponr_marpro' type='text' class='form-control' value='"+item.marca+"'/></div></td>"+
@@ -819,11 +820,3 @@ function addEquiposUpdate_equipo(obj){
         );
     });
 }
-
-
-
-
-
-
-
-
