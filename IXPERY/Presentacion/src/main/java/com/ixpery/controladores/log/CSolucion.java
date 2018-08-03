@@ -1,38 +1,31 @@
 package com.ixpery.controladores.log;
 
-import com.ixpery.entidades.log.EEstado;
-import com.ixpery.entidades.log.ERequerimiento;
-import com.ixpery.entidades.log.ESolucion;
-import com.ixpery.negocio.log.BEmpresa;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ixpery.negocio.log.BSolucion;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 @Controller
 public class CSolucion {
-    BEmpresa obEmpresa = new BEmpresa();
-    BSolucion obSolucion = new BSolucion();
+    private ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
+    private BSolucion obSolucion = (BSolucion) applicationContext.getBean("beanSolucion");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private Date date = new Date();
+    private String dateParse = sdf.format(date);
 
-    //SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
-    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    Date date = new Date();
-    String dateParse = sdf.format(date);
-//    Date date = new Date();
-//    String dateParse = sdf.format(date);
 
     public CSolucion() throws Exception {
     }
@@ -41,82 +34,109 @@ public class CSolucion {
     public ModelAndView Solucion(){
         ModelAndView modelAndView = new ModelAndView("/logistica/solucion");
         modelAndView.addObject("fecha",dateParse);
-
         return modelAndView;
     }
 
-    @RequestMapping(value="/solucion/register", method = RequestMethod.POST)
-    public @ResponseBody String RegistrarSolucion(
+    @RequestMapping(value="/solucion/GuardarSolucion", method = RequestMethod.POST)
+    public @ResponseBody
+    String GuardarSolucion(
             HttpServletRequest request,
-            @RequestParam(value = "iR") Integer iR,
-            @RequestParam(value = "values") String lisSol
+            @RequestBody String json
     ) throws Exception{
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         HttpSession session = request.getSession();
+        JsonParser parser = new JsonParser();
+        JsonObject root = parser.parse(json).getAsJsonObject();
+        for(Map.Entry<String, JsonElement> entryRoot : root.entrySet()){
+            String keyRoot = entryRoot.getKey();
+            JsonArray arrayValue = entryRoot.getValue().getAsJsonArray();
+            for(JsonElement jsonElement : arrayValue){
+                for(Map.Entry<String, JsonElement> entryChild : jsonElement.getAsJsonObject().entrySet()) {
+                    if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
+                        JsonObject objJSON = jsonElement.getAsJsonObject();
+                        objJSON.addProperty("sol10", 1);
+                        objJSON.addProperty("sol12", timestamp.toString());
+                        objJSON.addProperty("sol13", session.getAttribute("user").toString());
+                        break;
+                    }
+                }
+            }
 
-
-        String[] array = lisSol.split(",");
-        List<ESolucion> listSOL= new ArrayList<>();
-        ESolucion oeSolucion;
-
-        for (int i = 0; i < 1; i++){
-            oeSolucion = new ESolucion();
-            oeSolucion.setIdsolucion(0);
-            oeSolucion.setIdrequerimiento(new ERequerimiento(iR));
-            oeSolucion.setNomsolucion(array[i]);
-//            oeSolucion.setFechaCreacion(array[i+1]);
-            oeSolucion.setEncargadosol(array[i+1]);
-            oeSolucion.setDescripcion(array[i+2]);
-            oeSolucion.setEstado("1");
-            oeSolucion.setIdestado(7);
-            oeSolucion.setFecharegistro(timestamp);
-            oeSolucion.setUserregistro("pepito");
-            listSOL.add(oeSolucion);
-//            i+=2;
-            System.out.println(oeSolucion);
         }
-
-        String sol = obSolucion.Insertar(listSOL);
-
-        session.setAttribute("solucion", Integer.parseInt(sol));
-        System.out.println("SESSION: " + session.getAttribute("solucion").toString());
-        return "";
+        json = root.toString();
+        String mensaje = obSolucion.GuardarSolucion(json);
+        return mensaje;
     }
 
-    @RequestMapping("/solucion/empresa")
-    public @ResponseBody
-    String BuscarEmpresa(
-            @RequestParam(value="emp") String emp
-    ) throws Exception {
-        return obEmpresa.BuscarEmpresaConcatenado(emp);
-    }
 
-    @RequestMapping("/solucion/proyecto")
-    public @ResponseBody
-    String BuscarProyecto(
-            @RequestParam(value = "emp") Integer emp,
-            @RequestParam(value = "pro") String pro
-    ) throws Exception {
-        System.out.println("aca");
-        return obEmpresa.BuscarProyectoPorEmpresa(emp, pro);
-    }
-
-    @RequestMapping("/solucion/requerimiento")
+    @RequestMapping("/solucion/BuscarRequerimiento")
     public @ResponseBody
     String BuscarRequerimiento(
-            @RequestParam(value = "pro") Integer pro,
-            @RequestParam(value = "req") String req
+            @RequestParam(value = "value") String value,
+            HttpServletRequest request
     ) throws Exception {
-        System.out.println("aca");
-        return obEmpresa.BuscarRequerimientoPorProyecto(pro, req);
+        Integer perfil = 1;
+        return obSolucion.BuscarReqProEmp(value, perfil);
     }
 
-    @RequestMapping("/solucion/solucion")
+    @RequestMapping("/solucion/BuscarRequerimientos")
+    public @ResponseBody
+    String BuscarRequerimientos(
+            HttpServletRequest request
+            ) throws Exception {
+        HttpSession session = request.getSession();
+//        Integer perfil = Integer.parseInt(session.getAttribute("perfil").toString());
+        Integer perfil = 1;
+        return obSolucion.BuscarRequerimientos(perfil);
+    }
+
+    @RequestMapping("/solucion/BuscarSolucion")
     public @ResponseBody
     String BuscarSolucion(
             @RequestParam(value = "sol") Integer sol
     ) throws Exception {
-        System.out.println("aca");
-        return obSolucion.BuscarSolucionPorRequerimiento(sol);
+        return obSolucion.BuscarSolucion("sol2," + sol);
     }
+
+    @RequestMapping("/solucion/BuscarEmpleado")
+    public @ResponseBody
+    String BuscarEmpleado(
+            @RequestParam(value = "value") String value
+    ) throws Exception {
+//        String a = obSolucion.BuscarEmpleado("epl1," + value);
+        return obSolucion.BuscarEmpleado(value);
+    }
+
+
+
+    @RequestMapping("/solucion/SesionSolucion")
+    public @ResponseBody
+    String CrearSessionSolucion(
+            @RequestParam(value = "sol") String sol,
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("solucion", sol);
+
+//        Ejemplo para llamar la sesion de la solucion
+//        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
+        String solucion = session.getAttribute("solucion").toString();
+        return solucion;
+    }
+
+
+
+    @RequestMapping("/solucion2")
+    public ModelAndView Solucion2(){
+        ModelAndView modelAndView = new ModelAndView("/logistica/solucion2");
+        modelAndView.addObject("fecha",dateParse);
+        return modelAndView;
+    }
+
+
+
+
+
+
 
 }

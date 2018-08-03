@@ -636,13 +636,13 @@ public class Diccionario {
         //totalmostrar
         sol.put("sol9", "460719");
         //estado
-        sol.put("sol10", "460710");
+        sol.put("sol10", "4607110");
         //idestado
-        sol.put("sol11", "460711");
+        sol.put("sol11", "4607111");
         //fecharegistro
-        sol.put("sol12", "460712");
+        sol.put("sol12", "4607112");
         //userregistro
-        sol.put("sol13", "460713");
+        sol.put("sol13", "4607113");
         return sol;
     }
 
@@ -923,6 +923,10 @@ public class Diccionario {
         prp.put("prp6", "467436");
         //estado
         prp.put("prp7", "467437");
+        //modelo
+        prp.put("prp8", "467438");
+        //marca
+        prp.put("prp9", "467439");
         return prp;
     }
 

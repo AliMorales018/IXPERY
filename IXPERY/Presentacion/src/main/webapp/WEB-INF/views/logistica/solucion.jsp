@@ -1,13 +1,26 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <spring:url value="/resources" var="urlPublic"></spring:url>
-<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solucions</title>
     <link rel="stylesheet" href="${urlPublic}/css/styles.css">
+    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
+
+    <style>
+        #tbody-solucion-requerimientos tr:hover {
+            background-color: #E6E6E6;
+            /*background-color: #D34539;*/
+            cursor: pointer;
+        }
+        .unstyled::-webkit-inner-spin-button{
+            display: none;
+            -webkit-appearance: none;
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -28,141 +41,127 @@
     </div>
     <div class="cell small-12 medium-6 large-6">
         <div class="grid-x align-center-middle">
-            <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_solucion_save" class="btn btn-light" onclick="RegistrarSolucion();">Guardar</button>
+            <div class="cell small-4 medium-4 large-3 text-center">
+                <button type="button" id="btn_solucion_pendientes" class="btn btn-light" onclick="BuscarRequerimientos();">Pendientes</button>
             </div>
-            <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_solucion_send" class="btn btn-light" onclick="ValidarCampos_tbl_solucion();">Enviar a Operaciones</button>
+            <div class="cell small-4 medium-4 large-3 text-center">
+                <button type="button" id="btn_solucion_save" class="btn btn-light" onclick="GuardarSolucion();">Guardar</button>
             </div>
-            <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_solucion_delete" class="btn btn-secondary" onclick="ValidarCampos_tbl_solucion();">Eliminar</button>
+
+            <div class="cell small-4 medium-4 large-3 text-center">
+                <button type="button" id="btn_solucion_delete" class="btn btn-secondary" onclick="EliminarSolucion();">Eliminar</button>
             </div>
         </div>
     </div>
-    <div class="cell small-12 medium-3 large-3">
-        <!--Notify-->
+    <div class="cell small-12 medium-2 large-3">
+        <div class="cell small-4 medium-4 large-12 text-center">
+            <button type="button" id="btn_solucion_send" class="btn btn-light" onclick="ValidarCampos_tbl_solucion();">Enviar a Operaciones</button>
+        </div>
     </div>
 </div>
 <!-- End Buttons  -->
 
 <!-- Formulario -->
-<div>
-    <div class="grid-x align-center-middle">
-        <div class="cell large-1 text-center">
-            <div>
-                <label class="text-f" id="lbl_solucion_fecha" >${fecha}</label>
+<div name="div-solucion-frm">
+    <div class="grid-x ">
+        <div class="cell large-2">
+            <label class="text-f" id="lbl_solucion_fecha" >${fecha}</label>
+        </div>
+        <div class="cell large-8">
+            <div class="grid-x align-center-middle">
+                <div class="cell text-center" style="visibility: visible; margin-top: 10px">
+                    <div><span class="spn-solucion-emp"></span></div>
+                    <div><span class="spn-solucion-pro"></span></div>
+                    <div><span class="spn-solucion-req"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="cell large-2"></div>
+
+
+
+        <div class="cell large-12" style="margin-top: 10px">
+            <div class="grid-x  align-center-middle">
+                <div class="cell large-4">
+                    <select id="cmb-solucion-req" name="cmb-solucion-req" onchange="BuscarSolucion($(this).val());">
+                    </select>
+                </div>
 
             </div>
-            <div>
-                <label class="text-f" id="lbl_solucion_fecha1" style="color: #F2F2F2">.</label>
-            </div>
-            <div>
-                <label class="text-f" id="lbl_solucion_fecha2" style="color: #F2F2F2">.</label>
-            </div>
         </div>
-        <div class="cell large-10 text-center">
-            <div style="margin: 7px auto">
-                <h4>SOLUCION-SEMP0001</h4>
-            </div>
-        </div>
-        <div class="cell large-1">
-        </div>
-    </div>
 
-    <div style="margin: 10px auto" class="grid-x grid-padding-x align-center-middle">
-        <div class="cell large-9">
-            <div class="grid-x grid-padding-x">
-                <div class="cell large-4">
+        <div class="cell large-7" style="margin-top: 20px">
+            <div class="grid-x grid-padding-x align-right">
+                <div class="cell large-5"></div>
+                <div class="cell large-7">
                     <div class="form-group">
-                        <label class="label text-primary">Empresa:</label>
-                        <div id="sol_emp_capa1"><input type="text" id="txt_solucion_emp" name="txt_solucion_emp" class="form-control" /></div><div id="sol_emp_capa0"><select id="cmb_solucion_emp" name="cmb_solucion_emp" class="form-control ocultar"></select></div>
+                        <label class="label text-primary">Nombre de la Solucion:</label>
+                        <input name="txt-solucion-nom" class="form-control" type="text" placeholder="Nombre">
                     </div>
                 </div>
-                <div class="cell large-4">
+
+                <div class="cell large-3">
                     <div class="form-group">
-                        <label class="label text-primary">Proyecto:</label>
-                        <div id="sol_pro_capa1"><input type="text" id="txt_solucion_pro" name="txt_solucion_pro" class="form-control" /></div><div id="sol_pro_capa0"><select id="cmb_solucion_pro" name="cmb_solucion_pro" class="form-control ocultar"></select></div>
-                    </div>
-                </div>
-                <div class="cell large-4">
-                    <div class="form-group">
-                        <label class="label text-primary">Requerimiento:</label>
-                        <div id="sol_req_capa1"><input type="text" id="txt_solucion_req" name="txt_solucion_req" class="form-control" /></div><div id="sol_req_capa0"><select id="cmb_solucion_req" name="cmb_solucion_req" class="form-control ocultar"></select></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="grid-x grid-padding-x align-center-middle">
-        <div class="cell large-9">
-            <div class="grid-x grid-padding-x">
-                <div class="cell large-4">
-                    <div class="form-group">
-                        <label class="label text-primary">Nombre de la Solución:</label>
-                        <input class="form-control" type="text" id="txt_solucion_nom" placeholder="Nombre">
-                    </div>
-                </div>
-                <div class="cell large-4">
-                    <div class="form-group">
-                        <label class="label text-primary">Fecha de Inicio:</label>
-                        <input class="form-control" id="txt_solucion_fch" type="date">
+                        <label class="label text-primary">Fecha Inicio:</label>
+                        <input name="txt-solucion-fch" class="form-control" type="date">
                     </div>
                 </div>
                 <div class="cell large-4">
                     <div class="form-group">
                         <label class="label text-primary">Encargado:</label>
-                        <input class="form-control" type="text" id="txt_solucion_enc" placeholder="Encargado" />
+                        <select name="cmb-solucion-enc" class="custom-select"></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="cell large-5" style="margin-top: 20px">
+            <div class="grid-x grid-padding-x">
+
+                <div class="cell large-6">
+                    <div class="form-group">
+                        <label class="label text-primary">Descripcion:</label>
+                        <textarea name="tar-solucion-des" rows="6" style="width:100%;" id="txt_solucion_des" placeholder="Despcripcion"></textarea>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="grid-x grid-padding-x align-center-middle">
-        <div class="cell large-9">
-            <div class="form-group">
-                <label class="label text-primary">Descripcion:</label>
-                <div>
-                    <textarea style="width:100%;" id="txt_solucion_des" placeholder="Despcripcion"></textarea>
-                </div>
-            </div>
-        </div>
+
+
     </div>
 </div>
 <!-- End Formulario -->
 
+<!-- Table -->
+<div class="grid-x grid-padding-x align-center-middle l-container">
+    <div class="cell large-9">
+        <table class="table">
+            <thead class="thead-primary">
+            <tr>
+                <th class="p-3"><p class="text-center">N</p></th>
+                <th class="p-3">Requermiento</th>
+                <th class="p-3">Fecha Registro Requerimiento</th>
+                <th class="p-3">Solucion</th>
+                <th class="p-3">Fecha Inicio Solucion</th>
+                <th class="p-3">Proyecto</th>
+                <th class="p-3">Empresa</th>
+            </tr>
+            </thead>
+            <tbody id="tbody-solucion-requerimientos" name="tbody-solucion-requerimientos" >
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- End Table -->
+
 
 
 <!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptSolucion.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script >
+
 <!-- End JavaScript -->
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

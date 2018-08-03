@@ -12,48 +12,33 @@ public class BProyecto {
     public BProyecto() throws Exception {
     }
 
-    public String Validar(List<EProyecto> listPro) throws Exception{
-        String result = "";
-        result = odPro.ValidarDatosDB(listPro);
-        return result;
+    public String BuscarTipo() throws Exception {
+        return odPro.BuscarTipo();
     }
 
-    public void Modificar(EProyecto oePro) throws Exception{
-        odPro.ModificarProyecto(oePro);
+    public String BuscarEmpresaRuc(String campos) throws Exception {
+        return odPro.BuscarEmpresaRuc(campos);
     }
 
-    public void Eliminar(String id) throws Exception{
-        odPro.EliminarProyecto(id);
+    public String BuscarEmpleado(String campos) throws Exception {
+        return odPro.BuscarEmpleado(campos);
     }
 
-    public List<EProyecto> Buscar(String campos) throws Exception{
+    public String GuardarProyecto(String json) throws Exception{
+        String mensaje = odPro.GuardarProyecto(json);
+        return mensaje;
+    }
+
+    public String Buscar(String campos) throws Exception{
         return odPro.BuscarProyecto(campos);
     }
 
-    public String BuscarProyectoPorEmpresa(EEmpresa oeEmpresa)throws Exception {
-        return odPro.BuscarProEmpresa(oeEmpresa);
-    }
+    //****************************** Dante ******************************//
 
     public String BuscarProyectoPorEmpresaReque(EEmpresa oeEmpresa)throws Exception {
         return odPro.BuscarProEmpresaReque(oeEmpresa);
     }
 
-    public String BuscarEmpresa() throws Exception{
-        return odPro.BuscarEmpresa();
-    }
-
-    public String BuscarEmpleado() throws Exception {
-        return odPro.BuscarEmpleado();
-    }
-
-    public String BuscarTipo() throws Exception {
-        return odPro.BuscarTipo();
-    }
-
-    public String BuscarEmpresas(String var) throws Exception{
-        return odPro.BuscarEmpresas(var);
-    }
-
-
+    //****************************** Dante ******************************//
 
 }

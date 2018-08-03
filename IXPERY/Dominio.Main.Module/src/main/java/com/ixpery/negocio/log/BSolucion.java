@@ -11,15 +11,27 @@ public class BSolucion {
     public BSolucion() throws Exception {
     }
 
-    public String Insertar(List<ESolucion> listSol) throws Exception{
-        String result = "";
-        result = odSol.ValidarDatosDB(listSol);
-        return result;
+    public String GuardarSolucion(String value) throws Exception{
+        String mensaje = odSol.GuardarSolucion(value);
+        return mensaje;
     }
 
-    public String BuscarSolucionPorRequerimiento(Integer req) throws Exception{
-        return odSol.BuscarSolucionPorRequerimiento(req);
+    public String BuscarReqProEmp(String value, Integer perfil) throws Exception{
+        return odSol.BuscarReqProEmp(value, perfil);
     }
+
+    public String BuscarRequerimientos(Integer perfil) throws Exception{
+        return odSol.BuscarRequerimientos(perfil);
+    }
+
+    public String BuscarSolucion(String sol) throws Exception{
+        return odSol.BuscarSolucion(sol);
+    }
+
+    public String BuscarEmpleado(String value) throws Exception{
+        return odSol.BuscarEmpleado(value);
+    }
+
 
 
 }
