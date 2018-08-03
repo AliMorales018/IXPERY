@@ -22,8 +22,10 @@ $(document).ready(function () {
     $('#equipo_1 tbody')
         .on('focusin', 'tr[class=equipo-edit]', function () {
             idRowProdSolEq = parseInt($(this).find('span[id = spn_equipo_idprodsol]').html());
+            // console.log("entrando");
         })
         .on('focusout', 'tr[class=equipo-edit]', function () {
+            // console.log("saliendo");
             var objProEdit = {};
             idProdEq = parseInt($(this).find('span[id = spn_equipo_idprod]').html());
             canProdEq = parseInt($(this).find('input[id = txt_equipo_canpro]').val());
@@ -94,8 +96,10 @@ $(document).ready(function () {
     $('#equiponr_1 tbody')
         .on('focusin', 'tr[class=equiponr-edit]', function () {
             idRowPreRegEq = parseInt($(this).find('span[id = spn_equiponr_idpreg]').html());
+            console.log("ENTRANDO");
         })
         .on('focusout', 'tr[class=equiponr-edit]', function () {
+            console.log("saliendo");
             let objProEdit = {};
             nomProdEqReg = $(this).find('input[id = txt_equiponr_nompro]').val();
             modProdEqReg = $(this).find('input[id = txt_equiponr_modpro]').val();
@@ -103,13 +107,13 @@ $(document).ready(function () {
             umeProdEqReg = $(this).find('input[id = txt_equiponr_umepro]').val();
             canProdEqReg = parseInt($(this).find('input[id = txt_equiponr_canpro]').val());
 
-            console.log("nomProdEqReg: "+nomProdEqReg);
-            console.log("modProdEqReg: "+modProdEqReg);
-            console.log("marProdEqReg: "+marProdEqReg);
-            console.log("umeProdEqReg: "+umeProdEqReg);
-            console.log("canProdEqReg: "+canProdEqReg);
-            console.log("///////////////////////////");
-            console.log("///////////////////////////");
+            // console.log("nomProdEqReg: "+nomProdEqReg);
+            // console.log("modProdEqReg: "+modProdEqReg);
+            // console.log("marProdEqReg: "+marProdEqReg);
+            // console.log("umeProdEqReg: "+umeProdEqReg);
+            // console.log("canProdEqReg: "+canProdEqReg);
+            // console.log("///////////////////////////");
+            // console.log("///////////////////////////");
 
 
             if(nomProdEqReg==="") {

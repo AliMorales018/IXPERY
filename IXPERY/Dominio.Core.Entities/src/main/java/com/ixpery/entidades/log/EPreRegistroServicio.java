@@ -27,10 +27,13 @@ public class EPreRegistroServicio {
     @SerializedName("468068")
     private  String userregistro;
 
+    @SerializedName("468069")
+    private  String descripcion;
+
     public EPreRegistroServicio() {
     }
 
-    public EPreRegistroServicio(Integer idpreregserv, EServiciosSolicitados idservsol, EServicioSolucion idservicsolu, String servsolicitado, Integer cantidad, String estado, String fecharegistro, String userregistro) {
+    public EPreRegistroServicio(Integer idpreregserv, EServiciosSolicitados idservsol, EServicioSolucion idservicsolu, String servsolicitado, Integer cantidad, String estado, String fecharegistro, String userregistro, String descripcion) {
         this.idpreregserv = idpreregserv;
         this.idservsol = idservsol;
         this.idservicsolu = idservicsolu;
@@ -39,6 +42,7 @@ public class EPreRegistroServicio {
         this.estado = estado;
         this.fecharegistro = fecharegistro;
         this.userregistro = userregistro;
+        this.descripcion = descripcion;
     }
 
     public Integer getIdpreregserv() {
@@ -104,4 +108,8 @@ public class EPreRegistroServicio {
     public void setUserregistro(String userregistro) {
         this.userregistro = userregistro;
     }
+
+    public String getDescripcion() { return descripcion; }
+
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 }

@@ -271,7 +271,7 @@ function InsUpdDelEquipo() {
 
         //REGISTRO PRODUCTO SOLUCIÓN
 
-        objEqu.eqi1=parseInt($("label#lbl_equipo_ideq").html());//foránea equipo
+        objEqu.eqi1=parseInt($("label#lbl_otroservi_idotroserv").html());//foránea equipo
         objProd.pdt1= 0;
 
         objPreReg.prp1=0;//foránea pre-registro producto
@@ -324,7 +324,7 @@ function InsUpdDelEquipo() {
         //let objPreReg= {};
 
         //REGISTRO PRODUCTO SOLUCIÓN
-        objEqu.eqi1=$("label#lbl_equipo_ideq").text();//foránea equipo;
+        objEqu.eqi1=$("label#lbl_otroservi_idotroserv").text();//foránea equipo;
         objProd.pdt1=parseInt($(this).find("td div span[id = spn_equipo_idprod]").html());
         //objPreReg.prp1=0;//foránea pre-registro producto
 
@@ -475,24 +475,24 @@ var conta_filas_otroservi=1;
 function addOtroServ_otroservi(obj){
     conta_filas_otroservi++;
     var id = obj.id;
-    var Equipo = id.split("add_row_");
+    var OtroServic = id.split("add_row_");
     //alert(Equipo[1]);
-    var childs = $("#"+Equipo[1] + " tbody tr").length;
+    var childs = $("#"+OtroServic[1] + " tbody tr").length;
 
     childs++;
 
     var trval="otroservi_1_fila_"+childs;
-    $("#"+Equipo[1]+" tbody").append(
-        "<tr id='"+Equipo[1]+"_fila_"+childs+"' class='otroservi-insert'>"+
+    $("#"+OtroServic[1]+" tbody").append(
+        "<tr id='"+OtroServic[1]+"_fila_"+childs+"' class='otroservi-insert'>"+
         "<td><div><p class='text-center'>"+childs+"</p></></td>"+
-        "<td><div><select id='cmb_otroservi_nompro"+conta_filas_otroservi+"' name='cmb_otroservi_nompro' class='select_otroservi_otroservis' onchange='selCmbProd(this)' style='width: 100%;'></select></div></td>"+
-        "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
-        "<td><div><span id='spn_otroservi_modpro'></span></div></td>"+
-        "<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
-        "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+
-        "<td><div><input id='txt_otroservi_canpro' type='text' type='text' class='form-control' /></div></td>"+
-        "<td hidden><div><span id='spn_otroservi_idprod'></span></div></td>"+
-        "<td hidden><div><span id='spn_otroservi_idprodsol'></span></div></td>"+
+        "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbProd(this)' style='width: 100%;'></select></div></td>"+
+        // "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
+        "<td><div><input id='txt_otroservi_descri' type='text' class='form-control' /></div></td>"+
+        /*"<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
+        "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+*/
+        "<td><div><input id='txt_otroservi_cantid' type='text' class='form-control' /></div></td>"+
+        "<td hidden><div><span id='spn_otroservi_idservsoli'></span></div></td>"+
+        "<td hidden><div><span id='spn_otroservi_idservsolu'></span></div></td>"+
         "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservis(`"+trval+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
         "</tr>"
     );
@@ -501,9 +501,9 @@ function addOtroServ_otroservi(obj){
     clonar_select2(conta_filas_otroservi);
 }
 function clonar_select2(fila){
-    $('#cmb_otroservi_nompro'+fila).select2({
+    $('#cmb_otroservi_nombre'+fila).select2({
         ajax: {
-            url: "/equipo/busproducto",
+            url: "/otroservi/buservsolic",
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -521,8 +521,8 @@ function clonar_select2(fila){
         placeholder: 'Buscar por servicio . . .',
         escapeMarkup: function (markup) { return markup; },
         minimumInputLength: 3,
-        templateResult: formatRepoProd,
-        templateSelection: formatRepoSelectionProd
+        templateResult: formatRepoServSolic,
+        templateSelection: formatRepoSelectionServSolic
     });
 }
 
@@ -564,7 +564,7 @@ function reordernar_num_tabla_equipos(idEquipo){
         $(this).find("button").removeAttr('onclick');
         $(this).find("button").attr("onclick","eliminar_fila_tabla_otroservis('otroservi_1_fila_"+contador+"')");
         $(this).find("select").removeAttr('id');
-        $(this).find("select").attr("id","cmb_otroservi_nompro"+contador);
+        $(this).find("select").attr("id","cmb_otroservi_nombre"+contador);
         $(this).find("select").removeAttr('onchange');
         $(this).find("select").attr("onchange","selCmbProd(this)");
         contador++;
@@ -597,10 +597,10 @@ function addOtroServi_otroservinr(objnr){
     $("#"+OtroServinr[1]+" tbody").append(
         "<tr id='"+OtroServinr[1]+"_fila_"+childsnr+"' class='otroservinr-insert'>"+
         "<td><div><p class='text-center'>"+childsnr+"</p></div></td>"+
-        "<td><div><input id='txt_otroservinr_nompro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_otroservinr_modpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_otroservinr_marpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_otroservinr_umepro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_otroservinr_nomserv' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_otroservinr_desserv' type='text' class='form-control' /></div></td>"+
+        /*"<td><div><input id='txt_otroservinr_marpro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_otroservinr_umepro' type='text' class='form-control' /></div></td>"+*/
         "<td><div><input id='txt_otroservinr_canpro' type='text' class='form-control' /></div></td>"+
         "<td hidden><div><span id='spn_otroservinr_idpreg'></span></div></td>"+
         "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservisnr(`"+trvalnr+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
@@ -775,27 +775,27 @@ function addOtroServisUpdate_otroservi(obj){
     //RECORREMOS EQUIPO SOLUCIÓN
 
     $.each(JSONobj.items[1].items2, function (obj, item) {
-        conta_filas_equipo++;
+        conta_filas_otroservi++;
 
-        $("#equipo_1 tbody").append(
-            "<tr id='equipo_1_fila_"+conta_filas_equipo+"' class='equipo-edit'>"+
-            "<td><div><p class='text-center'>"+conta_filas_equipo+"</p></></td>"+
-            "<td><div><select id='cmb_equipo_nompro"+conta_filas_equipo+"' name='cmb_equipo_nompro' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProd(this)'></select></div></td>"+
-            "<td><div><span id='spn_equipo_codpro'>"+item.codigo+"</span></div></td>"+
-            "<td><div><span id='spn_equipo_modpro'>"+item.modelo+"</span></div></td>"+
-            "<td><div><span id='spn_equipo_marpro'>"+item.marca+"</span></div></td>"+
-            "<td><div><span id='spn_equipo_umepro'>"+item.nomumedida+"</span></div></td>"+
-            "<td><div><input id='txt_equipo_canpro' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
-            "<td hidden><div><span id='spn_equipo_idprod'>"+item.idproducto+"</span></div></td>"+
-            "<td hidden><div><span id='spn_equipo_idprodsol'>"+item.idprodsol+"</span></div></td>"+
-            "<td><div><center><input id='txt_equipo_del' type='checkbox' class='mgc mgc-danger mgc-circle' /></center></div></td>"+
+        $("#otroservi_1 tbody").append(
+            "<tr id='otroservi_1_fila_1"+conta_filas_otroservi+"' class='otroservi-edit'>"+
+            "<td><div><p class='text-center'>"+conta_filas_otroservi+"</p></></td>"+
+            "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' style='width: 100%;' onchange='selCmbProd(this)'></select></div></td>"+
+            // "<td><div><span id='spn_equipo_codpro'>"+item.codigo+"</span></div></td>"+
+            "<td><div><input id='txt_otroservi_descri' type='text' class='form-control'>"+item.modelo+"</input></div></td>"+
+           /* "<td><div><span id='spn_equipo_marpro'>"+item.marca+"</span></div></td>"+
+            "<td><div><span id='spn_equipo_umepro'>"+item.nomumedida+"</span></div></td>"+*/
+            "<td><div><input id='txt_otroservi_cantid' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
+            "<td hidden><div><span id='spn_otroservi_idservsoli'>"+item.idproducto+"</span></div></td>"+
+            "<td hidden><div><span id='spn_otroservi_idservsolu'>"+item.idprodsol+"</span></div></td>"+
+            "<td><div><center><input id='txt_otroservi_del' type='checkbox' class='mgc mgc-danger mgc-circle' /></center></div></td>"+
             "</tr>"
         );
-        $("label#lbl_equipo_ideq").text(item.idequipo);
+        $("label#lbl_otroservi_idotroserv").text(item.idequipo);
         /*<i class='icon-checkmark icon-hp-habil'></i>";
         <i class='icon-cross icon-hp-desh'></i>";        */
         borrar_select2();
-        clonar_select2(conta_filas_equipo);
+        clonar_select2(conta_filas_otroservi);
 
         $("#select2-cmb_equipo_nompro"+conta_filas_equipo+"-container").text(item.producto);
     });

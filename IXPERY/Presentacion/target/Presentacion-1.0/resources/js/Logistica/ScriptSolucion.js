@@ -1,398 +1,317 @@
-var hdempresa;
-var hdproyecto;
-var hdrequerimiento;
-var hdsolucion;
+var ireqSolucion;
+var isolSolucion;
+var jsonGuardarSolucion = {};
+var arrSolucion = [];
 
-$(document).ready(function () {
-    txtBuscarEmpresa();
-    txtBuscarProyecto();
-    txtBuscarRequerimiento();
+var modSolPend;
+
+$(document).ready(function(){
+    $('select[name="cmb-solucion-enc"]')
+        .select2({
+            ajax: {
+                url: "/solucion/BuscarEmpleado",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        value: params.term
+                    };
+                },
+                processResults: function (data) {
+                    console.log(data);
+                    $.each(data.epl, function(i, d) {
+                        data.epl[i]['id'] = d.epl1;
+                        data.epl[i]['text'] = d.epl4 + " " + d.epl5 + " " + d.epl6;
+                    });
+                    return {
+                        results: data.epl,
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar empleado . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: FormatEmpleado,
+        });
+
+    $('#cmb-solucion-req')
+        .select2({
+            ajax: {
+                url: "/solucion/BuscarRequerimiento",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        value: params.term
+                    };
+                },
+                processResults: function (data) {
+                    console.log('BuscarRequerimiento');
+                    console.log(data);
+                    $.each(data.items, function(i, d) {
+                        data.items[i]['id'] = d.idreq;
+                    });
+
+                    return {
+                        results: data.items,
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar empresa . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: FormatReqProEmp,
+            templateSelection: FormatReportReqProEmp
+
+        });
+
 });
 
-function txtBuscarEmpresa() {
-    $("#txt_solucion_emp").on("keyup", function(e){
-        if(e != undefined){
-            if(e.keyCode == 13){
-                var emp = $(this).val();
-                console.log(emp);
-                buscarEmpresa(emp);
-                $('#cmb_solucion_emp').attr('size', function(){
-                    var length = $('#cmb_solucion_emp option').length;
-                    if(length <= 4){
-                        return 2;
+
+function BuscarSolucion(sol) {
+    $.ajax({
+        method: "POST",
+        url: "/solucion/BuscarSolucion",
+        data: {"sol":sol},
+        success: function (data) {
+            if (data !== "0") {
+                console.log('BuscarSolucion');
+                console.log(data);
+                JSONpro = JSON.parse(data);
+                let arrayData = JSONpro.sol;
+                const length = arrayData.length;
+                $('input[name="txt-solucion-nom"]').val(arrayData[0].sol3);
+                $('input[name="txt-solucion-fch"]').val(arrayData[0].sol6);
+                $('select[name="cmb-solucion-enc"]').html(new Option(arrayData[0].sol5,'1',true,true));
+                $('textarea[name="tar-solucion-des"]').val(arrayData[0].sol4);
+            }
+            else {
+                LimpiarCampos();
+            }
+
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function BuscarRequerimientos() {
+    $.ajax({
+        method: "POST",
+        url: "/solucion/BuscarRequerimientos",
+        success: function (data) {
+            if (data !== "0") {
+                modSolPend = "1";
+                console.log('BuscarRequerimientos');
+                console.log(data);
+                JSONpro = JSON.parse(data);
+                let arrayData = JSONpro.items;
+                const length = arrayData.length;
+                let html = '';
+                for (let i = 0; i < length; ++i) {
+                    if(arrayData[i].fecharegistro_sol === null){arrayData[i].fecharegistro_sol = 'No registrado';}
+                    if(arrayData[i].fecharegistro_rq === null){
+                        arrayData[i].fecharegistro_rq = 'No registrado';
                     }
                     else{
-                        return 4;
+                        arrayData[i].fecharegistro_rq = arrayData[i].fecharegistro_rq.substr(0,10);
                     }
-                });
+                    html += `<tr name="solucion-requerimiento">`;
+                    html += `<td><div style="width: 5px"><span name="spn-proyecto-num" class="text-center">${i + 1}</span></div></td>`;
+                    html += `<td style="display: none"><div><span name="spn-proyecto-idreq">${arrayData[i].idreq}</span></div></td>`;
+                    html += `<td style="display: none"><div><span name="spn-proyecto-idsol">${arrayData[i].idsol}</span></div></td>`;
+                    html += `<td><div style="width: 180px"><span name="spn-proyecto-nomreq" class="text-center" />${arrayData[i].requerimiento}</div></td>`;
+                    html += `<td><div style="width: 150px"><span name="spn-proyecto-regreq" class="text-center" /></div>${arrayData[i].fecharegistro_rq}</td>`;
+                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nomsol" class="text-center" /></div>${arrayData[i].solucion}</td>`;
+                    html += `<td><div style="width: 150px"><span name="spn-proyecto-inisol" class="text-center" /></div>${arrayData[i].fecharegistro_sol}</td>`;
+                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nompro" class="text-center" /></div>${arrayData[i].nomproyecto}</td>`;
+                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nomemp" class="text-center" /></div>${arrayData[i].nomempresa}</td>`;
+                    html += `</tr>`;
+                }
 
-                $(this).addClass("ocultar");
-                $('#cmb_solucion_emp').removeClass("ocultar");
-            }
-        }
+                $('tbody[name=tbody-solucion-requerimientos]').html(html)
+                    .on('click', 'tr', function(){
+                        ireqSolucion = $(this).find('span[name=spn-proyecto-idreq]').text();
+                        isolSolucion = $(this).find('span[name=spn-proyecto-idsol]').text();
+                        let ab = isolSolucion;
+                        SesionSolucion(isolSolucion);
 
-    });
-
-}
-
-function txtBuscarProyecto() {
-    $("#txt_solucion_pro").on("keyup", function(e){
-        if(e != undefined){
-            if(e.keyCode == 13){
-                var emp = hdempresa;
-                var pro = $(this).val();
-                console.log(emp + pro);
-                console.log(emp);
-                buscarProyecto(emp,pro);
-                $('#cmb_solucion_pro').attr('size', function(){
-                    var length = $('#cmb_solucion_pro option').length;
-                    if(length <= 4){
-                        return 2;
-                    }
-                    else{
-                        return 4;
-                    }
-                });
-
-                $(this).addClass("ocultar");
-                $('#cmb_solucion_pro').removeClass("ocultar");
-            }
-        }
-
-    });
-
-}
-
-function txtBuscarRequerimiento() {
-    $("#txt_solucion_req").on("keyup", function(e){
-        if(e != undefined){
-            if(e.keyCode == 13){
-                var pro = hdproyecto;
-                var req = $(this).val();
-                console.log(pro + req);
-                buscarRequerimiento(pro, req);
-                $('#cmb_solucion_req').attr('size', function(){
-                    var length = $('#cmb_solucion_req option').length;
-                    if(length <= 4){
-                        return 2;
-                    }
-                    else{
-                        return 4;
-                    }
-                });
-
-                $(this).addClass("ocultar");
-                $('#cmb_solucion_req').removeClass("ocultar");
-            }
-        }
-
-    });
-
-}
-
-
-
-function txtBuscarSolucion() {
-    $("#txt_solucion_sol").on("keyup", function(e){
-        if(e != undefined){
-            if(e.keyCode == 13){
-                var sol = $(this).val();
-                buscarSolucion(sol);
-
-
-            }
-        }
-
-    });
-
-}
-
-
-
-function buscarEmpresa(emp) {
-    $.ajax({
-        method: "POST",
-        url: "/solucion/empresa",
-        data: {"emp":emp},
-        success: function resultado(data) {
-            if(data == "0"){
-                $("#cmb_solucion_emp").html("<option>No se encontraron productos...</option>");
-                $('#cmb_solucion_emp option').click(function(){
-                    //alert("Si escuché");
-                    $(this).attr('selected', true);
-                    $('#cmb_solucion_emp').attr('size', false);
-                    $('#cmb_solucion_emp').addClass("ocultar");
-                    $('#txt_solucion_emp').val(this.value).removeClass("ocultar");
-                });
-            }
-            else{
-                $("#cmb_solucion_emp").empty();
-                var JSONobj = JSON.parse(data);
-                var lenghtDatos = JSONobj.length;
-                //$("#cmb_equire_nom_1").append("<option value='0'>Seleccione . . .</option>");
-                $.each(JSONobj, function (obj, item) {
-                    $("#cmb_solucion_emp").append('<option value="'+item.idempresa+'">'+item.nomempresa+' - '+item.ruc+'</option>');
-                });
-
-                $('#cmb_solucion_emp option').click(function(){
-                    //alert("Si escuché");
-                    var valor = this.value;
-
-                    $(this).attr('selected', true);
-                    $('#cmb_solucion_emp').attr('size', false);
-                    $('#cmb_solucion_emp').addClass("ocultar");
-                    console.log(JSONobj);
-                    console.log(valor);
-                    console.log(lenghtDatos);
-
-                    //$('#txt_solucion_emp').val(this.option).text().removeClass("ocultar");
-                    for (var i = 0; i < lenghtDatos; ++i) {
-                        $.each(JSONobj[i], function (key, value) {
-                            if (key==="idempresa" && String(value)===valor) {
-                                console.log("entre"+key+value);
-                                $('#txt_solucion_emp').val(JSONobj[i].nomempresa).removeClass("ocultar");
-                                hdempresa = JSONobj[i].idempresa;
+                        for (let i = 0; i < length; ++i) {
+                            if(arrayData[i].idreq.toString() === ireqSolucion){
+                                if(arrayData[i].idsol.toString() !== '0'){
+                                    $('input[name="txt-solucion-nom"]').val(arrayData[i].solucion);
+                                    $('input[name="txt-solucion-fch"]').val(arrayData[i].fecharegistro_sol);
+                                    $('select[name="cmb-solucion-enc"]').html(new Option('soli','1',true,true));
+                                    $('textarea[name="tar-solucion-des"]').val('descripcion');
+                                }
+                                else{
+                                    LimpiarCampos();
+                                }
+                                $('.spn-solucion-emp').html(`EMPRESA: ${arrayData[i].nomempresa}`);
+                                $('.spn-solucion-pro').html(`PROYECTO: ${arrayData[i].nomproyecto}`);
+                                $('.spn-solucion-req').html(`REQUERIMIENTO: ${arrayData[i].requerimiento}`);
                             }
-                        });
-                    }
+                        }
 
-
-                });
-            }
-        },
-        error: function errores(msg) {
-            //alert('Error: ' + msg.responseText);
-        }
-    });
-
-
-}
-
-function buscarProyecto(emp, pro) {
-    $.ajax({
-        method: "POST",
-        url: "/solucion/proyecto",
-        data: {"emp":emp, "pro":pro},
-        success: function resultado(data) {
-            if(data == "0"){
-                $("#cmb_solucion_pro").html("<option>No se encontraron productos...</option>");
-                $('#cmb_solucion_pro option').click(function(){
-                    //alert("Si escuché");
-                    $(this).attr('selected', true);
-                    $('#cmb_solucion_pro').attr('size', false);
-                    $('#cmb_solucion_pro').addClass("ocultar");
-                    $('#txt_solucion_pro').val(this.value).removeClass("ocultar");
-                });
-            }
-            else{
-                $("#cmb_solucion_pro").empty();
-                var JSONobj = JSON.parse(data);
-                var lenghtDatos = JSONobj.length;
-                //$("#cmb_equire_nom_1").append("<option value='0'>Seleccione . . .</option>");
-                $.each(JSONobj, function (obj, item) {
-                    $("#cmb_solucion_pro").append('<option value="'+item.idproyecto+'">'+item.nomproyecto+'</option>');
-                });
-
-                $('#cmb_solucion_pro option').click(function(){
-                    //alert("Si escuché");
-                    var valor = this.value;
-
-                    $(this).attr('selected', true);
-                    $('#cmb_solucion_pro').attr('size', false);
-                    $('#cmb_solucion_pro').addClass("ocultar");
-                    console.log(JSONobj);
-                    console.log(valor);
-                    console.log(lenghtDatos);
-
-                    for (var i = 0; i < lenghtDatos; ++i) {
-                        $.each(JSONobj[i], function (key, value) {
-                            if (key==="idproyecto" && String(value)===valor) {
-                                console.log("entre"+key+value);
-                                $('#txt_solucion_pro').val(JSONobj[i].nomproyecto).removeClass("ocultar");
-                                hdproyecto = JSONobj[i].idproyecto;
-                            }
-                        });
-                    }
-
-
-                });
-            }
-        },
-        error: function errores(msg) {
-            //alert('Error: ' + msg.responseText);
-        }
-    });
-
-
-}
-
-function buscarRequerimiento(pro, req) {
-    $.ajax({
-        method: "POST",
-        url: "/solucion/requerimiento",
-        data: {"pro":pro, "req":req},
-        success: function resultado(data) {
-            if(data == "0"){
-                $("#cmb_solucion_req").html("<option>No se encontraron productos...</option>");
-                $('#cmb_solucion_req option').click(function(){
-                    //alert("Si escuché");
-                    $(this).attr('selected', true);
-                    $('#cmb_solucion_req').attr('size', false);
-                    $('#cmb_solucion_req').addClass("ocultar");
-                    $('#txt_solucion_req').val(this.value).removeClass("ocultar");
-                });
-            }
-            else{
-                $("#cmb_solucion_req").empty();
-                var JSONobj = JSON.parse(data);
-                var lenghtDatos = JSONobj.length;
-                //$("#cmb_equire_nom_1").append("<option value='0'>Seleccione . . .</option>");
-                $.each(JSONobj, function (obj, item) {
-                    console.log(item.idrequerimiento+item.nomrequerimiento);
-                    $("#cmb_solucion_req").append('<option value="'+item.idrequerimiento+'">'+item.nomrequerimiento+'</option>');
-                });
-
-                $('#cmb_solucion_req option').click(function(){
-                    //alert("Si escuché1");
-                    var valor = this.value;
-
-                    $(this).attr('selected', true);
-                    $('#cmb_solucion_req').attr('size', false);
-                    $('#cmb_solucion_req').addClass("ocultar");
-                    console.log(JSONobj);
-                    console.log(valor);
-                    console.log(lenghtDatos);
-
-                    for (var i = 0; i < lenghtDatos; ++i) {
-                        $.each(JSONobj[i], function (key, value) {
-                            if (key==="idrequerimiento" && String(value)===valor) {
-                                //alert("Si escuché1");
-
-                                console.log("entre"+key+value);
-                                $('#txt_solucion_req').val(JSONobj[i].nomrequerimiento).removeClass("ocultar");
-                                hdrequerimiento = JSONobj[i].idrequerimiento;
-                            }
-                        });
-                    }
-
-
-                });
-            }
-        },
-        error: function errores(msg) {
-            //alert('Error: ' + msg.responseText);
-        }
-    });
-
-}
-
-function buscarSolucion(req) {
-    $.ajax({
-        method: "POST",
-        url: "/solucion/solucion",
-        data: {"req":req},
-        success: function resultado(data) {
-            if(data == "0"){
-                //
-            }
-            else{
-                var JSONobj = JSON.parse(data);
-                var lenghtDatos = JSONobj.length;
-                hdsolucion = JSONobj[0].idsolucion;
-                alert(hdsolucion);
-                $('#txt_solucion_nom').val(JSONobj[1].nomsolucion);
-                $('#txt_solucion_fch').val(JSONobj[2].fechacreacion);
-                $('#txt_solucion_enc').val(JSONobj[3].encargadosol);
-                $('#txt_solucion_des').val(JSONobj[4].descripcion);
-
-
-            }
-        },
-        error: function errores(msg) {
-            //alert('Error: ' + msg.responseText);
-        }
-    });
-
-
-}
-
-
-
-
-
-
-function RegistrarSolucion() {
-    // var id;
-    // var obj;
-    // var arrayDatos = [];
-    // for (var i = 1; i <= cFila_requerimiento; i++) {
-    //     if (1 == 1) {
-    //         var filaData = []
-    //         for (var j = 1; j <= totalCol_requerimiento - 2; j++) {
-    //             var id = arrayElem_requerimiento[j][1];
-    //             id = "#" + id.substring(0, id.length - 1);
-    //             obj = $(id + i);
-    //             obj.removeClass("is-invalid");
-    //             filaData[j - 1] = obj.val();
-    //
-    //             //Validando Campos Vacios tipo INPUT
-    //             if (obj[0].tagName == 'INPUT') {
-    //                 if (obj.val().length == 0) {
-    //                     validoIngresados = false;
-    //                     obj.addClass("is-invalid");
-    //                     obj.focus();
-    //                     break;
-    //                 }
-    //             }
-    //             //Fin Validacion de campos vacios.
-    //         }
-    //     }
-    //     else {
-    //         break;
-    //     }
-    //     arrayDatos.push(filaData);
-    // }
-
-    var txt_fch = $('#txt_solucion_fch').val();
-
-    console.log("Fecha nav: " + txt_fch);
-    fch = moment(txt_fch, 'YYYY-MM-DD');
-    fch = fch.format('DD-MM-YYYY');
-    console.log("FECHA: " + fch);
-
-
-    //var arrayDatos = [$('#txt_solucion_nom').val(), fch , $('#txt_solucion_enc').val(), $('#txt_solucion_des').val()];
-    var arrayDatos = [$('#txt_solucion_nom').val(), $('#txt_solucion_enc').val(), $('#txt_solucion_des').val()];
-
-    var iR = hdrequerimiento;
-
-    console.log(arrayDatos);
-    console.log(iR);
-
-
-
-    $.ajax({
-        method: "POST",
-        url: "/solucion/register",
-        data: {"values":arrayDatos.toString(),"iR":iR},
-        success: function resultado(valor) {
-            if (valor == "") {
-                alert("Solucion registrada correctamente.");
-                //$("#" + nomBody_requerimiento).html(filaTabla_requerimiento);
-                //limpiarCombos();
-                //CargarJS_requerimiento(0, 1, 0);
-                $('#txt_solucion_nom').val('');
-                $('#txt_solucion_fch').val('');
-                $('#txt_solucion_enc').val('');
-                $('#txt_solucion_des').val('');
-                $('#txt_solucion_emp').val('');
-                $('#txt_solucion_pro').val('');
-                $('#txt_solucion_req').val('');
-
+                    });
 
             }
             else {
-                alert(valor);
+                // $('#cmb-proyecto-est').html('<option>No se encontraron registros</option>');
+            }
+
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+
+}
+
+
+function GuardarSolucion(){
+    let rowInsertSolucion = {};
+    let objSolReq = {};
+
+    console.log('ireqSolucion');
+    console.log(ireqSolucion);
+    console.log('isolSolucion');
+    console.log(isolSolucion);
+
+    if(isolSolucion === '0'){
+
+        let fchSol = $('input[name="txt-solucion-fch"]').val();
+
+        objSolReq.req1 = parseInt(ireqSolucion);
+        rowInsertSolucion.sol1 = 0;
+        rowInsertSolucion.sol2 = objSolReq;
+        rowInsertSolucion.sol3 = $('input[name="txt-solucion-nom"]').val();
+        rowInsertSolucion.sol4 = $('textarea[name="tar-solucion-des"]').val();
+        rowInsertSolucion.sol5 = $('select[name="cmb-solucion-enc"]').text();
+
+        if(fchSol !== ''){
+            rowInsertSolucion.sol6 = fchSol;
+        }
+
+        arrSolucion.push(rowInsertSolucion);
+        jsonGuardarSolucion.sol = arrSolucion;
+
+        console.log('jsonGuardarSolucion');
+        console.log(jsonGuardarSolucion);
+
+        $.ajax({
+            method: "POST",
+            url: "/solucion/GuardarSolucion",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(jsonGuardarSolucion),
+            success: function resultado(valor) {
+                if (valor === "0") {
+                    alert("La solución fue guardada correctamente.");
+                    LimpiarCampos();
+                    LimpiarVariables();
+                    if(modSolPend === '1'){
+                        BuscarRequerimientos();
+                    }
+                }
+                else {
+                    alert("Error en la red. No se han guardado cambios.");
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+
+    }
+    else {
+        let fchSol = $('input[name="txt-solucion-fch"]').val();
+
+        objSolReq.req1 = parseInt(ireqSolucion);
+        rowInsertSolucion.sol1 = parseInt(isolSolucion);
+        rowInsertSolucion.sol2 = objSolReq;
+        rowInsertSolucion.sol3 = $('input[name="txt-solucion-nom"]').val();
+        rowInsertSolucion.sol4 = $('textarea[name="tar-solucion-des"]').val();
+        rowInsertSolucion.sol5 = $('select[name="cmb-solucion-enc"]').text();
+
+        if(fchSol !== ''){
+            rowInsertSolucion.sol6 = fchSol;
+        }
+
+        arrSolucion.push(rowInsertSolucion);
+        jsonGuardarSolucion.sol = arrSolucion;
+
+        console.log('jsonGuardarSolucion');
+        console.log(jsonGuardarSolucion);
+
+        $.ajax({
+            method: "POST",
+            url: "/solucion/GuardarSolucion",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(jsonGuardarSolucion),
+            success: function resultado(valor) {
+                if (valor === "0") {
+                    alert("La solución fue guardada correctamente.");
+                    LimpiarCampos();
+                    LimpiarVariables();
+                    if(modSolPend === '1'){
+                        BuscarRequerimientos();
+                    }
+                }
+                else {
+                    alert("Error en la red. No se han guardado cambios.");
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+
+    }
+
+
+}
+
+
+function EliminarSolucion() {
+    let rowDeleteSolucion = {};
+
+    rowDeleteSolucion.sol1 = parseInt(isolSolucion);
+    rowDeleteSolucion.sol10 = '0';
+
+    arrSolucion.push(rowDeleteSolucion);
+    jsonGuardarSolucion.sol = arrSolucion;
+
+    $.ajax({
+        method: "POST",
+        url: "/solucion/GuardarSolucion",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(jsonGuardarSolucion),
+        success: function resultado(valor) {
+            if (valor === "0") {
+                alert("La solución ha sido eliminada.");
+                LimpiarCampos();
+                LimpiarVariables();
+                if(modSolPend === '1'){
+                    BuscarRequerimientos();
+                }
+            }
+            else {
+                alert("Error en la red. No se han guardado cambios.");
             }
         },
         error: function errores(msg) {
@@ -400,4 +319,77 @@ function RegistrarSolucion() {
         }
     });
 
+}
+
+
+function SesionSolucion(sol) {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/SesionSolucion",
+        data: {"sol": sol},
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+}
+
+
+
+
+
+function LimpiarCampos() {
+
+    $('input[name="txt-solucion-nom"]').val("");
+    $('input[name="txt-solucion-fch"]').val("");
+    $('select[name="cmb-solucion-enc"]').html("");
+    $('textarea[name="tar-solucion-des"]').val("");
+}
+
+function LimpiarVariables() {
+    ireqSolucion = '';
+    isolSolucion = '';
+    jsonGuardarSolucion = {};
+    arrSolucion = [];
+}
+
+
+//****************************************************************************//
+//***************************** Formatos Select2 *****************************//
+//****************************************************************************//
+
+function FormatEmpleado (repo) {
+    if (repo.loading) {
+        return repo.text;
+    }
+    let markup = `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Nombre: ${repo.epl4} ${repo.epl5} ${repo.epl6}</div>`+
+        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>DNI: ${repo.epl3}</div>`;
+    return markup;
+}
+
+function FormatReqProEmp (repo) {
+    if (repo.loading) {
+        return repo.text;
+    }
+    let markup = `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Empresa: ${repo.nomempresa}</div>`+
+        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Proyecto: ${repo.nomproyecto}</div>`+
+        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Requerimiento: ${repo.requerimiento}</div>`;
+    return markup;
+}
+
+
+function FormatReportReqProEmp (repo) {
+    if(repo.nomempresa !== undefined){
+        $('.spn-solucion-emp').html(`EMPRESA: ${repo.nomempresa}`);
+        $('.spn-solucion-pro').html(`PROYECTO: ${repo.nomproyecto}`);
+        $('.spn-solucion-req').html(`REQUERIMIENTO: ${repo.requerimiento}`);
+        ireqSolucion = repo.idreq;
+        isolSolucion = repo.idsol;
+        SesionSolucion(isolSolucion);
+    }
+    return  repo.text || repo.nomempresa + ' - ' + repo.nomproyecto  + ' - ' + repo.requerimiento ;
 }
