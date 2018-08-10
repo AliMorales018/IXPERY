@@ -320,6 +320,9 @@ public class DOtroServicio {
         listParameter.add(pValorLike);
         return com.EjecutaConsultaJson("filtrar_equipo_item1_json", listParameter);
     }
+
     //FIN LUIS
     //FIN LUIS
+
+
 }

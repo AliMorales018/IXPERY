@@ -1034,6 +1034,18 @@ public class Diccionario {
         prs.put("prs2", "468062");
         //idservicsolu
         prs.put("prs3", "468063");
+        //servsolicitado
+        prs.put("prs4", "468064");
+        //cantidad
+        prs.put("prs5", "468065");
+        //estado
+        prs.put("prs6", "468066");
+        //fecharegistro
+        prs.put("prs7", "468067");
+        //userregistro
+        prs.put("prs8", "468068");
+        //descripcion
+        prs.put("prs9", "468069");
         return prs;
     }
 
