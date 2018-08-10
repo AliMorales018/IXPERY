@@ -9396,3 +9396,49 @@ mp-0 {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out; }
+
+
+
+
+
+.text-span {
+    font-family: "Lato-Regular", cursive;
+    font-size: 14px;
+    text-align: center;
+    margin: 0.3rem auto;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*.menu {*/
+    /*width: 100%;*/
+    /*position: fixed;*/
+    /*z-index: 100;*/
+/*}*/
+
+
+.controles-permanentes {
+    overflow: hidden;
+    z-index: 100;
+}
+
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.content {
+    padding: 16px;
+}
+
+.sticky + .content {
+    padding-top: 80px;
+}
+
+
+
+

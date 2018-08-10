@@ -4,12 +4,12 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>solucion</title>
+    <title>Cotizacion</title>
     <link rel="stylesheet" href="${urlPublic}/css/styles.css">
     <link rel="stylesheet" href="${urlPublic}/css/select2.css">
 
     <style>
-        #tbody-solucion2-requerimientos tr:hover {
+        #tbody-cotizacion-requerimientos tr:hover {
             background-color: #E6E6E6;
             /*background-color: #D34539;*/
             cursor: pointer;
@@ -35,37 +35,31 @@
                 </div>
             </div>
             <div class="cell large-11">
-                <p class="main-title">solucion2</p>
+                <p class="main-title">cotizacion</p>
             </div>
         </div>
     </div>
     <div class="cell small-12 medium-6 large-6">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-3 text-center">
-                <button type="button" id="btn_solucion2_pendientes" class="btn btn-light" onclick="BuscarRequerimientos();">Pendientes</button>
-            </div>
-            <div class="cell small-4 medium-4 large-3 text-center">
-                <button type="button" id="btn_solucion2_save" class="btn btn-light" onclick="Guardarsolucion2();">Guardar</button>
+                <button type="button" id="btn_cotizacion_pendientes" class="btn btn-light" onclick="BuscarSolucionesPendientes();">Pendientes</button>
             </div>
 
-            <div class="cell small-4 medium-4 large-3 text-center">
-                <button type="button" id="btn_solucion2_delete" class="btn btn-secondary" onclick="Eliminarsolucion2();">Eliminar</button>
-            </div>
         </div>
     </div>
     <div class="cell small-12 medium-2 large-3">
         <div class="cell small-4 medium-4 large-12 text-center">
-            <button type="button" id="btn_solucion2_send" class="btn btn-light" onclick="ValidarCampos_tbl_solucion2();">Enviar a Operaciones</button>
+            <button type="button" id="btn_cotizacion_send" class="btn btn-light" onclick="ValidarCampos_tbl_cotizacion();">Enviar a Operaciones</button>
         </div>
     </div>
 </div>
 <!-- End Buttons  -->
 
 <!-- Formulario -->
-<div name="div-solucion2-frm">
+<div name="div-cotizacion-frm">
     <div class="grid-x ">
         <div class="cell large-2">
-            <label class="text-f" id="lbl_solucion2_fecha" >${fecha}</label>
+            <label class="text-f" id="lbl_cotizacion_fecha" >${fecha}</label>
         </div>
 
     </div>
@@ -87,7 +81,7 @@
                 <th class="p-3">Empresa</th>
             </tr>
             </thead>
-            <tbody id="tbody-solucion2-requerimientos" name="tbody-solucion2-requerimientos" >
+            <tbody id="tbody-cotizacion-requerimientos" name="tbody-cotizacion-requerimientos" >
             </tbody>
         </table>
     </div>
@@ -99,7 +93,7 @@
 <!-- JavaScript -->
 <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
-<script language="JavaScript" src="${urlPublic}/js/Logistica/Scriptsolucion2.js"></script>
+<script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptCotizacion.js"></script>
 
 <!-- End JavaScript -->
 </body>

@@ -73,7 +73,7 @@
 <body>
 
 <!-- Buttons -->
-<div class="grid-x grid-padding-x align-center-middle l-comandos">
+<div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">
             <div class="cell large-1 text-center">
@@ -242,8 +242,24 @@
 
 </script>
 <script>
+    function VerificarSesionSolucion(){
+        $.ajax({
+            method: "POST",
+            async: false,
+            url: "/solucion/VerificarSesionSolucion",
+            success: function resultado(valor) {
+                console.log('SESSION SOLUCION');
+                console.log(valor);
+                BuscarSolucionEquipos(valor);
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+    }
 
     $(document).ready(function () {
+        VerificarSesionSolucion();
 
         /* var doc = new jsPDF();
          var specialElementHandlers = {
@@ -348,6 +364,8 @@
                 url: "/equipo/buscarequiposol",
                 data: {"idsol": id},
                 success: function resultado(valor) {
+                    console.log('valor');
+                    console.log(valor);
                     JSONobjGeneralEq = JSON.parse(valor);
                     if(JSONobjGeneralEq.items.length>0){
                         estOperaEq=1;
