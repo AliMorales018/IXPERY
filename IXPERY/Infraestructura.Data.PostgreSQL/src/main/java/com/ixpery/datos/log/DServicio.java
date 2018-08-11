@@ -1,6 +1,7 @@
 package com.ixpery.datos.log;
 
 import com.ixpery.datos.tools.DConexion;
+import com.ixpery.datos.tools.JsonGeneral;
 import com.ixpery.datos.tools.JsonParcellable;
 import com.ixpery.entidades.log.*;
 import com.ixpery.utilitario.Datacnx;
@@ -18,6 +19,7 @@ public class DServicio {
     DtUtilitario com = new DtUtilitario(dataCnx);
     DActividad odactividad = new DActividad();
     DPersonalTransito odperstran = new DPersonalTransito();
+    JsonGeneral jsonGeneral = new JsonGeneral();
 
     public static String getNameTable() { return "46162"; }
     public String NameTableActividad = "46172";
@@ -135,5 +137,41 @@ public class DServicio {
         String jsonParse = parser.getJsonParcellable(1);
         System.out.println(jsonParse);
         return jsonParse;
+    }
+
+    public String GuardarFull(String json) {
+        try{
+            listaParametros.clear();
+            json = jsonGeneral.JsonITEM2(json);
+            SqlParameter paramJson = new SqlParameter("@json", json);
+            SqlParameter paramSalid = new SqlParameter("@retorno","");
+            listaParametros.add(paramJson);
+            listaParametros.add(paramSalid);
+            paramSalid.Direction = ParameterDirection.Output;
+            com.TransUnica("gen_guardar", listaParametros);
+            String a = paramSalid.Value.toString();
+            if (a.equals("0")) {
+                GenerarCostes(1);
+                return "0";
+            }
+            else{
+                return a;
+            }
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
+    public void GenerarCostes(Integer idServ){
+        try{
+            listaParametros.clear();
+            SqlParameter idServicio = new SqlParameter("@json", idServ);
+            listaParametros.add(idServicio);
+            com.TransUnica("calcular_item2", listaParametros);
+        }
+        catch (Exception e){
+            throw e;
+        }
     }
 }

@@ -23,4 +23,7 @@ public class BServicio{
         String a = odservicio.VerServicio(idSolucion);
         return a;
     }
+    public String GuardarFull(String json) throws Exception{
+        return odservicio.GuardarFull(json);
+    }
 }

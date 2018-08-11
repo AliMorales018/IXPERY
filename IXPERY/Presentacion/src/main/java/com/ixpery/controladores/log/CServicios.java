@@ -1,5 +1,9 @@
 package com.ixpery.controladores.log;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ixpery.entidades.log.*;
 import com.ixpery.entidades.rhh.ECargoLaboral;
 import com.ixpery.negocio.log.BCargoLaboral;
@@ -10,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -39,82 +46,77 @@ public class CServicios {
 
     @RequestMapping(value = "/servicios/register", method = RequestMethod.POST)
     public @ResponseBody String RegistrarServicio(
-            @RequestBody Map<String,List<List<String[]>>> values
+            HttpServletRequest request,
+            @RequestBody String json
     ) throws  Exception{
-
-        //SERVICIO
-        List<String[]> oServicio = values.get("servicio").get(0);
-        String[] servicio = oServicio.get(0);
-        EServicio oeServicio = new EServicio();
-        oeServicio.setNumcuadrillas(Integer.parseInt(servicio[0]));
-        oeServicio.setPorcentdepreciacion(Integer.parseInt(servicio[1]));
-        oeServicio.setIdsolucion(new ESolucion(10));
-        //SERVICIO
-
-        //ACTIVIDADES
-        List<EActividad> listActividades = new ArrayList<>();
-        Integer sizeListActividades = values.get("actividades").get(0).size();
-        EActividad oactividad;
-        String[] row;
-        for(int i = 0; i < sizeListActividades; i++){
-            oactividad = new EActividad();
-            row = values.get("actividades").get(0).get(i);
-            oactividad.setNomactividad(row[0]);
-            oactividad.setDescripcion(row[1]);
-            oactividad.setCantidad(Integer.parseInt(row[2]));
-            oactividad.setRiesgo(Integer.parseInt(row[3]));
-            oactividad.setAdicional(Double.parseDouble(row[4]));
-            listActividades.add(oactividad);
-        }
-        //ACTIVIDADES
-
-        //CARGOS LABORALES
-        List<List<EActividadCargo>> listActividadCargoC = new ArrayList<>();
-        List<EActividadCargo> listAC;
-        List<String[]> tabla;
-        Integer sizeTabla;
-        Integer sizeListActiCargo = values.get("cargoslab").size();
-        EActividadCargo oeActividadCargo;
-        String[] rowC;
-
-        for(int i = 0; i < sizeListActiCargo; i++){
-            sizeTabla = values.get("cargoslab").get(i).size();
-            tabla = values.get("cargoslab").get(i);
-            listAC = new ArrayList<>();
-            for(int j = 0; j < sizeTabla; j++){
-                rowC = tabla.get(j);
-                oeActividadCargo = new EActividadCargo();
-                oeActividadCargo.setIdcargo(new ECargoLaboral(Integer.parseInt(rowC[0])));
-                oeActividadCargo.setCantidad(Integer.parseInt(rowC[1]));
-                oeActividadCargo.setHoras(Integer.parseInt(rowC[2]));
-                listAC.add(oeActividadCargo);
+        System.out.println(json);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        //HttpSession session = request.getSession();
+        JsonParser parser = new JsonParser();
+        JsonObject root = parser.parse(json).getAsJsonObject();
+        for(Map.Entry<String, JsonElement> entryRoot : root.entrySet()){
+            String keyRoot = entryRoot.getKey();
+            if(keyRoot.equals("ser")){
+                JsonArray arrayValue = entryRoot.getValue().getAsJsonArray();
+                for(JsonElement jsonElement : arrayValue){
+                    for(Map.Entry<String, JsonElement> entryChild : jsonElement.getAsJsonObject().entrySet()) {
+                        if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
+                            JsonObject objJSON = jsonElement.getAsJsonObject();
+                            objJSON.addProperty("ser12", timestamp.toString());
+                            //objJSON.addProperty("ser13", session.getAttribute("user").toString());
+                            break;
+                        }
+                    }
+                }
             }
-            listActividadCargoC.add(listAC);
+            if(keyRoot.equals("act")){
+                JsonArray arrayValue = entryRoot.getValue().getAsJsonArray();
+                for(JsonElement jsonElement : arrayValue){
+                    for(Map.Entry<String, JsonElement> entryChild : jsonElement.getAsJsonObject().entrySet()) {
+                        if(entryChild.getKey().equals(keyRoot + "1") && Integer.parseInt(entryChild.getValue().toString()) < 0){
+                            JsonObject objJSON = jsonElement.getAsJsonObject();
+                            objJSON.addProperty("act13", timestamp.toString());
+                            //objJSON.addProperty("act14", session.getAttribute("user").toString());
+                            break;
+                        }
+                    }
+                }
+            }
+            if(keyRoot.equals("acc")){
+                JsonArray arrayValue = entryRoot.getValue().getAsJsonArray();
+                for(JsonElement jsonElement : arrayValue){
+                    for(Map.Entry<String, JsonElement> entryChild : jsonElement.getAsJsonObject().entrySet()) {
+                        if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
+                            JsonObject objJSON = jsonElement.getAsJsonObject();
+                            objJSON.addProperty("acc12", timestamp.toString());
+                            //objJSON.addProperty("acc11", session.getAttribute("user").toString());
+                            break;
+                        }
+                    }
+                }
+            }
+            if(keyRoot.equals("pet")){
+                JsonArray arrayValue = entryRoot.getValue().getAsJsonArray();
+                for(JsonElement jsonElement : arrayValue){
+                    for(Map.Entry<String, JsonElement> entryChild : jsonElement.getAsJsonObject().entrySet()) {
+                        if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
+                            JsonObject objJSON = jsonElement.getAsJsonObject();
+                            objJSON.addProperty("pet8", timestamp.toString());
+                            //objJSON.addProperty("pet9", session.getAttribute("user").toString());
+                            break;
+                        }
+                    }
+                }
+            }
         }
-        //CARGOS LABORALES
-
-        //PERSONAL DE TRANSITO
-        List<EPersonalTransito> listPersTran = new ArrayList<>();
-        Integer sizeListPersTra = values.get("personaltransito").get(0).size();
-        EPersonalTransito oePersTran;
-        String[] rowPT;
-        for(int i = 0; i < sizeListPersTra; i++){
-            oePersTran = new EPersonalTransito();
-            row = values.get("personaltransito").get(0).get(i);
-            oePersTran.setIdcargo(new ECargoLaboral(Integer.parseInt(row[0])));
-            oePersTran.setCargolaboral(row[1]);
-            oePersTran.setCantidad(Integer.parseInt(row[2]));
-            oePersTran.setHoras(Integer.parseInt(row[3]));
-            listPersTran.add(oePersTran);
-        }
-        //PERSONAL DE TRANSITO
-
-        String result = obServicio.ValidarDatosServicio(oeServicio,listActividades,listActividadCargoC,listPersTran);
-        if (result.equals("0")){
+        json = root.toString();
+        String a = obServicio.GuardarFull(json);
+        System.out.println(json);
+        if(a.equals("0")){
             return "";
         }
         else{
-            return result;
+            return a;
         }
     }
 

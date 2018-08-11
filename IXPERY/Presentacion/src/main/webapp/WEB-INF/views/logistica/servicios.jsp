@@ -40,6 +40,7 @@
             cursor:pointer;
             padding: 20px;
             border-radius: 50%;
+            z-index: 1;
         }
 
         .actividad{
@@ -113,7 +114,7 @@
     </style>
 </head>
 <body>
-<button onclick="addActividad();" disabled><span  class="add-actividad" for="Agregar actividad"><i class="icon-plus2"></i></span></button>
+<button title="Agregar actividad" onclick="addActividad();" disabled><span  class="add-actividad" for="Agregar actividad"><i class="icon-plus2"></i></span></button>
 <!-- Buttons -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos">
     <div class="cell small-12 medium-4 text-white">
@@ -131,7 +132,7 @@
     <div class="cell small-12 medium-4">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" disabled id="btn_servicio_save" class="btn btn-secondary" onclick="guardar_actividades_servicio();">Enviar a cotizar</button>
+                <button type="button" disabled id="btn_servicio_save" class="btn btn-secondary" onclick="guardar_actividades_servicio();">Guardar y enviar a cotizar</button>
             </div>
         </div>
     </div>
@@ -163,7 +164,8 @@
         <div class="cell large-3">
             <div class="form-group">
                 <label class="label text-primary"><b>Depreciación de herramientas (%):</b></label>
-                <input type="number" disabled class="form-control form-service" type="text" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
+                <input type="number" disabled class="form-control form-service" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
+                <input type="hidden" disabled class="form-control form-service" id="txt_idservicio">
             </div>
         </div>
     </div>

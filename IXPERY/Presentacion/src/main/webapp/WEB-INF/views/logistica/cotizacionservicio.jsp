@@ -80,46 +80,26 @@
                                         "<div class='grid-x grid-padding-x'>"+
                                                 "<div class='cell large-3'>"+
                                                     "<div class='form-group'>"+
-                                                        "<label class='label text-primary'><b>Número de Cuadrillas:</b></label>"+
-                                                        "<p type='number' class='form-control'><b>"+JsonServicio.numcuadrillas+"</b></p>"+
+                                                        "<label class='label text-primary'><b>Depreciación de Herramientas (%):</b></label>"+
+                                                        "<p type='number' class='form-control'><b>"+JsonServicio.porcentdepre+"</b></p>"+
                                                     "</div>"+
                                                 "</div>"+
                                                 "<div class='cell large-3'>"+
                                                     "<div class='form-group'>"+
-                                                        "<label class='label text-primary'><b>Porcentaje de Depreciación:</b></label>"+
-                                                        "<p type='number' class='form-control'><b>"+JsonServicio.porcentaje_depreciacion+"</b></p>"+
+                                                        "<label class='label text-primary'><b>Prorrateo tránsito:</b></label>"+
+                                                        "<p type='number' class='form-control'><b>"+JsonServicio.porcenttrans+"</b></p>"+
                                                     "</div>"+
                                                 "</div>"+
                                                 "<div class='cell large-3'>"+
                                                     "<div class='form-group'>"+
-                                                        "<label class='label text-primary'><b>Porcentaje de prorrateo:</b></label>"+
-                                                        "<p type='number' class='form-control'><b>3.5333758</b></p>"+
+                                                        "<label class='label text-primary'><b>Total de servicio e instalación:</b></label>"+
+                                                        "<p type='number' class='form-control'><b>"+JsonServicio.costototal+"</b></p>"+
                                                     "</div>"+
                                                 "</div>"+
                                                 "<div class='cell large-3'>"+
                                                     "<div class='form-group'>"+
-                                                        "<label class='label text-primary'><b>Precio Unitario/Actividad:</b></label>"+
-                                                        "<p type='number' class='form-control'><b>"+JsonServicio.unitactividad+"</b></p>"+
-                                                    "</div>"+
-                                                "</div>"+
-                                        "</div>"+
-                                        "<div class='grid-x grid-padding-x'>"+
-                                                "<div class='cell large-3'>"+
-                                                    "<div class='form-group'>"+
-                                                        "<label class='label text-primary'><b>Total (incluído % depreciación):</b></label>"+
-                                                        "<p type='number' class='form-control'><b>S/ 113270.22</b></p>"+
-                                                    "</div>"+
-                                                "</div>"+
-                                                "<div class='cell large-3'>"+
-                                                    "<div class='form-group'>"+
-                                                        "<label class='label text-primary'><b>SubTotal (incluido % prorrateo):</b></label>"+
-                                                        "<p type='number' class='form-control'><b>S/ 4434.35</b></p>"+
-                                                    "</div>"+
-                                                "</div>"+
-                                                "<div class='cell large-3'>"+
-                                                    "<div class='form-group'>"+
-                                                        "<label class='label text-primary'><b>Sub Total:</b></label>"+
-                                                        "<p type='number' class='form-control'><b>S/ "+JsonServicio.subtotal+"</b></p>"+
+                                                        "<label class='label text-primary'><b>Total (incluido prorrateo tránsito):</b></label>"+
+                                                        "<p type='number' class='form-control'><b>"+JsonServicio.costototalm+"</b></p>"+
                                                     "</div>"+
                                                 "</div>"+
                                         "</div>"+
@@ -140,8 +120,8 @@
                                                             "<tr>"+
                                                                 "<td>N°</td>"+
                                                                 "<td class='text-center' style='width: 370px'>Cargo Laboral</td>"+
-                                                                "<td>Cantidad</td>"+
-                                                                "<td>Tiempo (Horas)</td>"+
+                                                                "<td class='text-center'>Cantidad</td>"+
+                                                                "<td class='text-center'>Días pago</td>"+
                                                                 "<td>Sub Total</td>"+
                                                                 "<td>Total</td>"+
                                                             "</tr>"+
@@ -151,8 +131,8 @@
                                                             elements += "<tr>"+
                                                                             "<td><p style='font-size:11px;'>"+count+"</p></td>"+
                                                                             "<td><span>"+item.cargolaboral+"</span></td>"+
-                                                                            "<td><span>"+item.cantidad+"</span></td>"+
-                                                                            "<td><span>"+item.horas+"</span></td>"+
+                                                                            "<td class='text-center'><span>"+item.cantidad+"</span></td>"+
+                                                                            "<td class='text-center'><span>"+item.diaspago+"</span></td>"+
                                                                             "<td><span>S/ "+item.subtotal+"</span></td>"+
                                                                             "<td><span><b>S/ "+item.total+"</b></span></td>"+
                                                                         "</tr>"
@@ -175,12 +155,14 @@
                                                     "</div>"+
                                                     "<div class='grid-x grid-padding-x'>"+
                                                         "<div class='cell large-4'><div class='form-group'><label class='label text-primary'><b>Nombre de actividad:</b></label><p class='form-control'>"+item.actividad+"</p></div></div>"+
-                                                        "<div class='cell large-6'><div class='form-group'><label class='label text-primary'><b>Descripción:</b></label><p class='form-control'>"+item.descripcion+"</p></div></div>"+
-                                                        "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Cantidad:</b></label><p class='form-control'>"+item.cantidad+"</p></div></div>"+
-                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Riesgo:</b></label><p class='form-control'>"+item.riesgo+"</p></div></div>"+
-                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Adicionales:</b></label><p class='form-control'>"+item.adicional+"</p></div></div>"+
-                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Total Actividad (Mostrar):</b></label><p class='form-control'><b>54454</b></p></div></div>"+
-                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Total Actividad:</b></label><p class='form-control'><b>54454</b></p></div></div>"+
+                                                        "<div title='"+item.descripcion+"' class='cell large-4'><div class='form-group'><label class='label text-primary'><b>Descripción:</b></label><p class='form-control'>"+item.descripcion+"</p></div></div>"+
+                                                        "<div class='cell large-1'><div class='form-group text-center'><label class='label text-primary'><b>Cantidad:</b></label><p class='form-control'>"+item.cantidad+"</p></div></div>"+
+                                                        "<div class='cell large-1'><div class='form-group text-center'><label class='label text-primary'><b>Riesgo:</b></label><p class='form-control'>"+item.riesgo+"</p></div></div>"+
+                                                        "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Adicionales:</b></label><p class='form-control'>S/ "+item.adicional+"</p></div></div>"+
+                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Servicio Unitario (Mostrar):</b></label><p class='form-control'><b>S/ "+item.costunitm+"</b></p></div></div>"+
+                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Servicio Unitario:</b></label><p class='form-control'><b>S/ "+item.costunit+"</b></p></div></div>"+
+                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Total Servicio (Mostrar):</b></label><p class='form-control'><b>S/ "+item.costtotalm+"</b></p></div></div>"+
+                                                        "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Total Servicio:</b></label><p class='form-control'><b>S/ "+item.costtotal+"</b></p></div></div>"+
                                                     "</div>"+
                                                     "<div class='grid-x grid-padding-x'>"+
                                                         "<div class='cell large-12'>"+
@@ -188,11 +170,12 @@
                                                                 "<thead class='thead-primary'>"+
                                                                     "<tr>"+
                                                                         "<th class='text-center'>N°</th>"+
-                                                                        "<th>Salario (Hora)</th>"+
                                                                         "<th>Cargo Laboral</th>"+
                                                                         "<th class='text-center'>Cantidad</th>"+
-                                                                        "<th class='text-center'>Tiempo (Horas)</th>"+
-                                                                        "<th>Sub Total Laboral</th>"+
+                                                                        "<th class='text-center'>Días laborables</th>"+
+                                                                        "<th class='text-center'>Días pago</th>"+
+                                                                        "<th>Salario día</th>"+
+                                                                        "<th>Subtotal Laboral</th>"+
                                                                         "<th>Total Laboral</th>"+
                                                                         "<th class='text-center'>AS</th>"+
                                                                     "</tr>"+
@@ -201,12 +184,13 @@
                                                                  $.each(item.cargoslaborales, function (obj, item) {
                                                                      elements +=  "<tr>"+
                                                                                      "<td style='font-size: 11px;'><p class='text-center'>"+countCargosLab+"</p></td>"+
-                                                                                     "<td><span><b>S/ "+item.salarioxhora+"</b></span></td>"+
-                                                                                     "<td><span>TECNICO 1</span></td>"+
+                                                                                     "<td><span>"+item.nomcargo+"</span></td>"+
                                                                                      "<td class='text-center'><span>"+item.cantidad+"</span></td>"+
-                                                                                     "<td class='text-center'><span>"+item.horas+"</span></td>"+
-                                                                                     "<td><span>S/ 6400</span></td>"+
-                                                                                     "<td><span>S/ 12400</span></td>"+
+                                                                                     "<td class='text-center'><span>"+item.diaslaboral+"</span></td>"+
+                                                                                     "<td class='text-center'><span>"+item.diaspago+"</span></td>"+
+                                                                                     "<td><span><b>S/ "+item.salarioxdia+"</b></span></td>"+
+                                                                                     "<td><span><b>S/ "+item.subtotallaboral+"</b></span></td>"+
+                                                                                     "<td><span><b>S/ "+item.totallaboral+"</b></span></td>"+
                                                                                      "<td title='Actualizar salario' class='text-center'><button class='btn-icon-salario' onclick='actualizar_salario_cl("+item.idcargo+");'>S/.</button></td>"+
                                                                                   "</tr>"
                                                                      countCargosLab++;
