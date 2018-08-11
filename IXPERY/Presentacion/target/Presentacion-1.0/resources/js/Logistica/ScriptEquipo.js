@@ -1,16 +1,479 @@
-//ARRAY DE TODOS LOS ELEMENTOS DE LA PRIMERA FILA : TABLA EQUIPO PRODUCTOS EXISTENTES EN BD
-var arrayElem_equipo = [];
-arrayElem_equipo.push(["P", "p_num_equipo1", ]);
-arrayElem_equipo.push(["SELECT","cmb_equipo_nompro1", "select-one"]);
-arrayElem_equipo.push(["SPAN", "spn_equipo_codpro1", "text"]);
-arrayElem_equipo.push(["SPAN", "spn_equipo_modpro1", "text"]);
-arrayElem_equipo.push(["SPAN", "spn_equipo_marpro1", "text"]);
-arrayElem_equipo.push(["SPAN", "spn_equipo_medpro1", "text"]);
-arrayElem_equipo.push(["INPUT", "txt_equipo_canpro1", "text"]);
-arrayElem_equipo.push(["BUTTON","equipo_1_btn_elim_1", "button"]);
+var JSONobjGeneralEq;
+var estOperaEq=0;//0: guardar simple//1:updatetotal(sav-updt-del)
+//////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
+var idRowProdSolEq="";
+// var rowEquiObjIn = {};
+var rowEquiObjOut = {};
+// var arrProdSolEq = [];
+// var arrProdNoRegSol = [];
+var jsonGuardarFullEq = {};
+var arrGuardarEquipo = [];
+var arrGuardarPreRegEq = [];
+var arrProEditEq = [];
+var arrProEditNoRegEq = [];
 
-var childNodo_equipo;
-var nomBody_equipo="tbody_equipo";
+var idRowPreRegEq="";
+// var rowPreRegEquiObjIn = {};
+var rowPreRegEquiObjOut = {};
+$(document).ready(function () {
+    var idProdEq;
+    var canProdEq;
+
+    $('#equipo_1 tbody')
+        .on('focusin', 'tr[class=equipo-edit]', function () {
+            idRowProdSolEq = parseInt($(this).find('span[id = spn_equipo_idprodsol]').html());
+            // console.log("entrando");
+        })
+        .on('focusout', 'tr[class=equipo-edit]', function () {
+            // console.log("saliendo");
+            var objProEdit = {};
+            idProdEq = parseInt($(this).find('span[id = spn_equipo_idprod]').html());
+            canProdEq = parseInt($(this).find('input[id = txt_equipo_canpro]').val());
+
+            if(canProdEq===null || canProdEq==="" || canProdEq===0 || isNaN(canProdEq)){
+                $(this).find('input[id = txt_equipo_canpro]').focus();
+                $(this).find('input[id = txt_equipo_canpro]').addClass('is-invalid');
+                $("#btn_equipo_save").prop( "disabled", true );
+            }else{
+                $(this).find('input[id = txt_equipo_canpro]').removeClass('is-invalid');
+                rowEquiObjOut['pso1'] = idRowProdSolEq;
+                rowEquiObjOut['pso11'] = idProdEq;
+                rowEquiObjOut['pso4'] = canProdEq;
+
+                $.each(JSONobjGeneralEq.items[1].items2, function (obj, item) {
+                    if(item.idprodsol===rowEquiObjOut.pso1){
+                        objProEdit["pso1"] = rowEquiObjOut.pso1;
+
+                        if(item.idproducto!==rowEquiObjOut.pso11){
+                            objProEdit["pso11"] = rowEquiObjOut.pso11;
+                        }
+
+                        if(item.cantidad!==rowEquiObjOut.pso4){
+                            objProEdit["pso4"] = rowEquiObjOut.pso4;
+                        }
+
+                        var countKeys = Object.keys(objProEdit).length;
+                        if(countKeys > 1){
+                            arrProEditEq.push(objProEdit);
+                            arrProEditEq = eliminarObjetosDuplicados(arrProEditEq, 'pso1');
+                            arrGuardarEquipo = arrProEditEq.slice();
+                        }else{
+                            arrProEditEq.forEach(function(currentValue, index, arr){
+                                /*                            console.log("entré al for");
+                                                            console.log("ARRAY INDEX: "+arrProEditEq[index].pso1);
+                                                            console.log("ARRAY IDROWSOL: "+idRowProdSolEq);*/
+                                if(arrProEditEq[index].pso1===item.idprodsol){
+                                    console.log("entré a eliminar");
+                                    arrProEditEq.splice(index,1);
+                                    arrGuardarEquipo = arrProEditEq.slice();
+                                    return false;
+                                }
+
+                            })
+                        }
+                        return false;
+                    }
+                });
+                $("#btn_equipo_save").prop( "disabled", false );
+            }
+
+
+        });
+
+
+    let nomProdEqReg;
+    let modProdEqReg;
+    let marProdEqReg;
+    let umeProdEqReg;
+    let canProdEqReg;
+
+    let estadoNomProdEqReg;
+    let estadoModProdEqReg;
+    let estadoMarProdEqReg;
+    let estadoUmeProdEqReg;
+    let estadoCanProdEqReg;
+
+    $('#equiponr_1 tbody')
+        .on('focusin', 'tr[class=equiponr-edit]', function () {
+            idRowPreRegEq = parseInt($(this).find('span[id = spn_equiponr_idpreg]').html());
+            console.log("ENTRANDO");
+        })
+        .on('focusout', 'tr[class=equiponr-edit]', function () {
+            console.log("saliendo");
+            let objProEdit = {};
+            nomProdEqReg = $(this).find('input[id = txt_equiponr_nompro]').val();
+            modProdEqReg = $(this).find('input[id = txt_equiponr_modpro]').val();
+            marProdEqReg = $(this).find('input[id = txt_equiponr_marpro]').val();
+            umeProdEqReg = $(this).find('input[id = txt_equiponr_umepro]').val();
+            canProdEqReg = parseInt($(this).find('input[id = txt_equiponr_canpro]').val());
+
+            // console.log("nomProdEqReg: "+nomProdEqReg);
+            // console.log("modProdEqReg: "+modProdEqReg);
+            // console.log("marProdEqReg: "+marProdEqReg);
+            // console.log("umeProdEqReg: "+umeProdEqReg);
+            // console.log("canProdEqReg: "+canProdEqReg);
+            // console.log("///////////////////////////");
+            // console.log("///////////////////////////");
+
+
+            if(nomProdEqReg==="") {
+                $(this).find('input[id = txt_equiponr_nompro]').focus();
+                $(this).find('input[id = txt_equiponr_nompro]').addClass('is-invalid');
+                estadoNomProdEqReg=0;
+                $("#btn_equipo_save").prop( "disabled", true );
+            }else{
+                estadoNomProdEqReg=1;
+                $(this).find('input[id = txt_equiponr_nompro]').removeClass('is-invalid');
+                if(modProdEqReg==="") {
+                    $(this).find('input[id = txt_equiponr_modpro]').focus();
+                    $(this).find('input[id = txt_equiponr_modpro]').addClass('is-invalid');
+                    estadoModProdEqReg = 0;
+                    $("#btn_equipo_save").prop( "disabled", true );
+                }else{
+                    estadoModProdEqReg = 1;
+                    $(this).find('input[id = txt_equiponr_modpro]').removeClass('is-invalid');
+                    if(marProdEqReg==="") {
+                        $(this).find('input[id = txt_equiponr_marpro]').focus();
+                        $(this).find('input[id = txt_equiponr_marpro]').addClass('is-invalid');
+                        estadoMarProdEqReg = 0;
+                        $("#btn_equipo_save").prop( "disabled", true );
+                    }else{
+                        estadoMarProdEqReg = 1;
+                        $(this).find('input[id = txt_equiponr_marpro]').removeClass('is-invalid');
+                        if(umeProdEqReg==="") {
+                            $(this).find('input[id = txt_equiponr_umepro]').focus();
+                            $(this).find('input[id = txt_equiponr_umepro]').addClass('is-invalid');
+                            estadoUmeProdEqReg = 0;
+                            $("#btn_equipo_save").prop( "disabled", true );
+                        }else{
+                            estadoUmeProdEqReg = 1;
+                            $(this).find('input[id = txt_equiponr_umepro]').removeClass('is-invalid');
+                            if(canProdEqReg==="" || canProdEqReg===0 || isNaN(canProdEqReg)) {
+                                $(this).find('input[id = txt_equiponr_canpro]').focus();
+                                $(this).find('input[id = txt_equiponr_canpro]').addClass('is-invalid');
+                                estadoCanProdEqReg = 0;
+                                $("#btn_equipo_save").prop( "disabled", true );
+                            }else{
+                                estadoCanProdEqReg = 1;
+                                $(this).find('input[id = txt_equiponr_canpro]').removeClass('is-invalid');
+                                $("#btn_equipo_save").prop( "disabled", true );
+                            }
+                        }
+                    }
+                }
+            }
+
+            if(estadoNomProdEqReg===1 &&
+                estadoModProdEqReg===1 &&
+                estadoMarProdEqReg===1 &&
+                estadoUmeProdEqReg===1 &&
+                estadoCanProdEqReg===1)
+            {
+                rowPreRegEquiObjOut['prp1']  = idRowPreRegEq;
+                rowPreRegEquiObjOut['prp4'] = nomProdEqReg;
+                rowPreRegEquiObjOut['prp8']  = modProdEqReg;
+                rowPreRegEquiObjOut['prp9']  = marProdEqReg;
+                rowPreRegEquiObjOut['prp5'] = umeProdEqReg;
+                rowPreRegEquiObjOut['prp6']  = canProdEqReg;
+
+                $.each(JSONobjGeneralEq.items[2].items3, function (obj, item) {
+                    if(item.idprereg===rowPreRegEquiObjOut.prp1){
+                        objProEdit["prp1"] = rowPreRegEquiObjOut.prp1;
+
+                        if (item.nomproducto!== rowPreRegEquiObjOut.prp4) {
+                            objProEdit["prp4"] = rowPreRegEquiObjOut.prp4;
+                        }
+                        if (item.modelo !== rowPreRegEquiObjOut.prp8) {
+                            objProEdit["prp8"] = rowPreRegEquiObjOut.prp8;
+                        }
+                        if (item.marca !== rowPreRegEquiObjOut.prp9) {
+                            objProEdit["prp9"] = rowPreRegEquiObjOut.prp9;
+                        }
+
+                        if (item.umedida !== rowPreRegEquiObjOut.prp5) {
+                            objProEdit["prp5"] = rowPreRegEquiObjOut.prp5;
+                        }
+                        if (item.cantidad !== rowPreRegEquiObjOut.prp6) {
+                            objProEdit["prp6"] = rowPreRegEquiObjOut.prp6;
+                        }
+
+                        var countKeys = Object.keys(objProEdit).length;
+                        if(countKeys > 1){
+                            arrProEditNoRegEq.push(objProEdit);
+                            arrProEditNoRegEq = eliminarObjetosDuplicados(arrProEditNoRegEq, 'prp1');
+                            arrGuardarPreRegEq = arrProEditNoRegEq.slice();
+                        }else{
+                            arrProEditNoRegEq.forEach(function(currentValue, index, arr){
+                                if(arrProEditNoRegEq[index].prp1===item.idprereg){
+                                    console.log("entré a eliminar");
+                                    arrProEditNoRegEq.splice(index,1);
+                                    arrGuardarPreRegEq = arrProEditNoRegEq.slice();
+                                    return false;
+                                }
+                            })
+                        }
+                        return false;
+                    }
+                });
+            }
+        })
+});
+function VerEstaGuardaItem1(){
+    if(estOperaEq===0){
+        RegistrarEquipo_equipo();
+    }else if(estOperaEq===1){
+        InsUpdDelEquipo();
+    }
+}
+function eliminarObjetosDuplicados(arr, prop) {
+    var nuevoArray = [];
+    var lookup  = {};
+
+    for (var i in arr) {
+        lookup[arr[i][prop]] = arr[i];
+    }
+
+    for (i in lookup) {
+        nuevoArray.push(lookup[i]);
+    }
+
+    return nuevoArray;
+}
+
+function InsUpdDelEquipo() {
+    $('tbody#tbody_equiponr').find('tr[class=equiponr-edit]').each(function(){
+        if($(this).find('input[type=checkbox]').is(':checked')) {
+            let objJsonDel = {};
+            $(this).closest('tr').find('span[id=spn_equiponr_idpreg]').each(function(){
+                objJsonDel.prp1 = parseInt($(this).html());
+                objJsonDel.prp7 = "0";
+            });
+            arrGuardarPreRegEq.push(objJsonDel);
+            console.log("ELIMINAR");
+            console.log(arrGuardarPreRegEq);
+        }
+    }).closest('tbody').find('tr[class=equiponr-insert]').each(function () {
+        let objFilaPreReg = {};
+        let objProdSol= {};
+        let objFilaProSolPre = {};
+        let objEqu={};
+        let objProd={};
+        let objPreReg={};
+
+        //PRE-REGISTRO PRODUCTO
+        objProdSol.pso1=0;//foránea prod solución
+
+        objFilaPreReg.prp1=0;
+        objFilaPreReg.prp2=objProdSol;
+        objFilaPreReg.prp4=$(this).find("td div input[id = txt_equiponr_nompro]").val();
+        objFilaPreReg.prp5=$(this).find("td div input[id = txt_equiponr_umepro]").val();
+        objFilaPreReg.prp6=$(this).find("td div input[id = txt_equiponr_canpro]").val();
+        objFilaPreReg.prp7="1";
+        objFilaPreReg.prp8=$(this).find("td div input[id = txt_equiponr_modpro]").val();
+        objFilaPreReg.prp9=$(this).find("td div input[id = txt_equiponr_marpro]").val();
+        arrGuardarPreRegEq.push(objFilaPreReg);
+
+        //REGISTRO PRODUCTO SOLUCIÓN
+
+        objEqu.eqi1=parseInt($("label#lbl_equipo_ideq").html());//foránea equipo
+        objProd.pdt1= 0;
+
+        objPreReg.prp1=0;//foránea pre-registro producto
+
+        objFilaProSolPre.pso1=0;
+        objFilaProSolPre.pso2=objEqu;//objeto foránea equipo
+        objFilaProSolPre.pso4= $(this).find("td div input[id = txt_equiponr_canpro]").val();
+        objFilaProSolPre.pso8="1";
+        //objFilaProSolPre.pso11=objProd;
+        objFilaProSolPre.pso12="1";
+        objFilaProSolPre.pso14=objPreReg;
+        arrGuardarEquipo.push(objFilaProSolPre);
+    });
+
+
+    $('tbody#tbody_equipo').find('tr[class=equipo-edit]').each(function(){
+        console.log("Fila");
+        if($(this).find('input[type=checkbox]').is(':checked')) {
+            let objJsonDel = {};
+            $(this).closest('tr').find('span[id=spn_equipo_idprodsol]').each(function(){
+                objJsonDel.pso1 = parseInt($(this).html());
+                objJsonDel.pso8 = "0";
+            });
+            arrGuardarEquipo.push(objJsonDel);
+            console.log("ELIMINAR");
+            console.log(arrGuardarEquipo);
+        }else{
+            /* if(pid!==""){
+                 filaOkEqReg=1;
+
+                 filaData.push(pid);
+                 filaData.push(cod);
+                 filaData.push(mod);
+                 filaData.push(mrc);
+                 filaData.push(ume);
+                 filaData.push(cnt);
+                 arrayDatos_re.push(filaData);
+             }else{
+                 filaOkEqReg=0;
+                 arrayDatos_re=[];
+                 return false;
+             }*/
+
+        }
+    }).closest('tbody').find('tr[class=equipo-insert]').each(function () {
+        let objFilaProSol = {};
+
+        let objEqu= {};
+        let objProd={};
+        //let objPreReg= {};
+
+        //REGISTRO PRODUCTO SOLUCIÓN
+        objEqu.eqi1=$("label#lbl_equipo_ideq").text();//foránea equipo;
+        objProd.pdt1=parseInt($(this).find("td div span[id = spn_equipo_idprod]").html());
+        //objPreReg.prp1=0;//foránea pre-registro producto
+
+        objFilaProSol.pso1=0;
+        objFilaProSol.pso2=objEqu;//objeto foránea equipo
+        objFilaProSol.pso4=$(this).find("td div input[id = txt_equipo_canpro]").val();
+        objFilaProSol.pso8="1";
+        objFilaProSol.pso11=objProd;
+        objFilaProSol.pso12="1";
+        //objFilaProSol.pso14=objPreReg;
+        //arrProdSolEq.push(objFilaProSol);
+        arrGuardarEquipo.push(objFilaProSol);
+    });
+
+    jsonGuardarFullEq.pso=arrGuardarEquipo;//TPRODSOL
+    jsonGuardarFullEq.prp=arrGuardarPreRegEq;//TPREREGPRO
+
+
+    console.log("Json A Guardar");
+    console.log(jsonGuardarFullEq);
+
+
+    $.ajax({
+        method: "POST",
+        url: "/equipo/guardarfull",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(jsonGuardarFullEq),
+        success: function resultado(valor) {
+            if (valor == "") {
+                alert("Entro en IF");
+                //
+                // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
+                // CargarJS_proyecto(0, 1, 0);
+            }
+            else {
+                console.log("Entro en ELSE");
+                // alert(valor);
+            }
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+}
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var conta_filas_equipo=1;
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS
 function addEquipos_equipo(obj){
@@ -22,26 +485,26 @@ function addEquipos_equipo(obj){
 
     childs++;
 
+    var trval="equipo_1_fila_"+childs;
     $("#"+Equipo[1]+" tbody").append(
-        "<tr id='"+Equipo[1]+"_fila_"+childs+"'>"+
-        "<td><div><p id='p_num_equipo"+conta_filas_equipo+"' class='text-center'>"+childs+"</p></></td>"+
-        "<td><div><select id='cmb_equipo_nompro"+conta_filas_equipo+"' name='cmb_equipo_nompro' class='select_equipo_equipos' style='width: 100%;'></select></div></td>"+
-        "<td><div><span id='spn_equipo_codpro"+conta_filas_equipo+"' name='spn_equipo_codpro'></span></div></td>"+
-        "<td><div><span id='spn_equipo_modpro"+conta_filas_equipo+"' name='spn_equipo_modpro'></span></div></td>"+
-        "<td><div><span id='spn_equipo_marpro"+conta_filas_equipo+"' name='spn_equipo_marpro'></span></div></td>"+
-        "<td><div><span id='spn_equipo_medpro"+conta_filas_equipo+"' name='spn_equipo_medpro'></span></div></td>"+
-        "<td><div><input type='text' id='txt_equipo_canpro"+conta_filas_equipo+"' name='txt_equipo_canpro' type='text' class='form-control' /></div></td>"+
-        "<td><div class='text-center'><button id='"+Equipo[1]+"_btn_elim_"+childs+"' type='button' class='btn btn-sm-delete' onclick='eliminar_fila_tabla_equipos(this);'><i class='icon icon-bin '></i></button></div></td>"+
-        "<td hidden><div><input type='text' id='txt_equipo_idprodo"+conta_filas_equipo+"' name='txt_equipo_idprodo' type='text' class='form-control' /></div></td>"+
+        "<tr id='"+Equipo[1]+"_fila_"+childs+"' class='equipo-insert'>"+
+        "<td><div><p class='text-center'>"+childs+"</p></></td>"+
+        "<td><div><select id='cmb_equipo_nompro"+conta_filas_equipo+"' name='cmb_equipo_nompro' class='select_equipo_equipos' onchange='selCmbProd(this)' style='width: 100%;'></select></div></td>"+
+        "<td><div><span id='spn_equipo_codpro'></span></div></td>"+
+        "<td><div><span id='spn_equipo_modpro'></span></div></td>"+
+        "<td><div><span id='spn_equipo_marpro'></span></div></td>"+
+        "<td><div><span id='spn_equipo_umepro'></span></div></td>"+
+        "<td><div><input id='txt_equipo_canpro' type='text' type='text' class='form-control' /></div></td>"+
+        "<td hidden><div><span id='spn_equipo_idprod'></span></div></td>"+
+        "<td hidden><div><span id='spn_equipo_idprodsol'></span></div></td>"+
+        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_equipos(`"+trval+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
         "</tr>"
     );
-    contPrimervez++;
+    // contPrimervez++;
     borrar_select2();
     clonar_select2(conta_filas_equipo);
-
 }
 function clonar_select2(fila){
-
     $('#cmb_equipo_nompro'+fila).select2({
         ajax: {
             url: "/equipo/busproducto",
@@ -65,81 +528,53 @@ function clonar_select2(fila){
         templateResult: formatRepoProd,
         templateSelection: formatRepoSelectionProd
     });
-
 }
 
 function borrar_select2(){
     $('.js-example-basic-single').select2("destroy");
 }
-
+function selCmbProd(obj){
+    let selectId = obj.id;
+    let data = $("#"+selectId).select2('data');
+    let idProd=data[0].id;
+    alert(JSON.stringify(data));
+    $("#"+selectId).closest('tr').find('span[id=spn_equipo_codpro]').text(data[0].codigo);
+    $("#"+selectId).closest('tr').find('span[id=spn_equipo_modpro]').text(data[0].modelo);
+    $("#"+selectId).closest('tr').find('span[id=spn_equipo_marpro]').text(data[0].marca);
+    $("#"+selectId).closest('tr').find('span[id=spn_equipo_umepro]').text(data[0].umedida);
+    $("#"+selectId).closest('tr').find('span[id=spn_equipo_idprod]').text(idProd);
+}
 
 //FUNCIONES QUE OPERAN A NIVEL DE TABLA DENTRO DE CONTENEDOR DE ACTIVIDAD
-
-function eliminar_fila_tabla_equipos(obj){
-    var id = obj.id;
-    var splitId = id.split("_btn_elim_");
-    var childs = $("#"+splitId[0] + " tbody tr").length;
-
+function eliminar_fila_tabla_equipos(fila){
+    var equiporeg="equipo_1";
+    var childs = $("#"+equiporeg + " tbody tr").length;
     if(childs > 1){
-        $("#"+splitId[0]+"_fila_"+splitId[1]).remove();
-        reordernar_num_tabla_equipos(splitId[0]);
+        $("#"+fila).remove();
+        reordernar_num_tabla_equipos(equiporeg);
+        conta_filas_equipo--;
     }
-    conta_filas_equipo--;
-    contaprueba=1;
-    ReordenarId_tbl_equipo();
 }
 
 function reordernar_num_tabla_equipos(idEquipo){
     var contador = 1;
+
     var obj = $("#"+idEquipo+ " tbody tr");
 
     $(obj).each(function () {
+        $(this).removeAttr('id');
+        $(this).attr("id","equipo_1_fila_"+contador);
         $(this).find("p").text(contador);
+        $(this).find("button").removeAttr('onclick');
+        $(this).find("button").attr("onclick","eliminar_fila_tabla_equipos('equipo_1_fila_"+contador+"')");
+        $(this).find("select").removeAttr('id');
+        $(this).find("select").attr("id","cmb_equipo_nompro"+contador);
+        $(this).find("select").removeAttr('onchange');
+        $(this).find("select").attr("onchange","selCmbProd(this)");
         contador++;
     });
 }
-/*
-function ReordenarId_tbl_equipo() {
-    var r = 1;
-    var aux = 0;
-    var child;
-    var idText;
-    var pasoPri = 1;
-    var tbody_equipo = document.getElementById(nomBody_equipo);
-    var totalColumnas_equipo=8;
 
-    for (var i = 1; i <= conta_filas_equipo; i++) {
-        if (pasoPri == 1) {
-            for (var j = 1; j <= ((totalColumnas_equipo - 1) * 2) + 1; j += 2) {
-                child = tbody_equipo.childNodes[i].childNodes[j].childNodes[0].firstChild;
-                idText = arrayElem_equipo[aux][1];
-                idText = idText.substring(0, idText.length - 1);
-                child.id = idText + r;
-                child.name = idText + r;
-                aux++;
-            }
-            //if (childNodo_preempresa == 0) {
-            if (i == 1) {
-                i = i + 1;
-            }
-            // }
-            pasoPri = 2;
-        }
-        else {
-            aux = 0;
-            for (var j = 0; j <= totalColumnas_equipo - 2; j++) {
-                child = tbody_equipo.childNodes[i].childNodes[j].childNodes[0].firstChild;
-                idText = arrayElem_equipo[aux][1];
-                idText = idText.substring(0, idText.length - 1);
-                child.id = idText + r;
-                child.name = idText + r;
-                aux++;
-            }
-        }
-        r++;
-    }
-}
-*/
 
 //FIN GUARDAR EQUIPOS PRODUCTOS REGISTRADOS
 //FIN DE FUNCIONES QUE OPERAN A NIVEL DE LA TABLA
@@ -151,23 +586,9 @@ function ReordenarId_tbl_equipo() {
 * */
 //INICIO DE FUNCIONES PARA EQUIPOS NO REGISTRADOS
 
-//ARRAY DE TODOS LOS ELEMENTOS DE LA PRIMERA FILA : TABLA EQUIPO PRODUCTOS EXISTENTES EN BD
-var arrayElem_equiponr = [];
-arrayElem_equiponr.push(["P", "p_num_equiponr", ]);
-arrayElem_equiponr.push(["INPUT", "txt_equiponr_nompro1", "text"]);
-arrayElem_equiponr.push(["INPUT", "txt_equiponr_codpro1", "text"]);
-arrayElem_equiponr.push(["INPUT", "txt_equiponr_modpro1", "text"]);
-arrayElem_equiponr.push(["INPUT", "txt_equiponr_marpro1", "text"]);
-arrayElem_equiponr.push(["INPUT", "txt_equiponr_medpro1", "text"]);
-arrayElem_equiponr.push(["INPUT", "txt_equiponr_canpro1", "text"]);
-arrayElem_equiponr.push(["BUTTON", "equiponr_1_btn_elim_1", "button"]);
-
-var childNodo_equiponr;
-var nomBody_equiponr="tbody_equiponr";
 var conta_filas_equiponr=1;
 
 function addEquipos_equiponr(objnr){
-
     conta_filas_equiponr++;
 
     var idnr = objnr.id;
@@ -175,98 +596,47 @@ function addEquipos_equiponr(objnr){
 
     var childsnr = $("#"+Equiponr[1] + " tbody tr").length;
     childsnr++;
+    var trvalnr="equiponr_1_fila_"+childsnr;
 
     $("#"+Equiponr[1]+" tbody").append(
-        "<tr id='"+Equiponr[1]+"_fila_"+childsnr+"'>"+
-        "<td><div><p id='p_num_equiponr"+conta_filas_equiponr+"' class='text-center'>"+childsnr+"</p></div></td>"+
-        "<td><div><input id='txt_equiponr_nompro"+conta_filas_equiponr+"' name='txt_equiponr_nompro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_codpro"+conta_filas_equiponr+"' name='txt_equiponr_codpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_modpro"+conta_filas_equiponr+"' name='txt_equiponr_modpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_marpro"+conta_filas_equiponr+"' name='txt_equiponr_marpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_medpro"+conta_filas_equiponr+"' name='txt_equiponr_medpro' type='text' class='form-control' /></div></td>"+
-        "<td><div><input id='txt_equiponr_canpro"+conta_filas_equiponr+"' name='txt_equiponr_canpro' type='text' class='form-control' /></div></td>"+
-        "<td><div class='text-center'><button id='"+Equiponr[1]+"_btn_elim_"+childsnr+"' type='button' class='btn btn-sm-delete' onclick='eliminar_fila_tabla_equiposnr(this);'><i class='icon icon-bin '></i></button></div></td>"+
+        "<tr id='"+Equiponr[1]+"_fila_"+childsnr+"' class='equiponr-insert'>"+
+        "<td><div><p class='text-center'>"+childsnr+"</p></div></td>"+
+        "<td><div><input id='txt_equiponr_nompro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_equiponr_modpro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_equiponr_marpro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_equiponr_umepro' type='text' class='form-control' /></div></td>"+
+        "<td><div><input id='txt_equiponr_canpro' type='text' class='form-control' /></div></td>"+
+        "<td hidden><div><span id='spn_equiponr_idpreg'></span></div></td>"+
+        // "<td hidden><div><input id='txt_equiponr_idpreg' type='text' class='form-control' /></div></td>"+
+        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_equiposnr(`"+trvalnr+"`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
         "</tr>"
     );
 }
 
 //FUNCIONES QUE OPERAN A NIVEL DE TABLA DENTRO DE CONTENEDOR DE ACTIVIDAD
-
-function eliminar_fila_tabla_equiposnr(objnr){
-    var idnr = objnr.id;
-    var splitIdnr = idnr.split("_btn_elim_");
-    var childsnr = $("#"+splitIdnr[0] + " tbody tr").length;
+function eliminar_fila_tabla_equiposnr(fila){
+    var equiponoreg="equiponr_1";
+    var childsnr = $("#"+equiponoreg + " tbody tr").length;
 
     if(childsnr > 1){
-        $("#"+splitIdnr[0]+"_fila_"+splitIdnr[1]).remove();
-        reordernar_num_tabla_equiposnr(splitIdnr[0]);
+        $("#"+fila).remove();
+        reordernar_num_tabla_equiposnr(equiponoreg);
+        conta_filas_equiponr--;
     }
-    conta_filas_equiponr--;
-    ReordenarId_tbl_equiponr();
-
 }
-function eliminar_fila_tabla_equipos(obj){
-    var id = obj.id;
-    var splitId = id.split("_btn_elim_");
-    var childs = $("#"+splitId[0] + " tbody tr").length;
 
-    if(childs > 1){
-        $("#"+splitId[0]+"_fila_"+splitId[1]).remove();
-        reordernar_num_tabla_equipos(splitId[0]);
-    }
-    conta_filas_equipo--;
-    contaprueba=1;
-    ReordenarId_tbl_equipo();
-}
 function reordernar_num_tabla_equiposnr(idEquiponr){
     var contadornr = 1;
     var obj = $("#"+idEquiponr+ " tbody tr");
 
     $(obj).each(function () {
+        $(this).removeAttr('id');
+        $(this).attr("id","equiponr_1_fila_"+contadornr);
         $(this).find("p").text(contadornr);
+        $(this).find("button").removeAttr('onclick');
+        $(this).find("button").attr("onclick","eliminar_fila_tabla_equiposnr('equiponr_1_fila_"+contadornr+"')");
         contadornr++;
     });
-}
-
-function ReordenarId_tbl_equiponr() {
-    var rnr = 1;
-    var auxnr = 0;
-    var childnr;
-    var idTextnr;
-    var pasoPrinr = 1;
-    var tbody_equiponr = document.getElementById(nomBody_equiponr);
-    var totalColumnas_equiponr=8;
-
-    for (var i = 1; i <= conta_filas_equiponr; i++) {
-        if (pasoPrinr == 1) {
-            for (var j = 1; j <= ((totalColumnas_equiponr - 1) * 2) + 1; j += 2) {
-                childnr = tbody_equiponr.childNodes[i].childNodes[j].childNodes[0].firstChild;
-                idTextnr = arrayElem_equipo[auxnr][1];
-                idTextnr = idTextnr.substring(0, idTextnr.length - 1);
-                childnr.id = idTextnr + rnr;
-                childnr.name = idTextnr + rnr;
-                auxnr++;
-            }
-            //if (childNodo_preempresa == 0) {
-            if (i == 1) {
-                i = i + 1;
-            }
-            // }
-            pasoPrinr = 2;
-        }
-        else {
-            auxnr = 0;
-            for (var j = 0; j <= totalColumnas_equiponr - 2; j++) {
-                childnr = tbody_equiponr.childNodes[i].childNodes[j].childNodes[0].firstChild;
-                idTextnr = arrayElem_equiponr[auxnr][1];
-                idTextnr = idTextnr.substring(0, idTextnr.length - 1);
-                childnr.id = idTextnr + rnr;
-                childnr.name = idTextnr + rnr;
-                auxnr++;
-            }
-        }
-        rnr++;
-    }
 }
 
 //GUARDAR PRODUCTOS EQUIPOS REGISTRADOS Y NO REGISTRADOS
@@ -278,136 +648,155 @@ var arrayData_nr;
 var arrayData_completo;
 
 function RegistrarEquipo_equipo() {
-    var tbody_re = $("#tbody_equipo tr");
-    var tbody_nr = $("#tbody_equiponr tr");
-    var length_re = tbody_re.length;
-    var length_nr = tbody_nr.length;
+    if($("#selectEmpresaEquipo_Proyecto").val()!=null){
 
-    var sid=$("#selectEmpresaEquipo_Proyecto").val();
-    var filaDataExtras=[];
-    filaDataExtras.push(sid);
-    arrayDatos_extras.push(filaDataExtras);
+        var tbody_re = $("#tbody_equipo tr");
+        var tbody_nr = $("#tbody_equiponr tr");
+        var length_re = tbody_re.length;
+        var length_nr = tbody_nr.length;
 
-    //RECORRER EQUIPOS PRODUCTOS REGISTRADOS
-    for(var i = 1; i<=length_re; i++){
-        var filaData = [];
+        var sid=$("#selectEmpresaEquipo_Proyecto").val();
 
-        var pid = tbody_re.find("#txt_equipo_idprodo"+i).val();
-        var cod = tbody_re.find("#spn_equipo_codpro"+i).text();
-        var mod = tbody_re.find("#spn_equipo_modpro"+i).text();
-        var mrc = tbody_re.find("#spn_equipo_marpro"+i).text();
-        var ume = tbody_re.find("#spn_equipo_medpro"+i).text();
-        var cnt = tbody_re.find("#txt_equipo_canpro"+i).val();
+        var filaDataExtras=[];
+        var filaOkEqReg=0;//0:hace referencia a que falta completar algún campo de la fila//1:todoOK
+        var filaOkEqNoReg=0;//0:hace referencia a que falta completar algún campo de la fila//1:todoOK
+        //ponemos el id de solución en array
 
-        filaData.push(pid);filaData.push(cod);filaData.push(mod);filaData.push(mrc);filaData.push(ume);filaData.push(cnt);
 
-        arrayDatos_re.push(filaData);
+        //RECORRER EQUIPOS PRODUCTOS REGISTRADOS
+        //for(var i = 1; i<=length_re; i++){
+        $(tbody_re).each(function () {
+            var pid = $(this).find("td div span[id = spn_equipo_idprod]").text();
+            var cod = $(this).find("td div span[id = spn_equipo_codpro]").text();
+            var mod = $(this).find("td div span[id = spn_equipo_modpro]").text();
+            var mrc = $(this).find("td div span[id = spn_equipo_marpro]").text();
+            var ume = $(this).find("td div span[id = spn_equipo_umepro]").text();
+            var cnt = $(this).find("td div input[id = txt_equipo_canpro]").val();
+
+            var filaData = [];
+
+            if(pid!=="" && cnt!==""){
+                filaOkEqReg=1;
+
+                filaData.push(pid);
+                filaData.push(cod);
+                filaData.push(mod);
+                filaData.push(mrc);
+                filaData.push(ume);
+                filaData.push(cnt);
+                arrayDatos_re.push(filaData);
+            }else{
+                filaOkEqReg=0;
+                arrayDatos_re=[];
+                return false;
+            }
+
+        });
+        //}
+
+        //RECORRER EQUIPOS PRODUCTOS NO REGISTRADOS
+        //for(var i = 1; i<=length_nr; i++){
+        $(tbody_nr).each(function () {
+            var nomnr = $(this).find("td div input[id = txt_equiponr_nompro]").val();
+            var modnr = $(this).find("td div input[id = txt_equiponr_modpro]").val();
+            var mrcnr = $(this).find("td div input[id = txt_equiponr_marpro]").val();
+            var umenr = $(this).find("td div input[id = txt_equiponr_umepro]").val();
+            var cntnr = $(this).find("td div input[id = txt_equiponr_canpro]").val();
+
+            var filaData = [];
+
+            if(conta_filas_equiponr===1){
+                if(nomnr!=="" && modnr!=="" && mrcnr!=="" && umenr!=="" && cntnr!=="") {
+                    filaOkEqNoReg=1;
+                    filaData.push(nomnr);
+                    filaData.push(modnr);
+                    filaData.push(mrcnr);
+                    filaData.push(umenr);
+                    filaData.push(cntnr);
+
+                    arrayDatos_nr.push(filaData);
+                }else if(nomnr==="" && modnr==="" && mrcnr==="" && umenr==="" && cntnr===""){
+                    filaOkEqNoReg=1;
+                }else{
+                    filaOkEqNoReg=0;
+                }
+            }else{
+                if(nomnr!=="" && modnr!=="" && mrcnr!=="" && umenr!=="" && cntnr!==""){
+                    filaOkEqNoReg=1;
+                    filaData.push(nomnr);
+                    filaData.push(modnr);
+                    filaData.push(mrcnr);
+                    filaData.push(umenr);
+                    filaData.push(cntnr);
+
+                    arrayDatos_nr.push(filaData);
+                }else{
+                    filaOkEqNoReg=0;
+                    arrayDatos_nr=[];
+                    return false;
+                }
+            }
+        });
+        //}
+        if(filaOkEqReg===1 && filaOkEqNoReg===1){
+            filaDataExtras.push(sid);
+            arrayDatos_extras.push(filaDataExtras);
+            arrayData_completo = {
+                values0:arrayDatos_extras,
+                values1: arrayDatos_re,
+                values2: arrayDatos_nr
+            };
+
+            console.log(JSON.stringify(arrayData_completo));
+
+            $.ajax({
+                method: "POST",
+                url: "/equipo/register",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(arrayData_completo),
+                success: function resultado(valor) {
+                    alert("Equipo Solución Registrado Correctamente");
+                },
+                error: function errores(msg) {
+                    alert('Error: ' + msg.responseText);
+                }
+            });
+        }else{
+            alert("Faltan completar datos");
+            arrayDatos_re=[];
+            arrayDatos_nr=[];
+        }
+    }else{
+        alert("Selecione una Solución o Empresa por favor...");
     }
-
-    //RECORRER EQUIPOS PRODUCTOS NO REGISTRADOS
-    for(var i = 1; i<=length_nr; i++){
-        var filaData = [];
-
-        var nomnr = tbody_nr.find("#txt_equiponr_nompro"+i).val();
-        var codnr = tbody_nr.find("#txt_equiponr_codpro"+i).val();
-        var modnr = tbody_nr.find("#txt_equiponr_modpro"+i).val();
-        var mrcnr = tbody_nr.find("#txt_equiponr_marpro"+i).val();
-        var umenr = tbody_nr.find("#txt_equiponr_medpro"+i).val();
-        var cntnr = tbody_nr.find("#txt_equiponr_canpro"+i).val();
-
-        filaData.push(nomnr);filaData.push(codnr);filaData.push(modnr);filaData.push(mrcnr);filaData.push(umenr);filaData.push(cntnr);
-
-        arrayDatos_nr.push(filaData);
-    }
-
-    arrayData_completo = {
-        values0:arrayDatos_extras,
-        values1: arrayDatos_re,
-        values2: arrayDatos_nr
-    }
-
-    console.log(JSON.stringify(arrayData_completo));
-
-     $.ajax({
-         method: "POST",
-         url: "/equipo/register",
-         contentType: "application/json; charset=utf-8",
-         data: JSON.stringify(arrayData_completo),
-         success: function resultado(valor) {
-             /*if (valor == "") {
-                 //alert("Producto(s) registrado(s) correctamente.");
-                 console.log("aqa");
-                 console.log(arrayData_nr);
-                 $.ajax({
-                     method: "POST",
-                     url: "/equipo/preregister",
-                     contentType: "application/json; charset=utf-8",
-                     data: JSON.stringify(arrayData_nr),
-                     success: function resultado(valor) {
-                         if (valor == "") {
-                             alert("Producto(s) registrado(s) correctamente.");
-
-                             for(let i = 1; i<length_re; ++i) {
-                                 $("#txt_equire_nom_" + i).val("");
-                                 $("#spn_equire_cod_" + i).html("");
-                                 $("#spn_equire_mod_" + i).html("");
-                                 $("#spn_equire_mrc_" + i).html("");
-                                 $("#spn_equire_ume_" + i).html("");
-                                 $("#txt_equire_cnt_" + i).val("");
-                             }
-
-                             for(let i = 1; i<length_nr; ++i) {
-                                 $("#txt_equinr_nom_" + i).val("");
-                                 $("#txt_equinr_cod_" + i).val("");
-                                 $("#txt_equinr_mod_" + i).val("");
-                                 $("#txt_equinr_mrc_" + i).val("");
-                                 $("#txt_equinr_ume_" + i).val("");
-                                 $("#txt_equinr_cnt_" + i).val("");
-                             }
-
-                         }
-                         else {
-                             alert(valor);
-                         }
-                     },
-                     error: function errores(msg) {
-                         alert('Error: ' + msg.responseText);
-                     }
-                 });
-             }
-             else {
-                 alert(valor);
-             }*/
-         },
-         error: function errores(msg) {
-             alert('Error: ' + msg.responseText);
-         }
-     });
 }
 
 function addEquiposUpdate_equipo(obj){
     conta_filas_equipo=0;
     $( "#tbody_equipo" ).empty();
     var JSONobj = JSON.parse(obj);
-
     //RECORREMOS EQUIPO SOLUCIÓN
 
     $.each(JSONobj.items[1].items2, function (obj, item) {
         conta_filas_equipo++;
 
         $("#equipo_1 tbody").append(
-            "<tr id='equipo_1_fila_"+conta_filas_equipo+"'>"+
-            "<td id='td_equipo_num"+conta_filas_equipo+"'><div><p id='p_num_equipo"+conta_filas_equipo+"' class='text-center'>"+conta_filas_equipo+"</p></></td>"+
-            "<td id='td_equipo_nompro"+conta_filas_equipo+"'><div><select id='cmb_equipo_nompro"+conta_filas_equipo+"' name='cmb_equipo_nompro' class='select_equipo_equipos' style='width: 100%;'></select></div></td>"+
-            "<td id='td_equipo_codpro"+conta_filas_equipo+"'><div><span id='spn_equipo_codpro"+conta_filas_equipo+"' name='spn_equipo_codpro'>"+item.codigo+"</span></div></td>"+
-            "<td id='td_equipo_modpro"+conta_filas_equipo+"'><div><span id='spn_equipo_modpro"+conta_filas_equipo+"' name='spn_equipo_modpro'>"+item.modelo+"</span></div></td>"+
-            "<td id='td_equipo_marpro"+conta_filas_equipo+"'><div><span id='spn_equipo_marpro"+conta_filas_equipo+"' name='spn_equipo_marpro'>"+item.marca+"</span></div></td>"+
-            "<td id='td_equipo_medpro"+conta_filas_equipo+"'><div><span id='spn_equipo_medpro"+conta_filas_equipo+"' name='spn_equipo_medpro'>"+item.nomumedida+"</span></div></td>"+
-            "<td id='td_equipo_canpro"+conta_filas_equipo+"'><div><input type='text' id='txt_equipo_canpro"+conta_filas_equipo+"' name='txt_equipo_canpro' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
-            "<td id='td_equipo_eli"+conta_filas_equipo+"'><div class='text-center'><button id='equipo_1_fila_btn_elim_"+conta_filas_equipo+"' type='button' class='btn btn-sm-delete' onclick='eliminar_fila_tabla_equipos(this);'><i class='icon icon-bin '></i></button></div></td>"+
-            "<td hidden><div><input type='text' id='txt_equipo_idprodo"+conta_filas_equipo+"' name='txt_equipo_idprodo' type='text' class='form-control' value='"+item.idproducto+"'/></div></td>"+
+            "<tr id='equipo_1_fila_"+conta_filas_equipo+"' class='equipo-edit'>"+
+            "<td><div><p class='text-center'>"+conta_filas_equipo+"</p></></td>"+
+            "<td><div><select id='cmb_equipo_nompro"+conta_filas_equipo+"' name='cmb_equipo_nompro' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProd(this)'></select></div></td>"+
+            "<td><div><span id='spn_equipo_codpro'>"+item.codigo+"</span></div></td>"+
+            "<td><div><span id='spn_equipo_modpro'>"+item.modelo+"</span></div></td>"+
+            "<td><div><span id='spn_equipo_marpro'>"+item.marca+"</span></div></td>"+
+            "<td><div><span id='spn_equipo_umepro'>"+item.nomumedida+"</span></div></td>"+
+            "<td><div><input id='txt_equipo_canpro' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
+            "<td hidden><div><span id='spn_equipo_idprod'>"+item.idproducto+"</span></div></td>"+
+            "<td hidden><div><span id='spn_equipo_idprodsol'>"+item.idprodsol+"</span></div></td>"+
+            "<td><div><center><input id='txt_equipo_del' type='checkbox' class='mgc mgc-danger mgc-circle' /></center></div></td>"+
             "</tr>"
         );
+        $("label#lbl_equipo_ideq").text(item.idequipo);
+        /*<i class='icon-checkmark icon-hp-habil'></i>";
+        <i class='icon-cross icon-hp-desh'></i>";        */
         borrar_select2();
         clonar_select2(conta_filas_equipo);
 
@@ -421,18 +810,24 @@ function addEquiposUpdate_equipo(obj){
         conta_filas_equiponr++;
 
         $("#equiponr_1 tbody").append(
-            "<tr id='equiponr_1_fila_"+conta_filas_equiponr+"'>"+
-            "<td><div><p id='p_num_equiponr"+conta_filas_equiponr+"' class='text-center'>"+conta_filas_equiponr+"</p></div></td>"+
-            "<td><div><input id='txt_equiponr_nompro"+conta_filas_equiponr+"' name='txt_equiponr_nompro' type='text' class='form-control' value='"+item.nomproducto+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_codpro"+conta_filas_equiponr+"' name='txt_equiponr_codpro' type='text' class='form-control' value=''/></div></td>"+
-            "<td><div><input id='txt_equiponr_modpro"+conta_filas_equiponr+"' name='txt_equiponr_modpro' type='text' class='form-control' value='"+item.modelo+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_marpro"+conta_filas_equiponr+"' name='txt_equiponr_marpro' type='text' class='form-control' value='"+item.marca+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_medpro"+conta_filas_equiponr+"' name='txt_equiponr_medpro' type='text' class='form-control' value='"+item.umedida+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_canpro"+conta_filas_equiponr+"' name='txt_equiponr_canpro' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
-            "<td><div class='text-center'><button id='equiponr_1_btn_elim_"+conta_filas_equiponr+"' type='button' class='btn btn-sm-delete' onclick='eliminar_fila_tabla_equiposnr(this);'><i class='icon icon-bin '></i></button></div></td>"+
+            "<tr id='equiponr_1_fila_"+conta_filas_equiponr+"' class='equiponr-edit'>"+
+            "<td><div><p class='text-center'>"+conta_filas_equiponr+"</p></div></td>"+
+            "<td><div><input id='txt_equiponr_nompro' type='text' class='form-control' value='"+item.nomproducto+"'/></div></td>"+
+            "<td><div><input id='txt_equiponr_modpro' type='text' class='form-control' value='"+item.modelo+"'/></div></td>"+
+            "<td><div><input id='txt_equiponr_marpro' type='text' class='form-control' value='"+item.marca+"'/></div></td>"+
+            "<td><div><input id='txt_equiponr_umepro' type='text' class='form-control' value='"+item.umedida+"'/></div></td>"+
+            "<td><div><input id='txt_equiponr_canpro' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
+            "<td hidden><div><span id='spn_equiponr_idpreg'>"+item.idprereg+"</span></div></td>"+
+            "<td><div><center><input id='txt_equiponr_del' type='checkbox' class='mgc mgc-danger mgc-circle' /></center></div></td>"+
             "</tr>"
         );
     });
-
-
 }
+
+
+
+
+
+
+
+

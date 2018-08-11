@@ -124,14 +124,16 @@ public class CSolucion {
         return solucion;
     }
 
-
-
-    @RequestMapping("/solucion2")
-    public ModelAndView Solucion2(){
-        ModelAndView modelAndView = new ModelAndView("/logistica/solucion2");
-        modelAndView.addObject("fecha",dateParse);
-        return modelAndView;
+    @RequestMapping("/solucion/VerificarSesionSolucion")
+    public @ResponseBody
+    String VerificarSesionSolucion(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        return session.getAttribute("solucion").toString();
     }
+
+
 
 
 

@@ -4,6 +4,7 @@ var jsonGuardarSolucion = {};
 var arrSolucion = [];
 
 var modSolPend;
+var setSolucion = true;
 
 $(document).ready(function(){
     $('select[name="cmb-solucion-enc"]')
@@ -123,23 +124,23 @@ function BuscarRequerimientos() {
                 const length = arrayData.length;
                 let html = '';
                 for (let i = 0; i < length; ++i) {
-                    if(arrayData[i].fecharegistro_sol === null){arrayData[i].fecharegistro_sol = 'No registrado';}
+                    if(arrayData[i].fecharegistro_sol === null){arrayData[i].fecharegistro_sol = 'NO REGISTRADO';}
                     if(arrayData[i].fecharegistro_rq === null){
-                        arrayData[i].fecharegistro_rq = 'No registrado';
+                        arrayData[i].fecharegistro_rq = 'NO REGISTRADO';
                     }
                     else{
                         arrayData[i].fecharegistro_rq = arrayData[i].fecharegistro_rq.substr(0,10);
                     }
                     html += `<tr name="solucion-requerimiento">`;
-                    html += `<td><div style="width: 5px"><span name="spn-proyecto-num" class="text-center">${i + 1}</span></div></td>`;
+                    html += `<td><div style="width: 5px" class="text-span"><span name="spn-proyecto-num">${i + 1}</span></div></td>`;
                     html += `<td style="display: none"><div><span name="spn-proyecto-idreq">${arrayData[i].idreq}</span></div></td>`;
                     html += `<td style="display: none"><div><span name="spn-proyecto-idsol">${arrayData[i].idsol}</span></div></td>`;
-                    html += `<td><div style="width: 180px"><span name="spn-proyecto-nomreq" class="text-center" />${arrayData[i].requerimiento}</div></td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-regreq" class="text-center" /></div>${arrayData[i].fecharegistro_rq}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nomsol" class="text-center" /></div>${arrayData[i].solucion}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-inisol" class="text-center" /></div>${arrayData[i].fecharegistro_sol}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nompro" class="text-center" /></div>${arrayData[i].nomproyecto}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nomemp" class="text-center" /></div>${arrayData[i].nomempresa}</td>`;
+                    html += `<td><div style="width: 180px" class="text-span"><span name="spn-proyecto-nomreq">${arrayData[i].requerimiento}</span></div></td>`;
+                    html += `<td><div style="width: 150px" class="text-span"><span name="spn-proyecto-regreq">${arrayData[i].fecharegistro_rq}</span></div></td>`;
+                    html += `<td><div style="width: 150px" class="text-span"><span name="spn-proyecto-nomsol">${arrayData[i].solucion}</span></div></td>`;
+                    html += `<td><div style="width: 150px" class="text-span"><span name="spn-proyecto-inisol">${arrayData[i].fecharegistro_sol}</span></div></td>`;
+                    html += `<td><div style="width: 150px" class="text-span"><span name="spn-proyecto-nompro">${arrayData[i].nomproyecto}</span></div></td>`;
+                    html += `<td><div style="width: 150px" class="text-span"><span name="spn-proyecto-nomemp">${arrayData[i].nomempresa}</span></div></td>`;
                     html += `</tr>`;
                 }
 
@@ -167,11 +168,16 @@ function BuscarRequerimientos() {
                             }
                         }
 
+
+                        AddSetSolucion();
+
+
+
                     });
 
             }
             else {
-                // $('#cmb-proyecto-est').html('<option>No se encontraron registros</option>');
+                //$('#cmb-proyecto-est').html('<option>No se encontraron registros</option>');
             }
 
         },
@@ -182,6 +188,38 @@ function BuscarRequerimientos() {
 
 
 }
+
+
+function AddSetSolucion() {
+
+    if(setSolucion){
+        menuNivel3.push(`<li><a id='menu-tab__${mEquipo.idmenu}' class='tab'><span>${mEquipo.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+        menuNivel3.push(`<li><a id='menu-tab__${mServicio.idmenu}' class='tab'><span>${mServicio.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+        menuNivel3.push(`<li><a id='menu-tab__${mViatico.idmenu}' class='tab'><span>${mViatico.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+        $('#tabBar').html(menuNivel3);
+
+        $('#main')
+            .append(`<div id='panel__${mEquipo.idmenu}' class="ocultar"></div>`)
+            .append(`<div id='panel__${mServicio.idmenu}' class="ocultar"></div>`)
+            .append(`<div id='panel__${mViatico.idmenu}' class="ocultar"></div>`);
+
+        $.post(mEquipo.url, function (htmlExterno) {
+            $('#panel__' + mEquipo.idmenu).html(htmlExterno);
+        });
+        $.post(mServicio.url, function (htmlExterno) {
+            $('#panel__' + mServicio.idmenu).html(htmlExterno);
+        });
+        $.post(mViatico.url, function (htmlExterno) {
+            $('#panel__' + mViatico.idmenu).html(htmlExterno);
+        });
+        setSolucion = false;
+    }
+    $('#menu-tab__' + isolJson).addClass('tab-active');
+
+
+
+}
+
 
 
 function GuardarSolucion(){
@@ -390,6 +428,7 @@ function FormatReportReqProEmp (repo) {
         ireqSolucion = repo.idreq;
         isolSolucion = repo.idsol;
         SesionSolucion(isolSolucion);
+        // AddSet();
     }
     return  repo.text || repo.nomempresa + ' - ' + repo.nomproyecto  + ' - ' + repo.requerimiento ;
 }

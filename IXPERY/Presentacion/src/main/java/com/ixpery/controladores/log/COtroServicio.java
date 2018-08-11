@@ -28,7 +28,8 @@ public class COtroServicio {
     BEquipo obEquipo = (BEquipo) applicationContext.getBean("beanEquipo");
     BProductoSolucion obProductoSolucion = (BProductoSolucion) applicationContext.getBean("beanProductoSolucion");
     BPreRegistroProducto obPreReProducto = (BPreRegistroProducto) applicationContext.getBean("beanPreRegistroProducto");
-    BProducto obProducto =(BProducto) applicationContext.getBean("beanProducto");
+    //BOtroServicio obOtroServ =(BOtroServicio) applicationContext.getBean("beanOtroServicio");
+    BServicioSolicitados obServSolic =(BServicioSolicitados) applicationContext.getBean("beanServSolicitados");
     BEmpresa obEmpresa =(BEmpresa) applicationContext.getBean("beanEmpresa");
 
 
@@ -44,7 +45,7 @@ public class COtroServicio {
     public @ResponseBody String BuscarServSolic(
             @RequestParam(value="q") String var
     ) throws Exception {
-        return obProducto.BuscarProductoEquipoCombo(var);
+        return obServSolic.BuscarServicioCombo(var);
     }
 
     /* *//*

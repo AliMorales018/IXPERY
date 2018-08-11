@@ -72,7 +72,7 @@
 <body>
 
 <!-- Buttons -->
-<div class="grid-x grid-padding-x align-center-middle l-comandos">
+<div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">
             <div class="cell large-1 text-center">
@@ -125,7 +125,7 @@
 <!-- otroservis Regitrados-->
 <div id="container_otroservi" style="margin-top: 15px;">
     <div id="otroservi_1" class="actividad grid-container">
-        <label id="lbl_otroservi_ideq"></label>
+        <label id="lbl_otroservi_idotroserv"></label>
         <!-- Table -->
         <div class="grid-x grid-padding-x">
             <div class="cell large-9">
@@ -142,28 +142,28 @@
                     <thead class="thead-primary">
                     <tr>
                         <th id="add_row_otroservi_1" class="text-center" onclick="addOtroServ_otroservi(this);"><i class="icon-plus2 icon-add-row"></i></th>
-                        <th>Producto</th>
-                        <th>Código</th>
-                        <th>Modelo</th>
-                        <th>Marca</th>
-                        <th>U. Medida</th>
+                        <th>Servicio</th>
+                        <%--<th>Código</th>--%>
+                        <th>Descripción</th>
+                        <%--<th>Marca</th>
+                        <th>U. Medida</th>--%>
                         <th style="width: 20px;">Cantidad</th>
-                        <th style="display: none">IdProducto</th>
-                        <th style="display: none">IdProdSolucion</th>
+                        <th style="display: none">IdServSolic</th>
+                        <th style="display: none">IdServSoluc</th>
                         <th class="text-center"><i class="icon icon-bin"></i></th>
                     </tr>
                     </thead>
                     <tbody id="tbody_otroservi">
                     <tr id="otroservi_1_fila_1" class="otroservi-insert">
                         <td><div><p class="text-center">1</p></div></td>
-                        <td><div><select   id="cmb_otroservi_nompro1" name="cmb_otroservi_nompro1" class="select_otroservi_otroservis" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>
-                        <td><div><span id="spn_otroservi_codpro"></span></div></td>
-                        <td><div><span id="spn_otroservi_modpro"></span></div></td>
-                        <td><div><span id="spn_otroservi_marpro"></span></div></td>
-                        <td><div><span id="spn_otroservi_umepro"></span></div></td>
-                        <td><div><input id="txt_otroservi_canpro" type="text" class="form-control" required/></div></td>
-                        <td hidden><div><span id="spn_otroservi_idprod"></span></div></td>
-                        <td hidden><div><span id="spn_otroservi_idprodsol"></span></div></td>
+                        <td><div><select   id="cmb_otroservi_nombre1" name="cmb_otroservi_nombre1" class="select_otroservi_otroservis" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>
+                        <%--<td><div><span id="spn_otroservi_codpro"></span></div></td>--%>
+                        <td><div><input id="txt_otroservi_descri" type="text" class="form-control" required/></div></td>
+                       <%-- <td><div><span id="spn_otroservi_marpro"></span></div></td>
+                        <td><div><span id="spn_otroservi_umepro"></span></div></td>--%>
+                        <td><div><input id="txt_otroservi_cantid" type="text" class="form-control" required/></div></td>
+                        <td hidden><div><span id="spn_otroservi_idservsoli"></span></div></td>
+                        <td hidden><div><span id="spn_otroservi_idservsolu"></span></div></td>
                         <td><div class="text-center"><button type="button" onclick="eliminar_fila_tabla_otroservis(`otroservi_1_fila_1`);"><i class="icon-cross icon-hp-desh"></i></button></div></td>
                     </tr>
                     </tbody>
@@ -194,22 +194,22 @@
                     <thead class="thead-primary">
                     <tr>
                         <th id="add_row_otroservinr_1" class="text-center" onclick="addOtroServi_otroservinr(this);"><i class="icon-plus2 icon-add-row"></i></th>
-                        <th>Producto</th>
-                        <th>Modelo</th>
-                        <th>Marca</th>
-                        <th>U. Medida</th>
+                        <th>Servicio</th>
+                        <th>Descripción</th>
+                        <%--<th>Marca</th>
+                        <th>U. Medida</th>--%>
                         <th>Cantidad</th>
-                        <th style="display: none">IdPreRegProd</th>
+                        <th style="display: none">IdPreRegServ</th>
                         <th class="text-center"><i class="icon icon-bin"></i></th>
                     </tr>
                     </thead>
                     <tbody  id="tbody_otroservinr">
                     <tr id="otroservinr_1_fila_1">
                         <td><div><p class="text-center">1</p></div></td>
-                        <td><div><input id="txt_otroservinr_nompro" type="text" class="form-control" /></div></td>
-                        <td><div><input id="txt_otroservinr_modpro" type="text" class="form-control" /></div></td>
-                        <td><div><input id="txt_otroservinr_marpro" type="text" class="form-control" /></div></td>
-                        <td><div><input id="txt_otroservinr_umepro" type="text" class="form-control" /></div></td>
+                        <td><div><input id="txt_otroservinr_nomserv" type="text" class="form-control" /></div></td>
+                        <td><div><input id="txt_otroservinr_desserv" type="text" class="form-control" /></div></td>
+                        <%--<td><div><input id="txt_otroservinr_marpro" type="text" class="form-control" /></div></td>
+                        <td><div><input id="txt_otroservinr_umepro" type="text" class="form-control" /></div></td>--%>
                         <td><div><input id="txt_otroservinr_canpro" type="text" class="form-control" /></div></td>
                         <td hidden><div><span id="spn_otroservinr_idpreg"></span></div></td>
                         <td><div class="text-center"><button type="button" onclick="eliminar_fila_tabla_otroservisnr(`otroservinr_1_fila_1`);"><i class='icon-cross icon-hp-desh'></i></button></div></td>
@@ -254,14 +254,14 @@
         });
 
         //LISTAR COMBO PRODUCTOS
-        $("#cmb_otroservi_nompro1").select2({
+        $("#cmb_otroservi_nombre1").select2({
             ajax: {
                 url: "/otroservi/buservsolic",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
                     return {
-                        q: params.term
+                        q: params.term.toUpperCase()
                     };
                 },
                 processResults: function (data, params) {
@@ -274,8 +274,8 @@
             placeholder: 'Buscar por servicio . . .',
             escapeMarkup: function (markup) { return markup; },
             minimumInputLength: 3,
-            templateResult: formatRepoProd,
-            templateSelection: formatRepoSelectionProd
+            templateResult: formatRepoServSolic,
+            templateSelection: formatRepoSelectionServSolic
         });
         //COMBO PRODUCTOS
     });
@@ -294,18 +294,16 @@
         return repo.text || repo.nomempresa + " - " + repo.solucion;
     }
 
-    function formatRepoProd (repo) {
+    function formatRepoServSolic (repo) {
         if (repo.loading) {
             return repo.text;
         }
-        var markup = "<div class='selectotroservi2-result-producto'><span class='selectotroservi2-span-result'>PRODUCTO: </span>"+repo.nombre+"</div>"+
-            "<div class=         'selectotroservi2-result-modelo'  ><span class='selectotroservi2-span-result'>MODELO: </span>"+repo.modelo+"</span></div>"+
-            "<div class=         'selectotroservi2-result-marca'   ><span class='selectotroservi2-span-result'>MARCA: </span>"+repo.marca+"</span></div>";
+        var markup = "<div class='selectotroservi2-result-producto'><span class='selectotroservi2-span-result'>SERVICIO: </span>"+repo.serviciosolicitado+"</div>";
         return markup;
     }
 
-    function formatRepoSelectionProd (repo) {
-        return repo.text || repo.nombre;
+    function formatRepoSelectionServSolic (repo) {
+        return repo.text || repo.serviciosolicitado;
     }
 
     function BuscarSolucionOtroServis(id){
@@ -326,14 +324,14 @@
                         $("#otroservi_1 tbody").append(
                             "<tr id='otroservi_1_fila_1' class='otroservi-insert'>"+
                             "<td><div><p class='text-center'>1</p></div></td>"+
-                            "<td><div><select id='cmb_otroservi_nompro1' name='cmb_otroservi_nompro' class='select_otroservi_otroservis' onchange='selCmbProd(this);' style='width: 100%;'></select></div></td>"+
-                            "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
-                            "<td><div><span id='spn_otroservi_modpro'></span></div></td>"+
-                            "<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
-                            "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+
-                            "<td><div><input id='txt_otroservi_canpro' type='text' type='text' class='form-control' required/></div></td>"+
-                            "<td hidden><div><span id='spn_otroservi_idprod'></span></div></td>"+
-                            "<td hidden><div><span id='spn_otroservi_idprodsol'></span></div></td>"+
+                            "<td><div><select id='cmb_otroservi_nombre1' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbProd(this);' style='width: 100%;'></select></div></td>"+
+                            // "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
+                            "<td><div><input id='txt_otroservi_descri' type='text' class='form-control'/></div></td>"+
+/*                            "<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
+                            "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+*/
+                            "<td><div><input id='txt_otroservi_cantid' type='text' class='form-control' required/></div></td>"+
+                            "<td hidden><div><span id='spn_otroservi_idservsoli'></span></div></td>"+
+                            "<td hidden><div><span id='spn_otroservi_idservsolu'></span></div></td>"+
                             "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservis(`otroservi_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
                             "</tr>"
                         );
@@ -346,10 +344,10 @@
                         $("#otroservinr_1 tbody").append(
                             "<tr id='otroservinr_1_fila_1' class='otroservinr-insert'>"+
                             "<td><div><p class='text-center'>1</p></div></td>"+
-                            "<td><div><input id='txt_otroservinr_nompro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_otroservinr_modpro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_otroservinr_marpro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_otroservinr_umepro' type='text' class='form-control' /></div></td>"+
+                            "<td><div><input id='txt_otroservinr_nomserv' type='text' class='form-control' /></div></td>"+
+                            "<td><div><input id='txt_otroservinr_desserv' type='text' class='form-control' /></div></td>"+
+                            /*"<td><div><input id='txt_otroservinr_marpro' type='text' class='form-control' /></div></td>"+
+                            "<td><div><input id='txt_otroservinr_umepro' type='text' class='form-control' /></div></td>"+*/
                             "<td><div><input id='txt_otroservinr_canpro' type='text' class='form-control' /></div></td>"+
                             "<td hidden><div><span id='spn_otroservinr_idpreg'></span></div></td>"+
                             "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservisnr(`otroservinr_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+

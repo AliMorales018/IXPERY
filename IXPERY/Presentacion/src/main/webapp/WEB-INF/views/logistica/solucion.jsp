@@ -19,6 +19,12 @@
             -webkit-appearance: none;
         }
 
+
+
+
+
+
+
     </style>
 
 </head>
@@ -26,7 +32,7 @@
 <body>
 
 <!-- Buttons  -->
-<div class="grid-x grid-padding-x align-center-middle l-comandos">
+<div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-3 large-3 text-white">
         <div class="grid-x align-center-middle">
             <div class="cell large-1 text-center">
@@ -62,7 +68,7 @@
 <!-- End Buttons  -->
 
 <!-- Formulario -->
-<div name="div-solucion-frm">
+<div name="div-solucion-frm" class="content">
     <div class="grid-x ">
         <div class="cell large-2">
             <label class="text-f" id="lbl_solucion_fecha" >${fecha}</label>
@@ -70,9 +76,9 @@
         <div class="cell large-8">
             <div class="grid-x align-center-middle">
                 <div class="cell text-center" style="visibility: visible; margin-top: 10px">
-                    <div><span class="spn-solucion-emp"></span></div>
-                    <div><span class="spn-solucion-pro"></span></div>
-                    <div><span class="spn-solucion-req"></span></div>
+                    <div style="margin: 5px auto;"><span class="spn-solucion-emp text-primary" style="font-size: 14px;"></span></div>
+                    <div style="margin: 5px auto;"><span class="spn-solucion-pro text-primary" style="font-size: 14px;"></span></div>
+                    <div style="margin: 5px auto;"><span class="spn-solucion-req text-primary" style="font-size: 14px;"></span></div>
                 </div>
             </div>
         </div>
@@ -128,24 +134,23 @@
             </div>
         </div>
 
-
     </div>
 </div>
 <!-- End Formulario -->
 
 <!-- Table -->
 <div class="grid-x grid-padding-x align-center-middle l-container">
-    <div class="cell large-9">
+    <div class="cell large-12">
         <table class="table">
             <thead class="thead-primary">
             <tr>
-                <th class="p-3"><p class="text-center">N</p></th>
-                <th class="p-3">Requermiento</th>
-                <th class="p-3">Fecha Registro Requerimiento</th>
-                <th class="p-3">Solucion</th>
-                <th class="p-3">Fecha Inicio Solucion</th>
-                <th class="p-3">Proyecto</th>
-                <th class="p-3">Empresa</th>
+                <th class="p-3 text-primary" style="font-size: 14px; width: 5px"><p class="text-center">N</p></th>
+                <th class="p-3 text-primary" style="font-size: 14px; width: 150px">Requermiento</th>
+                <th class="p-3 text-primary" style="font-size: 14px; width: 100px">Fecha Registro Requerimiento</th>
+                <th class="p-3 text-primary" style="font-size: 14px; width: 150px">Solucion</th>
+                <th class="p-3 text-primary" style="font-size: 14px; width: 100px">Fecha Inicio Solucion</th>
+                <th class="p-3 text-primary" style="font-size: 14px; width: 100px">Proyecto</th>
+                <th class="p-3 text-primary" style="font-size: 14px; width: 100px" >Empresa</th>
             </tr>
             </thead>
             <tbody id="tbody-solucion-requerimientos" name="tbody-solucion-requerimientos" >
@@ -161,6 +166,38 @@
 <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptSolucion.js"></script>
+<script>
+    // window.onscroll = function() {myFunction()};
+    // var navbar = $('.controles-permanentes').get(0);
+    // var sticky = navbar.offsetTop;
+    // function myFunction() {
+    //
+    //
+    //     if (window.pageYOffset >= sticky) {
+    //         navbar.classList.add("sticky")
+    //     } else {
+    //         navbar.classList.remove("sticky");
+    //     }
+    // }
+
+    // var index = menuNivel3.length - 1;
+    // console.log('index');
+    // console.log(index);
+
+
+
+
+    // navbar = $('.controles-permanentes').get(0);
+    // console.log('navbar');
+    // console.log(navbar);
+    //
+    // sticky = navbar.offsetTop;
+    // console.log('sticky');
+    // console.log(sticky);
+    //
+    // window.onscroll = function() {FijarMenu()};
+
+</script>
 
 <!-- End JavaScript -->
 </body>
