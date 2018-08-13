@@ -346,7 +346,7 @@
                             "</tr>"
                         );
                         borrar_select2();
-                        clonar_select2(1);
+                        clonar_select2Equipo(1);
 
                         //EQUIPOS NO REGISTRADOS
                         conta_filas_equiponr=1;
