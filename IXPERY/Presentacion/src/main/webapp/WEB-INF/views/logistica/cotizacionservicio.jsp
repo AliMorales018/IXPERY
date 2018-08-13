@@ -72,6 +72,7 @@
                     let elements;
                     console.log(JsonObj);
                     if(JsonObj.items.length > 0){
+                        console.log("%cNO NOS INTENTES JAKIAR WEY :v", "color: red; font-size: x-large");
                         let JsonServicio = JsonObj.items[0].SERVICIO[0];
                         let count = 1;
                         let countActividades = 1;
@@ -114,7 +115,7 @@
                                                 "</div>"+
                                             "</div>"+
                                             "<div class='grid-x grid-padding-x'>"+
-                                                "<div class='cell large-9'>"+
+                                                "<div class='cell large-10'>"+
                                                     "<table class='table'>"+
                                                         "<thead style='background-color: #E6E6E6'>"+
                                                             "<tr>"+
@@ -122,6 +123,7 @@
                                                                 "<td class='text-center' style='width: 370px'>Cargo Laboral</td>"+
                                                                 "<td class='text-center'>Cantidad</td>"+
                                                                 "<td class='text-center'>Días pago</td>"+
+                                                                "<td class='text-center'>Salario día</td>"+
                                                                 "<td>Sub Total</td>"+
                                                                 "<td>Total</td>"+
                                                             "</tr>"+
@@ -133,7 +135,8 @@
                                                                             "<td><span>"+item.cargolaboral+"</span></td>"+
                                                                             "<td class='text-center'><span>"+item.cantidad+"</span></td>"+
                                                                             "<td class='text-center'><span>"+item.diaspago+"</span></td>"+
-                                                                            "<td><span>S/ "+item.subtotal+"</span></td>"+
+                                                                            "<td><span><b>S/ "+item.salarioxdia+"</b></span></td>"+
+                                                                            "<td><span><b>S/ "+item.subtotal+"</b></span></td>"+
                                                                             "<td><span><b>S/ "+item.total+"</b></span></td>"+
                                                                         "</tr>"
                                                             count++;
@@ -184,7 +187,7 @@
                                                                  $.each(item.cargoslaborales, function (obj, item) {
                                                                      elements +=  "<tr>"+
                                                                                      "<td style='font-size: 11px;'><p class='text-center'>"+countCargosLab+"</p></td>"+
-                                                                                     "<td><span>"+item.nomcargo+"</span></td>"+
+                                                                                     "<td style='width: 280px'><span>"+item.nomcargo+" - "+item.nomarea+"</span></td>"+
                                                                                      "<td class='text-center'><span>"+item.cantidad+"</span></td>"+
                                                                                      "<td class='text-center'><span>"+item.diaslaboral+"</span></td>"+
                                                                                      "<td class='text-center'><span>"+item.diaspago+"</span></td>"+

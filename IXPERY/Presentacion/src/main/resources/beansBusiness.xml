@@ -36,6 +36,7 @@
     <bean id="beanPreRegistroProducto" class="com.ixpery.negocio.log.BPreRegistroProducto" />
     <bean id="beanCargoLaboral" class="com.ixpery.negocio.log.BCargoLaboral" />
     <bean id="beanServicio" class="com.ixpery.negocio.log.BServicio" />
+    <bean id="beanServSolicitados" class="com.ixpery.negocio.log.BServicioSolicitados" />
 
     <!-- Beans RRHH -->
     <bean id="beanEmpleado" class="com.ixpery.negocio.rhh.BEmpleado" />

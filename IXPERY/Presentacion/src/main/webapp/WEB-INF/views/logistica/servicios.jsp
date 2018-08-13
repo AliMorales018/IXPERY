@@ -38,7 +38,7 @@
             bottom:20px;
             right:20px;
             cursor:pointer;
-            padding: 20px;
+            padding: 11px 20px 20px 20px;
             border-radius: 50%;
             z-index: 1;
         }
@@ -114,7 +114,7 @@
     </style>
 </head>
 <body>
-<button title="Agregar actividad" onclick="addActividad();" disabled><span  class="add-actividad" for="Agregar actividad"><i class="icon-plus2"></i></span></button>
+<button class="add-actividad" title="Agregar actividad" onclick="addActividad();" disabled><span for="Agregar actividad"><i class="icon-plus2"></i></span></button>
 <!-- Buttons -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos">
     <div class="cell small-12 medium-4 text-white">
@@ -258,7 +258,6 @@
 </div>
 <!-- Actividades -->
 
-<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
 <script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
 <script src="${urlPublic}/js/select2.js"></script>
 
