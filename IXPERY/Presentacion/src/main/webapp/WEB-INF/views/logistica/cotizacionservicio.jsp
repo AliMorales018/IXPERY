@@ -6,7 +6,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotización de servicio</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
     <style>
         .btn-icon-salario{
             background-color: #D34539;

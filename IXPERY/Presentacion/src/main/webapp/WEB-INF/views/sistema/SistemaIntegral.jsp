@@ -14,7 +14,7 @@
     <style>
 
         .logo-fondo{
-            opacity: .4;
+            opacity: .2;
             /*width: 100vw;*/
             /*height: 100vh;*/
             /*display: flex;*/

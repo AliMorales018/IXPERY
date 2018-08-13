@@ -4,9 +4,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asociar Producto</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
 
     <style>
         .select2-container .select2-selection--single {
@@ -79,7 +78,6 @@
 <!-- End Table -->
 
 <!-- JavaScript -->
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script type="text/javascript" src="${urlPublic}/js/Logistica/ScriptAsociarProducto.js"></script>
 <!-- End JavaScript -->
 </body>

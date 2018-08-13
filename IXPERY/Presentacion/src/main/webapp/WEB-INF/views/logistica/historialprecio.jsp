@@ -4,9 +4,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial de precios</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
 
     <style>
         .icon-hp-habil{
@@ -146,8 +145,6 @@
 </div>
 <!-- End TNuevo Precio -->
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptHistorialPrecio.js"></script>
 <script>
     $(document).ready(function() {

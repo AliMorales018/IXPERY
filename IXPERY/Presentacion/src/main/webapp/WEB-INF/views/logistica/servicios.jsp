@@ -4,8 +4,6 @@
 <html>
 <head>
     <title>Servicios</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css//select2.css">
     <style>
         .select_actividad_cargolab:focus{
             -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
@@ -116,7 +114,7 @@
 <body>
 <button class="add-actividad" title="Agregar actividad" onclick="addActividad();" disabled><span for="Agregar actividad"><i class="icon-plus2"></i></span></button>
 <!-- Buttons -->
-<div class="grid-x grid-padding-x align-center-middle l-comandos">
+<div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">
             <div class="cell large-1 text-center">
@@ -259,7 +257,6 @@
 <!-- Actividades -->
 
 <script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
-<script src="${urlPublic}/js/select2.js"></script>
 
 <script>
     $(document).ready(function(){
