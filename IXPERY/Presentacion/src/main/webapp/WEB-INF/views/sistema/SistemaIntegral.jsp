@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="${urlPublic}/css/styles.css" />
     <link rel="stylesheet" href="${urlPublic}/css/select2.css" />
     <link rel="stylesheet" href="${urlPublic}/css/toast.css" />
+    <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">
     <link rel="icon" href="${urlPublic}/css/Iconos/ixpery.ico" />
     <style>
 
