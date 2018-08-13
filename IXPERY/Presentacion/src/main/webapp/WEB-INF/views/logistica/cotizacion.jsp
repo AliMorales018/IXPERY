@@ -5,9 +5,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizacion</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
-
     <style>
         #tbody-cotizacion-requerimientos tr:hover {
             background-color: #E6E6E6;
@@ -18,9 +15,7 @@
             display: none;
             -webkit-appearance: none;
         }
-
     </style>
-
 </head>
 
 <body>
@@ -91,10 +86,7 @@
 
 
 <!-- JavaScript -->
-<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptCotizacion.js"></script>
-
 <!-- End JavaScript -->
 </body>
 </html>

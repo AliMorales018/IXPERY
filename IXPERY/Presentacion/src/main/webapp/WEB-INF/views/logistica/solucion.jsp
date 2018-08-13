@@ -5,9 +5,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solucions</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
-
     <style>
         #tbody-solucion-requerimientos tr:hover {
             background-color: #E6E6E6;
@@ -18,13 +15,6 @@
             display: none;
             -webkit-appearance: none;
         }
-
-
-
-
-
-
-
     </style>
 
 </head>
@@ -163,42 +153,7 @@
 
 
 <!-- JavaScript -->
-<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptSolucion.js"></script>
-<script>
-    // window.onscroll = function() {myFunction()};
-    // var navbar = $('.controles-permanentes').get(0);
-    // var sticky = navbar.offsetTop;
-    // function myFunction() {
-    //
-    //
-    //     if (window.pageYOffset >= sticky) {
-    //         navbar.classList.add("sticky")
-    //     } else {
-    //         navbar.classList.remove("sticky");
-    //     }
-    // }
-
-    // var index = menuNivel3.length - 1;
-    // console.log('index');
-    // console.log(index);
-
-
-
-
-    // navbar = $('.controles-permanentes').get(0);
-    // console.log('navbar');
-    // console.log(navbar);
-    //
-    // sticky = navbar.offsetTop;
-    // console.log('sticky');
-    // console.log(sticky);
-    //
-    // window.onscroll = function() {FijarMenu()};
-
-</script>
-
 <!-- End JavaScript -->
 </body>
 </html>
