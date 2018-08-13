@@ -37,6 +37,10 @@
     <bean id="beanCargoLaboral" class="com.ixpery.negocio.log.BCargoLaboral" />
     <bean id="beanServicio" class="com.ixpery.negocio.log.BServicio" />
     <bean id="beanServSolicitados" class="com.ixpery.negocio.log.BServicioSolicitados" />
+    <bean id="beanOperaciones" class="com.ixpery.negocio.log.BOperaciones" />
+    <bean id="beanOtroServicio" class="com.ixpery.negocio.log.BOtroServicio" />
+    <bean id="beanServicioProveedor" class="com.ixpery.negocio.log.BServicioProveedor" />
+    <bean id="beanUtilidadCotizacion" class="com.ixpery.negocio.log.BUtilidadCotizacion" />
 
     <!-- Beans RRHH -->
     <bean id="beanEmpleado" class="com.ixpery.negocio.rhh.BEmpleado" />
