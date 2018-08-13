@@ -10,17 +10,13 @@
     <!--meta http-equiv="Content-Type" content="text/html; charset=utf-8" /-->
     <title>IXPERY</title>
     <link rel="stylesheet" href="${urlPublic}/css/styles.css" />
+    <link rel="stylesheet" href="${urlPublic}/css/select2.css" />
+    <link rel="stylesheet" href="${urlPublic}/css/toast.css" />
     <link rel="icon" href="${urlPublic}/css/Iconos/ixpery.ico" />
     <style>
 
         .logo-fondo{
             opacity: .4;
-            /*width: 100vw;*/
-            /*height: 100vh;*/
-            /*display: flex;*/
-            /*justify-content: center;*/
-            /*justify-items: center;*/
-            /*align-items: center;*/
             position: absolute;
             left: 20%;
             top: 40%;
@@ -32,10 +28,6 @@
         .menu-permanente li {
             float: left;
             display: block;
-            /*color: #f2f2f2;*/
-            /*text-align: center;*/
-            /*padding: 14px;*/
-            /*text-decoration: none;*/
         }
 
         .sticky {
@@ -97,22 +89,13 @@
 <footer>
     <p></p>
 </footer>
+
 <!-- JavaScript -->
 <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Sistema/ScriptSistemaIntegral.js"></script>
-<script>
-    // window.onscroll = function() {myFunction()};
-    // var navbar = document.getElementById('tabBar');
-    // var sticky = navbar.offsetTop;
-    // function myFunction() {
-    //     if (window.pageYOffset >= sticky) {
-    //         navbar.classList.add("sticky")
-    //     } else {
-    //         navbar.classList.remove("sticky");
-    //     }
-    // }
-</script>
 <!-- End JavaScript -->
+
 </body>
 </html>
 
