@@ -38,7 +38,7 @@ public class EServicioSolucion {
     private String userregistro;
 
     @SerializedName("4679112")
-    private EServiciosSolicitados idservsol;
+    private Integer idservsol;
 
     @SerializedName("4679113")
     private String enviadocotizar;
@@ -47,7 +47,7 @@ public class EServicioSolucion {
     private String cotizado;
 
     @SerializedName("4679115")
-    private EPreRegistroServicio idpreregserv;
+    private Integer idpreregserv;
 
     @SerializedName("4679116")
     private String fechasolucion;
@@ -59,7 +59,7 @@ public class EServicioSolucion {
         this.idservicsolu = idservicsolu;
     }
 
-    public EServicioSolucion(Integer idservicsolu, EOtroServicio idoserv, EServicioProveedor idservprov, String nomservicio, String descripcion, Integer cantidad, Double subtotal, Double total, String estado, String fecharegistro, String userregistro, EServiciosSolicitados idservsol, String enviadocotizar, String cotizado, EPreRegistroServicio idpreregserv, String fechasolucion) {
+    public EServicioSolucion(Integer idservicsolu, EOtroServicio idoserv, EServicioProveedor idservprov, String nomservicio, String descripcion, Integer cantidad, Double subtotal, Double total, String estado, String fecharegistro, String userregistro, Integer idservsol, String enviadocotizar, String cotizado, Integer idpreregserv, String fechasolucion) {
         this.idservicsolu = idservicsolu;
         this.idoserv = idoserv;
         this.idservprov = idservprov;
@@ -166,11 +166,11 @@ public class EServicioSolucion {
         this.userregistro = userregistro;
     }
 
-    public EServiciosSolicitados getIdservsol() {
+    public Integer getIdservsol() {
         return idservsol;
     }
 
-    public void setIdservsol(EServiciosSolicitados idservsol) {
+    public void setIdservsol(Integer idservsol) {
         this.idservsol = idservsol;
     }
 
@@ -190,11 +190,11 @@ public class EServicioSolucion {
         this.cotizado = cotizado;
     }
 
-    public EPreRegistroServicio getIdpreregserv() {
+    public Integer getIdpreregserv() {
         return idpreregserv;
     }
 
-    public void setIdpreregserv(EPreRegistroServicio idpreregserv) {
+    public void setIdpreregserv(Integer idpreregserv) {
         this.idpreregserv = idpreregserv;
     }
 

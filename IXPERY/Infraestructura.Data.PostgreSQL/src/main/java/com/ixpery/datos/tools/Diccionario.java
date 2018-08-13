@@ -160,10 +160,11 @@ public class Diccionario {
             case"56063":
                 diccionario = getAcc();
                 break;
-            case"coe":
-            case"460381":
-                diccionario = getCoe();
+            case"cod":
+            case"91961":
+                diccionario = getCod();
                 break;
+
             default:
                 diccionario = null;
                 break;
@@ -1021,16 +1022,36 @@ public class Diccionario {
         ssl.put("ssl5", "467915");
         //cantidad
         ssl.put("ssl6", "467916");
-        //subtotal
+        //costosubtotal
         ssl.put("ssl7", "467917");
-        //total
+        //costototal
         ssl.put("ssl8", "467918");
         //estado
-        ssl.put("ssl9", "467919");
+        ssl.put("ssl9",  "467919");
         //fecharegistro
         ssl.put("ssl10", "4679110");
         //userregistro
         ssl.put("ssl11", "4679111");
+        //idservsol
+        ssl.put("ssl12", "4679112");
+        //enviadocotizar
+        ssl.put("ssl13", "4679113");
+        //cotizado
+        ssl.put("ssl14", "4679114");
+        //idpreregserv
+        ssl.put("ssl15", "4679115");
+        //fechasolucion
+        ssl.put("ssl16", "4679116");
+        //costounitario
+        ssl.put("ssl17", "4679117");
+        //preciounitario
+        ssl.put("ssl18", "4679118");
+        //preciosubtotal
+        ssl.put("ssl19", "4679119");
+        //preciototal
+        ssl.put("ssl20", "46791110");
+        //utilidad
+        ssl.put("ssl21", "46791111");
         return ssl;
     }
 
@@ -1088,6 +1109,52 @@ public class Diccionario {
         //fechareg
         acc.put("acc12", "5606312");
         return acc;
+    }
+
+    private Map<String, String> getCod(){
+        Map <String, String> cod = new HashMap<>();
+        //cotidetalle
+        cod.put("cod", "91961");
+        //idcotidetalle
+        cod.put("cod1", "919611");
+        //idcoti
+        cod.put("cod2", "919612");
+        //"codigo"
+        cod.put("cod3", "919613");
+        //"marca"
+        cod.put("cod4", "919614");
+        //"modelo"
+        cod.put("cod5", "919615");
+        //"descripcion"
+        cod.put("cod6", "919616");
+        //"cantidad"
+        cod.put("cod7", "919617");
+        //"costounitario"
+        cod.put("cod8", "919618");
+        //"preciounitario"
+        cod.put("cod9", "919619");
+        //"costosubtotal"
+        cod.put("cod10", "9196110");
+        //"preciosubtotal"
+        cod.put("cod11", "9196111");
+        //"costototalitem"
+        cod.put("cod12", "9196112");
+        //"preciototalitem"
+        cod.put("cod13", "9196113");
+        //"porcentajeutilidaditem"
+        cod.put("cod14", "9196114");
+        //"utilidaditem"
+        cod.put("cod15", "9196115");
+        //"estado"
+        cod.put("cod16", "9196116");
+        //"userregistro"
+        cod.put("cod17", "9196117");
+        //"fecharegistro"
+        cod.put("cod18", "9196118");
+        //"item"
+        cod.put("cod19", "9196119");
+
+        return cod;
     }
 
     private Map<String, String> getCoe(){

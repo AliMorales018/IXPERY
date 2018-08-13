@@ -35,39 +35,38 @@
             line-height: 23px;
         }
 
-        .selectempresa2-result-empresa{
+        .selectempresa2-result-equipo{
             font-size: 9.55px;
             padding: 5px 15px 10px;
         }
-        .selectempresa2-result-proyecto{
+        .selectempresa2-result-equipoproyecto{
             font-size: 9.55px;
             padding: 0px 15px 5px;
         }
-        .selectempresa2-result-solucion{
+        .selectempresa2-result-equiposolucion{
             font-size: 9.55px;
             padding: 0px 15px 5px;
         }
-        .selectempresa2-span-result{
+        .selectempresa2-span-equiporesult{
             font-size: 9.9px;
         }
 
-        .selectequipo2-result-producto{
+        .selectequipo2-result-equipoproducto{
             font-size: 9.55px;
             padding: 5px 15px 10px;
         }
-        .selectequipo2-result-modelo{
+        .selectequipo2-result-equipomodelo{
             font-size: 9.55px;
             padding: 0px 15px 5px;
         }
-        .selectequipo2-result-marca{
+        .selectequipo2-result-equipomarca{
             font-size: 9.55px;
             padding: 0px 15px 5px;
         }
-        .selectequipo2-span-result{
+        .selectequipo2-span-equiporesult{
             font-size: 9.9px;
         }
     </style>
-    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 </head>
 
 <body>
@@ -82,7 +81,7 @@
                 </div>
             </div>
             <div class="cell large-11">
-                <p class="main-title">Item1</p>
+                <p class="main-title">S. Equipo</p>
             </div>
         </div>
     </div>
@@ -244,23 +243,6 @@
 <script>
 
     $(document).ready(function () {
-
-        /* var doc = new jsPDF();
-         var specialElementHandlers = {
-             '#editor': function (element, renderer) {
-                 return true;
-             }
-         };
-
-         $('#cmd').click(function () {
-             doc.fromHTML($('#content').html(), 15, 15, {
-                 'width': 170,
-                 'elementHandlers': specialElementHandlers
-             });
-             doc.save('sample-file.pdf');
-         });
- */
-
         $("#selectEmpresaEquipo_Proyecto").select2({
             ajax: {
                 url: "/equipo/busempresa",
@@ -317,9 +299,9 @@
         if (repo.loading) {
             return repo.text;
         }
-        var markup = "<div class='selectempresa2-result-empresa'><span class='selectempresa2-span-result'>EMPRESA: </span>"+repo.nomempresa+" - " + repo.ruc +"</div>"+
-            "<div class='selectempresa2-result-proyecto'><span class='selectempresa2-span-result'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
-            "<div class='selectempresa2-result-solucion'><span class='selectempresa2-span-result'>SOLUCION: </span>"+repo.solucion+"</span></div>";
+        var markup = "<div class='selectempresa2-result-equipo'><span class='selectempresa2-span-equiporesult'>EMPRESA: </span>"+repo.nomempresa+" - " + repo.ruc +"</div>"+
+            "<div class='selectempresa2-result-equipoproyecto'><span class='selectempresa2-span-equiporesult'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
+            "<div class='selectempresa2-result-equiposolucion'><span class='selectempresa2-span-equiporesult'>SOLUCION: </span>"+repo.solucion+"</span></div>";
         return markup;
     }
 
@@ -331,9 +313,9 @@
         if (repo.loading) {
             return repo.text;
         }
-        var markup = "<div class='selectequipo2-result-producto'><span class='selectequipo2-span-result'>PRODUCTO: </span>"+repo.nombre+"</div>"+
-            "<div class=         'selectequipo2-result-modelo'  ><span class='selectequipo2-span-result'>MODELO: </span>"+repo.modelo+"</span></div>"+
-            "<div class=         'selectequipo2-result-marca'   ><span class='selectequipo2-span-result'>MARCA: </span>"+repo.marca+"</span></div>";
+        var markup = "<div class='selectequipo2-result-equipoproducto'><span class='selectequipo2-span-equiporesult'>PRODUCTO: </span>"+repo.nombre+"</div>"+
+            "<div class=         'selectequipo2-result-equipomodelo'  ><span class='selectequipo2-span-equiporesult'>MODELO: </span>"+repo.modelo+"</span></div>"+
+            "<div class=         'selectequipo2-result-equipomarca'   ><span class='selectequipo2-span-equiporesult'>MARCA: </span>"+repo.marca+"</span></div>";
         return markup;
     }
 

@@ -1,4 +1,4 @@
-var JSONobjGeneralEq2;
+var JSONobjGeneralServ2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowProdSolEq2="";
 var rowEqui2ObjIn = {};
@@ -119,15 +119,14 @@ function eliminarObjetosDuplicados(arr, prop) {
 
 
 var fila=0;
-function clonar_select3(fila,id){
+function clonar_select4(fila,id){
 
-    $('#cmb_equipo2_provee'+fila).select2({
+    $('#cmb_otroservicio2_provee'+fila).select2({
         ajax: {
-            url: "/equipo2/busprovprod",
+            url: "/otroservicio2/busprovserv",
             dataType: 'json',
             delay: 250,
             data: function (params) {
-                //alert(params);
                 return {
                     q: id
                 };
@@ -148,7 +147,7 @@ function clonar_select3(fila,id){
 
 }
 
-function borrar_select3(){
+function borrar_select4(){
     $('.js-example-basic-single').select2("destroy");
 }
 
@@ -159,7 +158,7 @@ function formatRepoProve (repo) {
         return repo.text;
     }
     var markup = "<div class='selectequipo2-result-empresa'><span class='selectequipo2-span-result'>EMPRESA: </span>"+repo.empresa+"</div>"+
-        "<div class='selectequipo2-result-producto'><span class='selectequipo2-span-result'>PRODUCTO: </span>"+repo.nomproducto+"</div>"+
+        "<div class='selectequipo2-result-producto'><span class='selectequipo2-span-result'>PRODUCTO: </span>"+repo.serviciosolicitado+"</div>"+
         "<div class=         'selectequipo2-result-modelo'  ><span class='selectequipo2-span-result'>PRECIO: </span>"+repo.precio+"</span></div>"
     return markup;
 }
@@ -172,10 +171,10 @@ function selCmbProvee(obj){
     let idProdProv=data[0].id;
     let subTot;
     alert(JSON.stringify(data));
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo2_prepro]').text(data[0].precio);
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo2_idprprov]').text(idProdProv);
-    subTot=parseFloat(data[0].precio)*parseFloat($("#"+selectId).closest('tr').find('span[id=spn_equipo2_canpro]').html());
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo2_subtot]').text(subTot);
+    $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_preser]').text(data[0].precio);
+    $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_idserprov]').text(idProdProv);
+    subTot=parseFloat(data[0].precio)*parseFloat($("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_canser]').html());
+    $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_subtot]').text(subTot);
 }
 
 function InsUpdDelEquipo2() {

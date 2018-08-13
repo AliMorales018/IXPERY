@@ -4,7 +4,6 @@ import com.ixpery.utilitario.DtUtilitario;
 import com.ixpery.utilitario.SqlParameter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,6 +16,7 @@ public class JsonGeneral {
 
     public JsonGeneral() throws Exception{
     }
+
 
     public String JsonConvert(String jsonString){
         String json = "";
@@ -407,152 +407,4 @@ public class JsonGeneral {
     }
     //Luis
 
-    //Dante
-    public String JsonITEM2(String jsonString){
-        String json = "";
-        Boolean jsonInsert = false;
-
-        Map <String, Integer> banderas = new HashMap<>();
-        Boolean addBandera;
-
-        if(!jsonString.equals("")){
-            JsonParser parser = new JsonParser();
-            JsonObject root = parser.parse(jsonString).getAsJsonObject();
-            JsonObject newRoot = new JsonObject();
-
-            for(Map.Entry<String, JsonElement> entryRoot : root.entrySet()){
-                String keyRoot = entryRoot.getKey();
-                JsonArray arrayValue = entryRoot.getValue().getAsJsonArray();
-                Map<String, String> diccionario = diccionarioMap.Buscar(keyRoot);
-
-                String newKeyRoot = diccionario.get(keyRoot);
-                Integer id = NextId(newKeyRoot);
-
-                String conca = "";
-
-                JsonArray newArrayValue = new JsonArray();
-                for(JsonElement jsonElement : arrayValue){
-                    JsonObject newObjectChild = new JsonObject();
-
-                    for(Map.Entry<String, JsonElement> entryChild : jsonElement.getAsJsonObject().entrySet()) {
-                        String keyChild = entryChild.getKey();
-
-                        String newKeyChild = diccionario.get(keyChild);
-
-
-                        if(entryChild.getValue().isJsonObject()) {
-                            JsonObject lastObject = new JsonObject();
-                            for(Map.Entry<String, JsonElement> entryLast : entryChild.getValue().getAsJsonObject().entrySet()) {
-                                String keyLast = entryLast.getKey().substring(0,3);
-                                Map<String, String> dic = diccionarioMap.Buscar(keyLast);
-                                String newKeyLast = dic.get(entryLast.getKey()).substring(0,5);
-                                String idNewKeyLast = newKeyLast + "1";
-                                addBandera = true;
-
-                                String keyBandera = entryLast.getValue().toString();
-
-                                if(keyBandera.matches("-+\\d+")){
-                                    for(Map.Entry<String,Integer> entryBandera: banderas.entrySet()){
-                                        if(keyBandera.equals(entryBandera.getKey())){
-                                            addBandera = false;
-                                        }
-                                    }
-                                    if(addBandera){
-                                        Integer idBandera = NextId(newKeyLast);
-                                        idBandera = idBandera + Math.abs(Integer.parseInt(keyBandera)) - 1;
-                                        banderas.put(keyBandera, idBandera);
-                                    }
-
-
-                                    Integer valBandera = banderas.get(keyBandera);
-                                    lastObject.addProperty(idNewKeyLast, valBandera);
-
-                                    if(keyChild.equals("acc2") && entryLast.getKey().equals("act1")){
-                                        conca += valBandera;
-
-                                    }
-
-
-                                }
-                                else if(entryLast.getKey().equals(keyLast + "1") && entryLast.getValue().toString().equals("0")){
-
-
-                                    Integer idFK = NextId(newKeyLast);
-
-
-                                    lastObject.addProperty(idNewKeyLast, idFK);
-
-
-                                }
-                                else{
-                                    lastObject.add(idNewKeyLast, entryLast.getValue());
-
-                                    if(keyChild.equals("acc3") && entryLast.getKey().equals("cal1")){
-                                        conca += entryLast.getValue();
-                                    }
-
-                                }
-
-                            }
-
-                            newObjectChild.add(newKeyChild, lastObject);
-
-                        }
-                        else{
-
-                            addBandera = true;
-
-                            String keyBandera = entryChild.getValue().toString();
-                            if(keyBandera.matches("-+\\d+")){
-                                for(Map.Entry<String,Integer> entryBandera: banderas.entrySet()){
-                                    if(keyBandera.equals(entryBandera.getKey())){
-                                        addBandera = false;
-                                    }
-                                }
-                                if(addBandera){
-                                    Integer idBandera = NextId(newKeyRoot);
-                                    idBandera = idBandera + Math.abs(Integer.parseInt(keyBandera)) - 1;
-                                    banderas.put(keyBandera, idBandera);
-                                }
-
-                                Integer valBandera = banderas.get(keyBandera);
-                                newObjectChild.addProperty(newKeyChild, valBandera);
-
-                            }
-                            else if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
-
-
-                                if(entryChild.getKey().equals("acc1")){
-                                    Integer idFK = Integer.parseInt(conca);
-                                    newObjectChild.addProperty(newKeyRoot + "1", idFK);
-                                    conca = "";
-                                }
-                                else{
-                                    newObjectChild.addProperty(newKeyRoot + "1", id);
-                                    jsonInsert = true;
-                                }
-                            }
-                            else{
-                                newObjectChild.add(newKeyChild, entryChild.getValue());
-                            }
-
-                        }
-
-                    }
-                    newArrayValue.add(newObjectChild);
-
-                    if(jsonInsert){
-                        ++id;
-                    }
-
-                }
-                newRoot.add(newKeyRoot, newArrayValue);
-            }
-            json = newRoot.toString();
-
-        }
-        System.out.println(json);
-        return  json;
-    }
-    //Dante
 }

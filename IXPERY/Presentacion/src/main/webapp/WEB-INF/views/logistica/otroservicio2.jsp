@@ -1,0 +1,246 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<spring:url value="/resources" var="urlPublic"></spring:url>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viaticos</title>
+    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
+    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
+    <style type="text/css">
+
+        .icon-add-row{
+            background-color: #D34539;
+            border-radius: 50%;
+            color:white;
+            padding: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 25.15px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 23px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Buttons -->
+<div class="grid-x grid-padding-x align-center-middle l-comandos">
+    <div class="cell small-12 medium-4 text-white">
+        <div class="grid-x align-center-middle">
+            <div class="cell large-1 text-center">
+                <div class="icon-object">
+                    <i class="icon icon-briefcase"></i>
+                </div>
+            </div>
+            <div class="cell large-11">
+                <p class="main-title">C. Viáticos</p>
+            </div>
+        </div>
+    </div>
+    <div class="cell small-12 medium-4">
+        <div class="grid-x align-center-middle">
+            <div class="cell small-4 medium-4 large-4 text-center">
+                <button type="button" id="btn_otroservicio2_save" class="btn btn-secondary" onclick="InsUpdDelOtroServ2();">Guardar</button>
+            </div>
+            <div class="cell small-4 medium-4 large-4 text-center">
+                <button type="button" id="btn_otroservicio2_regprovee" class="btn btn-secondary" onclick="">Reg. Proveedor</button>
+            </div>
+        </div>
+    </div>
+    <div class="cell small-12 medium-4">
+        <!-- Notify -->
+    </div>
+</div>
+<!-- End Buttons -->
+
+<!-- Date -->
+<div class="l-container-sm">
+    <div class="grid-x grid-padding-x">
+        <div class="cell large-12">
+            <label class="text-f" id="lbl_otroservicio_fecha">17/07/2018</label>
+        </div>
+    </div>
+</div>
+<!-- End Date -->
+
+<!-- otroservicios Regitrados-->
+<div id="container_otroservicios" style="margin-top: 15px;">
+    <div id="otroservicio_2" class="actividad grid-container">
+        <!-- Table -->
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-9">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell large-6 container-combo">
+                        <div class="form-group">
+                            <label class="label text-primary" style="line-height: 1.5;"><b>SOLUCION 1</b></label>
+                            <div hidden><label hidden id="lblidSol">1</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell large-9">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell large-6 container-combo">
+                        <div class="form-group">
+                            <label class="label text-primary" style="line-height: 1.5;"><b>SELECCIONAR PROVEEDOR PARA ASIGNAR PRECIOS</b></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell large-12">
+                <table class="table" id="tbl_otroservicio2">
+                    <thead class="thead-primary">
+                    <tr>
+                        <th class="text-center">N°</th>
+                        <th>Servicio</th>
+                        <th>Descripción</th>
+                        <%--<th>Modelo</th>--%>
+                        <th>Proveedor</th>
+                       <%-- <th>Marca</th>
+                        <th>U. Medida</th>--%>
+                        <th style="width: 20px;">Cantidad</th>
+                        <th>Precio</th>
+                        <th>Subtotal</th>
+                        <th>Actualizar Precio</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="tbody_otroservicio2">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End Table -->
+    </div>
+</div>
+<!-- Fin otroservicios -->
+
+<!-- otroservicios no Registrados-->
+<div id="container_otroservicionr2" style="margin-top: 15px;">
+    <div id="otroservicionr_2" class="actividad grid-container">
+        <!-- Table -->
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-9">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell large-6 container-combo">
+                        <div class="form-group">
+                            <label class="label text-primary" style="line-height: 1.5;"><b>LISTA DE SERVICIOS NUEVOS</b></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell large-12">
+                <table class="table" id="tbl_otroservicionr2">
+                    <thead class="thead-primary">
+                    <tr>
+                        <th class="text-center">N°</th>
+                        <th>Servicio</th>
+                        <th>Descripción</th>
+<%--                        <th>Marca</th>
+                        <th>U. Medida</th>--%>
+                        <th>Cantidad</th>
+                    </tr>
+                    </thead>
+                    <tbody  id="tbody_otroservicionr2">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End Table -->
+    </div>
+</div>
+<!-- Fin otroservicios -->
+
+<!-- JavaScript -->
+<script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio2.js"></script>
+<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
+<script>
+    var contPrimervez=0;
+    var fila=0;
+    var id=2;
+    var conta_filas_otroservicio2=0;
+    var conta_filas_otroservicionr2=0;
+    $(document).ready(function () {
+        $.ajax({
+            method: "POST",
+            url: "/otroservicio2/buscarotroserviciosol",
+            data: {"idsol": id},
+            success: function resultado(valor) {
+
+                JSONobjGeneralServ2 = JSON.parse(valor);
+                // alert(JSON.stringify(JSONobj));
+                $("#tbody_otroservicio2").empty();
+
+                //RECORREMOS otroservicio PRODUCTOS REGISTRADOS
+
+                $.each(JSONobjGeneralServ2.items[1].items2, function (obj, item) {
+                    conta_filas_otroservicio2++;
+                    let cosUnit="";
+                    let subUnit="";
+                    let servprov="";
+                    if(item.costounitario===0){cosUnit="";}else{cosUnit=item.costounitario}
+                    if(item.costosubtotal===0){subUnit="";}else{subUnit=item.costosubtotal}
+                    if(item.idservprov===null){servprov="";}else{servprov=item.idservprov}
+                    //falta total luego agregar si es necesario
+                    $("#otroservicio_2 tbody").append(
+                        "<tr id='otroservicio_2_fila_"+conta_filas_otroservicio2+"' class='otroservicio2-edit'>"+
+                        "<td><div><p class='text-center'>"+conta_filas_otroservicio2+"</p></div></td>"+
+                        "<td><div><span id='spn_otroservicio2_nomserv'>"+item.servsolicitado+"</span></div></td>"+
+                        "<td><div><span id='spn_otroservicio2_desserv'>"+item.descripcion+"</span></div></td>"+
+                        // "<td><div><span id='spn_otroservicio2_modpro'>"+item.modelo+"</span></div></td>"+
+                        "<td><div><select id='cmb_otroservicio2_provee"+conta_filas_otroservicio2+"' name='cmb_otroservicio2_provee' class='select_otroservicio_otroservicios' style='width: 100%;' onchange='selCmbProvee(this);'></select>"+
+/*                        "<td><div><span id='spn_otroservicio2_marpro'>"+item.marca+"</span></div></td>"+
+                        "<td><div><span id='spn_otroservicio2_medpro'>"+item.nomumedida+"</span></div></td>"+*/
+                        "<td><div><span id='spn_otroservicio2_canser'>"+item.cantidad+"</div></td>"+
+                        "<td><div><span id='spn_otroservicio2_preser'>"+cosUnit+"</span></div></td>"+
+                        "<td><div><span id='spn_otroservicio2_subtot'></span>"+subUnit+"</div></td>"+
+                        "<td><div><button id='btn_otroservicio2_actser"+conta_filas_otroservicio2+"' name='btn_otroservicio2_actser"+conta_filas_otroservicio2+"'>Actualizar Precio</button></div></td>"+
+                        "<td hidden><div><span id='spn_otroservicio2_idservicsolu'>"+item.idservicsolu+"</span></div></td>"+
+                        "<td hidden><div><span id='spn_otroservicio2_idotroservi'>"+item.idoserv+"</span></div></td>"+
+                        "<td hidden><div><span id='spn_otroservicio2_idserprov'>"+servprov+"</span></div></td>"+
+                        "<td hidden><div><span id='spn_otroservicio2_idsersoli'>"+item.idservsol+"</span></div></td>"+
+                        "</tr>"
+                    );
+                    borrar_select4();
+                    clonar_select4(conta_filas_otroservicio2,item.idservsol);
+
+                    $("#select2-cmb_otroservicio2_provee"+conta_filas_otroservicio2+"-container").text(item.nomempresa);
+                });
+
+                //NO REGISTRADOS SI EXISTEN MOSTRAR
+
+                $( "#tbody_otroservicionr2" ).empty();
+                $.each(JSONobjGeneralServ2.items[2].items3, function (obj, item) {
+                    conta_filas_otroservicionr2++;
+
+                    $("#otroservicionr_2 tbody").append(
+                        "<tr id='otroservicionr_2_fila_"+conta_filas_otroservicio2+"'>"+
+                        "<td><div><p class='text-center'>"+conta_filas_otroservicionr2+"</p></div></td>"+
+                        "<td><div><span id='spn_otroservicionr2_nomserv'>"+item.servsolicitado+"</span></div></td>"+
+                        "<td><div><span id='spn_otroservicionr2_desserv'>"+item.descripcion+"</span></div></td>"+
+                      /*  "<td><div><span id='spn_otroservicionr2_marpro'>"+item.marca+"</span></div></td>"+
+                        "<td><div><span id='spn_otroservicionr2_medpro'>"+item.umedida+"</span></div></td>"+*/
+                        "<td><div><span id='spn_otroservicionr2_canserv'>"+item.cantidad+"</span></div></td>"+
+                        "</tr>"
+                    );
+                });
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+    });
+</script>
+<!-- End JavaScript -->
+</body>
+</html>
