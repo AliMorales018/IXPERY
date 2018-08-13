@@ -8,8 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viaticos</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
+    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
+    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
     <style type="text/css">
 
         .icon-add-row{
@@ -34,7 +34,7 @@
 <body>
 
 <!-- Buttons -->
-<div class="grid-x grid-padding-x align-center-middle l-comandos">
+<div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">
             <div class="cell large-1 text-center">
@@ -67,7 +67,7 @@
 <div class="l-container-sm">
     <div class="grid-x grid-padding-x">
         <div class="cell large-12">
-            <label class="text-f" id="lbl_otroservicio_fecha">17/07/2018</label>
+            <label class="text-f" id="lbl_otroservicio_fecha">${fecha}</label>
         </div>
     </div>
 </div>
@@ -163,7 +163,7 @@
 
 <!-- JavaScript -->
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio2.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
+<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <script>
     var contPrimervez=0;
     var fila=0;
