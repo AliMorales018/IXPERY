@@ -3,7 +3,24 @@ var menuNivel2 = [];
 var menuNivel3 = [];
 var tabPaneles = [];
 
-var numero = 1;
+var idBro = 0;
+var idActive = 0;
+
+
+var mEquipo = {};
+var mServicio = {};
+var mViatico = {};
+var mEquipoCot = {};
+var mServicioCot = {};
+var mViaticoCot = {};
+var isolJson;
+var icotJson;
+
+
+var navbar;
+var sticky;
+
+
 $(document).ready(function () {
     $.ajax({
         url: '/SistemaIntegral/menu',
@@ -15,6 +32,7 @@ $(document).ready(function () {
             var JSONobj = JSON.parse(data);
             var lenghtDatos = JSONobj.length;
             var datos = JSONobj[1];
+            console.log(JSONobj);
 
             var abc = 0;
             var abc2 = 0;
@@ -26,13 +44,56 @@ $(document).ready(function () {
                     if (key==="id" && String(value)==="1") {
                         menuNivel1.push("<li><a id='menu-pri__" + JSONobj[i].idmenu + "' href='" + JSONobj[i].url + "'><div class='cell small-12 medium-2 large-2 celda'>" + JSONobj[i].descripcion + "</div></a></li>");
                     }
+                    if (key==="id" && String(value)==="2") {
+
+                        if(JSONobj[i].idmenu === 13) {
+                            isolJson = JSONobj[i].idmenu;
+                        }
+
+                        if(JSONobj[i].idmenu === 23){
+                        mEquipo = JSONobj[i];
+                        JSONobj.splice(i,1);
+                        }
+
+                        if(JSONobj[i].idmenu === 29){
+                            mEquipoCot = JSONobj[i];
+                            JSONobj.splice(i,1);
+                        }
+
+                        if(JSONobj[i].idmenu === 30){
+                            mServicio = JSONobj[i];
+                            JSONobj.splice(i,1);
+                        }
+
+                        if(JSONobj[i].idmenu === 31){
+                            mServicioCot = JSONobj[i];
+                            JSONobj.splice(i,1);
+                        }
+
+                        if(JSONobj[i].idmenu === 32){
+                            mViatico = JSONobj[i];
+                            JSONobj.splice(i,1);
+                        }
+
+                        if(JSONobj[i].idmenu === 33){
+                            mViaticoCot = JSONobj[i];
+                            JSONobj.splice(i,1);
+                        }
+
+                        if(JSONobj[i].idmenu === 34) {
+                            icotJson = JSONobj[i].idmenu;
+                        }
+
+
+                    }
+
                 });
             }
             $('#MenuPrincipal').html(menuNivel1);
 
             $('#prueba').on('click', function () {
                 //console.log("SECUNDARIO");
-            })
+            });
 
 
 
@@ -70,7 +131,21 @@ $(document).ready(function () {
                 if ($('#menu-tab__' + idSec).length) {
                     //console.log("Existe");
                     $('div[id ^= panel__]').addClass("ocultar");
-                    $('#panel__' + idSec).removeClass("ocultar");
+                    $('#panel__' + idSec).removeClass("ocultar").find('.controles-permanentes').each(function () {
+                        navbar = $(this).get(0);
+                        console.log('navbar');
+                        console.log(navbar);
+
+                        sticky = navbar.offsetTop;
+                        console.log('sticky');
+                        console.log(sticky);
+
+                        window.onscroll = function() {FijarMenu()};
+                    });
+
+
+
+
                     $('a[id ^= menu-tab__]').removeClass('tab-active');
                     $('#menu-tab__' + idSec).addClass('tab-active');
                     e.preventDefault();
@@ -87,10 +162,40 @@ $(document).ready(function () {
                     e.preventDefault();
                     //$('#panel__' + idSec).load(urlSec);
                     $.post(urlSec, function (htmlexterno) {
-                        $('#panel__' + idSec).html(htmlexterno);
+                        $('#panel__' + idSec).html(htmlexterno).find('.controles-permanentes').each(function () {
+                            navbar = $(this).get(0);
+                            console.log('navbar');
+                            console.log(navbar);
+
+                            sticky = navbar.offsetTop;
+                            console.log('sticky');
+                            console.log(sticky);
+
+                            window.onscroll = function() {FijarMenu()};
+                        });
                     });
                     tabPaneles = [];
+
+                    // $('#main').find('button[id^=btn_solucion_pendientes]').each(function () {
+                    //     alert('entre');
+                    // });
+                    //     .find('.controles-permanentes').each(function(){
+                    //     navbar = $(this).get(0);
+                    //     console.log('navbar');
+                    //     console.log(navbar);
+                    //
+                    //     sticky = navbar.offsetTop;
+                    //     console.log('sticky');
+                    //     console.log(sticky);
+                    //
+                    //     window.onscroll = function() {FijarMenu()};
+                    // });
+
+
                 }
+
+
+
 
             });
 
@@ -107,10 +212,53 @@ $(document).ready(function () {
                 //console.log(idFullTab);
                 //console.log(idTab);
                 //console.log(desTab);
+
+                // if($(this).attr('class') === 'tab-active'){
+                //
+                // }
+
+
+
                 $('div[id ^= panel__]').removeClass("ocultar").addClass("ocultar");
-                $('#panel__' + idTab).removeClass("ocultar");
+                $('#panel__' + idTab).removeClass("ocultar").find('.controles-permanentes').each(function () {
+                    navbar = $(this).get(0);
+                    console.log('navbar');
+                    console.log(navbar);
+
+                    sticky = navbar.offsetTop;
+                    console.log('sticky');
+                    console.log(sticky);
+
+                    window.onscroll = function() {FijarMenu()};
+                });
+
+
+
+                if(menuNivel3.length === 0){
+                    $('#panel__0').removeClass('ocultar');
+                    // $('main').find('div#panel__0').removeClass("ocultar");
+                }
+
+
+
                 $('a[id ^= menu-tab__]').removeClass('tab-active');
                 $('#menu-tab__' + idTab).addClass('tab-active');
+
+
+                if(idActive !== 0){
+                    $('#menu-tab__' + idActive).addClass('tab-active');
+                    $('#panel__' + idActive).removeClass("ocultar");
+                    idActive = 0;
+                }
+
+
+
+                if(idBro !== 0){
+                    $('#menu-tab__' + idBro).addClass('tab-active');
+                    $('#panel__' + idBro).removeClass("ocultar");
+                    idBro = 0;
+                }
+
             });
 
             $('#tabBar').on('click', 'div[id ^= tab-cerrar__]', function (e) {
@@ -118,10 +266,11 @@ $(document).ready(function () {
                 var idFullCerrar = $(this).prop("id");
                 var idCerrar = idFullCerrar.substring(12);
                 var textTab = $('#menu-tab__' + idCerrar).text();
-                //console.log(idFullCerrar);
-                //console.log(idCerrar);
-                $(this).parent('li a').remove();
-                $('#panel__' + idCerrar).remove();
+
+
+                // $(this).closest('li').prev().children().addClass('tab-active');
+
+
                 //console.log(menuNivel3);
                 //var contenido = "<li><a id='menu-tab__" + idCerrar + "' class='tab'>" + textTab + "</a><div id='tab-cerrar__" + idCerrar + "' class='icon-cerrar'><i class='icon-x'></i></div></li>"
                 var contenido = "<li><a id='menu-tab__" + idCerrar + "' class='tab'><span>" + textTab + "</span><div id='tab-cerrar__" + idCerrar + "' class='icon-cerrar'><i class='icon-x'></i></div></a></li>";
@@ -130,6 +279,78 @@ $(document).ready(function () {
                 //console.log(irem);
                 menuNivel3.splice(irem, 1);
                 //console.log(menuNivel3);
+
+                console.log('menuNivel3.length');
+                console.log(menuNivel3.length);
+
+
+
+                if(menuNivel3.length > 0){
+                    // console.log('a');
+                    // console.log(a);
+                    if($(this).closest('a').attr('class').includes('tab-active')){
+                        if(irem !== 0){
+                            console.log('PREV');
+                            let idPrev = $(this).closest('li').prev().find('a').attr('id');
+                            idBro = idPrev.substring(10);
+                            console.log(idBro);
+                        }
+                        else{
+                            console.log('NEXT');
+                            let idNext = $(this).closest('li').next().find('a').attr('id');
+                            idBro = idNext.substring(10);
+                            console.log(idBro);
+                        }
+                    }
+                    else{
+                        let act = $('.tab-active').attr('id');
+                        idActive = act.substring(10);
+                        console.log(idActive);
+                    }
+
+
+
+
+                }
+
+
+
+
+                // $(this).parent('li a').remove();
+                $('#menu-tab__' + idCerrar).closest('li').remove();
+                $('#panel__' + idCerrar).remove();
+
+
+                console.log('idCerrar');
+                console.log(idCerrar);
+                console.log('isolJson');
+                console.log(isolJson);
+
+                if(idCerrar == isolJson){
+                    menuNivel3.splice(menuNivel3.indexOf(mEquipo), 1);
+                    menuNivel3.splice(menuNivel3.indexOf(mServicio), 1);
+                    menuNivel3.splice(menuNivel3.indexOf(mViatico), 1);
+                    $('#menu-tab__' + mEquipo.idmenu).closest('li').remove();
+                    $('#menu-tab__' + mServicio.idmenu).closest('li').remove();
+                    $('#menu-tab__' + mViatico.idmenu).closest('li').remove();
+                    $('#panel__' + mEquipo.idmenu).remove();
+                    $('#panel__' + mServicio.idmenu).remove();
+                    $('#panel__' + mViatico.idmenu).remove();
+                }
+
+                if(idCerrar == icotJson){
+                    menuNivel3.splice(menuNivel3.indexOf(mEquipoCot), 1);
+                    menuNivel3.splice(menuNivel3.indexOf(mServicioCot), 1);
+                    menuNivel3.splice(menuNivel3.indexOf(mViaticoCot), 1);
+                    $('#menu-tab__' + mEquipoCot.idmenu).closest('li').remove();
+                    $('#menu-tab__' + mServicioCot.idmenu).closest('li').remove();
+                    $('#menu-tab__' + mViaticoCot.idmenu).closest('li').remove();
+                    $('#panel__' + mEquipoCot.idmenu).remove();
+                    $('#panel__' + mServicioCot.idmenu).remove();
+                    $('#panel__' + mViaticoCot.idmenu).remove();
+                }
+
+
             });
 
 
@@ -141,3 +362,13 @@ $(document).ready(function () {
     });
 
 });
+
+
+
+function FijarMenu() {
+    if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+    } else {
+        navbar.classList.remove("sticky");
+    }
+}

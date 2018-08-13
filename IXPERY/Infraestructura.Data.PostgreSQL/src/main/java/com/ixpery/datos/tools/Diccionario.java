@@ -732,17 +732,17 @@ public class Diccionario {
         ser.put("ser2", "461622");
         //nomservicio
         ser.put("ser3", "461623");
-        //subtotal
+        //costototal
         ser.put("ser4", "461624");
-        //numcuadrillas
+        //costototalamostrar
         ser.put("ser5", "461625");
-        //unitactividad
+        //preciototal
         ser.put("ser6", "461626");
         //porcentdepreciacion
         ser.put("ser7", "461627");
-        //aumento
+        //porcentran
         ser.put("ser8", "461628");
-        //total
+        //preciototalmostrar
         ser.put("ser9", "461629");
         //estado
         ser.put("ser10", "4616210");
@@ -752,6 +752,8 @@ public class Diccionario {
         ser.put("ser12", "4616212");
         //userregistro
         ser.put("ser13", "4616213");
+        //utilidad
+        ser.put("ser14", "4616214");
         return ser;
     }
 
@@ -787,6 +789,8 @@ public class Diccionario {
         act.put("act13", "4617213");
         //userregistro
         act.put("act14", "4617214");
+        //adicionales
+        act.put("act15", "4617215");
         return act;
     }
 
@@ -802,7 +806,7 @@ public class Diccionario {
         pet.put("pet3", "461823");
         //cantidad
         pet.put("pet4", "461824");
-        //horas
+        //diaspago
         pet.put("pet5", "461825");
         //subtotal
         pet.put("pet6", "461826");
@@ -812,6 +816,12 @@ public class Diccionario {
         pet.put("pet8", "461828");
         //userregistro
         pet.put("pet9", "461829");
+        //idcargo
+        pet.put("pet10", "4618210");
+        //contador
+        pet.put("pet11", "4618211");
+        //estado
+        pet.put("pet12", "4618212");
         return pet;
     }
 
@@ -1074,18 +1084,30 @@ public class Diccionario {
         Map <String, String> acc = new HashMap<>();
         //actividadcargo
         acc.put("acc", "56063");
-        //idactividad
+        //idactividadcargo
         acc.put("acc1", "560631");
-        //idcargo
+        //idactividad
         acc.put("acc2", "560632");
-        //cantidad
+        //idcargo
         acc.put("acc3", "560633");
-        //horas
+        //cantidad
         acc.put("acc4", "560634");
-        //subtotallaboral
+        //dias laborables
         acc.put("acc5", "560635");
-        //totallaboral
+        //costosubtotallaboral
         acc.put("acc6", "560636");
+        //costototallaboral
+        acc.put("acc7", "560637");
+        //costosalariodia
+        acc.put("acc8", "560638");
+        //diaspago
+        acc.put("acc9", "560639");
+        //estado
+        acc.put("acc10", "5606310");
+        //usuarioreg
+        acc.put("acc11", "5606311");
+        //fechareg
+        acc.put("acc12", "5606312");
         return acc;
     }
 
@@ -1143,6 +1165,5 @@ public class Diccionario {
         coe.put("coe1", "4603811");
         return coe;
     }
-
 
 }
