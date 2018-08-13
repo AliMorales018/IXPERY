@@ -4,10 +4,6 @@
 <html>
 <head>
     <title>Proyecto</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
-    <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">
-
     <style>
         #tbody_proyecto tr:hover {
             background-color: #E6E6E6;
@@ -104,23 +100,7 @@
 </div>
 <!-- End Table -->
 
-
-<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptProyecto.js"></script>
-<script>
-    // console.log('index');
-    // console.log(index);
 
-    // navbar = $('.controles-permanentes').get(1);
-    // console.log('navbar');
-    // console.log(navbar);
-    //
-    // sticky = navbar.offsetTop;
-    // console.log('sticky');
-    // console.log(sticky);
-    //
-    // window.onscroll = function() {FijarMenu()};
-</script>
 </body>
 </html>
