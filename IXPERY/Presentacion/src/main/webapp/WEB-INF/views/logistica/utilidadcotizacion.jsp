@@ -9,9 +9,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UtilidadCoti</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
-    <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">
+    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
+    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
+    <%--<link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">--%>
     <style type="text/css">
 
         .select2-container .select2-selection--single {
@@ -43,7 +43,7 @@
 <body>
 
 <!-- Buttons -->
-<div class="grid-x grid-padding-x align-center-middle l-comandos">
+<div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">
             <div class="cell large-1 text-center">
@@ -73,7 +73,7 @@
     <div class="l-container-sm">
         <div class="grid-x grid-padding-x">
             <div class="cell large-12">
-                <label class="text-f" id="lbl_equipo_fecha">17/07/2018</label>
+                <label class="text-f" id="lbl_equipo_fecha">${fecha}</label>
             </div>
         </div>
     </div>
@@ -344,7 +344,7 @@
         }
     }
 </script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
+<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <!-- End JavaScript -->
 </body>
 </html>
