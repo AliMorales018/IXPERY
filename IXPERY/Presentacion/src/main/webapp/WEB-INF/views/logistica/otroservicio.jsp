@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OtrosServicios</title>
+    <title>Viaticos</title>
     <link rel="stylesheet" href="${urlPublic}/css/styles.css">
     <link rel="stylesheet" href="${urlPublic}/css/select2.css">
     <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">
@@ -35,35 +35,27 @@
             line-height: 23px;
         }
 
-        .selectempresa2-result-empresa{
+        .selectempresa2-result-otroservicioempresa{
             font-size: 9.55px;
             padding: 5px 15px 10px;
         }
-        .selectempresa2-result-proyecto{
+        .selectempresa2-result-otroservicioproyecto{
             font-size: 9.55px;
             padding: 0px 15px 5px;
         }
-        .selectempresa2-result-solucion{
+        .selectempresa2-result-otroserviciosolucion{
             font-size: 9.55px;
             padding: 0px 15px 5px;
         }
-        .selectempresa2-span-result{
+        .selectempresa2-span-otroservicioresult{
             font-size: 9.9px;
         }
 
-        .selectotroservi2-result-producto{
+        .selectotroservi2-result-otroservicioproducto{
             font-size: 9.55px;
             padding: 5px 15px 10px;
         }
-        .selectotroservi2-result-modelo{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectotroservi2-result-marca{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectotroservi2-span-result{
+        .selectotroservi2-span-otroservicioresult{
             font-size: 9.9px;
         }
     </style>
@@ -81,7 +73,7 @@
                 </div>
             </div>
             <div class="cell large-11">
-                <p class="main-title">Item3</p>
+                <p class="main-title">S. Viáticos</p>
             </div>
         </div>
     </div>
@@ -156,7 +148,7 @@
                     <tbody id="tbody_otroservi">
                     <tr id="otroservi_1_fila_1" class="otroservi-insert">
                         <td><div><p class="text-center">1</p></div></td>
-                        <td><div><select   id="cmb_otroservi_nombre1" name="cmb_otroservi_nombre1" class="select_otroservi_otroservis" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>
+                        <td><div><select   id="cmb_otroservi_nombre1" name="cmb_otroservi_nombre1" class="select_otroservi_otroservis" onchange="selCmbServ(this)" style="width: 100%;"></select></div></td>
                         <%--<td><div><span id="spn_otroservi_codpro"></span></div></td>--%>
                         <td><div><input id="txt_otroservi_descri" type="text" class="form-control" required/></div></td>
                        <%-- <td><div><span id="spn_otroservi_marpro"></span></div></td>
@@ -284,9 +276,9 @@
         if (repo.loading) {
             return repo.text;
         }
-        var markup = "<div class='selectempresa2-result-empresa'><span class='selectempresa2-span-result'>EMPRESA: </span>"+repo.nomempresa+" - " + repo.ruc +"</div>"+
-            "<div class='selectempresa2-result-proyecto'><span class='selectempresa2-span-result'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
-            "<div class='selectempresa2-result-solucion'><span class='selectempresa2-span-result'>SOLUCION: </span>"+repo.solucion+"</span></div>";
+        var markup = "<div class='selectempresa2-result-otroservicioempresa'><span class='selectempresa2-span-otroservicioresult'>EMPRESA: </span>"+repo.nomempresa+" - " + repo.ruc +"</div>"+
+            "<div class='selectempresa2-result-otroservicioproyecto'><span class='selectempresa2-span-otroservicioresult'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
+            "<div class='selectempresa2-result-otroserviciosolucion'><span class='selectempresa2-span-otroservicioresult'>SOLUCION: </span>"+repo.solucion+"</span></div>";
         return markup;
     }
 
@@ -298,7 +290,7 @@
         if (repo.loading) {
             return repo.text;
         }
-        var markup = "<div class='selectotroservi2-result-producto'><span class='selectotroservi2-span-result'>SERVICIO: </span>"+repo.serviciosolicitado+"</div>";
+        var markup = "<div class='selectotroservi2-result-otroservicioproducto'><span class='selectotroservi2-span-otroservicioresult'>SERVICIO: </span>"+repo.serviciosolicitado+"</div>";
         return markup;
     }
 
@@ -310,10 +302,11 @@
         if(id!="" || id!=undefined){
             $.ajax({
                 method: "POST",
-                url: "/equipo/buscarequiposol",
+                url: "/otroservi/buscarotroservsol",
                 data: {"idsol": id},
                 success: function resultado(valor) {
                     JSONobjGeneralOtSer = JSON.parse(valor);
+                    console.log(JSONobjGeneralOtSer);
                     if(JSONobjGeneralOtSer.items.length>0){
                         estOperaOtSer=1;
                         addOtroServisUpdate_otroservi(valor);
@@ -324,7 +317,7 @@
                         $("#otroservi_1 tbody").append(
                             "<tr id='otroservi_1_fila_1' class='otroservi-insert'>"+
                             "<td><div><p class='text-center'>1</p></div></td>"+
-                            "<td><div><select id='cmb_otroservi_nombre1' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbProd(this);' style='width: 100%;'></select></div></td>"+
+                            "<td><div><select id='cmb_otroservi_nombre1' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbServ(this);' style='width: 100%;'></select></div></td>"+
                             // "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
                             "<td><div><input id='txt_otroservi_descri' type='text' class='form-control'/></div></td>"+
 /*                            "<td><div><span id='spn_otroservi_marpro'></span></div></td>"+

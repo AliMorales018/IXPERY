@@ -1,6 +1,7 @@
 package com.ixpery.datos.log;
 
 import com.ixpery.datos.tools.DConexion;
+import com.ixpery.datos.tools.JsonGeneral;
 import com.ixpery.datos.tools.JsonParcellable;
 import com.ixpery.entidades.log.*;
 import com.ixpery.utilitario.Datacnx;
@@ -16,6 +17,7 @@ public class DOtroServicio {
     Datacnx dataCnx = new DConexion().ConectarBD();
     DtUtilitario com = new DtUtilitario(dataCnx);
     List<SqlParameter> listParameter = new ArrayList<SqlParameter>();
+    JsonGeneral jsonGeneral = new JsonGeneral();
 
     public static String getNameTable() { return "46758"; }
     public static String getKeyId() { return "467581"; }
@@ -56,7 +58,7 @@ public class DOtroServicio {
         }
     }
 
-    public void InsertarEquipo(String json) throws Exception {
+    public void InsertarOtroServicio(String json) throws Exception {
         try{
             listParameter.clear();
             SqlParameter paramJson = new SqlParameter("@json", json);
@@ -148,31 +150,29 @@ public class DOtroServicio {
         }
     }
 
-    public String returnJson(Object objectEquipo, Object objectProdSolucion,List<EPreRegistroProducto> listPreRegProducto){
+    public String returnJson(Object objectOtroServ, Object objectServSolucion,List<EPreRegistroServicio> listPreRegServicio){
         JsonParcellable parser = new JsonParcellable();
-        parser.addObjectParse(getNameTable(), objectEquipo);
-        parser.addObjectParse(DProductoSolucion.getNameTable(), objectProdSolucion);
-        if(listPreRegProducto.size()==1) {
-            if (listPreRegProducto.get(0).getNomproducto() == "" ||
-                    listPreRegProducto.get(0).getModelo() == "" ||
-                    listPreRegProducto.get(0).getMarca() == "" ||
-                    listPreRegProducto.get(0).getUmedida() == "" ||
-                    listPreRegProducto.get(0).getCantidad() == 0)
+        parser.addObjectParse(getNameTable(), objectOtroServ);
+        parser.addObjectParse(DServicioSolucion.getNameTable(), objectServSolucion);
+        if(listPreRegServicio.size()==1) {
+            if (listPreRegServicio.get(0).getServsolicitado() == "" ||
+                    listPreRegServicio.get(0).getDescripcion() == "" ||
+                    listPreRegServicio.get(0).getCantidad() == 0)
             {
 
             }
             else
             {
-                Object objectPreRegProducto;
-                objectPreRegProducto=listPreRegProducto;
-                parser.addObjectParse(DPreRegistroProducto.getNameTable(), objectPreRegProducto);
+                Object objectPreRegServicio;
+                objectPreRegServicio=listPreRegServicio;
+                parser.addObjectParse(DPreRegistroServicio.getNameTable(), objectPreRegServicio);
             }
         }
         else
         {
-            Object objectPreRegProducto;
-            objectPreRegProducto=listPreRegProducto;
-            parser.addObjectParse(DPreRegistroProducto.getNameTable(), objectPreRegProducto);
+            Object objectPreRegServicio;
+            objectPreRegServicio=listPreRegServicio;
+            parser.addObjectParse(DPreRegistroServicio.getNameTable(), objectPreRegServicio);
         }
 
         String jsonParse = parser.getJsonParcellable(1);
@@ -181,24 +181,25 @@ public class DOtroServicio {
     }
 
 
-   /* public String addListId(List<EOtroServicio> listAddIdOtroServicio, List<EServicioSolucion> listServicioSolucion, List<EPreRegistroServicio> listPreRegServicio) throws Exception {
+     public String addListId(List<EOtroServicio> listAddIdOtroServicio, List<EServicioSolucion> listServicioSolucion, List<EPreRegistroServicio> listPreRegServicio) throws Exception {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        Integer NextIdEquipo =  NextId();
-        Integer contaProdSolucion=0;
+        Integer NextIdOtroServ =  NextId();
+        Integer contaServSolucion=0;
         String json="";
         for (int i = 0; i < listAddIdOtroServicio.size();i++){
-            listAddIdOtroServicio.get(i).setIdoserv(NextIdEquipo);
+            listAddIdOtroServicio.get(i).setIdoserv(NextIdOtroServ);
         }
 
         DServicioSolucion odServSolucion = new DServicioSolucion();
         listServicioSolucion = odServSolucion.AddListId(listServicioSolucion);
 
         for (int i = 0; i < listServicioSolucion.size();i++){
-            listServicioSolucion.get(i).setIdoserv(new EOtroServicio(NextIdEquipo));
+            listServicioSolucion.get(i).setIdoserv(new EOtroServicio(NextIdOtroServ));
         }
 
         if(listPreRegServicio.size()==1) {
             if (listPreRegServicio.get(0).getServsolicitado() == "" ||
+                    listPreRegServicio.get(0).getDescripcion() == "" ||
                     listPreRegServicio.get(0).getCantidad() == 0 )
             {
 
@@ -206,69 +207,73 @@ public class DOtroServicio {
             }
             else
             {
-                contaProdSolucion=listServicioSolucion.size() -1;
-                Integer NextProdSolucion=listServicioSolucion.get(contaProdSolucion).getIdservicsolu();
+                contaServSolucion=listServicioSolucion.size() -1;
+                Integer NextServSolucion=listServicioSolucion.get(contaServSolucion).getIdservicsolu();
 
-                DPreRegistroProducto odPreRegProducto = new DPreRegistroProducto();
-                listPreRegServicio = odPreRegProducto.AddListId(listPreRegProducto);
+                DPreRegistroServicio odPreRegServicio = new DPreRegistroServicio();
+                listPreRegServicio = odPreRegServicio.AddListId(listPreRegServicio);
 
                 EServicioSolucion oeServSolucion;
 
-                for (int i = 0; i < listPreRegProducto.size();i++){
-                    NextProdSolucion++;
-                    listPreRegProducto.get(i).setIdprodsol(new EProductoSolucion(NextProdSolucion));
+                for (int i = 0; i < listPreRegServicio.size();i++){
+                    NextServSolucion++;
+                    listPreRegServicio.get(i).setIdservicsolu(new EServicioSolucion(NextServSolucion));
 
                     oeServSolucion = new EServicioSolucion();
-                    oeServSolucion.setIdservicsolu(NextProdSolucion);
-                    oeServSolucion.setIdoserv(new EOtroServicio(NextIdEquipo));
-                    oeServSolucion.setCantidad(listPreRegProducto.get(i).getCantidad());
+                    oeServSolucion.setIdservicsolu(NextServSolucion);
+                    oeServSolucion.setIdoserv(new EOtroServicio(NextIdOtroServ));
+                    oeServSolucion.setNomservicio(listPreRegServicio.get(i).getServsolicitado());
+                    oeServSolucion.setDescripcion(listPreRegServicio.get(i).getDescripcion());
+                    oeServSolucion.setCantidad(listPreRegServicio.get(i).getCantidad());
                     oeServSolucion.setEstado("1");
                     oeServSolucion.setFecharegistro(timestamp.toString());
                     //CAMBIAR LUEGO POR LA SESSIÓN
                     oeServSolucion.setUserregistro("LUIS AZALDE LEYVA");
                     oeServSolucion.setEnviadocotizar("1");
-                    oeServSolucion.setIdprereg(listPreRegProducto.get(i).getIdprereg());
+                    oeServSolucion.setIdpreregserv(listPreRegServicio.get(i).getIdpreregserv());
 
                     listServicioSolucion.add(oeServSolucion);
                 }
-                json = returnJson(listAddIdOtroServicio,listServicioSolucion,listPreRegProducto);
+                json = returnJson(listAddIdOtroServicio,listServicioSolucion,listPreRegServicio);
 
             }
         }
         else
         {
-            contaProdSolucion=listProdSolucion.size() -1;
-            Integer NextProdSolucion=listProdSolucion.get(contaProdSolucion).getIdprodsol();
+            contaServSolucion=listServicioSolucion.size() -1;
+            Integer NextServSolucion=listServicioSolucion.get(contaServSolucion).getIdservicsolu();
 
-            DPreRegistroProducto odPreRegProducto = new DPreRegistroProducto();
-            listPreRegProducto = odPreRegProducto.AddListId(listPreRegProducto);
+            DPreRegistroServicio odPreRegServicio = new DPreRegistroServicio();
+            listPreRegServicio = odPreRegServicio.AddListId(listPreRegServicio);
 
-            EProductoSolucion oeProdSolucion;
+            EServicioSolucion oeServSolucion;
 
-            for (int i = 0; i < listPreRegProducto.size();i++){
-                NextProdSolucion++;
-                listPreRegProducto.get(i).setIdprodsol(new EProductoSolucion(NextProdSolucion));
+            for (int i = 0; i < listPreRegServicio.size();i++){
+                NextServSolucion++;
+                listPreRegServicio.get(i).setIdservicsolu(new EServicioSolucion(NextServSolucion));
 
-                oeProdSolucion = new EProductoSolucion();
-                oeProdSolucion.setIdprodsol(NextProdSolucion);
-                oeProdSolucion.setIdequipo(new EEquipo(NextIdEquipo));
-                oeProdSolucion.setCantidad(listPreRegProducto.get(i).getCantidad());
-                oeProdSolucion.setEstado("1");
-                oeProdSolucion.setFecharegistro(timestamp.toString());
+                oeServSolucion = new EServicioSolucion();
+                oeServSolucion.setIdservicsolu(NextServSolucion);
+                oeServSolucion.setIdoserv(new EOtroServicio(NextIdOtroServ));
+                oeServSolucion.setNomservicio(listPreRegServicio.get(i).getServsolicitado());
+                oeServSolucion.setDescripcion(listPreRegServicio.get(i).getDescripcion());
+                oeServSolucion.setCantidad(listPreRegServicio.get(i).getCantidad());
+                oeServSolucion.setEstado("1");
+                oeServSolucion.setFecharegistro(timestamp.toString());
                 //CAMBIAR LUEGO POR LA SESSIÓN
-                oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
-                oeProdSolucion.setEnviadocotizar("1");
-                oeProdSolucion.setIdprereg(listPreRegProducto.get(i).getIdprereg());
+                oeServSolucion.setUserregistro("LUIS AZALDE LEYVA");
+                oeServSolucion.setEnviadocotizar("1");
+                oeServSolucion.setIdpreregserv(listPreRegServicio.get(i).getIdpreregserv());
 
-                listProdSolucion.add(oeProdSolucion);
+                listServicioSolucion.add(oeServSolucion);
             }
-            json = returnJson(listAddIdOtroServicio,listProdSolucion,listPreRegProducto);
+            json = returnJson(listAddIdOtroServicio,listServicioSolucion,listPreRegServicio);
         }
 
 
 
         return json;
-    }*/
+    }
 
 
 
@@ -314,15 +319,47 @@ public class DOtroServicio {
     }
 
     //LUIS 21/07/18 10:49 --
-    public String BuscarProductoEquipoCombo(String var) throws Exception{
+    public String BuscarSolucionOtroServ(String var) throws Exception{
         listParameter.clear();
         SqlParameter pValorLike = new SqlParameter("varLike", Integer.parseInt(var));
         listParameter.add(pValorLike);
-        return com.EjecutaConsultaJson("filtrar_equipo_item1_json", listParameter);
+        return com.EjecutaConsultaJson("filtrar_equipo_item3_json", listParameter);
+    }
+
+
+
+    //FIN LUIS
+    //FIN LUIS
+    public String PonerIds(List<EOtroServicio> listOtroServ, List<EServicioSolucion> listServSolucion, List<EPreRegistroServicio> listPreRegServicio) throws Exception {
+        String json = addListId(listOtroServ,listServSolucion,listPreRegServicio);
+        InsertarOtroServicio(json);
+
+        return "";
+    }
+
+    //LUIS 26/07/18 15:27
+    public void GuardarFull(String json) {
+        try{
+            listParameter.clear();
+            json = jsonGeneral.JsonITEM3(json);
+            SqlParameter paramJson = new SqlParameter("@json", json);
+            listParameter.add(paramJson);
+            com.TransUnica("gen_guardar", listParameter);
+        }
+        catch (Exception e){
+            throw e;
+        }
     }
 
     //FIN LUIS
+    //LUIS 21/07/18 10:49 --
+    public String BuscarServiOtroCombo(String var) throws Exception{
+        listParameter.clear();
+        SqlParameter pValorLike = new SqlParameter("varLike", Integer.parseInt(var));
+        listParameter.add(pValorLike);
+        return com.EjecutaConsultaJson("filtrar_equipo_item3_json", listParameter);
+    }
+
+
     //FIN LUIS
-
-
 }

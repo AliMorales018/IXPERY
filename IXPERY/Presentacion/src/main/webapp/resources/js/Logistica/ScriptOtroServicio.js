@@ -1,69 +1,93 @@
 var JSONobjGeneralOtSer;
 var estOperaOtSer=0;//0: guardar simple//1:updatetotal(sav-updt-del)
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
-var idRowProdSolEq="";
+var idRowServSol="";
 // var rowEquiObjIn = {};
-var rowEquiObjOut = {};
+var rowOtroServObjOut = {};
 // var arrProdSolEq = [];
 // var arrProdNoRegSol = [];
-var jsonGuardarFullEq = {};
-var arrGuardarEquipo = [];
-var arrGuardarPreRegEq = [];
-var arrProEditEq = [];
-var arrProEditNoRegEq = [];
+var jsonGuardarFullOtroServ = {};
+var arrGuardarOtroServ = [];
+var arrGuardarPreRegServ = [];
+var arrSoliEditSer = [];
+var arrServEditNoRegSer = [];
 
-var idRowPreRegEq="";
+var idRowPreRegServ="";
 // var rowPreRegEquiObjIn = {};
 var rowPreRegEquiObjOut = {};
 $(document).ready(function () {
-    var idProdEq;
-    var canProdEq;
+    let idServSoli;
+    let canServSoli;
+    let desServSoli;
 
-    $('#equipo_1 tbody')
-        .on('focusin', 'tr[class=equipo-edit]', function () {
-            idRowProdSolEq = parseInt($(this).find('span[id = spn_equipo_idprodsol]').html());
+    let estadoCanServReg;
+    let estadoDesServReg;
+
+    $('#otroservi_1 tbody')
+        .on('focusin', 'tr[class=otroservi-edit]', function () {
+            idRowServSol = parseInt($(this).find('span[id = spn_otroservi_idservsolu]').html());
         })
-        .on('focusout', 'tr[class=equipo-edit]', function () {
+        .on('focusout', 'tr[class=otroservi-edit]', function () {
             var objProEdit = {};
-            idProdEq = parseInt($(this).find('span[id = spn_equipo_idprod]').html());
-            canProdEq = parseInt($(this).find('input[id = txt_equipo_canpro]').val());
+            idServSoli = parseInt($(this).find('span[id = spn_otroservi_idservsoli]').html());
+            desServSoli = $(this).find('input[id = txt_otroservi_descri]').val();
+            canServSoli = parseInt($(this).find('input[id = txt_otroservi_cantid]').val());
 
-            if(canProdEq===null || canProdEq==="" || canProdEq===0 || isNaN(canProdEq)){
-                $(this).find('input[id = txt_equipo_canpro]').focus();
-                $(this).find('input[id = txt_equipo_canpro]').addClass('is-invalid');
-                $("#btn_equipo_save").prop( "disabled", true );
+            if(canServSoli===null || canServSoli==="" || canServSoli===0 || isNaN(canServSoli)){
+                $(this).find('input[id = txt_otroservi_cantid]').focus();
+                $(this).find('input[id = txt_otroservi_cantid]').addClass('is-invalid');
+                estadoCanServReg=0;
+                $("#btn_otroservi_save").prop( "disabled", true );
             }else{
-                $(this).find('input[id = txt_equipo_canpro]').removeClass('is-invalid');
-                rowEquiObjOut['pso1'] = idRowProdSolEq;
-                rowEquiObjOut['pso11'] = idProdEq;
-                rowEquiObjOut['pso4'] = canProdEq;
+                estadoCanServReg=1;
+                $(this).find('input[id = txt_otroservi_cantid]').removeClass('is-invalid');
 
-                $.each(JSONobjGeneralEq.items[1].items2, function (obj, item) {
-                    if(item.idprodsol===rowEquiObjOut.pso1){
-                        objProEdit["pso1"] = rowEquiObjOut.pso1;
+                if(desServSoli===""){
+                    $(this).find('input[id = txt_otroservi_descri]').focus();
+                    $(this).find('input[id = txt_otroservi_descri]').addClass('is-invalid');
+                    estadoDesServReg=0;
+                    $("#btn_otroservi_save").prop( "disabled", true );
+                }else{
+                    estadoDesServReg=1;
+                    $(this).find('input[id = txt_otroservi_descri]').removeClass('is-invalid');
+                    $("#btn_otroservi_save").prop( "disabled", true );
+                }
+            }
 
-                        if(item.idproducto!==rowEquiObjOut.pso11){
-                            objProEdit["pso11"] = rowEquiObjOut.pso11;
+            if(estadoCanServReg===1 && estadoDesServReg===1){
+                rowOtroServObjOut['ssl1'] = idRowServSol;
+                rowOtroServObjOut['ssl12'] = idServSoli;
+                rowOtroServObjOut['ssl5'] = desServSoli;
+                rowOtroServObjOut['ssl6'] = canServSoli;
+
+                $.each(JSONobjGeneralOtSer.items[1].items2, function (obj, item) {
+                    if(item.idservicsolu===rowOtroServObjOut.ssl1){
+                        objProEdit["ssl1"] = rowOtroServObjOut.ssl1;
+
+                        if(item.idservsol!==rowOtroServObjOut.ssl12){
+                            objProEdit["ssl12"] = rowOtroServObjOut.ssl12;
                         }
-
-                        if(item.cantidad!==rowEquiObjOut.pso4){
-                            objProEdit["pso4"] = rowEquiObjOut.pso4;
+                        if(item.descripcion!==rowOtroServObjOut.ssl5){
+                            objProEdit["ssl5"] = rowOtroServObjOut.ssl5;
+                        }
+                        if(item.cantidad!==rowOtroServObjOut.ssl6){
+                            objProEdit["ssl6"] = rowOtroServObjOut.ssl6;
                         }
 
                         var countKeys = Object.keys(objProEdit).length;
                         if(countKeys > 1){
-                            arrProEditEq.push(objProEdit);
-                            arrProEditEq = eliminarObjetosDuplicados(arrProEditEq, 'pso1');
-                            arrGuardarEquipo = arrProEditEq.slice();
+                            arrSoliEditSer.push(objProEdit);
+                            arrSoliEditSer = eliminarObjetosDuplicados(arrSoliEditSer, 'ssl1');
+                            arrGuardarOtroServ = arrSoliEditSer.slice();
                         }else{
-                            arrProEditEq.forEach(function(currentValue, index, arr){
+                            arrSoliEditSer.forEach(function(currentValue, index, arr){
                                 /*                            console.log("entré al for");
-                                                            console.log("ARRAY INDEX: "+arrProEditEq[index].pso1);
-                                                            console.log("ARRAY IDROWSOL: "+idRowProdSolEq);*/
-                                if(arrProEditEq[index].pso1===item.idprodsol){
+                                                            console.log("ARRAY INDEX: "+arrSoliEditSer[index].pso1);
+                                                            console.log("ARRAY IDROWSOL: "+idRowServSol);*/
+                                if(arrSoliEditSer[index].ssl1===item.idservicsolu){
                                     console.log("entré a eliminar");
-                                    arrProEditEq.splice(index,1);
-                                    arrGuardarEquipo = arrProEditEq.slice();
+                                    arrSoliEditSer.splice(index,1);
+                                    arrGuardarOtroServ = arrSoliEditSer.slice();
                                     return false;
                                 }
 
@@ -72,138 +96,101 @@ $(document).ready(function () {
                         return false;
                     }
                 });
-                $("#btn_equipo_save").prop( "disabled", false );
             }
-
-
         });
 
 
-    let nomProdEqReg;
-    let modProdEqReg;
-    let marProdEqReg;
-    let umeProdEqReg;
-    let canProdEqReg;
+    let nomServOtroSerReg;
+    let desServOtroSerReg;
+    let canServOtroSerReg;
 
-    let estadoNomProdEqReg;
-    let estadoModProdEqReg;
-    let estadoMarProdEqReg;
-    let estadoUmeProdEqReg;
-    let estadoCanProdEqReg;
+    let estadoNomServOtroSerReg;
+    let estadoDesServOtroSerReg;
+    let estadoCanServOtroSerReg;
 
-    $('#equiponr_1 tbody')
-        .on('focusin', 'tr[class=equiponr-edit]', function () {
-            idRowPreRegEq = parseInt($(this).find('span[id = spn_equiponr_idpreg]').html());
+    $('#otroservinr_1 tbody')
+        .on('focusin', 'tr[class=otroservinr-edit]', function () {
+            idRowPreRegServ = parseInt($(this).find('span[id = spn_otroservinr_idpreg]').html());
         })
-        .on('focusout', 'tr[class=equiponr-edit]', function () {
+        .on('focusout', 'tr[class=otroservinr-edit]', function () {
             let objProEdit = {};
-            nomProdEqReg = $(this).find('input[id = txt_equiponr_nompro]').val();
-            modProdEqReg = $(this).find('input[id = txt_equiponr_modpro]').val();
-            marProdEqReg = $(this).find('input[id = txt_equiponr_marpro]').val();
-            umeProdEqReg = $(this).find('input[id = txt_equiponr_umepro]').val();
-            canProdEqReg = parseInt($(this).find('input[id = txt_equiponr_canpro]').val());
+            nomServOtroSerReg = $(this).find('input[id = txt_otroservinr_nomserv]').val();
+            desServOtroSerReg = $(this).find('input[id = txt_otroservinr_desserv]').val();
+            canServOtroSerReg = parseInt($(this).find('input[id = txt_otroservinr_canpro]').val());
 
-            console.log("nomProdEqReg: "+nomProdEqReg);
-            console.log("modProdEqReg: "+modProdEqReg);
-            console.log("marProdEqReg: "+marProdEqReg);
-            console.log("umeProdEqReg: "+umeProdEqReg);
-            console.log("canProdEqReg: "+canProdEqReg);
+            console.log("nomServOtroSerReg: "+nomServOtroSerReg);
+            console.log("desServOtroSerReg: "+desServOtroSerReg);
+            console.log("canServOtroSerReg: "+canServOtroSerReg);
             console.log("///////////////////////////");
             console.log("///////////////////////////");
 
-
-            if(nomProdEqReg==="") {
-                $(this).find('input[id = txt_equiponr_nompro]').focus();
-                $(this).find('input[id = txt_equiponr_nompro]').addClass('is-invalid');
-                estadoNomProdEqReg=0;
-                $("#btn_equipo_save").prop( "disabled", true );
+            if(nomServOtroSerReg==="") {
+                $(this).find('input[id = txt_otroservinr_nomserv]').focus();
+                $(this).find('input[id = txt_otroservinr_nomserv]').addClass('is-invalid');
+                estadoNomServOtroSerReg=0;
+                $("#btn_otroservi_save").prop( "disabled", true );
             }else{
-                estadoNomProdEqReg=1;
-                $(this).find('input[id = txt_equiponr_nompro]').removeClass('is-invalid');
-                if(modProdEqReg==="") {
-                    $(this).find('input[id = txt_equiponr_modpro]').focus();
-                    $(this).find('input[id = txt_equiponr_modpro]').addClass('is-invalid');
-                    estadoModProdEqReg = 0;
-                    $("#btn_equipo_save").prop( "disabled", true );
+                estadoNomServOtroSerReg=1;
+                $(this).find('input[id = txt_otroservinr_nomserv]').removeClass('is-invalid');
+                if(desServOtroSerReg==="") {
+                    $(this).find('input[id = txt_otroservinr_desserv]').focus();
+                    $(this).find('input[id = txt_otroservinr_desserv]').addClass('is-invalid');
+                    estadoDesServOtroSerReg = 0;
+                    $("#btn_otroservi_save").prop( "disabled", true );
                 }else{
-                    estadoModProdEqReg = 1;
-                    $(this).find('input[id = txt_equiponr_modpro]').removeClass('is-invalid');
-                    if(marProdEqReg==="") {
-                        $(this).find('input[id = txt_equiponr_marpro]').focus();
-                        $(this).find('input[id = txt_equiponr_marpro]').addClass('is-invalid');
-                        estadoMarProdEqReg = 0;
-                        $("#btn_equipo_save").prop( "disabled", true );
+                    estadoDesServOtroSerReg = 1;
+                    $(this).find('input[id = txt_otroservinr_desserv]').removeClass('is-invalid');
+                    if(canServOtroSerReg==="") {
+                        $(this).find('input[id = txt_otroservinr_canpro]').focus();
+                        $(this).find('input[id = txt_otroservinr_canpro]').addClass('is-invalid');
+                        estadoCanServOtroSerReg = 0;
+                        $("#btn_otroservi_save").prop( "disabled", true );
                     }else{
-                        estadoMarProdEqReg = 1;
-                        $(this).find('input[id = txt_equiponr_marpro]').removeClass('is-invalid');
-                        if(umeProdEqReg==="") {
-                            $(this).find('input[id = txt_equiponr_umepro]').focus();
-                            $(this).find('input[id = txt_equiponr_umepro]').addClass('is-invalid');
-                            estadoUmeProdEqReg = 0;
-                            $("#btn_equipo_save").prop( "disabled", true );
-                        }else{
-                            estadoUmeProdEqReg = 1;
-                            $(this).find('input[id = txt_equiponr_umepro]').removeClass('is-invalid');
-                            if(canProdEqReg==="" || canProdEqReg===0 || isNaN(canProdEqReg)) {
-                                $(this).find('input[id = txt_equiponr_canpro]').focus();
-                                $(this).find('input[id = txt_equiponr_canpro]').addClass('is-invalid');
-                                estadoCanProdEqReg = 0;
-                                $("#btn_equipo_save").prop( "disabled", true );
-                            }else{
-                                estadoCanProdEqReg = 1;
-                                $(this).find('input[id = txt_equiponr_canpro]').removeClass('is-invalid');
-                                $("#btn_equipo_save").prop( "disabled", true );
-                            }
-                        }
+                        estadoCanServOtroSerReg = 1;
+                        $(this).find('input[id = txt_otroservinr_canpro]').removeClass('is-invalid');
+                        $("#btn_otroservi_save").prop( "disabled", true );
                     }
                 }
-            }
+             }
 
-            if(estadoNomProdEqReg===1 &&
-                estadoModProdEqReg===1 &&
-                estadoMarProdEqReg===1 &&
-                estadoUmeProdEqReg===1 &&
-                estadoCanProdEqReg===1)
+            if(estadoNomServOtroSerReg===1 &&
+                estadoDesServOtroSerReg===1 &&
+                estadoCanServOtroSerReg===1)
             {
-                rowPreRegEquiObjOut['prp1']  = idRowPreRegEq;
-                rowPreRegEquiObjOut['prp4'] = nomProdEqReg;
-                rowPreRegEquiObjOut['prp8']  = modProdEqReg;
-                rowPreRegEquiObjOut['prp9']  = marProdEqReg;
-                rowPreRegEquiObjOut['prp5'] = umeProdEqReg;
-                rowPreRegEquiObjOut['prp6']  = canProdEqReg;
+                rowPreRegEquiObjOut['prs1']  = idRowPreRegServ;
+                rowPreRegEquiObjOut['prs4']  = nomServOtroSerReg;
+                rowPreRegEquiObjOut['prs5']  = canServOtroSerReg;
+                rowPreRegEquiObjOut['prs9']  = desServOtroSerReg;
 
-                $.each(JSONobjGeneralEq.items[2].items3, function (obj, item) {
-                    if(item.idprereg===rowPreRegEquiObjOut.prp1){
-                        objProEdit["prp1"] = rowPreRegEquiObjOut.prp1;
 
-                        if (item.nomproducto!== rowPreRegEquiObjOut.prp4) {
-                            objProEdit["prp4"] = rowPreRegEquiObjOut.prp4;
+                $.each(JSONobjGeneralOtSer.items[2].items3, function (obj, item) {
+                    if(item.idpreregserv===rowPreRegEquiObjOut.prs1){
+                        objProEdit["prs1"] = rowPreRegEquiObjOut.prs1;
+
+                        if (item.servsolicitado!== rowPreRegEquiObjOut.prs4) {
+                            objProEdit["prs4"] = rowPreRegEquiObjOut.prs4;
                         }
-                        if (item.modelo !== rowPreRegEquiObjOut.prp8) {
-                            objProEdit["prp8"] = rowPreRegEquiObjOut.prp8;
+                        if (item.cantidad !== rowPreRegEquiObjOut.prs5) {
+                            objProEdit["prs5"] = rowPreRegEquiObjOut.prs5;
                         }
-                        if (item.marca !== rowPreRegEquiObjOut.prp9) {
-                            objProEdit["prp9"] = rowPreRegEquiObjOut.prp9;
+                        if (item.descripcion !== rowPreRegEquiObjOut.prs9) {
+                            objProEdit["prs9"] = rowPreRegEquiObjOut.prs9;
                         }
 
-                        if (item.umedida !== rowPreRegEquiObjOut.prp5) {
-                            objProEdit["prp5"] = rowPreRegEquiObjOut.prp5;
-                        }
-                        if (item.cantidad !== rowPreRegEquiObjOut.prp6) {
-                            objProEdit["prp6"] = rowPreRegEquiObjOut.prp6;
-                        }
+
+
 
                         var countKeys = Object.keys(objProEdit).length;
                         if(countKeys > 1){
-                            arrProEditNoRegEq.push(objProEdit);
-                            arrProEditNoRegEq = eliminarObjetosDuplicados(arrProEditNoRegEq, 'prp1');
-                            arrGuardarPreRegEq = arrProEditNoRegEq.slice();
+                            arrServEditNoRegSer.push(objProEdit);
+                            arrServEditNoRegSer = eliminarObjetosDuplicados(arrServEditNoRegSer, 'prs1');
+                            arrGuardarPreRegServ = arrServEditNoRegSer.slice();
                         }else{
-                            arrProEditNoRegEq.forEach(function(currentValue, index, arr){
-                                if(arrProEditNoRegEq[index].prp1===item.idprereg){
+                            arrServEditNoRegSer.forEach(function(currentValue, index, arr){
+                                if(arrServEditNoRegSer[index].prs1===item.idpreregserv){
                                     console.log("entré a eliminar");
-                                    arrProEditNoRegEq.splice(index,1);
-                                    arrGuardarPreRegEq = arrProEditNoRegEq.slice();
+                                    arrServEditNoRegSer.splice(index,1);
+                                    arrGuardarPreRegServ = arrServEditNoRegSer.slice();
                                     return false;
                                 }
                             })
@@ -214,11 +201,11 @@ $(document).ready(function () {
             }
         })
 });
-function VerEstaGuardaItem1(){
-    if(estOperaEq===0){
-        RegistrarEquipo_equipo();
-    }else if(estOperaEq===1){
-        InsUpdDelEquipo();
+function VerEstaGuardaItem3(){
+    if(estOperaOtSer===0){
+        RegistrarOtro_servicio();
+    }else if(estOperaOtSer===1){
+        InsUpdDelOtroServ();
     }
 }
 function eliminarObjetosDuplicados(arr, prop) {
@@ -236,68 +223,73 @@ function eliminarObjetosDuplicados(arr, prop) {
     return nuevoArray;
 }
 
-function InsUpdDelEquipo() {
-    $('tbody#tbody_equiponr').find('tr[class=equiponr-edit]').each(function(){
+function InsUpdDelOtroServ() {
+    let xd=0;
+    let filaEdit=0;
+    $('tbody#tbody_otroservinr').find('tr[class=otroservinr-edit]').each(function(){
+        filaEdit++;
         if($(this).find('input[type=checkbox]').is(':checked')) {
+            xd++;
             let objJsonDel = {};
-            $(this).closest('tr').find('span[id=spn_equiponr_idpreg]').each(function(){
-                objJsonDel.prp1 = parseInt($(this).html());
-                objJsonDel.prp7 = "0";
+            $(this).closest('tr').find('span[id=spn_otroservinr_idpreg]').each(function(){
+                objJsonDel.prs1 = parseInt($(this).html());
+                objJsonDel.prs6 = "0";
             });
-            arrGuardarPreRegEq.push(objJsonDel);
+            arrGuardarPreRegServ.push(objJsonDel);
             console.log("ELIMINAR");
-            console.log(arrGuardarPreRegEq);
+            console.log(arrGuardarPreRegServ);
         }
-    }).closest('tbody').find('tr[class=equiponr-insert]').each(function () {
+    }).closest('tbody').find('tr[class=otroservinr-insert]').each(function () {
         let objFilaPreReg = {};
-        let objProdSol= {};
+        let objServSolu= {};
         let objFilaProSolPre = {};
-        let objEqu={};
-        let objProd={};
+        let objOtroServ={};
+        let objServSoli={};
         let objPreReg={};
 
-        //PRE-REGISTRO PRODUCTO
-        objProdSol.pso1=0;//foránea prod solución
+        //PRE-REGISTRO SERVICIO
+        objServSolu.ssl1=0;//foránea Serv solución
 
-        objFilaPreReg.prp1=0;
-        objFilaPreReg.prp2=objProdSol;
-        objFilaPreReg.prp4=$(this).find("td div input[id = txt_equiponr_nompro]").val();
-        objFilaPreReg.prp5=$(this).find("td div input[id = txt_equiponr_umepro]").val();
-        objFilaPreReg.prp6=$(this).find("td div input[id = txt_equiponr_canpro]").val();
-        objFilaPreReg.prp7="1";
-        objFilaPreReg.prp8=$(this).find("td div input[id = txt_equiponr_modpro]").val();
-        objFilaPreReg.prp9=$(this).find("td div input[id = txt_equiponr_marpro]").val();
-        arrGuardarPreRegEq.push(objFilaPreReg);
+        objFilaPreReg.prs1=0;
+        objFilaPreReg.prs3=objServSolu;
+        objFilaPreReg.prs4=$(this).find("td div input[id = txt_otroservinr_nomserv]").val();
+        objFilaPreReg.prs5=$(this).find("td div input[id = txt_otroservinr_canpro]").val();
+        objFilaPreReg.prs6="1";
+        objFilaPreReg.prs9=$(this).find("td div input[id = txt_otroservinr_desserv]").val();
 
-        //REGISTRO PRODUCTO SOLUCIÓN
+        arrGuardarPreRegServ.push(objFilaPreReg);
 
-        objEqu.eqi1=parseInt($("label#lbl_otroservi_idotroserv").html());//foránea equipo
-        objProd.pdt1= 0;
+        //REGISTRO SERVICIO SOLUCIÓN
 
-        objPreReg.prp1=0;//foránea pre-registro producto
+        objOtroServ.ose1=parseInt($("label#lbl_otroservi_idotroserv").html());//foránea otro servi
+        objServSoli.sso1= 0;
 
-        objFilaProSolPre.pso1=0;
-        objFilaProSolPre.pso2=objEqu;//objeto foránea equipo
-        objFilaProSolPre.pso4= $(this).find("td div input[id = txt_equiponr_canpro]").val();
-        objFilaProSolPre.pso8="1";
-        //objFilaProSolPre.pso11=objProd;
-        objFilaProSolPre.pso12="1";
-        objFilaProSolPre.pso14=objPreReg;
-        arrGuardarEquipo.push(objFilaProSolPre);
+        objPreReg.prs1=0;//foránea pre-registro servicio
+
+        objFilaProSolPre.ssl1=0;
+        objFilaProSolPre.ssl2=objOtroServ;//objeto foránea equipo
+        objFilaProSolPre.ssl4= $(this).find("td div input[id = txt_otroservinr_nomserv]").val();
+        objFilaProSolPre.ssl5= $(this).find("td div input[id = txt_otroservinr_desserv]").val();
+        objFilaProSolPre.ssl6= $(this).find("td div input[id = txt_otroservinr_canpro]").val();
+        objFilaProSolPre.ssl9="1";
+        //objFilaProSolPre.pso11=objServSoli;
+        objFilaProSolPre.ssl13="1";
+        objFilaProSolPre.ssl15=objPreReg;
+        arrGuardarOtroServ.push(objFilaProSolPre);
     });
 
 
-    $('tbody#tbody_equipo').find('tr[class=equipo-edit]').each(function(){
+    $('tbody#tbody_otroservi').find('tr[class=otroservi-edit]').each(function(){
         console.log("Fila");
         if($(this).find('input[type=checkbox]').is(':checked')) {
             let objJsonDel = {};
-            $(this).closest('tr').find('span[id=spn_equipo_idprodsol]').each(function(){
-                objJsonDel.pso1 = parseInt($(this).html());
-                objJsonDel.pso8 = "0";
+            $(this).closest('tr').find('span[id=spn_otroservi_idservsolu]').each(function(){
+                objJsonDel.ssl1 = parseInt($(this).html());
+                objJsonDel.ssl9 = "0";
             });
-            arrGuardarEquipo.push(objJsonDel);
+            arrGuardarOtroServ.push(objJsonDel);
             console.log("ELIMINAR");
-            console.log(arrGuardarEquipo);
+            console.log(arrGuardarOtroServ);
         }else{
             /* if(pid!==""){
                  filaOkEqReg=1;
@@ -308,50 +300,57 @@ function InsUpdDelEquipo() {
                  filaData.push(mrc);
                  filaData.push(ume);
                  filaData.push(cnt);
-                 arrayDatos_re.push(filaData);
+                 arrayDatos_servre.push(filaData);
              }else{
                  filaOkEqReg=0;
-                 arrayDatos_re=[];
+                 arrayDatos_servre=[];
                  return false;
              }*/
 
         }
-    }).closest('tbody').find('tr[class=equipo-insert]').each(function () {
+    }).closest('tbody').find('tr[class=otroservi-insert]').each(function () {
         let objFilaProSol = {};
 
         let objEqu= {};
-        let objProd={};
+        let objServSoli={};
         //let objPreReg= {};
 
         //REGISTRO PRODUCTO SOLUCIÓN
-        objEqu.eqi1=$("label#lbl_otroservi_idotroserv").text();//foránea equipo;
-        objProd.pdt1=parseInt($(this).find("td div span[id = spn_equipo_idprod]").html());
+        objEqu.ose1=$("label#lbl_otroservi_idotroserv").text();//foránea otro servi;
+        objServSoli.sso1=parseInt($(this).find("td div span[id = spn_otroservi_idservsoli]").html());
         //objPreReg.prp1=0;//foránea pre-registro producto
 
-        objFilaProSol.pso1=0;
-        objFilaProSol.pso2=objEqu;//objeto foránea equipo
-        objFilaProSol.pso4=$(this).find("td div input[id = txt_equipo_canpro]").val();
-        objFilaProSol.pso8="1";
-        objFilaProSol.pso11=objProd;
-        objFilaProSol.pso12="1";
+        objFilaProSol.ssl1=0;
+        objFilaProSol.ssl2=objEqu;//objeto foránea equipo
+
+        let data = $(this).find("td div select[id ^= cmb_otroservi_nombre]").select2('data');
+        let nom=data[0].serviciosolicitado;
+
+        objFilaProSol.ssl4= nom;
+        objFilaProSol.ssl5= $(this).find("td div input[id = txt_otroservi_descri]").val();
+        objFilaProSol.ssl6= $(this).find("td div input[id = txt_otroservi_cantid]").val();
+
+        objFilaProSol.ssl9="1";
+        objFilaProSol.ssl12=objServSoli;
+        objFilaProSol.ssl13="1";
         //objFilaProSol.pso14=objPreReg;
         //arrProdSolEq.push(objFilaProSol);
-        arrGuardarEquipo.push(objFilaProSol);
+        arrGuardarOtroServ.push(objFilaProSol);
     });
 
-    jsonGuardarFullEq.pso=arrGuardarEquipo;//TPRODSOL
-    jsonGuardarFullEq.prp=arrGuardarPreRegEq;//TPREREGPRO
+    jsonGuardarFullOtroServ.ssl=arrGuardarOtroServ;//TSERVSOLU
+    jsonGuardarFullOtroServ.prs=arrGuardarPreRegServ;//TPREREGSERV
 
 
     console.log("Json A Guardar");
-    console.log(jsonGuardarFullEq);
+    console.log(jsonGuardarFullOtroServ);
 
 
     $.ajax({
         method: "POST",
-        url: "/equipo/guardarfull",
+        url: "/otroservi/guardarfull",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(jsonGuardarFullEq),
+        data: JSON.stringify(jsonGuardarFullOtroServ),
         success: function resultado(valor) {
             if (valor == "") {
                 alert("Entro en IF");
@@ -485,7 +484,7 @@ function addOtroServ_otroservi(obj){
     $("#"+OtroServic[1]+" tbody").append(
         "<tr id='"+OtroServic[1]+"_fila_"+childs+"' class='otroservi-insert'>"+
         "<td><div><p class='text-center'>"+childs+"</p></></td>"+
-        "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbProd(this)' style='width: 100%;'></select></div></td>"+
+        "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbServ(this)' style='width: 100%;'></select></div></td>"+
         // "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
         "<td><div><input id='txt_otroservi_descri' type='text' class='form-control' /></div></td>"+
         /*"<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
@@ -529,16 +528,12 @@ function clonar_select2(fila){
 function borrar_select2(){
     $('.js-example-basic-single').select2("destroy");
 }
-function selCmbProd(obj){
+function selCmbServ(obj){
     let selectId = obj.id;
     let data = $("#"+selectId).select2('data');
-    let idProd=data[0].id;
+    let idServ=data[0].id;
     alert(JSON.stringify(data));
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo_codpro]').text(data[0].codigo);
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo_modpro]').text(data[0].modelo);
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo_marpro]').text(data[0].marca);
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo_umepro]').text(data[0].umedida);
-    $("#"+selectId).closest('tr').find('span[id=spn_equipo_idprod]').text(idProd);
+    $("#"+selectId).closest('tr').find('span[id=spn_otroservi_idservsoli]').text(idServ);
 }
 
 //FUNCIONES QUE OPERAN A NIVEL DE TABLA DENTRO DE CONTENEDOR DE ACTIVIDAD
@@ -566,7 +561,7 @@ function reordernar_num_tabla_equipos(idEquipo){
         $(this).find("select").removeAttr('id');
         $(this).find("select").attr("id","cmb_otroservi_nombre"+contador);
         $(this).find("select").removeAttr('onchange');
-        $(this).find("select").attr("onchange","selCmbProd(this)");
+        $(this).find("select").attr("onchange","selCmbServ(this)");
         contador++;
     });
 }
@@ -636,21 +631,21 @@ function reordernar_num_tabla_equiposnr(idEquiponr){
 
 //GUARDAR PRODUCTOS EQUIPOS REGISTRADOS Y NO REGISTRADOS
 var arrayDatos_extras=[];
-var arrayDatos_re=[];
-var arrayDatos_nr=[];
+var arrayDatos_servre=[];
+var arrayDatos_servnr=[];
 var arrayData_re;
 var arrayData_nr;
-var arrayData_completo;
+var arrayData_completoserv;
 
-function RegistrarEquipo_equipo() {
-    if($("#selectEmpresaEquipo_Proyecto").val()!=null){
+function RegistrarOtro_servicio() {
+    if($("#selectEmpresaOtroServi_Proyecto").val()!=null){
 
-        var tbody_re = $("#tbody_equipo tr");
-        var tbody_nr = $("#tbody_equiponr tr");
+        var tbody_re = $("#tbody_otroservi tr");
+        var tbody_nr = $("#tbody_otroservinr tr");
         var length_re = tbody_re.length;
         var length_nr = tbody_nr.length;
 
-        var sid=$("#selectEmpresaEquipo_Proyecto").val();
+        var sid=$("#selectEmpresaOtroServi_Proyecto").val();
 
         var filaDataExtras=[];
         var filaOkEqReg=0;//0:hace referencia a que falta completar algún campo de la fila//1:todoOK
@@ -661,28 +656,29 @@ function RegistrarEquipo_equipo() {
         //RECORRER EQUIPOS PRODUCTOS REGISTRADOS
         //for(var i = 1; i<=length_re; i++){
         $(tbody_re).each(function () {
-            var pid = $(this).find("td div span[id = spn_equipo_idprod]").text();
-            var cod = $(this).find("td div span[id = spn_equipo_codpro]").text();
-            var mod = $(this).find("td div span[id = spn_equipo_modpro]").text();
-            var mrc = $(this).find("td div span[id = spn_equipo_marpro]").text();
-            var ume = $(this).find("td div span[id = spn_equipo_umepro]").text();
-            var cnt = $(this).find("td div input[id = txt_equipo_canpro]").val();
+            var pid = $(this).find("td div span[id = spn_otroservi_idservsoli]").text();
+            let data = $(this).find("td div select[id ^= cmb_otroservi_nombre]").select2('data');
+            let nom="";
+            if($(this).find("td div select[id ^= cmb_otroservi_nombre]").val()>0){
+                nom=data[0].serviciosolicitado;
+            }
 
+            var des = $(this).find("td div input[id = txt_otroservi_descri]").val();
+            var cnt = $(this).find("td div input[id = txt_otroservi_cantid]").val();
+            console.log("pid: "+pid+" nom: "+nom+" des: "+des+" can: "+cnt);
             var filaData = [];
 
-            if(pid!=="" && cnt!==""){
+            if(pid!=="" && cnt!=="" && des!=="" && nom!==""){
                 filaOkEqReg=1;
 
                 filaData.push(pid);
-                filaData.push(cod);
-                filaData.push(mod);
-                filaData.push(mrc);
-                filaData.push(ume);
+                filaData.push(nom);
+                filaData.push(des);
                 filaData.push(cnt);
-                arrayDatos_re.push(filaData);
+                arrayDatos_servre.push(filaData);
             }else{
                 filaOkEqReg=0;
-                arrayDatos_re=[];
+                arrayDatos_servre=[];
                 return false;
             }
 
@@ -692,42 +688,36 @@ function RegistrarEquipo_equipo() {
         //RECORRER EQUIPOS PRODUCTOS NO REGISTRADOS
         //for(var i = 1; i<=length_nr; i++){
         $(tbody_nr).each(function () {
-            var nomnr = $(this).find("td div input[id = txt_equiponr_nompro]").val();
-            var modnr = $(this).find("td div input[id = txt_equiponr_modpro]").val();
-            var mrcnr = $(this).find("td div input[id = txt_equiponr_marpro]").val();
-            var umenr = $(this).find("td div input[id = txt_equiponr_umepro]").val();
-            var cntnr = $(this).find("td div input[id = txt_equiponr_canpro]").val();
+            var nomnr = $(this).find("td div input[id = txt_otroservinr_nomserv]").val();
+            var desnr = $(this).find("td div input[id = txt_otroservinr_desserv]").val();
+            var cntnr = $(this).find("td div input[id = txt_otroservinr_canpro]").val();
 
             var filaData = [];
 
             if(conta_filas_otroservinr===1){
-                if(nomnr!=="" && modnr!=="" && mrcnr!=="" && umenr!=="" && cntnr!=="") {
+                if(nomnr!=="" && desnr!=="" && cntnr!=="") {
                     filaOkEqNoReg=1;
                     filaData.push(nomnr);
-                    filaData.push(modnr);
-                    filaData.push(mrcnr);
-                    filaData.push(umenr);
+                    filaData.push(desnr);
                     filaData.push(cntnr);
 
-                    arrayDatos_nr.push(filaData);
-                }else if(nomnr==="" && modnr==="" && mrcnr==="" && umenr==="" && cntnr===""){
+                    arrayDatos_servnr.push(filaData);
+                }else if(nomnr==="" && desnr==="" && cntnr===""){
                     filaOkEqNoReg=1;
                 }else{
                     filaOkEqNoReg=0;
                 }
             }else{
-                if(nomnr!=="" && modnr!=="" && mrcnr!=="" && umenr!=="" && cntnr!==""){
+                if(nomnr!=="" && desnr!=="" && cntnr!==""){
                     filaOkEqNoReg=1;
                     filaData.push(nomnr);
-                    filaData.push(modnr);
-                    filaData.push(mrcnr);
-                    filaData.push(umenr);
+                    filaData.push(desnr);
                     filaData.push(cntnr);
 
-                    arrayDatos_nr.push(filaData);
+                    arrayDatos_servnr.push(filaData);
                 }else{
                     filaOkEqNoReg=0;
-                    arrayDatos_nr=[];
+                    arrayDatos_servnr=[];
                     return false;
                 }
             }
@@ -738,19 +728,19 @@ function RegistrarEquipo_equipo() {
         if(filaOkEqReg===1 && filaOkEqNoReg===1){
             filaDataExtras.push(sid);
             arrayDatos_extras.push(filaDataExtras);
-            arrayData_completo = {
+            arrayData_completoserv = {
                 values0:arrayDatos_extras,
-                values1: arrayDatos_re,
-                values2: arrayDatos_nr
+                values1: arrayDatos_servre,
+                values2: arrayDatos_servnr
             };
 
-            console.log(JSON.stringify(arrayData_completo));
+            console.log(JSON.stringify(arrayData_completoserv));
 
             $.ajax({
                 method: "POST",
-                url: "/equipo/register",
+                url: "/otroservi/register",
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(arrayData_completo),
+                data: JSON.stringify(arrayData_completoserv),
                 success: function resultado(valor) {
                     alert("Equipo Solución Registrado Correctamente");
                 },
@@ -760,8 +750,8 @@ function RegistrarEquipo_equipo() {
             });
         }else{
             alert("Faltan completar datos");
-            arrayDatos_re=[];
-            arrayDatos_nr=[];
+            arrayDatos_servre=[];
+            arrayDatos_servnr=[];
         }
     }else{
         alert("Selecione una Solución o Empresa por favor...");
@@ -769,8 +759,8 @@ function RegistrarEquipo_equipo() {
 }
 
 function addOtroServisUpdate_otroservi(obj){
-    conta_filas_equipo=0;
-    $( "#tbody_equipo" ).empty();
+    conta_filas_otroservi=0;
+    $( "#tbody_otroservi" ).empty();
     var JSONobj = JSON.parse(obj);
     //RECORREMOS EQUIPO SOLUCIÓN
 
@@ -780,42 +770,42 @@ function addOtroServisUpdate_otroservi(obj){
         $("#otroservi_1 tbody").append(
             "<tr id='otroservi_1_fila_1"+conta_filas_otroservi+"' class='otroservi-edit'>"+
             "<td><div><p class='text-center'>"+conta_filas_otroservi+"</p></></td>"+
-            "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' style='width: 100%;' onchange='selCmbProd(this)'></select></div></td>"+
+            "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' style='width: 100%;' onchange='selCmbServ(this)'></select></div></td>"+
             // "<td><div><span id='spn_equipo_codpro'>"+item.codigo+"</span></div></td>"+
-            "<td><div><input id='txt_otroservi_descri' type='text' class='form-control'>"+item.modelo+"</input></div></td>"+
+            "<td><div><input id='txt_otroservi_descri' type='text' class='form-control' value='"+item.descripcion+"'/></div></td>"+
            /* "<td><div><span id='spn_equipo_marpro'>"+item.marca+"</span></div></td>"+
             "<td><div><span id='spn_equipo_umepro'>"+item.nomumedida+"</span></div></td>"+*/
             "<td><div><input id='txt_otroservi_cantid' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
-            "<td hidden><div><span id='spn_otroservi_idservsoli'>"+item.idproducto+"</span></div></td>"+
-            "<td hidden><div><span id='spn_otroservi_idservsolu'>"+item.idprodsol+"</span></div></td>"+
+            "<td hidden><div><span id='spn_otroservi_idservsoli'>"+item.idservsol+"</span></div></td>"+
+            "<td hidden><div><span id='spn_otroservi_idservsolu'>"+item.idservicsolu+"</span></div></td>"+
             "<td><div><center><input id='txt_otroservi_del' type='checkbox' class='mgc mgc-danger mgc-circle' /></center></div></td>"+
             "</tr>"
         );
-        $("label#lbl_otroservi_idotroserv").text(item.idequipo);
+        $("label#lbl_otroservi_idotroserv").text(item.idoserv);
         /*<i class='icon-checkmark icon-hp-habil'></i>";
         <i class='icon-cross icon-hp-desh'></i>";        */
         borrar_select2();
         clonar_select2(conta_filas_otroservi);
 
-        $("#select2-cmb_equipo_nompro"+conta_filas_equipo+"-container").text(item.producto);
+        $("#select2-cmb_otroservi_nombre"+conta_filas_otroservi+"-container").text(item.servsolicitado);
     });
 
     //SI EXISTEN
     conta_filas_otroservinr=0;
-    $( "#tbody_equiponr" ).empty();
+    $( "#tbody_otroservinr" ).empty();
     $.each(JSONobj.items[2].items3, function (obj, item) {
         conta_filas_otroservinr++;
 
-        $("#equiponr_1 tbody").append(
-            "<tr id='equiponr_1_fila_"+conta_filas_otroservinr+"' class='equiponr-edit'>"+
+        $("#otroservinr_1 tbody").append(
+            "<tr id='otroservinr_1_fila_"+conta_filas_otroservinr+"' class='otroservinr-edit'>"+
             "<td><div><p class='text-center'>"+conta_filas_otroservinr+"</p></div></td>"+
-            "<td><div><input id='txt_equiponr_nompro' type='text' class='form-control' value='"+item.nomproducto+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_modpro' type='text' class='form-control' value='"+item.modelo+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_marpro' type='text' class='form-control' value='"+item.marca+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_umepro' type='text' class='form-control' value='"+item.umedida+"'/></div></td>"+
-            "<td><div><input id='txt_equiponr_canpro' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
-            "<td hidden><div><span id='spn_equiponr_idpreg'>"+item.idprereg+"</span></div></td>"+
-            "<td><div><center><input id='txt_equiponr_del' type='checkbox' class='mgc mgc-danger mgc-circle' /></center></div></td>"+
+            "<td><div><input id='txt_otroservinr_nomserv' type='text' class='form-control' value='"+item.servsolicitado+"'/></div></td>"+
+            "<td><div><input id='txt_otroservinr_desserv' type='text' class='form-control' value='"+item.descripcion+"'/></div></td>"+
+            /*"<td><div><input id='txt_equiponr_marpro' type='text' class='form-control' value='"+item.marca+"'/></div></td>"+
+            "<td><div><input id='txt_equiponr_umepro' type='text' class='form-control' value='"+item.umedida+"'/></div></td>"+*/
+            "<td><div><input id='txt_otroservinr_canpro' type='text' class='form-control' value='"+item.cantidad+"'/></div></td>"+
+            "<td hidden><div><span id='spn_otroservinr_idpreg'>"+item.idpreregserv+"</span></div></td>"+
+            "<td><div><center><input id='txt_otroservinr_del' type='checkbox' class='mgc mgc-danger mgc-circle' /></center></div></td>"+
             "</tr>"
         );
     });

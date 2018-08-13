@@ -119,7 +119,7 @@ function eliminarObjetosDuplicados(arr, prop) {
 
 
 var fila=0;
-function clonar_select3(fila){
+function clonar_select3(fila,id){
 
     $('#cmb_equipo2_provee'+fila).select2({
         ajax: {
@@ -127,8 +127,9 @@ function clonar_select3(fila){
             dataType: 'json',
             delay: 250,
             data: function (params) {
+                //alert(params);
                 return {
-                    q: params.term
+                    q: id
                 };
             },
             processResults: function (data, params) {
@@ -140,7 +141,7 @@ function clonar_select3(fila){
         },
         placeholder: 'Buscar por proveedor . . .',
         escapeMarkup: function (markup) { return markup; },
-        minimumInputLength: 3,
+        //minimumInputLength: 3,
         templateResult: formatRepoProve,
         templateSelection: formatRepoSelectionProve
     });

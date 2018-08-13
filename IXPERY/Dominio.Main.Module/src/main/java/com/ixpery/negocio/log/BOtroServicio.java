@@ -36,13 +36,34 @@ public class BOtroServicio {
         return odOtroServicio.BuscarEquipoSolucion(campos);
     }
     //LUIS 17/07/2018 10:00 AM
-    public String BuscarSolucionEquipo(String var) throws Exception{
-        return odOtroServicio.BuscarProductoEquipoCombo(var);
+    public String BuscarSolucionOtroServ(String var) throws Exception{
+        return odOtroServicio.BuscarSolucionOtroServ(var);
     }
     //FIN LUIS
+
     public  String RetornaTB() throws  Exception{
         return odOtroServicio.RetornaTB();
 
     }
 
+    public String PonerIds(List<EOtroServicio> listOtroServ, List<EServicioSolucion> listServSolucion, List<EPreRegistroServicio> listPreRegServicio) throws Exception {
+        String result = "";
+        result = odOtroServicio.PonerIds(listOtroServ,listServSolucion,listPreRegServicio);
+        return result;
+    }
+
+    //LUIS 06/08 18:32
+
+    public String GuardarFull(String json) throws Exception{
+        String result = "";
+        odOtroServicio.GuardarFull(json);
+        return result;
+    }
+
+    //FIN LUIS
+    //LUIS 17/07/2018 10:00 AM
+    public String BuscarSolucionOtroServicio(String var) throws Exception{
+        return odOtroServicio.BuscarServiOtroCombo(var);
+    }
+    //FIN LUIS
 }

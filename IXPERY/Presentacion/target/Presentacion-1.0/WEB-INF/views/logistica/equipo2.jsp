@@ -34,42 +34,7 @@
             line-height: 23px;
         }
 
-        .selectempresa2-result-empresa{
-            font-size: 9.55px;
-            padding: 5px 15px 10px;
-        }
-        .selectempresa2-result-proyecto{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectempresa2-result-solucion{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectempresa2-span-result{
-            font-size: 9.9px;
-        }
-
-        .selectequipo2-result-producto{
-            font-size: 9.55px;
-            padding: 5px 15px 10px;
-        }
-        .selectequipo2-result-empresa{
-            font-size: 9.55px;
-            padding: 5px 15px 10px;
-        }
-        .selectequipo2-result-modelo{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectequipo2-result-marca{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectequipo2-span-result{
-            font-size: 9.9px;
-        }
-    </style>
+     </style>
 </head>
 
 <body>
@@ -84,7 +49,7 @@
                 </div>
             </div>
             <div class="cell large-11">
-                <p class="main-title">Equipos</p>
+                <p class="main-title">C. Equipo</p>
             </div>
         </div>
     </div>
@@ -250,10 +215,11 @@
                         "<td hidden><div><span id='spn_equipo2_idprodsol'>"+item.idprodsol+"</span></div></td>"+
                         "<td hidden><div><span id='spn_equipo2_idequipo'>"+item.idequipo+"</span></div></td>"+
                         "<td hidden><div><span id='spn_equipo2_idprprov'>"+prodprov+"</span></div></td>"+
+                        "<td hidden><div><span id='spn_equipo2_idproduc'>"+item.idproducto+"</span></div></td>"+
                         "</tr>"
                     );
                     borrar_select3();
-                    clonar_select3(conta_filas_equipo2);
+                    clonar_select3(conta_filas_equipo2,item.idproducto);
 
                     $("#select2-cmb_equipo2_provee"+conta_filas_equipo2+"-container").text(item.nomempresa);
                 });
