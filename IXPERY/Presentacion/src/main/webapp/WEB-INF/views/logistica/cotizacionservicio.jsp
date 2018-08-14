@@ -5,8 +5,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotización de servicio</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
+    <title>C. Cotización de servicio</title>
     <style>
         .btn-icon-salario{
             background-color: #D34539;
@@ -28,7 +27,7 @@
                     </div>
                 </div>
                 <div class="cell large-11">
-                    <p class="main-title">Servicios</p>
+                    <p class="main-title">C. Servicios</p>
                 </div>
             </div>
         </div>
