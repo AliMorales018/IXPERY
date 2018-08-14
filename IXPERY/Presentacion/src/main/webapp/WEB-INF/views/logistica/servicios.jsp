@@ -69,9 +69,6 @@
         .select2-span-result{
             font-size: 9.9px;
         }
-        .form-service{
-            line-height: 1.56;
-        }
         .table-personal-transito{
             font-size: 11.5px;
             margin-bottom: 20px;
@@ -155,20 +152,21 @@
     <div class="grid-x grid-padding-x">
         <div class="cell large-6">
             <div class="form-group">
-                <label class="label text-primary"><b>Buscar por empresa o solución:</b></label>
-                <select id="select_solucion_servicio_cl" style="width: 100%;" onchange="BuscarSolucionServiciosCL($(this).val())"></select>
+                <label class="label text-primary"><b>Solución:</b></label>
+                <!--select id="select_solucion_servicio_cl" style="width: 100%;" onchange="BuscarSolucionServiciosCL($(this).val())"></select-->
+                <span class="form-control">-</span>
             </div>
         </div>
         <div class="cell large-3">
             <div class="form-group">
                 <label class="label text-primary"><b>Depreciación de herramientas (%):</b></label>
-                <input type="number" disabled class="form-control form-service" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
-                <input type="hidden" disabled class="form-control form-service" id="txt_idservicio">
+                <input type="number" disabled class="form-control" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
+                <input type="hidden" disabled class="form-control" id="txt_idservicio">
             </div>
         </div>
     </div>
 </div>
-<!-- End Input -->
+<!-- End Input Data -->
 
 <!-- Personal en Transito -->
 <div id="container_personal_transito" style="margin-top: 15px;">
