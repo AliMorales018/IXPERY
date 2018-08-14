@@ -75,7 +75,8 @@ public class CSolucion {
             @RequestParam(value = "value") String value,
             HttpServletRequest request
     ) throws Exception {
-        Integer perfil = 1;
+        HttpSession session = request.getSession();
+        Integer perfil = Integer.parseInt(session.getAttribute("perfil").toString());
         return obSolucion.BuscarReqProEmp(value, perfil);
     }
 
@@ -85,8 +86,7 @@ public class CSolucion {
             HttpServletRequest request
             ) throws Exception {
         HttpSession session = request.getSession();
-//        Integer perfil = Integer.parseInt(session.getAttribute("perfil").toString());
-        Integer perfil = 1;
+        Integer perfil = Integer.parseInt(session.getAttribute("perfil").toString());
         return obSolucion.BuscarRequerimientos(perfil);
     }
 
