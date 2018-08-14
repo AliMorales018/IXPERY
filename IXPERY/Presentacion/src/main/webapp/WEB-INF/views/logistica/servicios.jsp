@@ -4,8 +4,6 @@
 <html>
 <head>
     <title>Servicios</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css//select2.css">
     <style>
         .select_actividad_cargolab:focus{
             -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
@@ -71,9 +69,6 @@
         .select2-span-result{
             font-size: 9.9px;
         }
-        .form-service{
-            line-height: 1.56;
-        }
         .table-personal-transito{
             font-size: 11.5px;
             margin-bottom: 20px;
@@ -116,7 +111,7 @@
 <body>
 <button class="add-actividad" title="Agregar actividad" onclick="addActividad();" disabled><span for="Agregar actividad"><i class="icon-plus2"></i></span></button>
 <!-- Buttons -->
-<div class="grid-x grid-padding-x align-center-middle l-comandos">
+<div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">
             <div class="cell large-1 text-center">
@@ -157,20 +152,21 @@
     <div class="grid-x grid-padding-x">
         <div class="cell large-6">
             <div class="form-group">
-                <label class="label text-primary"><b>Buscar por empresa o solución:</b></label>
-                <select id="select_solucion_servicio_cl" style="width: 100%;" onchange="BuscarSolucionServiciosCL($(this).val())"></select>
+                <label class="label text-primary"><b>Solución:</b></label>
+                <!--select id="select_solucion_servicio_cl" style="width: 100%;" onchange="BuscarSolucionServiciosCL($(this).val())"></select-->
+                <span class="form-control">-</span>
             </div>
         </div>
         <div class="cell large-3">
             <div class="form-group">
                 <label class="label text-primary"><b>Depreciación de herramientas (%):</b></label>
-                <input type="number" disabled class="form-control form-service" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
-                <input type="hidden" disabled class="form-control form-service" id="txt_idservicio">
+                <input type="number" disabled class="form-control" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
+                <input type="hidden" disabled class="form-control" id="txt_idservicio">
             </div>
         </div>
     </div>
 </div>
-<!-- End Input -->
+<!-- End Input Data -->
 
 <!-- Personal en Transito -->
 <div id="container_personal_transito" style="margin-top: 15px;">
@@ -259,7 +255,6 @@
 <!-- Actividades -->
 
 <script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
-<script src="${urlPublic}/js/select2.js"></script>
 
 <script>
     $(document).ready(function(){

@@ -14,7 +14,7 @@ var nomBody_requerimiento;
 var txtHiFi_requerimiento;
 var txtInVa_requerimiento;
 var idPriFilaBody_requerimiento = "firstRowBody_requerimiento";
-
+//requer
 //Variable para guardar los valores de la primera fila de la tabla.
 var filaTabla_requerimiento
 filaTabla_requerimiento = filaTabla_requerimiento + "<tr id='" + idPriFilaBody_requerimiento + "'>";
