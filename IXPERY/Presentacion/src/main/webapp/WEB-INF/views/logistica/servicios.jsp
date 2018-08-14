@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Servicios</title>
+    <title>S. Servicios</title>
     <style>
         .select_actividad_cargolab:focus{
             -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <div class="cell large-11">
-                <p class="main-title">Servicios</p>
+                <p class="main-title">S. Servicios</p>
             </div>
         </div>
     </div>
@@ -166,7 +166,7 @@
         </div>
     </div>
 </div>
-<!-- End Input Data -->
+<!-- End Input -->
 
 <!-- Personal en Transito -->
 <div id="container_personal_transito" style="margin-top: 15px;">
