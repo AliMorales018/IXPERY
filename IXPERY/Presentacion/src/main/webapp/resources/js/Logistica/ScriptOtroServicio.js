@@ -175,10 +175,9 @@ function InsUpdDelOtroServ() {
         data: JSON.stringify(jsonGuardarFullOtroServ),
         success: function resultado(valor) {
             if (valor == "") {
-                alert("Entro en IF");
-                //
-                // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
-                // CargarJS_proyecto(0, 1, 0);
+                limpiarInsUpdTotServi();
+                var sid=$("#selectEmpresaOtroServi_Proyecto").val();
+                BuscarSolucionOtroServis(sid);
             }
             else {
                 console.log("Entro en ELSE");
@@ -242,7 +241,6 @@ $(document).ready(function () {
         templateResult: formatRepoOtroServ,
         templateSelection: formatRepoSelectionOtroServ
     });
-
     rowCloneOtroServicio =$(dollyRowOtroServicioHTML).clone().prop({id:'row-otroservi-' + conta_filas_otroservi});
     rowCloneOtroServicio.find('p').html(1);
 
@@ -455,6 +453,7 @@ $(document).ready(function () {
                 });
             }
         })
+    BuscarSolucionOtroServis(1);
 });
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS
 function addOtroServ_otroservi(){
@@ -784,7 +783,9 @@ function RegistrarOtro_servicio() {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(arrayData_completoserv),
                 success: function resultado(valor) {
-                    alert("Equipo Solución Registrado Correctamente");
+                    limpiarInsUpdTotServi();
+                    alert("Servicio Registrado Correctamente id"+sid);
+                    BuscarSolucionOtroServis(sid);
                 },
                 error: function errores(msg) {
                     alert('Error: ' + msg.responseText);
@@ -853,7 +854,25 @@ function addOtroServisUpdate_otroservi(obj){
     });
 }
 
-function BuscarSolucionOtroServis(id){
+function BuscarSolucionOtroServis(idSol){
+    let id = "";
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/VerificarSesionSolucion",
+        success: function(valor) {
+            console.log('valor');
+            console.log(valor);
+            id = valor;
+            // id = "1";
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+    ++countss;
+    console.log("id");
+    console.log(id);
     if(id!="" || id!=undefined){
         $.ajax({
             method: "POST",
@@ -908,4 +927,31 @@ function BuscarSolucionOtroServis(id){
             }
         });
     }
+}
+
+
+function limpiarInsUpdTotServi(){
+    idRowServSol="";
+    rowOtroServObjOut = {};
+
+    jsonGuardarFullOtroServ = {};
+    arrGuardarOtroServ = [];
+    arrGuardarPreRegServ = [];
+    arrSoliEditSer = [];
+    arrServEditNoRegSer = [];
+
+    arrGuardarFinOtroServ = [];
+    arrGuardarFinPreRegServ = [];
+
+    idRowPreRegServ="";
+    rowPreRegEquiObjOut = {};
+
+
+
+   arrayDatos_extras=[];
+   arrayDatos_servre=[];
+   arrayDatos_servnr=[];
+   arrayData_re;
+   arrayData_nr;
+   arrayData_completoserv={};
 }

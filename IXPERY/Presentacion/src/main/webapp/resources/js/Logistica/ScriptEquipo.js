@@ -162,7 +162,9 @@ function InsUpdDelEquipo() {
         data: JSON.stringify(jsonGuardarFullEq),
         success: function resultado(valor) {
             if (valor == "") {
-                alert("Entro en IF");
+                limpiarInsUpdTot();
+                var sid=$("#selectEmpresaEquipo_Proyecto").val();
+                BuscarSolucionEquipos(sid);
                 //
                 // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
                 // CargarJS_proyecto(0, 1, 0);
@@ -233,6 +235,7 @@ $(document).ready(function () {
         templateResult: formatRepo,
         templateSelection: formatRepoSelection
     });
+
 
     rowCloneEquipo =$(dollyRowEquipoHTML).clone().prop({id:'row-equipo-' + conta_filas_equipo});
     rowCloneEquipo.find('p').html(1);
@@ -461,6 +464,7 @@ $(document).ready(function () {
                 });
             }
         })
+    BuscarSolucionEquipos(1);
 });
 
 
@@ -825,7 +829,9 @@ function RegistrarEquipo_equipo() {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(arrayData_completo),
                 success: function resultado(valor) {
-                    alert("Equipo Solución Registrado Correctamente");
+                    limpiarInsUpdTot();
+                    alert("Equipo Registrado Correctamente id"+sid);
+                    BuscarSolucionEquipos(sid);
                 },
                 error: function errores(msg) {
                     alert('Error: ' + msg.responseText);
@@ -918,9 +924,25 @@ function formatRepoSelection (repo) {
     return repo.text || repo.nomempresa + " - " + repo.solucion;
 }
 
-
-
-function BuscarSolucionEquipos(id){
+function BuscarSolucionEquipos(idSol){
+    let id = "";
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/VerificarSesionSolucion",
+        success: function(valor) {
+            console.log('valor');
+            console.log(valor);
+            id = valor;
+            // id = "1";
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+    ++countss;
+    console.log("id");
+    console.log(id);
     if(id!="" || id!=undefined){
         $.ajax({
             method: "POST",
@@ -975,4 +997,30 @@ function BuscarSolucionEquipos(id){
             }
         });
     }
+}
+function limpiarInsUpdTot(){
+    idRowProdSolEq="";
+    rowEquiObjOut = {};
+
+    jsonGuardarFullEq = {};
+    arrGuardarEquipo = [];
+    arrGuardarPreRegEq = [];
+    arrProEditEq = [];
+    arrProEditNoRegEq = [];
+
+    arrGuardarFinEquipo = [];
+    arrGuardarFinPreRegEq = [];
+
+    idRowPreRegEq="";
+    rowPreRegEquiObjOut = {};
+
+
+
+
+    arrayDatos_extras=[];
+    arrayDatos_re=[];
+    arrayDatos_nr=[];
+    arrayData_re;
+    arrayData_nr;
+    arrayData_completo={};
 }
