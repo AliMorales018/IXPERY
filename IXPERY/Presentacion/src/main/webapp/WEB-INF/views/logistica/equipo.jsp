@@ -8,9 +8,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipos</title>
-<%--    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
-    <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">--%>
+    <%--    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
+        <link rel="stylesheet" href="${urlPublic}/css/select2.css">
+        <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">--%>
     <style type="text/css">
 
         .icon-add-row{
@@ -42,29 +42,6 @@
         .selectempresa2-result-equipoproyecto{
             font-size: 9.55px;
             padding: 0px 15px 5px;
-        }
-        .selectempresa2-result-equiposolucion{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectempresa2-span-equiporesult{
-            font-size: 9.9px;
-        }
-
-        .selectequipo2-result-equipoproducto{
-            font-size: 9.55px;
-            padding: 5px 15px 10px;
-        }
-        .selectequipo2-result-equipomodelo{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectequipo2-result-equipomarca{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectequipo2-span-equiporesult{
-            font-size: 9.9px;
         }
     </style>
 </head>
@@ -142,7 +119,7 @@
                     <table class="table">
                         <thead class="thead-primary">
                         <tr>
-                            <th id="add_row_equipo_1" class="text-center" onclick="addEquipos_equipo(this);"><i class="icon-plus2 icon-add-row"></i></th>
+                            <th id="add_row_equipo_1" class="text-center" onclick="addEquipos_equipo();"><i class="icon-plus2 icon-add-row"></i></th>
                             <th>Producto</th>
                             <th>Código</th>
                             <th>Modelo</th>
@@ -155,9 +132,10 @@
                         </tr>
                         </thead>
                         <tbody id="tbody_equipo">
-                        <tr id="equipo_1_fila_1" class="equipo-insert">
+                        <%--<tr id="equipo_1_fila_1" class="equipo-insert">
                             <td><div><p class="text-center">1</p></div></td>
-                            <td><div><select   id="cmb_equipo_nompro1" name="cmb_equipo_nompro1" class="select_equipo_equipos" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>
+                            &lt;%&ndash;<td><div><select   id="cmb_equipo_nompro1" name="cmb_equipo_nompro1" class="select_equipo_equipos" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>&ndash;%&gt;
+                            <td><div><select   id="cmb_equipo_nompro" class="select_equipo_equipos" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>
                             <td><div><span id="spn_equipo_codpro"></span></div></td>
                             <td><div><span id="spn_equipo_modpro"></span></div></td>
                             <td><div><span id="spn_equipo_marpro"></span></div></td>
@@ -166,7 +144,7 @@
                             <td hidden><div><span id="spn_equipo_idprod"></span></div></td>
                             <td hidden><div><span id="spn_equipo_idprodsol"></span></div></td>
                             <td><div class="text-center"><button type="button" onclick="eliminar_fila_tabla_equipos(`equipo_1_fila_1`);"><i class="icon-cross icon-hp-desh"></i></button></div></td>
-                        </tr>
+                        </tr>--%>
                         </tbody>
                     </table>
                 </div>
@@ -228,151 +206,9 @@
 
 <!-- JavaScript -->
 
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
-<script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEquipo.js"></script>
-<script type="'text/javascript'">
-
-</script>
-<script>
-
-    $(document).ready(function () {
-        $("#selectEmpresaEquipo_Proyecto").select2({
-            ajax: {
-                url: "/equipo/busempresa",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term
-                    };
-                },
-                processResults: function (data, params) {
-                    console.log(data.items);
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Buscar por empresa o solución . . .',
-            escapeMarkup: function (markup) { return markup; },
-            minimumInputLength: 3,
-            templateResult: formatRepo,
-            templateSelection: formatRepoSelection
-        });
-
-        //LISTAR COMBO PRODUCTOS
-        $("#cmb_equipo_nompro1").select2({
-            ajax: {
-                url: "/equipo/busproducto",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term
-                    };
-                },
-                processResults: function (data, params) {
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Buscar producto . . .',
-            escapeMarkup: function (markup) { return markup; },
-            minimumInputLength: 3,
-            templateResult: formatRepoProd,
-            templateSelection: formatRepoSelectionProd
-        });
-        //COMBO PRODUCTOS
-    });
-
-    function formatRepo (repo) {
-        if (repo.loading) {
-            return repo.text;
-        }
-        var markup = "<div class='selectempresa2-result-equipo'><span class='selectempresa2-span-equiporesult'>EMPRESA: </span>"+repo.nomempresa+" - " + repo.ruc +"</div>"+
-            "<div class='selectempresa2-result-equipoproyecto'><span class='selectempresa2-span-equiporesult'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
-            "<div class='selectempresa2-result-equiposolucion'><span class='selectempresa2-span-equiporesult'>SOLUCION: </span>"+repo.solucion+"</span></div>";
-        return markup;
-    }
-
-    function formatRepoSelection (repo) {
-        return repo.text || repo.nomempresa + " - " + repo.solucion;
-    }
-
-    function formatRepoProd (repo) {
-        if (repo.loading) {
-            return repo.text;
-        }
-        var markup = "<div class='selectequipo2-result-equipoproducto'><span class='selectequipo2-span-equiporesult'>PRODUCTO: </span>"+repo.nombre+"</div>"+
-            "<div class=         'selectequipo2-result-equipomodelo'  ><span class='selectequipo2-span-equiporesult'>MODELO: </span>"+repo.modelo+"</span></div>"+
-            "<div class=         'selectequipo2-result-equipomarca'   ><span class='selectequipo2-span-equiporesult'>MARCA: </span>"+repo.marca+"</span></div>";
-        return markup;
-    }
-
-    function formatRepoSelectionProd (repo) {
-        return repo.text || repo.nombre;
-    }
-
-    function BuscarSolucionEquipos(id){
-        if(id!="" || id!=undefined){
-            $.ajax({
-                method: "POST",
-                url: "/equipo/buscarequiposol",
-                data: {"idsol": id},
-                success: function resultado(valor) {
-                    JSONobjGeneralEq = JSON.parse(valor);
-                    if(JSONobjGeneralEq.items.length>0){
-                        estOperaEq=1;
-                        addEquiposUpdate_equipo(valor);
-                    }else{
-                        estOperaEq=0;
-                        conta_filas_equipo=1;
-                        $("#tbody_equipo").empty();
-                        $("#equipo_1 tbody").append(
-                            "<tr id='equipo_1_fila_1' class='equipo-insert'>"+
-                            "<td><div><p class='text-center'>1</p></div></td>"+
-                            "<td><div><select id='cmb_equipo_nompro1' name='cmb_equipo_nompro' class='select_equipo_equipos' onchange='selCmbProd(this);' style='width: 100%;'></select></div></td>"+
-                            "<td><div><span id='spn_equipo_codpro'></span></div></td>"+
-                            "<td><div><span id='spn_equipo_modpro'></span></div></td>"+
-                            "<td><div><span id='spn_equipo_marpro'></span></div></td>"+
-                            "<td><div><span id='spn_equipo_umepro'></span></div></td>"+
-                            "<td><div><input id='txt_equipo_canpro' type='text' type='text' class='form-control' required/></div></td>"+
-                            "<td hidden><div><span id='spn_equipo_idprod'></span></div></td>"+
-                            "<td hidden><div><span id='spn_equipo_idprodsol'></span></div></td>"+
-                            "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_equipos(`equipo_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
-                            "</tr>"
-                        );
-                        borrar_select2();
-                        clonar_select2Equipo(1);
-
-                        //EQUIPOS NO REGISTRADOS
-                        conta_filas_equiponr=1;
-                        $("#tbody_equiponr").empty();
-                        $("#equiponr_1 tbody").append(
-                            "<tr id='equiponr_1_fila_1' class='equiponr-insert'>"+
-                            "<td><div><p class='text-center'>1</p></div></td>"+
-                            "<td><div><input id='txt_equiponr_nompro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_equiponr_modpro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_equiponr_marpro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_equiponr_umepro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_equiponr_canpro' type='text' class='form-control' /></div></td>"+
-                            "<td hidden><div><span id='spn_equiponr_idpreg'></span></div></td>"+
-                            "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_equiposnr(`equiponr_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
-                            "</tr>"
-                        );
-                    }
-                },
-                error: function errores(msg) {
-                    alert('Error: ' + msg.responseText);
-                }
-            });
-        }
-    }
-</script>
 <%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <!-- End JavaScript -->
+<script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEquipo.js"></script>
+
 </body>
 </html>

@@ -12,10 +12,268 @@ var arrGuardarPreRegServ = [];
 var arrSoliEditSer = [];
 var arrServEditNoRegSer = [];
 
+var arrGuardarFinOtroServ = [];
+var arrGuardarFinPreRegServ = [];
+
+
 var idRowPreRegServ="";
 // var rowPreRegEquiObjIn = {};
 var rowPreRegEquiObjOut = {};
+
+function VerEstaGuardaItem3(){
+    if(estOperaOtSer===0){
+        RegistrarOtro_servicio();
+    }else if(estOperaOtSer===1){
+        InsUpdDelOtroServ();
+    }
+}
+function eliminarObjetosDuplicados(arr, prop) {
+    var nuevoArray = [];
+    var lookup  = {};
+
+    for (var i in arr) {
+        lookup[arr[i][prop]] = arr[i];
+    }
+
+    for (i in lookup) {
+        nuevoArray.push(lookup[i]);
+    }
+
+    return nuevoArray;
+}
+
+function InsUpdDelOtroServ() {
+    let xd=0;
+    let filaEdit=0;
+    $('tbody#tbody_otroservinr').find('tr[class=otroservinr-edit]').each(function(){
+        filaEdit++;
+        if($(this).find('input[type=checkbox]').is(':checked')) {
+            xd++;
+            let objJsonDel = {};
+            $(this).closest('tr').find('span[id=spn_otroservinr_idpreg]').each(function(){
+                objJsonDel.prs1 = parseInt($(this).html());
+                objJsonDel.prs6 = "0";
+            });
+            arrGuardarPreRegServ.push(objJsonDel);
+            console.log("ELIMINAR");
+            console.log(arrGuardarPreRegServ);
+        }
+    }).closest('tbody').find('tr[class=otroservinr-insert]').each(function () {
+        let objFilaPreReg = {};
+        let objServSolu= {};
+        let objFilaProSolPre = {};
+        let objOtroServ={};
+        let objServSoli={};
+        let objPreReg={};
+
+        //PRE-REGISTRO SERVICIO
+        objServSolu.ssl1=0;//foránea Serv solución
+
+        objFilaPreReg.prs1=0;
+        objFilaPreReg.prs3=objServSolu;
+        objFilaPreReg.prs4=$(this).find("td div input[id = txt_otroservinr_nomserv]").val();
+        objFilaPreReg.prs5=$(this).find("td div input[id = txt_otroservinr_canpro]").val();
+        objFilaPreReg.prs6="1";
+        objFilaPreReg.prs9=$(this).find("td div input[id = txt_otroservinr_desserv]").val();
+
+        arrGuardarFinPreRegServ.push(objFilaPreReg);
+
+        //REGISTRO SERVICIO SOLUCIÓN
+
+        objOtroServ.ose1=parseInt($("label#lbl_otroservi_idotroserv").html());//foránea otro servi
+        objServSoli.sso1= 0;
+
+        objPreReg.prs1=0;//foránea pre-registro servicio
+
+        objFilaProSolPre.ssl1=0;
+        objFilaProSolPre.ssl2=objOtroServ;//objeto foránea equipo
+        objFilaProSolPre.ssl4= $(this).find("td div input[id = txt_otroservinr_nomserv]").val();
+        objFilaProSolPre.ssl5= $(this).find("td div input[id = txt_otroservinr_desserv]").val();
+        objFilaProSolPre.ssl6= $(this).find("td div input[id = txt_otroservinr_canpro]").val();
+        objFilaProSolPre.ssl9="1";
+        //objFilaProSolPre.pso11=objServSoli;
+        objFilaProSolPre.ssl13="1";
+        objFilaProSolPre.ssl15=objPreReg;
+        arrGuardarFinOtroServ.push(objFilaProSolPre);
+    });
+
+
+    $('tbody#tbody_otroservi').find('tr[class=otroservi-edit]').each(function(){
+        console.log("Fila");
+        if($(this).find('input[type=checkbox]').is(':checked')) {
+            let objJsonDel = {};
+            $(this).closest('tr').find('span[id=spn_otroservi_idservsolu]').each(function(){
+                objJsonDel.ssl1 = parseInt($(this).html());
+                objJsonDel.ssl9 = "0";
+            });
+            arrGuardarOtroServ.push(objJsonDel);
+            console.log("ELIMINAR");
+            console.log(arrGuardarOtroServ);
+        }else{
+            /* if(pid!==""){
+                 filaOkEqReg=1;
+
+                 filaData.push(pid);
+                 filaData.push(cod);
+                 filaData.push(mod);
+                 filaData.push(mrc);
+                 filaData.push(ume);
+                 filaData.push(cnt);
+                 arrayDatos_servre.push(filaData);
+             }else{
+                 filaOkEqReg=0;
+                 arrayDatos_servre=[];
+                 return false;
+             }*/
+
+        }
+    }).closest('tbody').find('tr[class=otroservi-insert]').each(function () {
+        let objFilaProSol = {};
+
+        let objEqu= {};
+        let objServSoli={};
+        //let objPreReg= {};
+
+        //REGISTRO PRODUCTO SOLUCIÓN
+        objEqu.ose1=$("label#lbl_otroservi_idotroserv").text();//foránea otro servi;
+        objServSoli.sso1=parseInt($(this).find("td div span[id = spn_otroservi_idservsoli]").html());
+        //objPreReg.prp1=0;//foránea pre-registro producto
+
+        objFilaProSol.ssl1=0;
+        objFilaProSol.ssl2=objEqu;//objeto foránea equipo
+
+        let data = $(this).find("td div select[name = cmb_otroservi_nombre]").select2('data');
+        let nom=data[0].serviciosolicitado;
+
+        objFilaProSol.ssl4= nom;
+        objFilaProSol.ssl5= $(this).find("td div input[id = txt_otroservi_descri]").val();
+        objFilaProSol.ssl6= $(this).find("td div input[id = txt_otroservi_cantid]").val();
+
+        objFilaProSol.ssl9="1";
+        objFilaProSol.ssl12=objServSoli;
+        objFilaProSol.ssl13="1";
+        //objFilaProSol.pso14=objPreReg;
+        //arrProdSolEq.push(objFilaProSol);
+        arrGuardarFinOtroServ.push(objFilaProSol);
+    });
+
+    $.merge(arrGuardarFinOtroServ,arrGuardarOtroServ);
+    $.merge(arrGuardarFinPreRegServ,arrGuardarPreRegServ);
+
+    jsonGuardarFullOtroServ.ssl=arrGuardarFinOtroServ;//TSERVSOLU
+    jsonGuardarFullOtroServ.prs=arrGuardarFinPreRegServ;//TPREREGSERV
+
+
+    console.log("Json A Guardar");
+    console.log(jsonGuardarFullOtroServ);
+
+
+    $.ajax({
+        method: "POST",
+        url: "/otroservi/guardarfull",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(jsonGuardarFullOtroServ),
+        success: function resultado(valor) {
+            if (valor == "") {
+                alert("Entro en IF");
+                //
+                // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
+                // CargarJS_proyecto(0, 1, 0);
+            }
+            else {
+                console.log("Entro en ELSE");
+                // alert(valor);
+            }
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+}
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+var conta_filas_otroservi=1;
+var dollyRowOtroServicio = '';
+dollyRowOtroServicio+= '<tr class="otroservi-insert">';
+dollyRowOtroServicio+= '<td><div><p class="text-center" id="p_otroservi_num"></p></div></td>';
+dollyRowOtroServicio+= '<td><div style="width: 170px"><select name="cmb_otroservi_nombre" class="select_otroservi_otroservis"></select></div></td>';
+dollyRowOtroServicio+= '<td><div><input type="text" id="txt_otroservi_descri" class="form-control"/></div></td>';
+dollyRowOtroServicio+= '<td><div><input type="text" id="txt_otroservi_cantid" class="form-control"/></div></td>';
+dollyRowOtroServicio+= '<td hidden><div><span id="spn_otroservi_idservsoli"></span></div></td>';
+dollyRowOtroServicio+= '<td hidden><div><span id="spn_otroservi_idservsolu"></span></div></td>';
+dollyRowOtroServicio+= '<td><div class="text-center"><button type="button"><i class="icon-cross icon-hp-desh"></i></button></div></td>';
+dollyRowOtroServicio+= '</tr>';
+
+var dollyRowOtroServicioHTML = $.parseHTML(dollyRowOtroServicio);
+
+var rowCloneOtroServicio;
+
 $(document).ready(function () {
+    $("#selectEmpresaOtroServi_Proyecto").select2({
+        ajax: {
+            url: "/equipo/busempresa",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term
+                };
+            },
+            processResults: function (data, params) {
+                console.log(data.items);
+                return {
+                    results: data.items
+                };
+            },
+            cache: true
+        },
+        placeholder: 'Buscar por empresa o solución . . .',
+        escapeMarkup: function (markup) { return markup; },
+        minimumInputLength: 3,
+        templateResult: formatRepoOtroServ,
+        templateSelection: formatRepoSelectionOtroServ
+    });
+
+    rowCloneOtroServicio =$(dollyRowOtroServicioHTML).clone().prop({id:'row-otroservi-' + conta_filas_otroservi});
+    rowCloneOtroServicio.find('p').html(1);
+
+    $('table #tbody_otroservi')
+        .html(rowCloneOtroServicio).find('tr:last-child')
+        .find('select[name=cmb_otroservi_nombre]').attr('onchange','selCmbServ(1)')
+        .select2({
+            ajax: {
+                url: "/otroservi/buservsolic",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar por servicio . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: formatRepoServSolic,
+            templateSelection: formatRepoSelectionServSolic
+        });
+
+
     let idServSoli;
     let canServSoli;
     let desServSoli;
@@ -151,7 +409,7 @@ $(document).ready(function () {
                         $("#btn_otroservi_save").prop( "disabled", true );
                     }
                 }
-             }
+            }
 
             if(estadoNomServOtroSerReg===1 &&
                 estadoDesServOtroSerReg===1 &&
@@ -177,9 +435,6 @@ $(document).ready(function () {
                             objProEdit["prs9"] = rowPreRegEquiObjOut.prs9;
                         }
 
-
-
-
                         var countKeys = Object.keys(objProEdit).length;
                         if(countKeys > 1){
                             arrServEditNoRegSer.push(objProEdit);
@@ -201,278 +456,57 @@ $(document).ready(function () {
             }
         })
 });
-function VerEstaGuardaItem3(){
-    if(estOperaOtSer===0){
-        RegistrarOtro_servicio();
-    }else if(estOperaOtSer===1){
-        InsUpdDelOtroServ();
-    }
-}
-function eliminarObjetosDuplicados(arr, prop) {
-    var nuevoArray = [];
-    var lookup  = {};
-
-    for (var i in arr) {
-        lookup[arr[i][prop]] = arr[i];
-    }
-
-    for (i in lookup) {
-        nuevoArray.push(lookup[i]);
-    }
-
-    return nuevoArray;
-}
-
-function InsUpdDelOtroServ() {
-    let xd=0;
-    let filaEdit=0;
-    $('tbody#tbody_otroservinr').find('tr[class=otroservinr-edit]').each(function(){
-        filaEdit++;
-        if($(this).find('input[type=checkbox]').is(':checked')) {
-            xd++;
-            let objJsonDel = {};
-            $(this).closest('tr').find('span[id=spn_otroservinr_idpreg]').each(function(){
-                objJsonDel.prs1 = parseInt($(this).html());
-                objJsonDel.prs6 = "0";
-            });
-            arrGuardarPreRegServ.push(objJsonDel);
-            console.log("ELIMINAR");
-            console.log(arrGuardarPreRegServ);
-        }
-    }).closest('tbody').find('tr[class=otroservinr-insert]').each(function () {
-        let objFilaPreReg = {};
-        let objServSolu= {};
-        let objFilaProSolPre = {};
-        let objOtroServ={};
-        let objServSoli={};
-        let objPreReg={};
-
-        //PRE-REGISTRO SERVICIO
-        objServSolu.ssl1=0;//foránea Serv solución
-
-        objFilaPreReg.prs1=0;
-        objFilaPreReg.prs3=objServSolu;
-        objFilaPreReg.prs4=$(this).find("td div input[id = txt_otroservinr_nomserv]").val();
-        objFilaPreReg.prs5=$(this).find("td div input[id = txt_otroservinr_canpro]").val();
-        objFilaPreReg.prs6="1";
-        objFilaPreReg.prs9=$(this).find("td div input[id = txt_otroservinr_desserv]").val();
-
-        arrGuardarPreRegServ.push(objFilaPreReg);
-
-        //REGISTRO SERVICIO SOLUCIÓN
-
-        objOtroServ.ose1=parseInt($("label#lbl_otroservi_idotroserv").html());//foránea otro servi
-        objServSoli.sso1= 0;
-
-        objPreReg.prs1=0;//foránea pre-registro servicio
-
-        objFilaProSolPre.ssl1=0;
-        objFilaProSolPre.ssl2=objOtroServ;//objeto foránea equipo
-        objFilaProSolPre.ssl4= $(this).find("td div input[id = txt_otroservinr_nomserv]").val();
-        objFilaProSolPre.ssl5= $(this).find("td div input[id = txt_otroservinr_desserv]").val();
-        objFilaProSolPre.ssl6= $(this).find("td div input[id = txt_otroservinr_canpro]").val();
-        objFilaProSolPre.ssl9="1";
-        //objFilaProSolPre.pso11=objServSoli;
-        objFilaProSolPre.ssl13="1";
-        objFilaProSolPre.ssl15=objPreReg;
-        arrGuardarOtroServ.push(objFilaProSolPre);
-    });
-
-
-    $('tbody#tbody_otroservi').find('tr[class=otroservi-edit]').each(function(){
-        console.log("Fila");
-        if($(this).find('input[type=checkbox]').is(':checked')) {
-            let objJsonDel = {};
-            $(this).closest('tr').find('span[id=spn_otroservi_idservsolu]').each(function(){
-                objJsonDel.ssl1 = parseInt($(this).html());
-                objJsonDel.ssl9 = "0";
-            });
-            arrGuardarOtroServ.push(objJsonDel);
-            console.log("ELIMINAR");
-            console.log(arrGuardarOtroServ);
-        }else{
-            /* if(pid!==""){
-                 filaOkEqReg=1;
-
-                 filaData.push(pid);
-                 filaData.push(cod);
-                 filaData.push(mod);
-                 filaData.push(mrc);
-                 filaData.push(ume);
-                 filaData.push(cnt);
-                 arrayDatos_servre.push(filaData);
-             }else{
-                 filaOkEqReg=0;
-                 arrayDatos_servre=[];
-                 return false;
-             }*/
-
-        }
-    }).closest('tbody').find('tr[class=otroservi-insert]').each(function () {
-        let objFilaProSol = {};
-
-        let objEqu= {};
-        let objServSoli={};
-        //let objPreReg= {};
-
-        //REGISTRO PRODUCTO SOLUCIÓN
-        objEqu.ose1=$("label#lbl_otroservi_idotroserv").text();//foránea otro servi;
-        objServSoli.sso1=parseInt($(this).find("td div span[id = spn_otroservi_idservsoli]").html());
-        //objPreReg.prp1=0;//foránea pre-registro producto
-
-        objFilaProSol.ssl1=0;
-        objFilaProSol.ssl2=objEqu;//objeto foránea equipo
-
-        let data = $(this).find("td div select[id ^= cmb_otroservi_nombre]").select2('data');
-        let nom=data[0].serviciosolicitado;
-
-        objFilaProSol.ssl4= nom;
-        objFilaProSol.ssl5= $(this).find("td div input[id = txt_otroservi_descri]").val();
-        objFilaProSol.ssl6= $(this).find("td div input[id = txt_otroservi_cantid]").val();
-
-        objFilaProSol.ssl9="1";
-        objFilaProSol.ssl12=objServSoli;
-        objFilaProSol.ssl13="1";
-        //objFilaProSol.pso14=objPreReg;
-        //arrProdSolEq.push(objFilaProSol);
-        arrGuardarOtroServ.push(objFilaProSol);
-    });
-
-    jsonGuardarFullOtroServ.ssl=arrGuardarOtroServ;//TSERVSOLU
-    jsonGuardarFullOtroServ.prs=arrGuardarPreRegServ;//TPREREGSERV
-
-
-    console.log("Json A Guardar");
-    console.log(jsonGuardarFullOtroServ);
-
-
-    $.ajax({
-        method: "POST",
-        url: "/otroservi/guardarfull",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(jsonGuardarFullOtroServ),
-        success: function resultado(valor) {
-            if (valor == "") {
-                alert("Entro en IF");
-                //
-                // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
-                // CargarJS_proyecto(0, 1, 0);
-            }
-            else {
-                console.log("Entro en ELSE");
-                // alert(valor);
-            }
-        },
-        error: function errores(msg) {
-            alert('Error: ' + msg.responseText);
-        }
-    });
-
-}
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var conta_filas_otroservi=1;
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS
-function addOtroServ_otroservi(obj){
-    conta_filas_otroservi++;
+function addOtroServ_otroservi(){
+    conta_filas_otroservi=$('table #tbody_otroservi tr').length;
+    ++conta_filas_otroservi;
+
+    let rowCloneOtroServicio=$(dollyRowOtroServicioHTML).clone().prop({id:'row-otroservi-' + conta_filas_otroservi});
+    rowCloneOtroServicio.find('p').html(conta_filas_otroservi);
+
+    $('table #tbody_otroservi').append(rowCloneOtroServicio)
+        .find('tr:last-child').find('select[name=cmb_otroservi_nombre]').attr('onchange','selCmbServ('+conta_filas_otroservi+')')
+        .select2({
+            ajax: {
+                url: "/otroservi/buservsolic",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar por servicio . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: formatRepoServSolic,
+            templateSelection: formatRepoSelectionServSolic
+        });
+
+    $('table #tbody_otroservi').find('button').each(function () {
+        $(this).on('click', function () {
+            let rRowPro = 1;
+            $(this).closest('tr').remove();
+            var obj = $('table #tbody_otroservi tr');
+
+            $(obj).each(function () {
+                $(this).attr("id","row-otroservi-"+rRowPro);
+                $(this).find('p[id=p_otroservi_num]').html(rRowPro);
+                $(this).find('select[name=cmb_otroservi_nombre]').removeAttr('onchange');
+                $(this).find('select[name=cmb_otroservi_nombre]').attr('onchange','selCmbServ('+rRowPro+')');
+
+                ++rRowPro;
+            });
+        });
+    });
+    /*conta_filas_otroservi++;
     var id = obj.id;
     var OtroServic = id.split("add_row_");
     //alert(Equipo[1]);
@@ -487,8 +521,8 @@ function addOtroServ_otroservi(obj){
         "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbServ(this)' style='width: 100%;'></select></div></td>"+
         // "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
         "<td><div><input id='txt_otroservi_descri' type='text' class='form-control' /></div></td>"+
-        /*"<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
-        "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+*/
+        /!*"<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
+        "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+*!/
         "<td><div><input id='txt_otroservi_cantid' type='text' class='form-control' /></div></td>"+
         "<td hidden><div><span id='spn_otroservi_idservsoli'></span></div></td>"+
         "<td hidden><div><span id='spn_otroservi_idservsolu'></span></div></td>"+
@@ -497,7 +531,7 @@ function addOtroServ_otroservi(obj){
     );
     // contPrimervez++;
     borrar_select2();
-    clonar_select2OtroServicio(conta_filas_otroservi);
+    clonar_select2OtroServicio(conta_filas_otroservi);*/
 }
 function clonar_select2OtroServicio(fila){
     $('#cmb_otroservi_nombre'+fila).select2({
@@ -528,7 +562,15 @@ function clonar_select2OtroServicio(fila){
 function borrar_select2(){
     $('.js-example-basic-single').select2("destroy");
 }
-function selCmbServ(obj){
+function selCmbServ(fila){
+    let data = $('tbody#tbody_otroservi tr#row-otroservi-'+fila).find('select').select2('data');
+    alert(JSON.stringify(data));
+    // let selectId = obj.id;
+    // let data = $("#"+selectId).select2('data');
+    let idServ=data[0].id;
+    $('tbody#tbody_otroservi tr#row-otroservi-'+fila).closest('tr').find('span[id=spn_otroservi_idservsoli]').text(idServ);
+}
+function selCmbServ2(obj){
     let selectId = obj.id;
     let data = $("#"+selectId).select2('data');
     let idServ=data[0].id;
@@ -542,12 +584,12 @@ function eliminar_fila_tabla_otroservis(fila){
     var childs = $("#"+otroservi + " tbody tr").length;
     if(childs > 1){
         $("#"+fila).remove();
-        reordernar_num_tabla_equipos(otroservi);
+        reordernar_num_tabla_otroservi(otroservi);
         conta_filas_otroservi--;
     }
 }
 
-function reordernar_num_tabla_equipos(idEquipo){
+function reordernar_num_tabla_otroservi(idEquipo){
     var contador = 1;
 
     var obj = $("#"+idEquipo+ " tbody tr");
@@ -610,12 +652,12 @@ function eliminar_fila_tabla_otroservisnr(fila){
 
     if(childsnr > 1){
         $("#"+fila).remove();
-        reordernar_num_tabla_equiposnr(otroservinr);
+        reordernar_num_tabla_otroservinr(otroservinr);
         conta_filas_otroservinr--;
     }
 }
 
-function reordernar_num_tabla_equiposnr(idEquiponr){
+function reordernar_num_tabla_otroservinr(idEquiponr){
     var contadornr = 1;
     var obj = $("#"+idEquiponr+ " tbody tr");
 
@@ -657,9 +699,9 @@ function RegistrarOtro_servicio() {
         //for(var i = 1; i<=length_re; i++){
         $(tbody_re).each(function () {
             var pid = $(this).find("td div span[id = spn_otroservi_idservsoli]").text();
-            let data = $(this).find("td div select[id ^= cmb_otroservi_nombre]").select2('data');
+            let data = $(this).find("td div select[name = cmb_otroservi_nombre]").select2('data');
             let nom="";
-            if($(this).find("td div select[id ^= cmb_otroservi_nombre]").val()>0){
+            if($(this).find("td div select[name ^= cmb_otroservi_nombre]").val()>0){
                 nom=data[0].serviciosolicitado;
             }
 
@@ -768,9 +810,9 @@ function addOtroServisUpdate_otroservi(obj){
         conta_filas_otroservi++;
 
         $("#otroservi_1 tbody").append(
-            "<tr id='otroservi_1_fila_1"+conta_filas_otroservi+"' class='otroservi-edit'>"+
+            "<tr id='row-otroservi-"+conta_filas_otroservi+"' class='otroservi-edit'>"+
             "<td><div><p class='text-center'>"+conta_filas_otroservi+"</p></></td>"+
-            "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' style='width: 100%;' onchange='selCmbServ(this)'></select></div></td>"+
+            "<td><div><select id='cmb_otroservi_nombre"+conta_filas_otroservi+"' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' style='width: 100%;' onchange='selCmbServ2(this)'></select></div></td>"+
             // "<td><div><span id='spn_equipo_codpro'>"+item.codigo+"</span></div></td>"+
             "<td><div><input id='txt_otroservi_descri' type='text' class='form-control' value='"+item.descripcion+"'/></div></td>"+
            /* "<td><div><span id='spn_equipo_marpro'>"+item.marca+"</span></div></td>"+
@@ -809,4 +851,61 @@ function addOtroServisUpdate_otroservi(obj){
             "</tr>"
         );
     });
+}
+
+function BuscarSolucionOtroServis(id){
+    if(id!="" || id!=undefined){
+        $.ajax({
+            method: "POST",
+            url: "/otroservi/buscarotroservsol",
+            data: {"idsol": id},
+            success: function resultado(valor) {
+                JSONobjGeneralOtSer = JSON.parse(valor);
+                console.log(JSONobjGeneralOtSer);
+                if(JSONobjGeneralOtSer.items.length>0){
+                    estOperaOtSer=1;
+                    addOtroServisUpdate_otroservi(valor);
+                }else{
+                    estOperaOtSer=0;
+                    conta_filas_otroservi=0;
+                    $("#tbody_otroservi").empty();
+                   /* $("#otroservi_1 tbody").append(
+                        "<tr id='otroservi_1_fila_1' class='otroservi-insert'>"+
+                        "<td><div><p class='text-center'>1</p></div></td>"+
+                        "<td><div><select id='cmb_otroservi_nombre1' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbServ(this);' style='width: 100%;'></select></div></td>"+
+                        // "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
+                        "<td><div><input id='txt_otroservi_descri' type='text' class='form-control'/></div></td>"+
+                        /!*                            "<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
+                                                    "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+*!/
+                        "<td><div><input id='txt_otroservi_cantid' type='text' class='form-control' required/></div></td>"+
+                        "<td hidden><div><span id='spn_otroservi_idservsoli'></span></div></td>"+
+                        "<td hidden><div><span id='spn_otroservi_idservsolu'></span></div></td>"+
+                        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservis(`otroservi_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
+                        "</tr>"
+                    );
+                    borrar_select2();
+                    clonar_select2OtroServicio(1);*/
+
+                    //otroserviS NO REGISTRADOS
+                    conta_filas_otroservinr=1;
+                    $("#tbody_otroservinr").empty();
+                    $("#otroservinr_1 tbody").append(
+                        "<tr id='otroservinr_1_fila_1' class='otroservinr-insert'>"+
+                        "<td><div><p class='text-center'>1</p></div></td>"+
+                        "<td><div><input id='txt_otroservinr_nomserv' type='text' class='form-control' /></div></td>"+
+                        "<td><div><input id='txt_otroservinr_desserv' type='text' class='form-control' /></div></td>"+
+                        /*"<td><div><input id='txt_otroservinr_marpro' type='text' class='form-control' /></div></td>"+
+                        "<td><div><input id='txt_otroservinr_umepro' type='text' class='form-control' /></div></td>"+*/
+                        "<td><div><input id='txt_otroservinr_canpro' type='text' class='form-control' /></div></td>"+
+                        "<td hidden><div><span id='spn_otroservinr_idpreg'></span></div></td>"+
+                        "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservisnr(`otroservinr_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
+                        "</tr>"
+                    );
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+    }
 }
