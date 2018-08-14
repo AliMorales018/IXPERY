@@ -6,6 +6,8 @@ var arrSolucion = [];
 var modSolPend;
 var setSolucion = true;
 
+var countss = 0;
+
 $(document).ready(function(){
     $('select[name="cmb-solucion-enc"]')
         .select2({
@@ -148,8 +150,18 @@ function BuscarRequerimientos() {
                     .on('click', 'tr', function(){
                         ireqSolucion = $(this).find('span[name=spn-proyecto-idreq]').text();
                         isolSolucion = $(this).find('span[name=spn-proyecto-idsol]').text();
-                        let ab = isolSolucion;
+
+                        console.log('isolSolucion');
+                        console.log(isolSolucion);
+
+
+
                         SesionSolucion(isolSolucion);
+
+                        if(countss !== 0){
+                            console.log('entre');
+                            BuscarSolucionEquipos();
+                        }
 
                         for (let i = 0; i < length; ++i) {
                             if(arrayData[i].idreq.toString() === ireqSolucion){
