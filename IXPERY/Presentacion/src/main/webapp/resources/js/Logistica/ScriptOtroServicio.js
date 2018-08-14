@@ -497,9 +497,9 @@ function addOtroServ_otroservi(obj){
     );
     // contPrimervez++;
     borrar_select2();
-    clonar_select2(conta_filas_otroservi);
+    clonar_select2OtroServicio(conta_filas_otroservi);
 }
-function clonar_select2(fila){
+function clonar_select2OtroServicio(fila){
     $('#cmb_otroservi_nombre'+fila).select2({
         ajax: {
             url: "/otroservi/buservsolic",
@@ -785,7 +785,7 @@ function addOtroServisUpdate_otroservi(obj){
         /*<i class='icon-checkmark icon-hp-habil'></i>";
         <i class='icon-cross icon-hp-desh'></i>";        */
         borrar_select2();
-        clonar_select2(conta_filas_otroservi);
+        clonar_select2OtroServicio(conta_filas_otroservi);
 
         $("#select2-cmb_otroservi_nombre"+conta_filas_otroservi+"-container").text(item.servsolicitado);
     });

@@ -329,7 +329,7 @@
                             "</tr>"
                         );
                         borrar_select2();
-                        clonar_select2(1);
+                        clonar_select2OtroServicio(1);
 
                         //otroserviS NO REGISTRADOS
                         conta_filas_otroservinr=1;
