@@ -86,6 +86,12 @@ function BuscarSolucionesPendientes(){
 function AddSetCotizacion() {
 
     if(setCotizacion){
+        console.log('mServicioCot');
+        console.log(mServicioCot);
+        console.log('mEquipoCot');
+        console.log(mEquipoCot);
+
+
         menuNivel3.push(`<li><a id='menu-tab__${mEquipoCot.idmenu}' class='tab'><span>${mEquipoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
         menuNivel3.push(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
         menuNivel3.push(`<li><a id='menu-tab__${mViaticoCot.idmenu}' class='tab'><span>${mViaticoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
@@ -96,13 +102,13 @@ function AddSetCotizacion() {
             .append(`<div id='panel__${mServicioCot.idmenu}' class="ocultar"></div>`)
             .append(`<div id='panel__${mViaticoCot.idmenu}' class="ocultar"></div>`);
 
-        $.post(mEquipo.url, function (htmlExterno) {
+        $.post(mEquipoCot.url, function (htmlExterno) {
             $('#panel__' + mEquipoCot.idmenu).html(htmlExterno);
         });
-        $.post(mServicio.url, function (htmlExterno) {
+        $.post(mServicioCot.url, function (htmlExterno) {
             $('#panel__' + mServicioCot.idmenu).html(htmlExterno);
         });
-        $.post(mViatico.url, function (htmlExterno) {
+        $.post(mViaticoCot.url, function (htmlExterno) {
             $('#panel__' + mViaticoCot.idmenu).html(htmlExterno);
         });
         setCotizacion = false;

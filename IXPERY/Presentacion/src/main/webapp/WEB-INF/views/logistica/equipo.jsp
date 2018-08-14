@@ -286,6 +286,8 @@
             templateSelection: formatRepoSelectionProd
         });
         //COMBO PRODUCTOS
+
+        BuscarSolucionEquipos();
     });
 
     function formatRepo (repo) {
@@ -316,7 +318,25 @@
         return repo.text || repo.nombre;
     }
 
-    function BuscarSolucionEquipos(id){
+
+    function BuscarSolucionEquipos(){
+        let id = "";
+        $.ajax({
+            method: "POST",
+            async: false,
+            url: "/solucion/VerificarSesionSolucion",
+            success: function(valor) {
+                console.log('valor');
+                console.log(valor);
+                //id = valor;
+                id = "1";
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+        console.log("id");
+        console.log(id);
         if(id!="" || id!=undefined){
             $.ajax({
                 method: "POST",
