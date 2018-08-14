@@ -637,13 +637,13 @@ public class Diccionario {
         //totalmostrar
         sol.put("sol9", "460719");
         //estado
-        sol.put("sol10", "460710");
+        sol.put("sol10", "4607110");
         //idestado
-        sol.put("sol11", "460711");
+        sol.put("sol11", "4607111");
         //fecharegistro
-        sol.put("sol12", "460712");
+        sol.put("sol12", "4607112");
         //userregistro
-        sol.put("sol13", "460713");
+        sol.put("sol13", "4607113");
         return sol;
     }
 
