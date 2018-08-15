@@ -253,7 +253,7 @@
                     }
                 }
 
-                //NO REGISTRADOS SI EXISTEN MOSTRAR
+                //NO REGISTRADOS SI EXISTEN MOSTRARr
 
                 $("#tbody_equiponr2").empty();
                 if(JSONobjGeneralEq2.items.length > 0) {

@@ -256,7 +256,7 @@
                 }
                 }
 
-                //NO REGISTRADOS SI EXISTEN MOSTRAR
+                //NO REGISTRADOS SI EXISTEN MOSTRARr
 
                 $("#tbody_otroservicionr2").empty();
                 if(JSONobjGeneralServ2.items.length > 0) {
