@@ -8,8 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipos2</title>
-<%--    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
+    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
+    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
     <style type="text/css">
 
         .icon-add-row{
@@ -73,7 +73,7 @@
 <div class="l-container-sm">
     <div class="grid-x grid-padding-x">
         <div class="cell large-12">
-            <label class="text-f" id="lbl_equipo_fecha">${fecha}</label>
+            <label class="text-f" id="lbl_equipo2_fecha">${fecha}</label>
         </div>
     </div>
 </div>
@@ -172,16 +172,30 @@
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEquipo2.js"></script>
 <%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <script>
-    var contPrimervez=0;
-    var fila=0;
-    var id=1;
-    var conta_filas_equipo2=0;
-    var conta_filas_equiponr2=0;
-    $(document).ready(function () {
+    function BuscarSesionSol(){
+        // let id = "1";
+       /* $.ajax({
+            method: "POST",
+            async: false,
+            url: "/solucion/VerificarSesionSolucion",
+            success: function(valor) {
+                console.log('valor');
+                console.log(valor);
+                id = valor;
+                sSolucionEq2=id;
+                id = 1;
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });*/
+       // ++countss;
+       //  console.log("id");
+       //  console.log(id);
         $.ajax({
             method: "POST",
             url: "/equipo2/buscarequiposol",
-            data: {"idsol": id},
+            data: {"idsol": 1},
             success: function resultado(valor) {
 
                 JSONobjGeneralEq2 = JSON.parse(valor);
@@ -205,7 +219,7 @@
                         "<td><div><span id='spn_equipo2_nompro'>"+item.producto+"</span></div></td>"+
                         "<td><div><span id='spn_equipo2_codpro'>"+item.codigo+"</span></div></td>"+
                         "<td><div><span id='spn_equipo2_modpro'>"+item.modelo+"</span></div></td>"+
-                        "<td><div><select id='cmb_equipo2_provee"+conta_filas_equipo2+"' name='cmb_equipo2_provee' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProvee(this);'></select>"+
+                        "<td><div><select id='cmb_equipo2_provee"+conta_filas_equipo2+"' name='cmb_equipo2_provee' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProveeEq2(this);'></select>"+
                         "<td><div><span id='spn_equipo2_marpro'>"+item.marca+"</span></div></td>"+
                         "<td><div><span id='spn_equipo2_medpro'>"+item.nomumedida+"</span></div></td>"+
                         "<td><div><span id='spn_equipo2_canpro'>"+item.cantidad+"</div></td>"+
@@ -218,8 +232,8 @@
                         "<td hidden><div><span id='spn_equipo2_idproduc'>"+item.idproducto+"</span></div></td>"+
                         "</tr>"
                     );
-                    borrar_select3();
-                    clonar_select3(conta_filas_equipo2,item.idproducto);
+                    // borrar_select3();
+                    clonar_selectEq2(conta_filas_equipo2,item.idproducto);
 
                     $("#select2-cmb_equipo2_provee"+conta_filas_equipo2+"-container").text(item.nomempresa);
                 });
@@ -246,6 +260,14 @@
                 alert('Error: ' + msg.responseText);
             }
         });
+    }
+    var contPrimervez=0;
+    var filaEq2=0;
+    var id=1;
+    var conta_filas_equipo2=0;
+    var conta_filas_equiponr2=0;
+    $(document).ready(function () {
+        BuscarSesionSol();
     });
 </script>
 <!-- End JavaScript -->

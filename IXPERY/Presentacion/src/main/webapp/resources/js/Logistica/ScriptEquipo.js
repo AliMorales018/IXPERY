@@ -1,4 +1,5 @@
 var JSONobjGeneralEq;
+var sSolucionEq=0;
 var estOperaEq=0;//0: guardar simple//1:updatetotal(sav-updt-del)
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowProdSolEq="";
@@ -163,7 +164,8 @@ function InsUpdDelEquipo() {
         success: function resultado(valor) {
             if (valor == "") {
                 limpiarInsUpdTot();
-                var sid=$("#selectEmpresaEquipo_Proyecto").val();
+                // var sid=$("#selectEmpresaEquipo_Proyecto").val();
+                var sid=sSolucionEq;
                 BuscarSolucionEquipos(sid);
                 //
                 // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
@@ -403,7 +405,7 @@ $(document).ready(function () {
                             }else{
                                 estadoCanProdEqReg = 1;
                                 $(this).find('input[id = txt_equiponr_canpro]').removeClass('is-invalid');
-                                $("#btn_equipo_save").prop( "disabled", true );
+                                $("#btn_equipo_save").prop( "disabled", false );
                             }
                         }
                     }
@@ -722,14 +724,15 @@ var arrayData_nr;
 var arrayData_completo;
 
 function RegistrarEquipo_equipo() {
-    if($("#selectEmpresaEquipo_Proyecto").val()!=null){
+    // if($("#selectEmpresaEquipo_Proyecto").val()!=null){
 
         var tbody_re = $("#tbody_equipo tr");
         var tbody_nr = $("#tbody_equiponr tr");
         var length_re = tbody_re.length;
         var length_nr = tbody_nr.length;
 
-        var sid=$("#selectEmpresaEquipo_Proyecto").val();
+        // var sid=$("#selectEmpresaEquipo_Proyecto").val();
+        var sid=sSolucionEq;
 
         var filaDataExtras=[];
         var filaOkEqReg=0;//0:hace referencia a que falta completar algún campo de la fila//1:todoOK
@@ -842,9 +845,9 @@ function RegistrarEquipo_equipo() {
             arrayDatos_re=[];
             arrayDatos_nr=[];
         }
-    }else{
+ /*   }else{
         alert("Selecione una Solución o Empresa por favor...");
-    }
+    }*/
 }
 
 function addEquiposUpdate_equipo(obj){
@@ -934,6 +937,7 @@ function BuscarSolucionEquipos(idSol){
             console.log('valor');
             console.log(valor);
             id = valor;
+            sSolucionEq=id;
             // id = "1";
         },
         error: function errores(msg) {
@@ -1024,3 +1028,5 @@ function limpiarInsUpdTot(){
     arrayData_nr;
     arrayData_completo={};
 }
+
+

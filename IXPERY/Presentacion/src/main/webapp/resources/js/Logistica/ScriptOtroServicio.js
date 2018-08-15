@@ -1,4 +1,6 @@
 var JSONobjGeneralOtSer;
+var sSolucionOtSer=0;
+var estadoVacio;
 var estOperaOtSer=0;//0: guardar simple//1:updatetotal(sav-updt-del)
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowServSol="";
@@ -134,27 +136,34 @@ function InsUpdDelOtroServ() {
         let objServSoli={};
         //let objPreReg= {};
 
-        //REGISTRO PRODUCTO SOLUCIÓN
-        objEqu.ose1=$("label#lbl_otroservi_idotroserv").text();//foránea otro servi;
-        objServSoli.sso1=parseInt($(this).find("td div span[id = spn_otroservi_idservsoli]").html());
-        //objPreReg.prp1=0;//foránea pre-registro producto
-
-        objFilaProSol.ssl1=0;
-        objFilaProSol.ssl2=objEqu;//objeto foránea equipo
 
         let data = $(this).find("td div select[name = cmb_otroservi_nombre]").select2('data');
-        let nom=data[0].serviciosolicitado;
+        let nom="";
+        if($(this).find("td div select[name ^= cmb_otroservi_nombre]").val()>0){
+            nom=data[0].serviciosolicitado;
 
-        objFilaProSol.ssl4= nom;
-        objFilaProSol.ssl5= $(this).find("td div input[id = txt_otroservi_descri]").val();
-        objFilaProSol.ssl6= $(this).find("td div input[id = txt_otroservi_cantid]").val();
+            //REGISTRO PRODUCTO SOLUCIÓN
+            objEqu.ose1=$("label#lbl_otroservi_idotroserv").text();//foránea otro servi;
+            objServSoli.sso1=parseInt($(this).find("td div span[id = spn_otroservi_idservsoli]").html());
+            //objPreReg.prp1=0;//foránea pre-registro producto
 
-        objFilaProSol.ssl9="1";
-        objFilaProSol.ssl12=objServSoli;
-        objFilaProSol.ssl13="1";
-        //objFilaProSol.pso14=objPreReg;
-        //arrProdSolEq.push(objFilaProSol);
-        arrGuardarFinOtroServ.push(objFilaProSol);
+            objFilaProSol.ssl1=0;
+            objFilaProSol.ssl2=objEqu;//objeto foránea equipo
+
+            objFilaProSol.ssl4= nom;
+            objFilaProSol.ssl5= $(this).find("td div input[id = txt_otroservi_descri]").val();
+            objFilaProSol.ssl6= $(this).find("td div input[id = txt_otroservi_cantid]").val();
+
+            objFilaProSol.ssl9="1";
+            objFilaProSol.ssl12=objServSoli;
+            objFilaProSol.ssl13="1";
+            //objFilaProSol.pso14=objPreReg;
+            //arrProdSolEq.push(objFilaProSol);
+            arrGuardarFinOtroServ.push(objFilaProSol);
+            estadoVacio=1;
+        }else{
+            estadoVacio=0;
+        }
     });
 
     $.merge(arrGuardarFinOtroServ,arrGuardarOtroServ);
@@ -176,7 +185,8 @@ function InsUpdDelOtroServ() {
         success: function resultado(valor) {
             if (valor == "") {
                 limpiarInsUpdTotServi();
-                var sid=$("#selectEmpresaOtroServi_Proyecto").val();
+                // var sid=$("#selectEmpresaOtroServi_Proyecto").val();
+                var sid=sSolucionOtSer;
                 BuscarSolucionOtroServis(sid);
             }
             else {
@@ -306,7 +316,7 @@ $(document).ready(function () {
                 }else{
                     estadoDesServReg=1;
                     $(this).find('input[id = txt_otroservi_descri]').removeClass('is-invalid');
-                    $("#btn_otroservi_save").prop( "disabled", true );
+                    $("#btn_otroservi_save").prop( "disabled", false );
                 }
             }
 
@@ -404,7 +414,7 @@ $(document).ready(function () {
                     }else{
                         estadoCanServOtroSerReg = 1;
                         $(this).find('input[id = txt_otroservinr_canpro]').removeClass('is-invalid');
-                        $("#btn_otroservi_save").prop( "disabled", true );
+                        $("#btn_otroservi_save").prop( "disabled", false );
                     }
                 }
             }
@@ -679,14 +689,14 @@ var arrayData_nr;
 var arrayData_completoserv;
 
 function RegistrarOtro_servicio() {
-    if($("#selectEmpresaOtroServi_Proyecto").val()!=null){
+    // if($("#selectEmpresaOtroServi_Proyecto").val()!=null){
 
         var tbody_re = $("#tbody_otroservi tr");
         var tbody_nr = $("#tbody_otroservinr tr");
         var length_re = tbody_re.length;
         var length_nr = tbody_nr.length;
 
-        var sid=$("#selectEmpresaOtroServi_Proyecto").val();
+        var sid=sSolucionOtSer;
 
         var filaDataExtras=[];
         var filaOkEqReg=0;//0:hace referencia a que falta completar algún campo de la fila//1:todoOK
@@ -796,9 +806,9 @@ function RegistrarOtro_servicio() {
             arrayDatos_servre=[];
             arrayDatos_servnr=[];
         }
-    }else{
+  /*  }else{
         alert("Selecione una Solución o Empresa por favor...");
-    }
+    }*/
 }
 
 function addOtroServisUpdate_otroservi(obj){
@@ -864,6 +874,7 @@ function BuscarSolucionOtroServis(idSol){
             console.log('valor');
             console.log(valor);
             id = valor;
+            sSolucionOtSer=id;
             // id = "1";
         },
         error: function errores(msg) {

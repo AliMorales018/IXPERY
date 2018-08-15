@@ -3,7 +3,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>S. Servicios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O. Servicios</title>
+    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
+    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
     <style>
         .select_actividad_cargolab:focus{
             -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
@@ -112,7 +115,7 @@
                 </div>
             </div>
             <div class="cell large-11">
-                <p class="main-title">S. Servicios</p>
+                <p class="main-title">O. Servicios</p>
             </div>
         </div>
     </div>
@@ -162,29 +165,32 @@
 
 <!-- Personal en Transito -->
 <div id="container_personal_transito" style="margin-top: 15px;">
-    <div class="grid-container">
+    <div>
         <!-- Titulo -->
-        <div class="grid-x grid-padding-x" style="margin-bottom:10px">
-            <div class="cell large-12">
+        <div class="grid-x grid-padding-x align-center-middle" style="margin-bottom:10px">
+            <div class="cell large-9">
                 <label class="text-primary" style="font-size: 12px"><b>Personal en tránsito: </b></label>
             </div>
         </div>
         <!-- Titulo -->
 
         <!-- Table -->
-        <div class="grid-x grid-padding-x">
+        <div class="grid-x grid-padding-x align-center-middle">
             <div class="cell large-9">
                 <table class="table table-personal-transito">
                     <thead>
-                        <tr>
-                            <td>N°</td>
-                            <td class="text-center" style="width: 370px">Cargo Laboral</td>
-                            <td class="text-center">Cantidad</td>
-                            <td class="text-center">Días pago</td>
-                        </tr>
+                    <tr>
+                        <td>N°</td>
+                        <td class="text-center" style="width: 370px">Cargo Laboral</td>
+                        <td class="text-center">Cantidad</td>
+                        <td class="text-center">Días pago</td>
+                        <td class="text-center">Salario día</td>
+                        <td class="text-center">Subtotal</td>
+                        <td class="text-center">Total</td>
+                    </tr>
                     </thead>
                     <tbody id="tbody_personal_transito">
-                        <tr><td colspan='5' class='text-center'><div style="padding: 4px; font-size: 10px">Seleccione cargo laboral.</div></td></tr>
+                    <tr><td colspan='5' class='text-center'><div style="padding: 4px; font-size: 10px">Seleccione cargo laboral.</div></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -197,7 +203,7 @@
 
 <!-- Actividades -->
 <div id="container_actividades" style="margin-top: 15px;">
-    <div id="actividad_1" class="actividad grid-container">
+    <div id="actividad_1" class="actividad">
         <!-- Titulo -->
         <div class="grid-x grid-padding-x" style="margin-bottom:10px">
             <div class="cell large-12">
@@ -245,8 +251,9 @@
     </div>
 </div>
 <!-- Actividades -->
-
-<script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
+<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
+<script src="${urlPublic}/js/select2.js"></script>
+<script src="${urlPublic}/js/Logistica/ScriptOperacionServicio.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -260,7 +267,7 @@
         }
 
         return  "<div class='select2-result-cargolab'><span class='select2-span-result'>CARGO: </span>"+repo.cargo+"</div>"+
-                "<div class='select2-result-area'><span class='select2-span-result'>AREA: </span>"+repo.area+"</span></div>";
+            "<div class='select2-result-area'><span class='select2-span-result'>AREA: </span>"+repo.area+"</span></div>";
     }
 
     function formatRepoSelection_servicio (repo) {

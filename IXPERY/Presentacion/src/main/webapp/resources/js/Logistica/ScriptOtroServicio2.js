@@ -1,6 +1,6 @@
 var JSONobjGeneralServ2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
-var idRowProdSolEq2="";
+var idRowProdSolOtS2="";
 var rowEqui2ObjIn = {};
 var rowEqui2ObjOut = {};
 
@@ -13,56 +13,56 @@ $(document).ready(function () {
     let idProdProvEq2;
     let preProdEq2;
     let subProdEq2;
-    $('#equipo_2 tbody')
-        .on('focusin', 'tr[class=equipo2-edit]', function () {
-            idRowProdSolEq2 = parseInt($(this).find('span[id = spn_equipo2_idprodsol]').html());
-            idProdProvEq2 = parseInt($(this).find('span[id = spn_equipo2_idprprov]').html());
+    $('#otroservicio_2 tbody')
+        .on('focusin', 'tr[class=otroservicio2-edit]', function () {
+            idRowProdSolOtS2 = parseInt($(this).find('span[id = spn_otroservicio2_idservicsolu]').html());
+            idProdProvEq2 = parseInt($(this).find('span[id = spn_otroservicio2_idserprov]').html());
         })
-        .on('focusout', 'tr[class=equipo2-edit]', function () {
+        .on('focusout', 'tr[class=otroservicio2-edit]', function () {
             let objProEdit = {};
-            idProdProvEq2 = parseInt($(this).find('span[id = spn_equipo2_idprprov]').html());
-            preProdEq2 = parseFloat($(this).find('span[id = spn_equipo2_prepro]').html());
-            subProdEq2 = parseFloat($(this).find('span[id = spn_equipo2_subtot]').html());
+            idProdProvEq2 = parseInt($(this).find('span[id = spn_otroservicio2_idserprov]').html());
+            preProdEq2 = parseFloat($(this).find('span[id = spn_otroservicio2_preser]').html());
+            subProdEq2 = parseFloat($(this).find('span[id = spn_otroservicio2_subtot]').html());
 
-            rowEqui2ObjOut['pso1'] = idRowProdSolEq2;
-            rowEqui2ObjOut['pso3'] = idProdProvEq2;
-            rowEqui2ObjOut['pso5'] = preProdEq2;
-            rowEqui2ObjOut['pso7'] = subProdEq2;
+            rowEqui2ObjOut['ssl1'] = idRowProdSolOtS2;
+            rowEqui2ObjOut['ssl3'] = idProdProvEq2;
+            rowEqui2ObjOut['ssl17'] = preProdEq2;
+            rowEqui2ObjOut['ssl7'] = subProdEq2;
 
 
-            $.each(JSONobjGeneralEq2.items[1].items2, function (obj, item) {
-                if(item.idprodsol===rowEqui2ObjOut.pso1){
-                    objProEdit["pso1"] = rowEqui2ObjOut.pso1;
-                    if(item.idprodprov===null){
+            $.each(JSONobjGeneralServ2.items[1].items2, function (obj, item) {
+                if(item.idservicsolu===rowEqui2ObjOut.ssl1){
+                    objProEdit["ssl1"] = rowEqui2ObjOut.ssl1;
+                    if(item.idservprov===null){
                         console.log("entro a null");
-                        if(!isNaN(rowEqui2ObjOut.pso3)){
+                        if(!isNaN(rowEqui2ObjOut.ssl3)){
                             console.log("ES <> A NaN");
-                            console.log(rowEqui2ObjOut.pso3);
-                            item.idprodprov=rowEqui2ObjOut.pso3;
-                            item.preciounit=rowEqui2ObjOut.pso5;
-                            item.subtotal=rowEqui2ObjOut.pso7;
+                            console.log(rowEqui2ObjOut.ssl3);
+                            item.idservprov=rowEqui2ObjOut.ssl3;
+                            item.costounitario=rowEqui2ObjOut.ssl17;
+                            item.costosubtotal=rowEqui2ObjOut.ssl7;
 
                             let objProdProv={};
-                            objProdProv.ppr1=idProdProvEq2;
-                            objProEdit["pso3"] =objProdProv;
-                            objProEdit["pso5"] = preProdEq2;
-                            objProEdit["pso7"] = subProdEq2;
+                            objProdProv.spr1=idProdProvEq2;
+                            objProEdit["ssl3"] =objProdProv;
+                            objProEdit["ssl17"] = preProdEq2;
+                            objProEdit["ssl7"] = subProdEq2;
 
                             arrProEdit2.push(objProEdit);
                             arrGuardarEquipo2 = arrProEdit2.slice();
                         }
                     }else{
                         console.log("objProEdit");
-                        console.log("IDPRODPROV: "+item.idprodprov);
-                        console.log("rowEqui2ObjOut.pso3: "+rowEqui2ObjOut.pso3);
-                        if (item.idprodprov!== rowEqui2ObjOut.pso3) {
+                        console.log("IDPRODPROV: "+item.idservprov);
+                        console.log("rowEqui2ObjOut.ssl3: "+rowEqui2ObjOut.ssl3);
+                        if (item.idservprov!== rowEqui2ObjOut.ssl3) {
 
                             let objProdProv={};
-                            objProdProv.ppr1=rowEqui2ObjOut.pso3;
-                            objProEdit["pso3"] =objProdProv;
+                            objProdProv.spr1=rowEqui2ObjOut.ssl3;
+                            objProEdit["ssl3"] =objProdProv;
 
-                            objProEdit["pso5"] = rowEqui2ObjOut.pso5;
-                            objProEdit["pso7"] = rowEqui2ObjOut.pso7;
+                            objProEdit["ssl17"] = rowEqui2ObjOut.ssl17;
+                            objProEdit["ssl7"] = rowEqui2ObjOut.ssl7;
 
                             let countKeys = Object.keys(objProEdit).length;
                             console.log("objProEdit");
@@ -71,11 +71,11 @@ $(document).ready(function () {
                             console.log(countKeys);
                             if(countKeys > 1){
                                 arrProEdit2.push(objProEdit);
-                                arrProEdit2 = eliminarObjetosDuplicados(arrProEdit2, 'pso1');
+                                arrProEdit2 = eliminarObjetosDuplicados(arrProEdit2, 'ssl1');
                                 arrGuardarEquipo2 = arrProEdit2.slice();
                             }else if(countKeys === 1){
                                 arrProEdit2.forEach(function(currentValue, index, arr){
-                                    if(arrProEdit2[index].pso1===item.idprodsol){
+                                    if(arrProEdit2[index].ssl1===item.idservicsolu){
                                         console.log("entré a eliminar");
                                         arrProEdit2.splice(index,1);
                                         arrGuardarEquipo2 = arrProEdit2.slice();
@@ -118,7 +118,7 @@ function eliminarObjetosDuplicados(arr, prop) {
 
 
 
-var fila=0;
+var filaOtS2=0;
 function clonar_select4(fila,id){
 
     $('#cmb_otroservicio2_provee'+fila).select2({
@@ -141,8 +141,8 @@ function clonar_select4(fila,id){
         placeholder: 'Buscar por proveedor . . .',
         escapeMarkup: function (markup) { return markup; },
         //minimumInputLength: 3,
-        templateResult: formatRepoProve,
-        templateSelection: formatRepoSelectionProve
+        templateResult: formatRepoProveOtS2,
+        templateSelection: formatRepoSelectionProveOtS2
     });
 
 }
@@ -152,7 +152,7 @@ function borrar_select4(){
 }
 
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS
-function formatRepoProve (repo) {
+function formatRepoProveOtS2 (repo) {
     //alert(repo.precio);
     if (repo.loading) {
         return repo.text;
@@ -162,10 +162,10 @@ function formatRepoProve (repo) {
         "<div class=         'selectequipo2-result-modelo'  ><span class='selectequipo2-span-result'>PRECIO: </span>"+repo.precio+"</span></div>"
     return markup;
 }
-function formatRepoSelectionProve (repo) {
+function formatRepoSelectionProveOtS2 (repo) {
     return repo.text || repo.empresa;
 }
-function selCmbProvee(obj){
+function selCmbProveeOtS2(obj){
     let selectId = obj.id;
     let data = $("#"+selectId).select2('data');
     let idProdProv=data[0].id;
@@ -177,13 +177,13 @@ function selCmbProvee(obj){
     $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_subtot]').text(subTot);
 }
 
-function InsUpdDelEquipo2() {
+function InsUpdDelOtroServ2() {
     jsonGuardarFullEq2.pso=arrGuardarEquipo2;//TPRODSOL
     console.log("Json A Guardar");
     console.log(jsonGuardarFullEq2);
     $.ajax({
         method: "POST",
-        url: "/equipo/guardarfull",
+        url: "/otroservi/guardarfull",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(jsonGuardarFullEq2),
         success: function resultado(valor) {
