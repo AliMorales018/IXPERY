@@ -3,12 +3,12 @@ var JSONobjGeneralServ2;
 var idRowProdSolOtS2="";
 var sSolucionOtSer2="";
 var rowEqui2ObjIn = {};
-var rowEqui2ObjOut = {};
+var rowOtroSer2ObjOut = {};
 
-var jsonGuardarFullEq2 = {};
-var arrGuardarEquipo2 = [];
+var jsonGuardarFullOtroSer2 = {};
+var arrGuardarOtroSer2 = [];
 
-var arrProEdit2 = [];
+var arrProEdit2OtSer2 = [];
 
 $(document).ready(function () {
     let idProdProvEq2;
@@ -25,23 +25,23 @@ $(document).ready(function () {
             preProdEq2 = parseFloat($(this).find('span[id = spn_otroservicio2_preser]').html());
             subProdEq2 = parseFloat($(this).find('span[id = spn_otroservicio2_subtot]').html());
 
-            rowEqui2ObjOut['ssl1'] = idRowProdSolOtS2;
-            rowEqui2ObjOut['ssl3'] = idProdProvEq2;
-            rowEqui2ObjOut['ssl17'] = preProdEq2;
-            rowEqui2ObjOut['ssl7'] = subProdEq2;
+            rowOtroSer2ObjOut['ssl1'] = idRowProdSolOtS2;
+            rowOtroSer2ObjOut['ssl3'] = idProdProvEq2;
+            rowOtroSer2ObjOut['ssl17'] = preProdEq2;
+            rowOtroSer2ObjOut['ssl7'] = subProdEq2;
 
 
             $.each(JSONobjGeneralServ2.items[1].items2, function (obj, item) {
-                if(item.idservicsolu===rowEqui2ObjOut.ssl1){
-                    objProEdit["ssl1"] = rowEqui2ObjOut.ssl1;
+                if(item.idservicsolu===rowOtroSer2ObjOut.ssl1){
+                    objProEdit["ssl1"] = rowOtroSer2ObjOut.ssl1;
                     if(item.idservprov===null){
                         console.log("entro a null");
-                        if(!isNaN(rowEqui2ObjOut.ssl3)){
+                        if(!isNaN(rowOtroSer2ObjOut.ssl3)){
                             console.log("ES <> A NaN");
-                            console.log(rowEqui2ObjOut.ssl3);
-                            item.idservprov=rowEqui2ObjOut.ssl3;
-                            item.costounitario=rowEqui2ObjOut.ssl17;
-                            item.costosubtotal=rowEqui2ObjOut.ssl7;
+                            console.log(rowOtroSer2ObjOut.ssl3);
+                            item.idservprov=rowOtroSer2ObjOut.ssl3;
+                            item.costounitario=rowOtroSer2ObjOut.ssl17;
+                            item.costosubtotal=rowOtroSer2ObjOut.ssl7;
 
                             let objProdProv={};
                             objProdProv.spr1=idProdProvEq2;
@@ -49,21 +49,21 @@ $(document).ready(function () {
                             objProEdit["ssl17"] = preProdEq2;
                             objProEdit["ssl7"] = subProdEq2;
 
-                            arrProEdit2.push(objProEdit);
-                            arrGuardarEquipo2 = arrProEdit2.slice();
+                            arrProEdit2OtSer2.push(objProEdit);
+                            arrGuardarOtroSer2 = arrProEdit2OtSer2.slice();
                         }
                     }else{
                         console.log("objProEdit");
                         console.log("IDPRODPROV: "+item.idservprov);
-                        console.log("rowEqui2ObjOut.ssl3: "+rowEqui2ObjOut.ssl3);
-                        if (item.idservprov!== rowEqui2ObjOut.ssl3) {
+                        console.log("rowOtroSer2ObjOut.ssl3: "+rowOtroSer2ObjOut.ssl3);
+                        if (item.idservprov!== rowOtroSer2ObjOut.ssl3) {
 
                             let objProdProv={};
-                            objProdProv.spr1=rowEqui2ObjOut.ssl3;
+                            objProdProv.spr1=rowOtroSer2ObjOut.ssl3;
                             objProEdit["ssl3"] =objProdProv;
 
-                            objProEdit["ssl17"] = rowEqui2ObjOut.ssl17;
-                            objProEdit["ssl7"] = rowEqui2ObjOut.ssl7;
+                            objProEdit["ssl17"] = rowOtroSer2ObjOut.ssl17;
+                            objProEdit["ssl7"] = rowOtroSer2ObjOut.ssl7;
 
                             let countKeys = Object.keys(objProEdit).length;
                             console.log("objProEdit");
@@ -71,15 +71,15 @@ $(document).ready(function () {
                             console.log("CONTAobjProEdit");
                             console.log(countKeys);
                             if(countKeys > 1){
-                                arrProEdit2.push(objProEdit);
-                                arrProEdit2 = eliminarObjetosDuplicados(arrProEdit2, 'ssl1');
-                                arrGuardarEquipo2 = arrProEdit2.slice();
+                                arrProEdit2OtSer2.push(objProEdit);
+                                arrProEdit2OtSer2 = eliminarObjetosDuplicados(arrProEdit2OtSer2, 'ssl1');
+                                arrGuardarOtroSer2 = arrProEdit2OtSer2.slice();
                             }else if(countKeys === 1){
-                                arrProEdit2.forEach(function(currentValue, index, arr){
-                                    if(arrProEdit2[index].ssl1===item.idservicsolu){
+                                arrProEdit2OtSer2.forEach(function(currentValue, index, arr){
+                                    if(arrProEdit2OtSer2[index].ssl1===item.idservicsolu){
                                         console.log("entré a eliminar");
-                                        arrProEdit2.splice(index,1);
-                                        arrGuardarEquipo2 = arrProEdit2.slice();
+                                        arrProEdit2OtSer2.splice(index,1);
+                                        arrGuardarOtroSer2 = arrProEdit2OtSer2.slice();
                                         return false;
                                     }
 
@@ -179,14 +179,14 @@ function selCmbProveeOtS2(obj){
 }
 
 function InsUpdDelOtroServ2() {
-    jsonGuardarFullEq2.pso=arrGuardarEquipo2;//TPRODSOL
+    jsonGuardarFullOtroSer2.pso=arrGuardarOtroSer2;//TPRODSOL
     console.log("Json A Guardar");
-    console.log(jsonGuardarFullEq2);
+    console.log(jsonGuardarFullOtroSer2);
     $.ajax({
         method: "POST",
         url: "/otroservi/guardarfull",
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(jsonGuardarFullEq2),
+        data: JSON.stringify(jsonGuardarFullOtroSer2),
         success: function resultado(valor) {
             if (valor == "") {
                 alert("Entro en IF");
