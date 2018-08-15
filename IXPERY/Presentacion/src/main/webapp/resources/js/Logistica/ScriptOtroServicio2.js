@@ -120,7 +120,7 @@ function eliminarObjetosDuplicados(arr, prop) {
 
 
 var filaOtS2=0;
-function clonar_select4(fila,id){
+function clonar_selectOtroSer2(fila,id){
 
     $('#cmb_otroservicio2_provee'+fila).select2({
         ajax: {

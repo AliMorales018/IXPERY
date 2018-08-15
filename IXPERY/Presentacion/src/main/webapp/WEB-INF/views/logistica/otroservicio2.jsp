@@ -168,7 +168,7 @@
 <%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <script>
     var contPrimervez=0;
-    var fila=0;
+    var filaOtS2=0;
     var id=2;
     var conta_filas_otroservicio2=0;
     var conta_filas_otroservicionr2=0;
@@ -206,58 +206,77 @@
                 $("#tbody_otroservicio2").empty();
 
                 //RECORREMOS otroservicio PRODUCTOS REGISTRADOS
+                if (JSONobjGeneralServ2.items.length > 0) {
+                    if(JSONobjGeneralServ2.items[1].length>0){
+                    $.each(JSONobjGeneralServ2.items[1].items2, function (obj, item) {
+                        conta_filas_otroservicio2++;
+                        let cosUnit = "";
+                        let subUnit = "";
+                        let servprov = "";
+                        if (item.costounitario === 0) {
+                            cosUnit = "";
+                        } else {
+                            cosUnit = item.costounitario
+                        }
+                        if (item.costosubtotal === 0) {
+                            subUnit = "";
+                        } else {
+                            subUnit = item.costosubtotal
+                        }
+                        if (item.idservprov === null) {
+                            servprov = "";
+                        } else {
+                            servprov = item.idservprov
+                        }
+                        //falta total luego agregar si es necesario
+                        $("#otroservicio_2 tbody").append(
+                            "<tr id='otroservicio_2_fila_" + conta_filas_otroservicio2 + "' class='otroservicio2-edit'>" +
+                            "<td><div><p class='text-center'>" + conta_filas_otroservicio2 + "</p></div></td>" +
+                            "<td><div><span id='spn_otroservicio2_nomserv'>" + item.servsolicitado + "</span></div></td>" +
+                            "<td><div><span id='spn_otroservicio2_desserv'>" + item.descripcion + "</span></div></td>" +
+                            // "<td><div><span id='spn_otroservicio2_modpro'>"+item.modelo+"</span></div></td>"+
+                            "<td><div><select id='cmb_otroservicio2_provee" + conta_filas_otroservicio2 + "' name='cmb_otroservicio2_provee' class='select_otroservicio_otroservicios' style='width: 100%;' onchange='selCmbProveeOtS2(this);'></select>" +
+                            /*                        "<td><div><span id='spn_otroservicio2_marpro'>"+item.marca+"</span></div></td>"+
+                                                    "<td><div><span id='spn_otroservicio2_medpro'>"+item.nomumedida+"</span></div></td>"+*/
+                            "<td><div><span id='spn_otroservicio2_canser'>" + item.cantidad + "</div></td>" +
+                            "<td><div><span id='spn_otroservicio2_preser'>" + cosUnit + "</span></div></td>" +
+                            "<td><div><span id='spn_otroservicio2_subtot'></span>" + subUnit + "</div></td>" +
+                            "<td><div><button id='btn_otroservicio2_actser" + conta_filas_otroservicio2 + "' name='btn_otroservicio2_actser" + conta_filas_otroservicio2 + "'>Actualizar Precio</button></div></td>" +
+                            "<td hidden><div><span id='spn_otroservicio2_idservicsolu'>" + item.idservicsolu + "</span></div></td>" +
+                            "<td hidden><div><span id='spn_otroservicio2_idotroservi'>" + item.idoserv + "</span></div></td>" +
+                            "<td hidden><div><span id='spn_otroservicio2_idserprov'>" + servprov + "</span></div></td>" +
+                            "<td hidden><div><span id='spn_otroservicio2_idsersoli'>" + item.idservsol + "</span></div></td>" +
+                            "</tr>"
+                        );
+                        // borrar_select4();
+                        clonar_selectOtroSer2(conta_filas_otroservicio2, item.idservsol);
 
-                $.each(JSONobjGeneralServ2.items[1].items2, function (obj, item) {
-                    conta_filas_otroservicio2++;
-                    let cosUnit="";
-                    let subUnit="";
-                    let servprov="";
-                    if(item.costounitario===0){cosUnit="";}else{cosUnit=item.costounitario}
-                    if(item.costosubtotal===0){subUnit="";}else{subUnit=item.costosubtotal}
-                    if(item.idservprov===null){servprov="";}else{servprov=item.idservprov}
-                    //falta total luego agregar si es necesario
-                    $("#otroservicio_2 tbody").append(
-                        "<tr id='otroservicio_2_fila_"+conta_filas_otroservicio2+"' class='otroservicio2-edit'>"+
-                        "<td><div><p class='text-center'>"+conta_filas_otroservicio2+"</p></div></td>"+
-                        "<td><div><span id='spn_otroservicio2_nomserv'>"+item.servsolicitado+"</span></div></td>"+
-                        "<td><div><span id='spn_otroservicio2_desserv'>"+item.descripcion+"</span></div></td>"+
-                        // "<td><div><span id='spn_otroservicio2_modpro'>"+item.modelo+"</span></div></td>"+
-                        "<td><div><select id='cmb_otroservicio2_provee"+conta_filas_otroservicio2+"' name='cmb_otroservicio2_provee' class='select_otroservicio_otroservicios' style='width: 100%;' onchange='selCmbProveeOtS2(this);'></select>"+
-                        /*                        "<td><div><span id='spn_otroservicio2_marpro'>"+item.marca+"</span></div></td>"+
-                                                "<td><div><span id='spn_otroservicio2_medpro'>"+item.nomumedida+"</span></div></td>"+*/
-                        "<td><div><span id='spn_otroservicio2_canser'>"+item.cantidad+"</div></td>"+
-                        "<td><div><span id='spn_otroservicio2_preser'>"+cosUnit+"</span></div></td>"+
-                        "<td><div><span id='spn_otroservicio2_subtot'></span>"+subUnit+"</div></td>"+
-                        "<td><div><button id='btn_otroservicio2_actser"+conta_filas_otroservicio2+"' name='btn_otroservicio2_actser"+conta_filas_otroservicio2+"'>Actualizar Precio</button></div></td>"+
-                        "<td hidden><div><span id='spn_otroservicio2_idservicsolu'>"+item.idservicsolu+"</span></div></td>"+
-                        "<td hidden><div><span id='spn_otroservicio2_idotroservi'>"+item.idoserv+"</span></div></td>"+
-                        "<td hidden><div><span id='spn_otroservicio2_idserprov'>"+servprov+"</span></div></td>"+
-                        "<td hidden><div><span id='spn_otroservicio2_idsersoli'>"+item.idservsol+"</span></div></td>"+
-                        "</tr>"
-                    );
-                    borrar_select4();
-                    clonar_select4(conta_filas_otroservicio2,item.idservsol);
-
-                    $("#select2-cmb_otroservicio2_provee"+conta_filas_otroservicio2+"-container").text(item.nomempresa);
-                });
+                        $("#select2-cmb_otroservicio2_provee" + conta_filas_otroservicio2 + "-container").text(item.nomempresa);
+                    });
+                }
+                }
 
                 //NO REGISTRADOS SI EXISTEN MOSTRAR
 
-                $( "#tbody_otroservicionr2" ).empty();
-                $.each(JSONobjGeneralServ2.items[2].items3, function (obj, item) {
-                    conta_filas_otroservicionr2++;
+                $("#tbody_otroservicionr2").empty();
+                if(JSONobjGeneralServ2.items.length > 0) {
+                    if(JSONobjGeneralServ2.items[2].length>0){
+                    $.each(JSONobjGeneralServ2.items[2].items3, function (obj, item) {
+                        conta_filas_otroservicionr2++;
 
-                    $("#otroservicionr_2 tbody").append(
-                        "<tr id='otroservicionr_2_fila_"+conta_filas_otroservicio2+"'>"+
-                        "<td><div><p class='text-center'>"+conta_filas_otroservicionr2+"</p></div></td>"+
-                        "<td><div><span id='spn_otroservicionr2_nomserv'>"+item.servsolicitado+"</span></div></td>"+
-                        "<td><div><span id='spn_otroservicionr2_desserv'>"+item.descripcion+"</span></div></td>"+
-                        /*  "<td><div><span id='spn_otroservicionr2_marpro'>"+item.marca+"</span></div></td>"+
-                          "<td><div><span id='spn_otroservicionr2_medpro'>"+item.umedida+"</span></div></td>"+*/
-                        "<td><div><span id='spn_otroservicionr2_canserv'>"+item.cantidad+"</span></div></td>"+
-                        "</tr>"
-                    );
-                });
+                        $("#otroservicionr_2 tbody").append(
+                            "<tr id='otroservicionr_2_fila_" + conta_filas_otroservicio2 + "'>" +
+                            "<td><div><p class='text-center'>" + conta_filas_otroservicionr2 + "</p></div></td>" +
+                            "<td><div><span id='spn_otroservicionr2_nomserv'>" + item.servsolicitado + "</span></div></td>" +
+                            "<td><div><span id='spn_otroservicionr2_desserv'>" + item.descripcion + "</span></div></td>" +
+                            /*  "<td><div><span id='spn_otroservicionr2_marpro'>"+item.marca+"</span></div></td>"+
+                              "<td><div><span id='spn_otroservicionr2_medpro'>"+item.umedida+"</span></div></td>"+*/
+                            "<td><div><span id='spn_otroservicionr2_canserv'>" + item.cantidad + "</span></div></td>" +
+                            "</tr>"
+                        );
+                    });
+                }
+            }
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
