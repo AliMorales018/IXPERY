@@ -644,6 +644,21 @@ public class Diccionario {
         sol.put("sol12", "4607112");
         //userregistro
         sol.put("sol13", "4607113");
+        //solucion
+        sol.put("sol14", "4607114");
+        //enviadocotizar
+        sol.put("sol15", "4607115");
+        //cotizado
+        sol.put("sol16", "4607116");
+        //enviadooperaciones
+        sol.put("sol17", "4607117");
+        //rechazado
+        sol.put("sol18", "4607118");
+        //aprobado
+        sol.put("sol19", "4607119");
+        //finalizado
+        sol.put("sol20", "4607120");
+
         return sol;
     }
 

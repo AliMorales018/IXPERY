@@ -27,10 +27,10 @@ public class DSolucion {
     public String BuscarReqProEmp(String value, Integer perfil) throws Exception {
         listParametros.clear();
         SqlParameter pCampo = new SqlParameter("value", value);
-        SqlParameter pPerfil = new SqlParameter("perfil", perfil);
+//        SqlParameter pPerfil = new SqlParameter("perfil", perfil);
         listParametros.add(pCampo);
-        listParametros.add(pPerfil);
-        return com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_j", listParametros);
+//        listParametros.add(pPerfil);
+        return com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_s", listParametros);
     }
 
 
@@ -94,6 +94,23 @@ public class DSolucion {
         listParametros.add(pValue);
         String json = com.EjecutaConsultaJson("gen_filtrar_concatenado", listParametros);
         json =  jsonGeneral.JsonConvertInvert(json);
+        return json;
+    }
+
+
+    public String BuscarSolPenC() throws Exception {
+        listParametros.clear();
+        SqlParameter pValue = new SqlParameter("value", "/");
+        listParametros.add(pValue);
+        String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_c", listParametros);
+        return json;
+    }
+
+    public String ReporteOperaciones(Integer sol) throws Exception {
+        listParametros.clear();
+        SqlParameter pValue = new SqlParameter("value", sol);
+        listParametros.add(pValue);
+        String json = com.EjecutaConsultaJson("generarreportesp", listParametros);
         return json;
     }
 

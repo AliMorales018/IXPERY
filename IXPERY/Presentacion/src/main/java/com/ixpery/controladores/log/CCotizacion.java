@@ -34,12 +34,8 @@ public class CCotizacion {
     @RequestMapping("/cotizacion/BuscarSolucionesPendientes")
     public @ResponseBody
     String BuscarSolucionesPendientes(
-            HttpServletRequest request
     ) throws Exception {
-        HttpSession session = request.getSession();
-//        Integer perfil = Integer.parseInt(session.getAttribute("perfil").toString());
-        Integer perfil = 1;
-        return obSolucion.BuscarRequerimientos(perfil);
+        return obSolucion.BuscarSolPenC();
     }
 
 

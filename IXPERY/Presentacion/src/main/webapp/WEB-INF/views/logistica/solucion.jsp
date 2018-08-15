@@ -51,7 +51,7 @@
     </div>
     <div class="cell small-12 medium-2 large-3">
         <div class="cell small-4 medium-4 large-12 text-center">
-            <button type="button" id="btn_solucion_send" class="btn btn-light" onclick="ValidarCampos_tbl_solucion();">Enviar a Operaciones</button>
+            <button type="button" id="btn_enviar_solucion_cotizacion" class="btn btn-light" onclick="EnviarSolucionCotizacion();" style="display:none">Enviar a Cotizacion</button>
         </div>
     </div>
 </div>
@@ -59,63 +59,63 @@
 
 <!-- Formulario -->
 <div name="div-solucion-frm" class="content">
-    <div class="grid-x ">
+    <div class="grid-x align-center align-top">
+
         <div class="cell large-2">
             <label class="text-f" id="lbl_solucion_fecha" >${fecha}</label>
         </div>
         <div class="cell large-8">
-            <div class="grid-x align-center-middle">
-                <div class="cell text-center" style="visibility: visible; margin-top: 10px">
-                    <div style="margin: 5px auto;"><span class="spn-solucion-emp text-primary" style="font-size: 14px;"></span></div>
-                    <div style="margin: 5px auto;"><span class="spn-solucion-pro text-primary" style="font-size: 14px;"></span></div>
-                    <div style="margin: 5px auto;"><span class="spn-solucion-req text-primary" style="font-size: 14px;"></span></div>
+            <div class="grid-x align-center align-top">
+                <div class="cell text-center" style="visibility:visible">
+                    <div style="margin-bottom: 5px"><span class="spn-solucion-emp text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                    <div style="margin-bottom: 5px"><span class="spn-solucion-pro text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                    <div><span class="spn-solucion-req text-primary" style="font-size:10px;font-weight:bold"></span></div>
                 </div>
             </div>
         </div>
         <div class="cell large-2"></div>
 
 
-
-        <div class="cell large-12" style="margin-top: 10px">
-            <div class="grid-x  align-center-middle">
-                <div class="cell large-4">
-                    <select id="cmb-solucion-req" name="cmb-solucion-req" onchange="BuscarSolucion($(this).val());">
-                    </select>
-                </div>
-
-            </div>
-        </div>
-
         <div class="cell large-7" style="margin-top: 20px">
-            <div class="grid-x grid-padding-x align-right">
-                <div class="cell large-5"></div>
+            <div class="grid-x grid-padding-x align-center-middle">
+                <div class="cell large-7">
+                    <div class="form-group">
+                        <label class="label text-primary">Buscar Solucion:</label>
+                        <select id="cmb-solucion-req" name="cmb-solucion-req" onchange="BuscarSolucion($(this).val());">
+                        </select>
+                    </div>
+                </div>
+                <div class="cell large-5">
+                    <div class="form-group">
+                        <label class="label text-primary">Fecha Inicio:</label>
+                        <input name="txt-solucion-fch" class="form-control" type="date">
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="grid-x grid-padding-x align-center-middle">
                 <div class="cell large-7">
                     <div class="form-group">
                         <label class="label text-primary">Nombre de la Solucion:</label>
                         <input name="txt-solucion-nom" class="form-control" type="text" placeholder="Nombre">
                     </div>
                 </div>
-
-                <div class="cell large-3">
-                    <div class="form-group">
-                        <label class="label text-primary">Fecha Inicio:</label>
-                        <input name="txt-solucion-fch" class="form-control" type="date">
-                    </div>
-                </div>
-                <div class="cell large-4">
+                <div class="cell large-5">
                     <div class="form-group">
                         <label class="label text-primary">Encargado:</label>
                         <select name="cmb-solucion-enc" class="custom-select"></select>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <div class="cell large-5" style="margin-top: 20px">
-            <div class="grid-x grid-padding-x">
 
-                <div class="cell large-6">
+
+        <div class="cell large-4" style="margin-top: 20px">
+            <div class="grid-x grid-padding-x">
+                <div class="cell large-12">
                     <div class="form-group">
                         <label class="label text-primary">Descripcion:</label>
                         <textarea name="tar-solucion-des" rows="6" style="width:100%;" id="txt_solucion_des" placeholder="Despcripcion"></textarea>
@@ -123,6 +123,9 @@
                 </div>
             </div>
         </div>
+
+
+
 
     </div>
 </div>
@@ -132,15 +135,15 @@
 <div class="grid-x grid-padding-x align-center-middle l-container">
     <div class="cell large-12">
         <table class="table">
-            <thead class="thead-primary">
+            <thead id="thead-solucion-requerimientos" class="thead-primary" style="display:none">
             <tr>
-                <th class="p-3 text-primary" style="font-size: 14px; width: 5px"><p class="text-center">N</p></th>
-                <th class="p-3 text-primary" style="font-size: 14px; width: 150px">Requermiento</th>
-                <th class="p-3 text-primary" style="font-size: 14px; width: 100px">Fecha Registro Requerimiento</th>
-                <th class="p-3 text-primary" style="font-size: 14px; width: 150px">Solucion</th>
-                <th class="p-3 text-primary" style="font-size: 14px; width: 100px">Fecha Inicio Solucion</th>
-                <th class="p-3 text-primary" style="font-size: 14px; width: 100px">Proyecto</th>
-                <th class="p-3 text-primary" style="font-size: 14px; width: 100px" >Empresa</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 15px">N</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 250px">Requermiento</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 100px">Fecha Registro Requerimiento</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 250px">Solucion</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 100px">Fecha Inicio Solucion</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 200px">Proyecto</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 150px">Empresa</th>
             </tr>
             </thead>
             <tbody id="tbody-solucion-requerimientos" name="tbody-solucion-requerimientos" >
