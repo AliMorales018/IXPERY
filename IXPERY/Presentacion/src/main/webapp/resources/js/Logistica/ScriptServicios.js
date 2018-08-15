@@ -102,21 +102,21 @@ function eliminar_contenedor_actividad(obj){
                 if(arrayEditActividad.length >= 1){
                     for(let i = 0; i < arrayEditActividad.length ; i++){
                         if(arrayEditActividad[i].act1 === idActiv){
-                            arrayEditActividad[i].act11 = 0;
+                            arrayEditActividad[i].act11 = "0";
                             encontrado = true;
                             break;
                         }
                     }
                     if(encontrado !== true){
                         ObjEditAct.act1 = idActiv;
-                        ObjEditAct.act11 = 0;
+                        ObjEditAct.act11 = "0";
                         arrayEditActividad.push(ObjEditAct);
                         arrayGuardarActividad = arrayEditActividad.slice();
                     }
                 }
                 else{
                     ObjEditAct.act1 = idActiv;
-                    ObjEditAct.act11 = 0;
+                    ObjEditAct.act11 = "0";
                     arrayEditActividad.push(ObjEditAct);
                     arrayGuardarActividad = arrayEditActividad.slice();
                 }
@@ -328,7 +328,7 @@ function guardar_actividades_servicio(){
                             let encontradoPT = false;
                             for(let i = 0; i < array_personal_transito.length; i++){
                                 //console.log("Entro "+i);
-                                if(JsonObjectItems2.items.length > 0) {
+                                if(JsonObjectItems2.items.length > 1) {
                                     //console.log("Entro mayor a 0")
                                     $.each(JsonObjectItems2.items[2].PERSONALTRANSITO, function (index, item) {
                                         if (parseInt(array_personal_transito[i][0]) === item.idcargo) {
@@ -358,14 +358,14 @@ function guardar_actividades_servicio(){
                                 }
                                 if(encontradoPT === false){
                                     //console.log("No encontrado");
-                                    let idServicio = JsonObjectItems2.items.length > 0 ?  JsonObjectItems2.items[0].SERVICIO[0].idservicio : 0;
+                                    let idServicio = JsonObjectItems2.items.length > 1 ?  JsonObjectItems2.items[0].SERVICIO[0].idservicio : 0;
                                     arrayGuardarPersTran.push({pet1: 0, pet2: {ser1: idServicio}, pet3: array_personal_transito[i][1], pet4: array_personal_transito[i][3], pet5: array_personal_transito[i][4], pet10: {cal1: parseInt(array_personal_transito[i][0])}, pet11: array_personal_transito[i][2], pet12: "1"});
                                 }
                                 encontradoPT = false;
                             };
                             //Eliminados Personal de Transito
                             let encontradoBDPT = false;
-                            if(JsonObjectItems2.items.length > 0) {
+                            if(JsonObjectItems2.items.length > 1) {
                                 $.each(JsonObjectItems2.items[2].PERSONALTRANSITO, function (index, item) {
                                     for (let j = 0; j < array_personal_transito.length; j++) {
                                         if (item.idperstran === array_personal_transito[j][5]) {
@@ -435,7 +435,7 @@ function get_actividad_campos(){
             var objForServicio = {};
             $(this).find(".data-control").each(function (index) {
                 objFilaActividad.act1 = keyActividad;
-                if(JsonObjectItems2.items.length > 0) {
+                if(JsonObjectItems2.items.length > 1) {
                     objForServicio.ser1 = JsonObjectItems2.items[0].SERVICIO[0].idservicio;
                 }
                 else{
@@ -690,20 +690,49 @@ function focusPersonalTransito(){
     });
 }
 
-function BuscarSolucionServiciosCL(id) {
+function llenar_combo_solitem2(position){
+    $('#select_solucion_servicio_cl').empty();
+    //COMBO DE SOLUCION
+    let data = {id:JsonObjectItems2.items[position].SOLUCION[0].idsol , text: JsonObjectItems2.items[position].SOLUCION[0].nomsol};
+    let newOption = new Option(data.text, data.id, false, false);
+    $('#select_solucion_servicio_cl').append(newOption).trigger('change');
+}
+
+function BuscarSolucionServiciosCL() {
+        console.log("SERVICIOS");
+        let id = "";
         $.ajax({
             method: "POST",
-            url: "/servicios/verservicio",
+            async: false,
+            url: "/solucion/VerificarSesionSolucion",
+            success: function(valor) {
+                console.log('valor');
+                console.log(valor);
+                id = valor;
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+        ++countss;
+
+        $.ajax({
+            method: "POST",
+            url: "/servicios/verserviciosp",
             data: {"id":id},
             success: function resultado(valor) {
                 JsonObjectItems2 = JSON.parse(valor);
-                if (JsonObjectItems2.items.length > 0) {
+                console.log(JsonObjectItems2);
+                if (JsonObjectItems2.items.length > 1) {
                     cont_actividades_tabla = 0;
                     let elementsPT = "";
                     let JsonServicio = JsonObjectItems2.items[0].SERVICIO[0];
                     let countCL = 1;
                     let data;
                     console.log(JsonObjectItems2);
+
+                    //Solucion
+                    llenar_combo_solitem2(3);
 
                     //Removemos atributos disabled
                     habilitarElements();
@@ -905,6 +934,9 @@ function BuscarSolucionServiciosCL(id) {
                     focusPersonalTransito();
                 }
                 else{
+                    //Solucion
+                    llenar_combo_solitem2(0);
+
                     cont_actividades_tabla = 1;
                     cont_select_cargolaboral = 2;
                     array_personal_transito = [];
