@@ -95,12 +95,17 @@ public class DServicio {
         }
     }
 
-    public String VerServicio(Integer idSolucion) throws Exception {
+    public String VerServicio(Integer idSolucion,String perfil) throws Exception {
         try {
             listaParametros.clear();
             SqlParameter pId = new SqlParameter("@id",idSolucion);
             listaParametros.add(pId);
-            return com.EjecutaConsultaJson("filtrar_servicio_item2_json",listaParametros);
+            if (perfil.equals("s")) {
+                return com.EjecutaConsultaJson("filtrar_servicio_item2_json_sp",listaParametros);
+            }
+            else{
+                return com.EjecutaConsultaJson("filtrar_servicio_item2_json",listaParametros);
+            }
         }
         catch (Exception ex){
             throw ex;
