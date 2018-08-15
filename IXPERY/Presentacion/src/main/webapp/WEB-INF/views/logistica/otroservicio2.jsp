@@ -8,8 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viaticos</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
+    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
+    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
     <style type="text/css">
 
         .icon-add-row{
@@ -162,10 +162,10 @@
 <!-- Fin otroservicios -->
 
 <!-- JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
 
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio2.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
+<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <script>
     var contPrimervez=0;
     var fila=0;
