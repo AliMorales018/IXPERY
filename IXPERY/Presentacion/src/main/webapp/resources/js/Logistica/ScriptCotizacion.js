@@ -1,4 +1,5 @@
 var setCotizacion = true;
+var isolCotizacion;
 
 $(document).ready(function(){
     BuscarSolucionesPendientes();
@@ -20,33 +21,34 @@ function BuscarSolucionesPendientes(){
                 const length = arrayData.length;
                 let html = '';
                 for (let i = 0; i < length; ++i) {
-                    if(arrayData[i].fecharegistro_sol === null){arrayData[i].fecharegistro_sol = 'No registrado';}
+                    if(arrayData[i].fecharegistro_sol === null){arrayData[i].fecharegistro_sol = 'NO REGISTRADO';}
                     if(arrayData[i].fecharegistro_rq === null){
-                        arrayData[i].fecharegistro_rq = 'No registrado';
+                        arrayData[i].fecharegistro_rq = 'NO REGISTRADO';
                     }
                     else{
                         arrayData[i].fecharegistro_rq = arrayData[i].fecharegistro_rq.substr(0,10);
                     }
+
                     html += `<tr name="cotizacion-requerimiento">`;
-                    html += `<td><div style="width: 5px"><span name="spn-proyecto-num" class="text-center">${i + 1}</span></div></td>`;
-                    html += `<td style="display: none"><div><span name="spn-proyecto-idreq">${arrayData[i].idreq}</span></div></td>`;
-                    html += `<td style="display: none"><div><span name="spn-proyecto-idsol">${arrayData[i].idsol}</span></div></td>`;
-                    html += `<td><div style="width: 180px"><span name="spn-proyecto-nomreq" class="text-center" />${arrayData[i].requerimiento}</div></td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-regreq" class="text-center" /></div>${arrayData[i].fecharegistro_rq}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nomsol" class="text-center" /></div>${arrayData[i].cotizacion}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-inisol" class="text-center" /></div>${arrayData[i].fecharegistro_sol}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nompro" class="text-center" /></div>${arrayData[i].nomproyecto}</td>`;
-                    html += `<td><div style="width: 150px"><span name="spn-proyecto-nomemp" class="text-center" /></div>${arrayData[i].nomempresa}</td>`;
+                    html += `<td><div style="width: 15px" class="text-span"><span name="spn-cotizacion-num">${i + 1}</span></div></td>`;
+                    html += `<td style="display: none"><div><span name="spn-cotizacion-idreq">${arrayData[i].idreq}</span></div></td>`;
+                    html += `<td style="display: none"><div><span name="spn-cotizacion-idsol">${arrayData[i].idsol}</span></div></td>`;
+                    html += `<td><div style="width: 250px" class="text-span"><span name="spn-cotizacion-nomreq">${arrayData[i].requerimiento}</span></div></td>`;
+                    html += `<td><div style="width: 100px" class="text-span"><span name="spn-cotizacion-regreq">${arrayData[i].fecharegistro_rq}</span></div></td>`;
+                    html += `<td><div style="width: 250px" class="text-span"><span name="spn-cotizacion-nomsol">${arrayData[i].solucion}</span></div></td>`;
+                    html += `<td><div style="width: 100px" class="text-span"><span name="spn-cotizacion-inisol">${arrayData[i].fecharegistro_sol}</span></div></td>`;
+                    html += `<td><div style="width: 200px" class="text-span"><span name="spn-cotizacion-nompro">${arrayData[i].nomproyecto}</span></div></td>`;
+                    html += `<td><div style="width: 150px" class="text-span"><span name="spn-cotizacion-nomemp">${arrayData[i].nomempresa}</span></div></td>`;
                     html += `</tr>`;
                 }
-
+                $('thead#thead-cotizacion-requerimientos').show();
                 $('tbody[name=tbody-cotizacion-requerimientos]').html(html)
                     .on('click', 'tr', function(){
-                        ireqSolucion = $(this).find('span[name=spn-proyecto-idreq]').text();
-                        isolSolucion = $(this).find('span[name=spn-proyecto-idsol]').text();
-                        let ab = isolSolucion;
-                        // SesionSolucion(isolSolucion);
-
+                        ireqSolucion = $(this).find('span[name=spn-cotizacion-idreq]').text();
+                        isolCotizacion = $(this).find('span[name=spn-cotizacion-idsol]').text();
+                        SesionSolucionCot(isolCotizacion);
+                        console.log("session");
+                        console.log(isolCotizacion);
                         for (let i = 0; i < length; ++i) {
                             if(arrayData[i].idreq.toString() === ireqSolucion){
                                 if(arrayData[i].idsol.toString() !== '0'){
@@ -58,9 +60,9 @@ function BuscarSolucionesPendientes(){
                                 else{
                                     // LimpiarCampos();
                                 }
-                                $('.spn-cotizacion-emp').html(`EMPRESA: ${arrayData[i].nomempresa}`);
-                                $('.spn-cotizacion-pro').html(`PROYECTO: ${arrayData[i].nomproyecto}`);
-                                $('.spn-cotizacion-req').html(`REQUERIMIENTO: ${arrayData[i].requerimiento}`);
+                                $('.spn-cotizacion-emp').html(`EMPRESA: <span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
+                                $('.spn-cotizacion-pro').html(`PROYECTO: <span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
+                                $('.spn-cotizacion-req').html(`REQUERIMIENTO: <span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
                             }
                         }
                         AddSetCotizacion();
@@ -81,6 +83,62 @@ function BuscarSolucionesPendientes(){
 
 }
 
+
+
+function EnviarSolucionOperaciones(){
+    let jsonGuardarCotizacion = {};
+    let arrCotizacion = [];
+    let rowInsertCotizacion = {};
+
+
+    console.log('ireqSolucion');
+    console.log(ireqSolucion);
+    console.log('isolCotizacion');
+    console.log(isolCotizacion);
+
+    if(isolCotizacion !== '0'){
+        rowInsertCotizacion.sol1 = parseInt(isolCotizacion);
+        rowInsertCotizacion.sol16 = '1';
+        rowInsertCotizacion.sol17 = '1';
+
+        arrCotizacion.push(rowInsertCotizacion);
+        jsonGuardarCotizacion.sol = arrCotizacion;
+
+        console.log('jsonGuardarCotizacion');
+        console.log(jsonGuardarCotizacion);
+
+        $.ajax({
+            method: "POST",
+            url: "/solucion/GuardarSolucion",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(jsonGuardarCotizacion),
+            success: function resultado(valor) {
+                if (valor === "0") {
+                    alert("La solución fue enviada a cotizar.");
+                    // LimpiarCampos();
+                    // LimpiarVariables();
+                    BuscarSolucionesPendientes();
+                    LimpiarCamposCot();
+                }
+                else {
+                    alert("Error en la red. No se han guardado cambios.");
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+
+    }
+
+
+}
+
+function LimpiarCamposCot() {
+    $('.spn-cotizacion-emp').html('');
+    $('.spn-cotizacion-pro').html('');
+    $('.spn-cotizacion-req').html('');
+}
 
 
 function AddSetCotizacion() {
@@ -122,7 +180,21 @@ function AddSetCotizacion() {
 
 
 
+function SesionSolucionCot(sol) {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/SesionSolucion",
+        data: {"sol": sol},
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
 
+}
 
 
 

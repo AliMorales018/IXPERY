@@ -32,6 +32,14 @@ public class BSolucion {
         return odSol.BuscarEmpleado(value);
     }
 
+    public String BuscarSolPenC() throws Exception{
+        return odSol.BuscarSolPenC();
+    }
+
+
+    public String ReporteOperaciones(Integer sol) throws Exception{
+        return odSol.ReporteOperaciones(sol);
+    }
 
 
 }

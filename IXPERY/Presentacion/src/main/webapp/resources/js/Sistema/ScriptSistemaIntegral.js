@@ -28,7 +28,8 @@ $(document).ready(function () {
         success: function (data) {
             //console.log("ENTRE");
             //console.log(data);
-
+            console.log('json');
+            console.log(data);
             var JSONobj = JSON.parse(data);
             var lenghtDatos = JSONobj.length;
             var datos = JSONobj[1];
@@ -45,44 +46,61 @@ $(document).ready(function () {
                         menuNivel1.push("<li><a id='menu-pri__" + JSONobj[i].idmenu + "' href='" + JSONobj[i].url + "'><div class='cell small-12 medium-2 large-2 celda'>" + JSONobj[i].descripcion + "</div></a></li>");
                     }
                     if (key==="id" && String(value)==="2") {
-
-                        if(JSONobj[i].idmenu === 13) {
-                            isolJson = JSONobj[i].idmenu;
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 13) {
+                                isolJson = JSONobj[i].idmenu;
+                            }
                         }
 
-                        if(JSONobj[i].idmenu === 23){
-                        mEquipo = JSONobj[i];
-                        JSONobj.splice(i,1);
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 23) {
+                                mEquipo = JSONobj[i];
+                                JSONobj.splice(i, 1);
+                            }
                         }
 
-                        if(JSONobj[i].idmenu === 29){
-                            mEquipoCot = JSONobj[i];
-                            JSONobj.splice(i,1);
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 29) {
+                                mEquipoCot = JSONobj[i];
+                                JSONobj.splice(i, 1);
+                            }
                         }
 
-                        if(JSONobj[i].idmenu === 30){
-                            mServicio = JSONobj[i];
-                            JSONobj.splice(i,1);
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 30) {
+                                mServicio = JSONobj[i];
+                                JSONobj.splice(i, 1);
+                            }
                         }
 
-                        if(JSONobj[i].idmenu === 31){
-                            mServicioCot = JSONobj[i];
-                            JSONobj.splice(i,1);
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 31) {
+                                mServicioCot = JSONobj[i];
+                                JSONobj.splice(i, 1);
+                            }
                         }
 
-                        if(JSONobj[i].idmenu === 32){
-                            mViatico = JSONobj[i];
-                            JSONobj.splice(i,1);
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 32) {
+                                mViatico = JSONobj[i];
+                                JSONobj.splice(i, 1);
+                            }
                         }
 
-                        if(JSONobj[i].idmenu === 33){
-                            mViaticoCot = JSONobj[i];
-                            JSONobj.splice(i,1);
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 33){
+                                mViaticoCot = JSONobj[i];
+                                JSONobj.splice(i,1);
+                            }
                         }
 
-                        if(JSONobj[i].idmenu === 34) {
-                            icotJson = JSONobj[i].idmenu;
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 34) {
+                                icotJson = JSONobj[i].idmenu;
+                            }
                         }
+
+
 
 
                     }
