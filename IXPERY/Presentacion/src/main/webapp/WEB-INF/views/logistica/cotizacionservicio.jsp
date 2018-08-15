@@ -90,8 +90,8 @@
                     let JsonObj = JSON.parse(valor);
                     let elements;
                     console.log(JsonObj);
-                    if(JsonObj.items.length > 0){
-                        console.log("%cNO NOS INTENTES JAKIAR WEY :v", "color: red; font-size: x-large");
+                    if(JsonObj.items.length > 1){
+                        $("#contenedor_cotizacion_servicio").html("");
                         let JsonServicio = JsonObj.items[0].SERVICIO[0];
                         let count = 1;
                         let countActividades = 1;
@@ -228,6 +228,7 @@
                         $("#contenedor_cotizacion_servicio").append(elements);
                     }
                     else{
+                        $("#contenedor_cotizacion_servicio").html("");
                         $("#contenedor_cotizacion_servicio").append(
                             "<div class='grid-container'>"+
                             "<div class='grid-x grid-margin-x align-center-middle'>"+
@@ -243,18 +244,18 @@
                     alert('Error: ' + msg.responseText);
                 }
             });
-            function actualizar_salario_cl(idCargo) {
-                var r = confirm("ID CARGO: "+idCargo);
-                if (r == true) {
-                    alert("SI");
-                } else {
-                    alert("NO");
-                }
+        }
+        function actualizar_salario_cl(idCargo) {
+            var r = confirm("ID CARGO: "+idCargo);
+            if (r == true) {
+                alert("SI");
+            } else {
+                alert("NO");
             }
+        }
 
-            function servicio_enviar_a_operaciones(){
-                alert("Enviado a Operaciones.");
-            }
+        function servicio_enviar_a_operaciones(){
+            alert("Enviado a Operaciones.");
         }
     </script>
 </body>
