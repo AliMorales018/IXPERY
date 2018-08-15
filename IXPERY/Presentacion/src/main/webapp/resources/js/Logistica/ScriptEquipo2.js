@@ -1,6 +1,7 @@
 var JSONobjGeneralEq2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowProdSolEq2="";
+var sSolucionEq2="";
 var rowEqui2ObjIn = {};
 var rowEqui2ObjOut = {};
 
@@ -118,8 +119,8 @@ function eliminarObjetosDuplicados(arr, prop) {
 
 
 
-var fila=0;
-function clonar_select3(fila,id){
+var filaEq2=0;
+function clonar_selectEq2(fila,id){
 
     $('#cmb_equipo2_provee'+fila).select2({
         ajax: {
@@ -142,18 +143,18 @@ function clonar_select3(fila,id){
         placeholder: 'Buscar por proveedor . . .',
         escapeMarkup: function (markup) { return markup; },
         //minimumInputLength: 3,
-        templateResult: formatRepoProve,
-        templateSelection: formatRepoSelectionProve
+        templateResult: formatRepoProveEq2,
+        templateSelection: formatRepoSelectionProveEq2
     });
 
 }
 
-function borrar_select3(){
+/*function borrar_select3(){
     $('.js-example-basic-single').select2("destroy");
-}
+}*/
 
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS
-function formatRepoProve (repo) {
+function formatRepoProveEq2 (repo) {
     //alert(repo.precio);
     if (repo.loading) {
         return repo.text;
@@ -163,10 +164,10 @@ function formatRepoProve (repo) {
         "<div class=         'selectequipo2-result-modelo'  ><span class='selectequipo2-span-result'>PRECIO: </span>"+repo.precio+"</span></div>"
     return markup;
 }
-function formatRepoSelectionProve (repo) {
+function formatRepoSelectionProveEq2 (repo) {
     return repo.text || repo.empresa;
 }
-function selCmbProvee(obj){
+function selCmbProveeEq2(obj){
     let selectId = obj.id;
     let data = $("#"+selectId).select2('data');
     let idProdProv=data[0].id;
