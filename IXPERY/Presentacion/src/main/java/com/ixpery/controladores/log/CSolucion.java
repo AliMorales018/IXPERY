@@ -57,6 +57,13 @@ public class CSolucion {
                         objJSON.addProperty("sol10", 1);
                         objJSON.addProperty("sol12", timestamp.toString());
                         objJSON.addProperty("sol13", session.getAttribute("user").toString());
+                        objJSON.addProperty("sol14", 1);
+                        objJSON.addProperty("sol15", 0);
+                        objJSON.addProperty("sol16", 0);
+                        objJSON.addProperty("sol17", 0);
+                        objJSON.addProperty("sol18", 0);
+                        objJSON.addProperty("sol19", 0);
+                        objJSON.addProperty("sol20", 0);
                         break;
                     }
                 }
@@ -136,7 +143,14 @@ public class CSolucion {
 
 
 
-
+    @RequestMapping("/solucion/ReporteOperaciones")
+    public @ResponseBody
+    String ReporteOperaciones(
+            @RequestParam(value = "sol") Integer sol
+    ) throws Exception {
+        String json = obSolucion.ReporteOperaciones(sol);
+        return json;
+    }
 
 
 

@@ -44,36 +44,46 @@
     </div>
     <div class="cell small-12 medium-2 large-3">
         <div class="cell small-4 medium-4 large-12 text-center">
-            <button type="button" id="btn_cotizacion_send" class="btn btn-light" onclick="ValidarCampos_tbl_cotizacion();">Enviar a Operaciones</button>
+            <button type="button" id="btn_cotizacion_send" class="btn btn-light" onclick="EnviarSolucionOperaciones();">Enviar a Operaciones</button>
         </div>
     </div>
 </div>
 <!-- End Buttons  -->
 
 <!-- Formulario -->
-<div name="div-cotizacion-frm">
-    <div class="grid-x ">
+<div name="div-cotizacion-frm" class="content">
+    <div class="grid-x align-top">
         <div class="cell large-2">
-            <label class="text-f" id="lbl_cotizacion_fecha" >${fecha}</label>
+            <label class="text-f" id="lbl_solucion_fecha" >${fecha}</label>
         </div>
-
+        <div class="cell large-8">
+            <div class="grid-x align-center align-top">
+                <div class="cell text-center" style="visibility:visible">
+                    <div style="margin-bottom: 5px"><span class="spn-cotizacion-emp text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                    <div style="margin-bottom: 5px"><span class="spn-cotizacion-pro text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                    <div><span class="spn-cotizacion-req text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="cell large-2"></div>
     </div>
 </div>
+
 <!-- End Formulario -->
 
 <!-- Table -->
 <div class="grid-x grid-padding-x align-center-middle l-container">
-    <div class="cell large-9">
+    <div class="cell large-12">
         <table class="table">
-            <thead class="thead-primary">
+            <thead id="thead-cotizacion-requerimientos" class="thead-primary" style="display:none">
             <tr>
-                <th class="p-3"><p class="text-center">N</p></th>
-                <th class="p-3">Requermiento</th>
-                <th class="p-3">Fecha Registro Requerimiento</th>
-                <th class="p-3">solucion</th>
-                <th class="p-3">Fecha Inicio solucion</th>
-                <th class="p-3">Proyecto</th>
-                <th class="p-3">Empresa</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 15px">N</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 250px">Requermiento</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 100px">Fecha Registro Requerimiento</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 250px">Solucion</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 100px">Fecha Inicio Solucion</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 200px">Proyecto</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 150px">Empresa</th>
             </tr>
             </thead>
             <tbody id="tbody-cotizacion-requerimientos" name="tbody-cotizacion-requerimientos" >
