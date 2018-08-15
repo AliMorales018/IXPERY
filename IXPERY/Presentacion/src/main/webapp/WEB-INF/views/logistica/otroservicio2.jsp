@@ -173,10 +173,32 @@
     var conta_filas_otroservicio2=0;
     var conta_filas_otroservicionr2=0;
     $(document).ready(function () {
+        BuscarOtroServicio();
+    });
+    function BuscarOtroServicio(){
+        let id = "";
+        $.ajax({
+            method: "POST",
+            async: false,
+            url: "/solucion/VerificarSesionSolucion",
+            success: function(valor) {
+                console.log('valor');
+                console.log(valor);
+                id = valor;
+                sSolucionOtSer2=id;
+                //id = 1;
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+        ++countsc;
+        //  console.log("id");
+        //  console.log(id);
         $.ajax({
             method: "POST",
             url: "/otroservicio2/buscarotroserviciosol",
-            data: {"idsol": 1},
+            data: {"idsol": id},
             success: function resultado(valor) {
 
                 JSONobjGeneralServ2 = JSON.parse(valor);
@@ -201,8 +223,8 @@
                         "<td><div><span id='spn_otroservicio2_desserv'>"+item.descripcion+"</span></div></td>"+
                         // "<td><div><span id='spn_otroservicio2_modpro'>"+item.modelo+"</span></div></td>"+
                         "<td><div><select id='cmb_otroservicio2_provee"+conta_filas_otroservicio2+"' name='cmb_otroservicio2_provee' class='select_otroservicio_otroservicios' style='width: 100%;' onchange='selCmbProveeOtS2(this);'></select>"+
-/*                        "<td><div><span id='spn_otroservicio2_marpro'>"+item.marca+"</span></div></td>"+
-                        "<td><div><span id='spn_otroservicio2_medpro'>"+item.nomumedida+"</span></div></td>"+*/
+                        /*                        "<td><div><span id='spn_otroservicio2_marpro'>"+item.marca+"</span></div></td>"+
+                                                "<td><div><span id='spn_otroservicio2_medpro'>"+item.nomumedida+"</span></div></td>"+*/
                         "<td><div><span id='spn_otroservicio2_canser'>"+item.cantidad+"</div></td>"+
                         "<td><div><span id='spn_otroservicio2_preser'>"+cosUnit+"</span></div></td>"+
                         "<td><div><span id='spn_otroservicio2_subtot'></span>"+subUnit+"</div></td>"+
@@ -230,8 +252,8 @@
                         "<td><div><p class='text-center'>"+conta_filas_otroservicionr2+"</p></div></td>"+
                         "<td><div><span id='spn_otroservicionr2_nomserv'>"+item.servsolicitado+"</span></div></td>"+
                         "<td><div><span id='spn_otroservicionr2_desserv'>"+item.descripcion+"</span></div></td>"+
-                      /*  "<td><div><span id='spn_otroservicionr2_marpro'>"+item.marca+"</span></div></td>"+
-                        "<td><div><span id='spn_otroservicionr2_medpro'>"+item.umedida+"</span></div></td>"+*/
+                        /*  "<td><div><span id='spn_otroservicionr2_marpro'>"+item.marca+"</span></div></td>"+
+                          "<td><div><span id='spn_otroservicionr2_medpro'>"+item.umedida+"</span></div></td>"+*/
                         "<td><div><span id='spn_otroservicionr2_canserv'>"+item.cantidad+"</span></div></td>"+
                         "</tr>"
                     );
@@ -241,7 +263,7 @@
                 alert('Error: ' + msg.responseText);
             }
         });
-    });
+    }
 </script>
 <!-- End JavaScript -->
 </body>

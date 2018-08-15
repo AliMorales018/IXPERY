@@ -1,6 +1,7 @@
 var JSONobjGeneralServ2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowProdSolOtS2="";
+var sSolucionOtSer2="";
 var rowEqui2ObjIn = {};
 var rowEqui2ObjOut = {};
 

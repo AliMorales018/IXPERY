@@ -173,8 +173,8 @@
 <%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <script>
     function BuscarSesionSol(){
-        // let id = "1";
-       /* $.ajax({
+        let id = "";
+        $.ajax({
             method: "POST",
             async: false,
             url: "/solucion/VerificarSesionSolucion",
@@ -183,19 +183,19 @@
                 console.log(valor);
                 id = valor;
                 sSolucionEq2=id;
-                id = 1;
+                //id = 1;
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
             }
-        });*/
-       // ++countss;
+        });
+       ++countsc;
        //  console.log("id");
        //  console.log(id);
         $.ajax({
             method: "POST",
             url: "/equipo2/buscarequiposol",
-            data: {"idsol": 1},
+            data: {"idsol": id},
             success: function resultado(valor) {
 
                 JSONobjGeneralEq2 = JSON.parse(valor);
