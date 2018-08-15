@@ -1,5 +1,7 @@
 var setCotizacion = true;
+var countsc = 0;
 var isolCotizacion;
+
 
 $(document).ready(function(){
     BuscarSolucionesPendientes();
@@ -173,7 +175,12 @@ function AddSetCotizacion() {
     }
     $('#menu-tab__' + icotJson).addClass('tab-active');
 
-
+    if(countsc !== 0){
+        console.log('entre');
+        BuscarSesionSol();
+        BuscarServicioCotizacion();
+        BuscarOtroServicio();
+    }
 
 }
 
