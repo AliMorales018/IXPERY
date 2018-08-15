@@ -57,7 +57,9 @@
         .delete_actividad{
             margin-left: 15px;
         }
-
+        .form-service{
+            line-height: 1.56;
+        }
         .select2-result-cargolab{
             font-size: 9.55px;
             padding: 5px 15px 10px;
@@ -153,15 +155,15 @@
         <div class="cell large-6">
             <div class="form-group">
                 <label class="label text-primary"><b>Solución:</b></label>
-                <!--select id="select_solucion_servicio_cl" style="width: 100%;" onchange="BuscarSolucionServiciosCL($(this).val())"></select-->
-                <span class="form-control">-</span>
+                <select disabled id="select_solucion_servicio_cl" style="width: 100%;"></select>
+                <!--span class="form-control" id="lbl_nomsolucion_servicio onchange="BuscarSolucionServiciosCL($(this).val())">-</span-->
             </div>
         </div>
         <div class="cell large-3">
             <div class="form-group">
                 <label class="label text-primary"><b>Depreciación de herramientas (%):</b></label>
-                <input type="number" disabled class="form-control" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
-                <input type="hidden" disabled class="form-control" id="txt_idservicio">
+                <input type="number" disabled class="form-control form-service" id="txt_porcen_depre" placeholder="Porcentaje de Depreciación">
+                <input type="hidden" disabled class="form-control form-service" id="txt_idservicio">
             </div>
         </div>
     </div>
@@ -258,7 +260,23 @@
 
 <script>
     $(document).ready(function(){
-        $("#select_solucion_servicio_cl").select2({
+        $.ajax({
+            method: "POST",
+            async: false,
+            url: "/solucion/VerificarSesionSolucion",
+            success: function(idSolucion) {
+                console.log("ID SOLUCION: "+idSolucion);
+                if(idSolucion !== undefined || idSolucion !== null){
+                    BuscarSolucionServiciosCL(idSolucion);
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+
+        $("#select_solucion_servicio_cl").select2();
+        /*$("#select_solucion_servicio_cl").select2({
             ajax: {
                 url: "/equipo/busempresa",
                 dataType: 'json',
@@ -304,7 +322,7 @@
             minimumInputLength: 2,
             templateResult: formatRepo_servicio,
             templateSelection: formatRepoSelection_servicio
-        });
+        });*/
     });
 
     function formatRepo_servicio (repo) {

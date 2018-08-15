@@ -94,7 +94,7 @@
 <div class="l-container-sm">
     <div class="grid-x grid-padding-x">
         <div class="cell large-12">
-            <label class="text-f" id="lbl_otroservi_fecha">17/07/2018</label>
+            <label class="text-f" id="lbl_otroservi_fecha">${fecha}</label>
         </div>
     </div>
 </div>
@@ -133,7 +133,7 @@
                 <table class="table">
                     <thead class="thead-primary">
                     <tr>
-                        <th id="add_row_otroservi_1" class="text-center" onclick="addOtroServ_otroservi(this);"><i class="icon-plus2 icon-add-row"></i></th>
+                        <th id="add_row_otroservi_1" class="text-center" onclick="addOtroServ_otroservi();"><i class="icon-plus2 icon-add-row"></i></th>
                         <th>Servicio</th>
                         <%--<th>Código</th>--%>
                         <th>Descripción</th>
@@ -146,18 +146,18 @@
                     </tr>
                     </thead>
                     <tbody id="tbody_otroservi">
-                    <tr id="otroservi_1_fila_1" class="otroservi-insert">
+                    <%--<tr id="otroservi_1_fila_1" class="otroservi-insert">
                         <td><div><p class="text-center">1</p></div></td>
                         <td><div><select   id="cmb_otroservi_nombre1" name="cmb_otroservi_nombre1" class="select_otroservi_otroservis" onchange="selCmbServ(this)" style="width: 100%;"></select></div></td>
-                        <%--<td><div><span id="spn_otroservi_codpro"></span></div></td>--%>
+                        &lt;%&ndash;<td><div><span id="spn_otroservi_codpro"></span></div></td>&ndash;%&gt;
                         <td><div><input id="txt_otroservi_descri" type="text" class="form-control" required/></div></td>
-                       <%-- <td><div><span id="spn_otroservi_marpro"></span></div></td>
-                        <td><div><span id="spn_otroservi_umepro"></span></div></td>--%>
+                       &lt;%&ndash; <td><div><span id="spn_otroservi_marpro"></span></div></td>
+                        <td><div><span id="spn_otroservi_umepro"></span></div></td>&ndash;%&gt;
                         <td><div><input id="txt_otroservi_cantid" type="text" class="form-control" required/></div></td>
                         <td hidden><div><span id="spn_otroservi_idservsoli"></span></div></td>
                         <td hidden><div><span id="spn_otroservi_idservsolu"></span></div></td>
                         <td><div class="text-center"><button type="button" onclick="eliminar_fila_tabla_otroservis(`otroservi_1_fila_1`);"><i class="icon-cross icon-hp-desh"></i></button></div></td>
-                    </tr>
+                    </tr>--%>
                     </tbody>
                 </table>
             </div>
@@ -220,31 +220,6 @@
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio.js"></script>
 <script>
     $(document).ready(function () {
-        $("#selectEmpresaOtroServi_Proyecto").select2({
-            ajax: {
-                url: "/equipo/busempresa",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term
-                    };
-                },
-                processResults: function (data, params) {
-                    console.log(data.items);
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Buscar por empresa o solución . . .',
-            escapeMarkup: function (markup) { return markup; },
-            minimumInputLength: 3,
-            templateResult: formatRepoOtroServ,
-            templateSelection: formatRepoSelectionOtroServ
-        });
-
         //LISTAR COMBO PRODUCTOS
         $("#cmb_otroservi_nombre1").select2({
             ajax: {
@@ -298,62 +273,7 @@
         return repo.text || repo.serviciosolicitado;
     }
 
-    function BuscarSolucionOtroServis(id){
-        if(id!="" || id!=undefined){
-            $.ajax({
-                method: "POST",
-                url: "/otroservi/buscarotroservsol",
-                data: {"idsol": id},
-                success: function resultado(valor) {
-                    JSONobjGeneralOtSer = JSON.parse(valor);
-                    console.log(JSONobjGeneralOtSer);
-                    if(JSONobjGeneralOtSer.items.length>0){
-                        estOperaOtSer=1;
-                        addOtroServisUpdate_otroservi(valor);
-                    }else{
-                        estOperaOtSer=0;
-                        conta_filas_otroservi=1;
-                        $("#tbody_otroservi").empty();
-                        $("#otroservi_1 tbody").append(
-                            "<tr id='otroservi_1_fila_1' class='otroservi-insert'>"+
-                            "<td><div><p class='text-center'>1</p></div></td>"+
-                            "<td><div><select id='cmb_otroservi_nombre1' name='cmb_otroservi_nombre' class='select_otroservi_otroservis' onchange='selCmbServ(this);' style='width: 100%;'></select></div></td>"+
-                            // "<td><div><span id='spn_otroservi_codpro'></span></div></td>"+
-                            "<td><div><input id='txt_otroservi_descri' type='text' class='form-control'/></div></td>"+
-/*                            "<td><div><span id='spn_otroservi_marpro'></span></div></td>"+
-                            "<td><div><span id='spn_otroservi_umepro'></span></div></td>"+*/
-                            "<td><div><input id='txt_otroservi_cantid' type='text' class='form-control' required/></div></td>"+
-                            "<td hidden><div><span id='spn_otroservi_idservsoli'></span></div></td>"+
-                            "<td hidden><div><span id='spn_otroservi_idservsolu'></span></div></td>"+
-                            "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservis(`otroservi_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
-                            "</tr>"
-                        );
-                        borrar_select2();
-                        clonar_select2OtroServicio(1);
 
-                        //otroserviS NO REGISTRADOS
-                        conta_filas_otroservinr=1;
-                        $("#tbody_otroservinr").empty();
-                        $("#otroservinr_1 tbody").append(
-                            "<tr id='otroservinr_1_fila_1' class='otroservinr-insert'>"+
-                            "<td><div><p class='text-center'>1</p></div></td>"+
-                            "<td><div><input id='txt_otroservinr_nomserv' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_otroservinr_desserv' type='text' class='form-control' /></div></td>"+
-                            /*"<td><div><input id='txt_otroservinr_marpro' type='text' class='form-control' /></div></td>"+
-                            "<td><div><input id='txt_otroservinr_umepro' type='text' class='form-control' /></div></td>"+*/
-                            "<td><div><input id='txt_otroservinr_canpro' type='text' class='form-control' /></div></td>"+
-                            "<td hidden><div><span id='spn_otroservinr_idpreg'></span></div></td>"+
-                            "<td><div class='text-center'><button type='button' onclick='eliminar_fila_tabla_otroservisnr(`otroservinr_1_fila_1`);'><i class='icon-cross icon-hp-desh'></i></button></div></td>"+
-                            "</tr>"
-                        );
-                    }
-                },
-                error: function errores(msg) {
-                    alert('Error: ' + msg.responseText);
-                }
-            });
-        }
-    }
 </script>
 <%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <!-- End JavaScript -->
