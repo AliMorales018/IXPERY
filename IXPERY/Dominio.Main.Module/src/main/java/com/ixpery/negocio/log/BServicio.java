@@ -19,8 +19,8 @@ public class BServicio{
         return a;
     }
 
-    public String VerServicio(Integer idSolucion) throws Exception {
-        String a = odservicio.VerServicio(idSolucion);
+    public String VerServicio(Integer idSolucion, String perfil) throws Exception {
+        String a = odservicio.VerServicio(idSolucion, perfil);
         return a;
     }
     public String GuardarFull(String json) throws Exception{
