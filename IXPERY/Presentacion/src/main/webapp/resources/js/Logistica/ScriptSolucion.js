@@ -237,8 +237,8 @@ function AddSetSolucion() {
     if(countss !== 0){
         console.log('entre');
         BuscarSolucionEquipos();
-        // BuscarSolucionServiciosCL();
-        // BuscarSolucionOtroServis();
+        BuscarSolucionServiciosCL();
+        BuscarSolucionOtroServis();
     }
 
 
