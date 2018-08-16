@@ -8,8 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viaticos</title>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
+    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
+    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
     <style type="text/css">
 
         .icon-add-row{
@@ -162,10 +162,10 @@
 <!-- Fin otroservicios -->
 
 <!-- JavaScript -->
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio2.js"></script>
-<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
+<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script>
     var contPrimervez=0;
     var filaOtS2=0;
@@ -176,7 +176,7 @@
         BuscarOtroServicio();
     });
     function BuscarOtroServicio(){
-        let id = "";
+       /* let id = "";
         $.ajax({
             method: "POST",
             async: false,
@@ -192,13 +192,13 @@
                 alert('Error: ' + msg.responseText);
             }
         });
-        ++countsc;
+        ++countsc;*/
         //  console.log("id");
         //  console.log(id);
         $.ajax({
             method: "POST",
             url: "/otroservicio2/buscarotroserviciosol",
-            data: {"idsol": id},
+            data: {"idsol": 1},
             success: function resultado(valor) {
 
                 JSONobjGeneralServ2 = JSON.parse(valor);
@@ -206,8 +206,8 @@
                 $("#tbody_otroservicio2").empty();
 
                 //RECORREMOS otroservicio PRODUCTOS REGISTRADOS
-                if (JSONobjGeneralServ2.items.length > 0) {
-                    if(JSONobjGeneralServ2.items[1].length>0){
+      /*          if (JSONobjGeneralServ2.items.length > 0) {
+                    if(JSONobjGeneralServ2.items[1].length>0){*/
                     $.each(JSONobjGeneralServ2.items[1].items2, function (obj, item) {
                         conta_filas_otroservicio2++;
                         let cosUnit = "";
@@ -253,14 +253,14 @@
 
                         $("#select2-cmb_otroservicio2_provee" + conta_filas_otroservicio2 + "-container").text(item.nomempresa);
                     });
-                }
-                }
+                /*}
+                }*/
 
-                //NO REGISTRADOS SI EXISTEN MOSTRAR
+                //NO REGISTRADOS SI EXISTEN MOSTRARr
 
                 $("#tbody_otroservicionr2").empty();
-                if(JSONobjGeneralServ2.items.length > 0) {
-                    if(JSONobjGeneralServ2.items[2].length>0){
+                /*if(JSONobjGeneralServ2.items.length > 0) {
+                    if(JSONobjGeneralServ2.items[2].length>0){*/
                     $.each(JSONobjGeneralServ2.items[2].items3, function (obj, item) {
                         conta_filas_otroservicionr2++;
 
@@ -275,8 +275,8 @@
                             "</tr>"
                         );
                     });
-                }
-            }
+            /*    }
+            }*/
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);

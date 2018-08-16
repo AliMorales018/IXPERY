@@ -164,7 +164,10 @@ public class Diccionario {
             case"91961":
                 diccionario = getCod();
                 break;
-
+            case"coe":
+            case"460381":
+                diccionario = getCoe();
+                break;
             default:
                 diccionario = null;
                 break;
@@ -1020,6 +1023,14 @@ public class Diccionario {
         spr.put("spr6", "467766");
         //userregistro
         spr.put("spr7", "467767");
+        //costo
+        spr.put("spr8", "467768");
+        //fechainicio
+        spr.put("spr9", "467769");
+        //fechafin
+        spr.put("spr10", "4677610");
+        //precioventaminimo
+        spr.put("spr11", "4677611");
         return spr;
     }
 
@@ -1170,7 +1181,10 @@ public class Diccionario {
         cod.put("cod18", "9196118");
         //"item"
         cod.put("cod19", "9196119");
-
+        //preciounitariovisible
+        cod.put("cod20", "9196120");
+        //preciosubtotalvisible
+        cod.put("cod21", "9196121");
         return cod;
     }
 
@@ -1182,5 +1196,6 @@ public class Diccionario {
         coe.put("coe1", "4603811");
         return coe;
     }
+
 
 }

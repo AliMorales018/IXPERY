@@ -24,6 +24,18 @@ public class EServicioProveedor {
     @SerializedName("467767")
     private String userregistro;
 
+    @SerializedName("467768")
+    private Double costo;
+
+    @SerializedName("467769")
+    private String fechainicio;
+
+    @SerializedName("4677610")
+    private String fechafin;
+
+    @SerializedName("4677611")
+    private Double precioventaminimo;
+
     public EServicioProveedor() {
     }
 
@@ -31,7 +43,7 @@ public class EServicioProveedor {
         this.idservprov = idservprov;
     }
 
-    public EServicioProveedor(Integer idservprov, EServiciosSolicitados idservsol, EProveedor idproveedor, Double precio, String estado, String fecharegistro, String userregistro) {
+    public EServicioProveedor(Integer idservprov, EServiciosSolicitados idservsol, EProveedor idproveedor, Double precio, String estado, String fecharegistro, String userregistro, Double costo, String fechainicio, String fechafin, Double precioventaminimo) {
         this.idservprov = idservprov;
         this.idservsol = idservsol;
         this.idproveedor = idproveedor;
@@ -39,6 +51,10 @@ public class EServicioProveedor {
         this.estado = estado;
         this.fecharegistro = fecharegistro;
         this.userregistro = userregistro;
+        this.costo = costo;
+        this.fechainicio = fechainicio;
+        this.fechafin = fechafin;
+        this.precioventaminimo = precioventaminimo;
     }
 
     public Integer getIdservprov() {
@@ -96,4 +112,37 @@ public class EServicioProveedor {
     public void setUserregistro(String userregistro) {
         this.userregistro = userregistro;
     }
+
+    public Double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(Double costo) {
+        this.costo = costo;
+    }
+
+    public String getFechainicio() {
+        return fechainicio;
+    }
+
+    public void setFechainicio(String fechainicio) {
+        this.fechainicio = fechainicio;
+    }
+
+    public String getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(String fechafin) {
+        this.fechafin = fechafin;
+    }
+
+    public Double getPrecioventaminimo() {
+        return precioventaminimo;
+    }
+
+    public void setPrecioventaminimo(Double precioventaminimo) {
+        this.precioventaminimo = precioventaminimo;
+    }
+
 }

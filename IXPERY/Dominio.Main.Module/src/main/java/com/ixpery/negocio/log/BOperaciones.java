@@ -15,4 +15,12 @@ public class BOperaciones {
     public String BuscarSolucionOpera() throws Exception{
         return odOpera.BuscarSolucionOpera();
     }
+
+    public String BuscarSolucionesPendientes() throws Exception{
+        return odOpera.BuscarSolucionesPendientes();
+    }
+
+
+
+
 }

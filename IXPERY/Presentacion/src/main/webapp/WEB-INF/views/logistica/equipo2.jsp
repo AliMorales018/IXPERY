@@ -59,7 +59,10 @@
                 <button type="button" id="btn_equipo2_save" class="btn btn-secondary" onclick="InsUpdDelEquipo2();">Guardar</button>
             </div>
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_equipo2_regprovee" class="btn btn-secondary" onclick="">Reg. Proveedor</button>
+                <button type="button" id="btn_equipo2_regprovee" class="btn btn-light" onclick="">Reg. Proveedor</button>
+            </div>
+            <div class="cell small-4 medium-4 large-4 text-center">
+                <button type="button" id="btn_equipo2_asocprod" class="btn btn-secondary" onclick="">Asociar Prod.</button>
             </div>
         </div>
     </div>
@@ -253,7 +256,7 @@
                     }
                 }
 
-                //NO REGISTRADOS SI EXISTEN MOSTRAR
+                //NO REGISTRADOS SI EXISTEN MOSTRARr
 
                 $("#tbody_equiponr2").empty();
                 if(JSONobjGeneralEq2.items.length > 0) {
