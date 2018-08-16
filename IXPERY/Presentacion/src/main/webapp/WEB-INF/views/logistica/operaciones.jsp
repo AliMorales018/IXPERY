@@ -4,14 +4,9 @@
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <spring:url value="/resources" var="urlPublic"></spring:url>
 
-<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Operaciones</title>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">--%>
     <style type="text/css">
         .select2-container .select2-selection--single {
             height: 25.15px;
@@ -36,6 +31,24 @@
         .selectempresa2-span-result{
             font-size: 9.9px;
         }
+
+        #tbody-solucion-operaciones tr:hover {
+            background-color: #E6E6E6;
+            cursor: pointer;
+        }
+        .unstyled::-webkit-inner-spin-button{
+            display: none;
+            -webkit-appearance: none;
+        }
+
+
+        .row-selected{
+            color: #D34539;
+            border-top: .13rem solid grey;
+            border-bottom: .13rem solid grey;
+        }
+
+
     </style>
 </head>
 
@@ -43,27 +56,38 @@
 
 <!-- Buttons -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
-    <div class="cell small-12 medium-4 text-white">
+    <div class="cell large-1 text-white">
         <div class="grid-x align-center-middle">
-            <div class="cell large-1 text-center">
+            <div class="cell large-4  text-center">
                 <div class="icon-object">
                     <i class="icon icon-briefcase"></i>
                 </div>
             </div>
-            <div class="cell large-11">
+            <div class="cell large-8 ">
                 <p class="main-title">Operaciones</p>
             </div>
         </div>
     </div>
-    <div class="cell small-12 medium-4">
+    <div class="cell large-2"></div>
+    <div class="cell large-6">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_operaciones_save" class="btn btn-secondary" onclick="Registrar_Operaciones();">Guardar</button>
+                <button type="button" id="btn_operaciones_pendientes" class="btn btn-primary" onclick="BuscarSolucionesPendientes();">Pendientes</button>
+            </div>
+            <div class="cell small-4 medium-4 large-4 text-center">
+                <button type="button" id="btn_operaciones_guardar" class="btn btn-primary" onclick="Registrar_Operaciones();">Aprobar</button>
+            </div>
+            <div class="cell small-4 medium-4 large-4 text-center">
+                <button type="button" id="btn_operaciones_rechazar" class="btn btn-secondary">Rechazar</button>
             </div>
         </div>
     </div>
-    <div class="cell small-12 medium-4">
-        <!-- Notify -->
+    <div class="cell large-3">
+        <div class="grid-x align-center-middle">
+            <div class="cell small-4 medium-4 large-4 text-center">
+                <button type="button" id="btn_operaciones_reporte" class="btn btn-primary" onclick="AbrirReporte();">Reporte</button>
+            </div>
+        </div>
     </div>
 </div>
 <!-- End Buttons -->
@@ -77,134 +101,77 @@
     </div>
 </div>
 <!-- End Date -->
-<!-- Combo ProyectoEmpresa -->
-<div class="grid-x grid-padding-x l-container">
-    <div class="cell large-12">
-        <div class="l-container">
-            <div class="grid-x grid-padding-x">
-                <div class="cell large-4">
-                    <div class="form-group">
-                        <label class="label text-primary" style="line-height: 1.5;"><b>SELECCIONE SOLUCIÓN:</b></label>
-                        <select id="selectEmpresa_Proyecto_Sol_Opera" onchange="BuscarSolucionOperaciones($(this).val())"></select>
-                    </div>
+
+<%--Formulario--%>
+<div class="grid-x grid-padding-x align-center">
+    <div class="cell large-5">
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-10">
+                <div class="form-group">
+                    <label class="label text-primary"><b>SELECCIONE SOLUCIÓN:</b></label>
+                    <select id="selectEmpresa_Proyecto_Sol_Opera" onchange="BuscarSolucionOperaciones($(this).val())"></select>
                 </div>
-            <%--</div>--%>
-            <%--<div class="grid-x grid-padding-x">--%>
-                <div class="cell large-1">
-                    <div class="form-group" style="margin-top:5px">
-                        <label class="label text-primary"><b>VALIDEZ</b></label>
-                        <input id="txt_validezofer_opera" style="text-align: right" class="form-control" required="required" placeholder='Ej 1' type="number"/>
-                    </div>
+            </div>
+            <div class="cell large-2">
+                <div class="form-group">
+                    <label class="label text-primary"><b>VALIDEZ</b></label>
+                    <input id="txt_validezofer_opera" style="text-align: right" class="form-control" required="required" placeholder='Ej 1' type="number"/>
+                </div>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+            <div class="cell large-6">
+                <div class="form-group">
+                    <label class="label text-primary"><b>TIEMPO ENTREGA</b></label>
+                    <input type="text" id="txt_timeentre_opera" class="form-control" placeholder='' />
+                </div>
+            </div>
+            <div class="cell large-6">
+                <div class="form-group">
+                    <label class="label text-primary"><b>TIEMPO EJECUCIÓN</b></label>
+                    <input type="text" id="txt_timeejecu_opera" class="form-control" placeholder='' />
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- End Combo -->
-
-
-<div class="grid-x grid-padding-x l-container">
-    <div class="cell large-12">
-        <div class="l-container">
-            <div class="grid-x grid-padding-x">
-                <div class="cell large-5">
-                    <div class="form-group">
-                        <label class="label text-primary"><b>TIEMPO ENTREGA</b></label>
-                        <textarea id="txt_timeentre_opera" style="width:470px; height:90px;" class="form-control" placeholder=''></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-x grid-padding-x">
-                <div class="cell large-5">
-                    <div class="form-group">
-                        <label class="label text-primary"><b>TIEMPO EJECUCIÓN</b></label>
-                        <textarea id="txt_timeejecu_opera" style="width:470px; height:90px;" class="form-control" placeholder=''></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid-x grid-padding-x">
-                <div class="cell large-5">
-                    <div class="form-group">
-                        <label class="label text-primary"><b>CONDICIONES COMERCIALES</b></label>
-                        <textarea id="txt_condcomer_opera" style="width:470px; height:90px;" class="form-control" placeholder=''></textarea>
-                    </div>
-                </div>
-            </div>
+    <div class="cell large-4">
+        <div class="form-group">
+            <label class="label text-primary"><b>CONDICIONES COMERCIALES</b></label>
+            <textarea id="txt_condcomer_opera" style="width:100%; height:90px;" class="form-control" placeholder=''></textarea>
         </div>
     </div>
 </div>
+<%--Fin Formulario--%>
 
-<div id="editor"></div>
-<!-- Fin operacioness -->
+<%--Tabla--%>
+<div class="grid-x grid-padding-x align-center-middle l-container">
+    <div class="cell large-12">
+        <table class="table">
+            <thead id="thead-solucion-operaciones" class="thead-primary" style="display:none">
+            <tr>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 15px">N</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 250px">Requermiento</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 100px">Fecha Registro Requerimiento</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 250px">Solucion</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 100px">Fecha Inicio Solucion</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 200px">Proyecto</th>
+                <th class="p-3 text-primary text-center" style="font-size: 14px; width: 150px">Empresa</th>
+            </tr>
+            </thead>
+            <tbody id="tbody-solucion-operaciones">
+            </tbody>
+        </table>
+    </div>
+</div>
+<%--Fin Tabla--%>
+
+
+
+
+
 
 <!-- JavaScript -->
-<%--<script src="${urlPublic}/js/jquery-3.3.1.js"></script>--%>
-
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOperaciones.js"></script>
-<script>
-
-    $(document).ready(function () {
-        $("#selectEmpresa_Proyecto_Sol_Opera").select2({
-            ajax: {
-                url: "/equipo/busempresa",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term
-                    };
-                },
-                processResults: function (data, params) {
-                    console.log(data.items);
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Buscar por empresa o solución . . .',
-            escapeMarkup: function (markup) { return markup; },
-            minimumInputLength: 3,
-            templateResult: formatRepo,
-            templateSelection: formatRepoSelection
-        });
-    });
-
-    function formatRepo (repo) {
-        if (repo.loading) {
-            return repo.text;
-        }
-        var markup = "<div class='selectempresa2-result-empresa'><span class='selectempresa2-span-result'>EMPRESA: </span>"+repo.nomempresa+" - " + repo.ruc +"</div>"+
-            "<div class='selectempresa2-result-proyecto'><span class='selectempresa2-span-result'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
-            "<div class='selectempresa2-result-solucion'><span class='selectempresa2-span-result'>SOLUCION: </span>"+repo.solucion+"</span></div>";
-        return markup;
-    }
-
-    function formatRepoSelection (repo) {
-        return repo.text || repo.nomempresa + " - " + repo.solucion;
-    }
-
-    function BuscarSolucionOperaciones(id){
-        if(id!="" || id!=undefined){
-            $.ajax({
-                method: "POST",
-                url: "/operaciones/buscaroperacionsol",
-                data: {"idsol": id},
-                success: function resultado(valor) {
-                    JSONobjGeneralOpera = JSON.parse(valor);
-                    console.log(JSONobjGeneralOpera);
-                },
-                error: function errores(msg) {
-                    alert('Error: ' + msg.responseText);
-                }
-            });
-        }
-    }
-</script>
-<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <!-- End JavaScript -->
 </body>
 </html>

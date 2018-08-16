@@ -38,4 +38,17 @@ public class DOperaciones {
         listParameter.add(pValorLike);*/
         return com.EjecutaConsultaJson("retornar_condicion", listParameter);
     }
+
+
+    public String BuscarSolucionesPendientes() throws Exception{
+        listParameter.clear();
+        SqlParameter pValue = new SqlParameter("value", "/");
+        listParameter.add(pValue);
+        String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_o", listParameter);
+        return json;
+    }
+
+
+
+
 }
