@@ -1018,6 +1018,14 @@ public class Diccionario {
         spr.put("spr6", "467766");
         //userregistro
         spr.put("spr7", "467767");
+        //costo
+        spr.put("spr8", "467768");
+        //fechainicio
+        spr.put("spr9", "467769");
+        //fechafin
+        spr.put("spr10", "4677610");
+        //precioventaminimo
+        spr.put("spr11", "4677611");
         return spr;
     }
 
