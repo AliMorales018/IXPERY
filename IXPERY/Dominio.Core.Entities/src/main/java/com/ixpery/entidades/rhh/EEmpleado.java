@@ -22,9 +22,9 @@ public class EEmpleado {
     @SerializedName("462279")
     private String fechanac ;
     @SerializedName("4622710")
-    private Character sexo;
+    private String sexo;
     @SerializedName("4622711")
-    private Boolean estado;
+    private String estado;
 
     public EEmpleado() {
     }
@@ -99,23 +99,23 @@ public class EEmpleado {
         this.fechanac = fechanac;
     }
 
-    public Character getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(Character sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public EEmpleado(Integer idempleado, EArea idarea, String dni, String nombre, String apellidopaterno, String apellidomaterno, String telefono, String direccion, String fechanac, Character sexo, Boolean estado) {     this.idempleado = idempleado;
+    public EEmpleado(Integer idempleado, EArea idarea, String dni, String nombre, String apellidopaterno, String apellidomaterno, String telefono, String direccion, String fechanac, String sexo, String estado) {     this.idempleado = idempleado;
         this.idarea = idarea;
         this.dni = dni;
         this.nombre = nombre;

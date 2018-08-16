@@ -334,16 +334,18 @@ public class Diccionario {
         Map <String, String> hic = new HashMap<>();
         //historialcargo
         hic.put("hic", "46217");
-        //idcargo
+        //idhistorialcargo
         hic.put("hic1", "462171");
-        //fechainicio
+        //idcargo
         hic.put("hic2", "462172");
-        //fechafin
+        //fechainicio
         hic.put("hic3", "462173");
-        //salario
+        //fechafin
         hic.put("hic4", "462174");
-        //estado
+        //salario
         hic.put("hic5", "462175");
+        //estado
+        hic.put("hic6", "462176");
         return hic;
     }
 

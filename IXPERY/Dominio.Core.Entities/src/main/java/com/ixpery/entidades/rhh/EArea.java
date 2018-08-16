@@ -66,6 +66,10 @@ public class EArea {
 
     public EArea(){}
 
+    public EArea(Integer idArea) {
+        this.idArea = idArea;
+    }
+
     public EArea(Integer idArea, String nomArea, String estado, String idEstado, String fechaRegistro, String userRegistro) {
         this.idArea = idArea;
         this.nomArea = nomArea;

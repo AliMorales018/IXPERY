@@ -4,10 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.ixpery.entidades.log.*;
-import com.ixpery.entidades.rhh.ECargoLaboral;
-import com.ixpery.negocio.log.BCargoLaboral;
 import com.ixpery.negocio.log.BServicio;
+import com.ixpery.negocio.rhh.BCargoLaboral;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -24,7 +22,7 @@ import java.util.*;
 public class CServicios {
 
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
-    BCargoLaboral obCargoLaboral = (BCargoLaboral) applicationContext.getBean("beanCargoLaboral");
+    BCargoLaboral obCargoLaboralS = (BCargoLaboral) applicationContext.getBean("beanCargoLaboral");
     BServicio obServicio = (BServicio) applicationContext.getBean("beanServicio");
 
     @RequestMapping("/servicios")
@@ -41,15 +39,17 @@ public class CServicios {
     public @ResponseBody String listarCargoLaboral(
             @RequestParam(value="q") String value
     ) throws  Exception{
-        return obCargoLaboral.ListarCargoLaboralCombo(value);
+        return obCargoLaboralS.ListarCargoLaboralCombo(value);
     }
 
     @RequestMapping(value = "/servicios/register", method = RequestMethod.POST)
     public @ResponseBody String RegistrarServicio(
             HttpServletRequest request,
-            @RequestBody String json
+            @RequestParam(value="json") String json,
+            @RequestParam(value="idSol") Integer idSol
     ) throws  Exception{
         System.out.println(json);
+        System.out.println("IDSOL: "+idSol);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         HttpSession session = request.getSession();
         JsonParser parser = new JsonParser();
@@ -110,7 +110,7 @@ public class CServicios {
             }
         }
         json = root.toString();
-        String a = obServicio.GuardarFull(json);
+        String a = obServicio.GuardarFull(json,idSol);
         System.out.println(json);
         if(a.equals("0")){
             return "";
