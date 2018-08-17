@@ -159,6 +159,23 @@
 
 <script>
     $(document).ready(function() {
+
+        //Verificar sesion
+        let idCargo;
+        $.ajax({
+            method: "POST",
+            url:"/cargolaboral/getsesioncl",
+            data:{},
+            success: function resultado(data) {
+                idCargo = data;
+                //SESION CARGO
+                console.log(idCargo);
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+
         $("#selectCargoLaboral_histsal").select2({
             ajax: {
                 url: "/servicios/listarcargolaboral",

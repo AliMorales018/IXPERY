@@ -49,7 +49,7 @@ function ListarHistorial_SalariosCL(idCargo){
                     });
                 }
                 else{
-                    $("#tbody_historialsalariocl").html("<tr><td colspan='5' class='text-center'><div style='padding: 4px; font-size: 10px'>No se encontraron resultados.</div></td></tr>");
+                    $("#tbody_historialsalariocl").html("<tr class='no-registers'><td colspan='5' class='text-center'><div style='padding: 4px; font-size: 10px'>No se encontraron resultados.</div></td></tr>");
                 }
             },
             error: function errores(msg) {
@@ -77,21 +77,26 @@ function guardar_nuevo_SalarioCL(){
         };
         let FechaIni = new Date($("#new_date_hs_cl").val());
         let FechaFin = sumOresDias_HS(FechaIni, -1);
-        FechaFin = convertDate_HS(FechaFin);
-        //console.log(FechaFin);
-
-        let ultimaFecha = $("#tbody_historialsalariocl tr:last-child td").eq(1).find("span").text();
-
-        function compararFechas(){
+        let stateRegisters = $("#tbody_historialsalariocl :first-child").hasClass("no-registers");
+        let ultimaFecha;
+        let fechaCorrecta;
+        if(!stateRegisters) {
+            ultimaFecha = $("#tbody_historialsalariocl tr:last-child td").eq(1).find("span").text();
+            FechaFin = convertDate_HS(FechaFin);
             if(Date.parse(FechaIni) <= Date.parse(ultimaFecha)){
-                return false;
+                fechaCorrecta = false;
             }
             else{
-                return true;
+                fechaCorrecta = true;
             }
+            //console.log(FechaFin);
+        }
+        else{
+            FechaFin = "0";
+            fechaCorrecta = true;
         }
 
-        if (compararFechas()) {
+        if (fechaCorrecta) {
             $.ajax({
                 method: "POST",
                 url: "/historialsalariocl/register",
