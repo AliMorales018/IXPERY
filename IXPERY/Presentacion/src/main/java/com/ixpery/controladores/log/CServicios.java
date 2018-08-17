@@ -51,7 +51,7 @@ public class CServicios {
     ) throws  Exception{
         System.out.println(json);
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        //HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         JsonParser parser = new JsonParser();
         JsonObject root = parser.parse(json).getAsJsonObject();
         for(Map.Entry<String, JsonElement> entryRoot : root.entrySet()){
@@ -63,7 +63,7 @@ public class CServicios {
                         if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
                             JsonObject objJSON = jsonElement.getAsJsonObject();
                             objJSON.addProperty("ser12", timestamp.toString());
-                            //objJSON.addProperty("ser13", session.getAttribute("user").toString());
+                            objJSON.addProperty("ser13", session.getAttribute("user").toString());
                             break;
                         }
                     }
@@ -76,7 +76,7 @@ public class CServicios {
                         if(entryChild.getKey().equals(keyRoot + "1") && Integer.parseInt(entryChild.getValue().toString()) < 0){
                             JsonObject objJSON = jsonElement.getAsJsonObject();
                             objJSON.addProperty("act13", timestamp.toString());
-                            //objJSON.addProperty("act14", session.getAttribute("user").toString());
+                            objJSON.addProperty("act14", session.getAttribute("user").toString());
                             break;
                         }
                     }
@@ -89,7 +89,7 @@ public class CServicios {
                         if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
                             JsonObject objJSON = jsonElement.getAsJsonObject();
                             objJSON.addProperty("acc12", timestamp.toString());
-                            //objJSON.addProperty("acc11", session.getAttribute("user").toString());
+                            objJSON.addProperty("acc11", session.getAttribute("user").toString());
                             break;
                         }
                     }
@@ -102,7 +102,7 @@ public class CServicios {
                         if(entryChild.getKey().equals(keyRoot + "1") && entryChild.getValue().toString().equals("0")){
                             JsonObject objJSON = jsonElement.getAsJsonObject();
                             objJSON.addProperty("pet8", timestamp.toString());
-                            //objJSON.addProperty("pet9", session.getAttribute("user").toString());
+                            objJSON.addProperty("pet9", session.getAttribute("user").toString());
                             break;
                         }
                     }
@@ -129,10 +129,27 @@ public class CServicios {
         modelView.addObject("fecha",dateParse);
         return modelView;
     }
-    @RequestMapping(value = "/servicios/verservicio", method = RequestMethod.POST)
+
+    @RequestMapping("/servicios/operaciones")
+    public ModelAndView ServiciosOperación() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateParse = sdf.format(date);
+        ModelAndView modelView = new ModelAndView("logistica/operacionservicio");
+        modelView.addObject("fecha",dateParse);
+        return modelView;
+    }
+
+    @RequestMapping(value = "/servicios/verserviciosp", method = RequestMethod.POST)
     public @ResponseBody String VerServicio(
             @RequestParam(value="id") Integer idSolucion
     ) throws  Exception{
-        return obServicio.VerServicio(idSolucion);
+        return obServicio.VerServicio(idSolucion,"s");
+    }
+    @RequestMapping(value = "/servicios/verservicio", method = RequestMethod.POST)
+    public @ResponseBody String VerServicioCot(
+            @RequestParam(value="id") Integer idSolucion
+    ) throws  Exception{
+        return obServicio.VerServicio(idSolucion,"c");
     }
 }

@@ -173,8 +173,8 @@
 <%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <script>
     function BuscarSesionSol(){
-        // let id = "1";
-       /* $.ajax({
+        let id = "";
+        $.ajax({
             method: "POST",
             async: false,
             url: "/solucion/VerificarSesionSolucion",
@@ -183,19 +183,19 @@
                 console.log(valor);
                 id = valor;
                 sSolucionEq2=id;
-                id = 1;
+                //id = 1;
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
             }
-        });*/
-       // ++countss;
+        });
+       ++countsc;
        //  console.log("id");
        //  console.log(id);
         $.ajax({
             method: "POST",
             url: "/equipo2/buscarequiposol",
-            data: {"idsol": 1},
+            data: {"idsol": id},
             success: function resultado(valor) {
 
                 JSONobjGeneralEq2 = JSON.parse(valor);
@@ -203,58 +203,77 @@
                 $("#tbody_equipo2").empty();
 
                 //RECORREMOS EQUIPO PRODUCTOS REGISTRADOS
+                if (JSONobjGeneralEq2.items.length > 0) {
+                    if (JSONobjGeneralEq2.items[1].length > 0) {
+                        $.each(JSONobjGeneralEq2.items[1].items2, function (obj, item) {
+                            conta_filas_equipo2++;
+                            let cosUnit = "";
+                            let subUnit = "";
+                            let prodprov = "";
+                            if (item.costounitario === 0) {
+                                cosUnit = "";
+                            } else {
+                                cosUnit = item.costounitario
+                            }
+                            if (item.costosubtotal === 0) {
+                                subUnit = "";
+                            } else {
+                                subUnit = item.costosubtotal
+                            }
+                            if (item.idprodprov === null) {
+                                prodprov = "";
+                            } else {
+                                prodprov = item.idprodprov
+                            }
+                            //falta total luego agregar si es necesario
+                            $("#equipo_2 tbody").append(
+                                "<tr id='equipo_2_fila_" + conta_filas_equipo2 + "' class='equipo2-edit'>" +
+                                "<td><div><p class='text-center'>" + conta_filas_equipo2 + "</p></div></td>" +
+                                "<td><div><span id='spn_equipo2_nompro'>" + item.producto + "</span></div></td>" +
+                                "<td><div><span id='spn_equipo2_codpro'>" + item.codigo + "</span></div></td>" +
+                                "<td><div><span id='spn_equipo2_modpro'>" + item.modelo + "</span></div></td>" +
+                                "<td><div><select id='cmb_equipo2_provee" + conta_filas_equipo2 + "' name='cmb_equipo2_provee' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProveeEq2(this);'></select>" +
+                                "<td><div><span id='spn_equipo2_marpro'>" + item.marca + "</span></div></td>" +
+                                "<td><div><span id='spn_equipo2_medpro'>" + item.nomumedida + "</span></div></td>" +
+                                "<td><div><span id='spn_equipo2_canpro'>" + item.cantidad + "</div></td>" +
+                                "<td><div><span id='spn_equipo2_prepro'>" + cosUnit + "</span></div></td>" +
+                                "<td><div><span id='spn_equipo2_subtot'></span>" + subUnit + "</div></td>" +
+                                "<td><div><button id='btn_equipo2_actpre" + conta_filas_equipo2 + "' name='btn_equipo2_actpre1'>Actualizar Precio</button></div></td>" +
+                                "<td hidden><div><span id='spn_equipo2_idprodsol'>" + item.idprodsol + "</span></div></td>" +
+                                "<td hidden><div><span id='spn_equipo2_idequipo'>" + item.idequipo + "</span></div></td>" +
+                                "<td hidden><div><span id='spn_equipo2_idprprov'>" + prodprov + "</span></div></td>" +
+                                "<td hidden><div><span id='spn_equipo2_idproduc'>" + item.idproducto + "</span></div></td>" +
+                                "</tr>"
+                            );
+                            // borrar_select3();
+                            clonar_selectEq2(conta_filas_equipo2, item.idproducto);
 
-                $.each(JSONobjGeneralEq2.items[1].items2, function (obj, item) {
-                    conta_filas_equipo2++;
-                    let cosUnit="";
-                    let subUnit="";
-                    let prodprov="";
-                    if(item.costounitario===0){cosUnit="";}else{cosUnit=item.costounitario}
-                    if(item.costosubtotal===0){subUnit="";}else{subUnit=item.costosubtotal}
-                    if(item.idprodprov===null){prodprov="";}else{prodprov=item.idprodprov}
-                    //falta total luego agregar si es necesario
-                    $("#equipo_2 tbody").append(
-                        "<tr id='equipo_2_fila_"+conta_filas_equipo2+"' class='equipo2-edit'>"+
-                        "<td><div><p class='text-center'>"+conta_filas_equipo2+"</p></div></td>"+
-                        "<td><div><span id='spn_equipo2_nompro'>"+item.producto+"</span></div></td>"+
-                        "<td><div><span id='spn_equipo2_codpro'>"+item.codigo+"</span></div></td>"+
-                        "<td><div><span id='spn_equipo2_modpro'>"+item.modelo+"</span></div></td>"+
-                        "<td><div><select id='cmb_equipo2_provee"+conta_filas_equipo2+"' name='cmb_equipo2_provee' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProveeEq2(this);'></select>"+
-                        "<td><div><span id='spn_equipo2_marpro'>"+item.marca+"</span></div></td>"+
-                        "<td><div><span id='spn_equipo2_medpro'>"+item.nomumedida+"</span></div></td>"+
-                        "<td><div><span id='spn_equipo2_canpro'>"+item.cantidad+"</div></td>"+
-                        "<td><div><span id='spn_equipo2_prepro'>"+cosUnit+"</span></div></td>"+
-                        "<td><div><span id='spn_equipo2_subtot'></span>"+subUnit+"</div></td>"+
-                        "<td><div><button id='btn_equipo2_actpre"+conta_filas_equipo2+"' name='btn_equipo2_actpre1'>Actualizar Precio</button></div></td>"+
-                        "<td hidden><div><span id='spn_equipo2_idprodsol'>"+item.idprodsol+"</span></div></td>"+
-                        "<td hidden><div><span id='spn_equipo2_idequipo'>"+item.idequipo+"</span></div></td>"+
-                        "<td hidden><div><span id='spn_equipo2_idprprov'>"+prodprov+"</span></div></td>"+
-                        "<td hidden><div><span id='spn_equipo2_idproduc'>"+item.idproducto+"</span></div></td>"+
-                        "</tr>"
-                    );
-                    // borrar_select3();
-                    clonar_selectEq2(conta_filas_equipo2,item.idproducto);
+                            $("#select2-cmb_equipo2_provee" + conta_filas_equipo2 + "-container").text(item.nomempresa);
+                        });
+                    }
+                }
 
-                    $("#select2-cmb_equipo2_provee"+conta_filas_equipo2+"-container").text(item.nomempresa);
-                });
+                //NO REGISTRADOS SI EXISTEN MOSTRARr
 
-                //NO REGISTRADOS SI EXISTEN MOSTRAR
-
-                $( "#tbody_equiponr2" ).empty();
+                $("#tbody_equiponr2").empty();
+                if(JSONobjGeneralEq2.items.length > 0) {
+                    if(JSONobjGeneralEq2.items[2].length>0){
                 $.each(JSONobjGeneralEq2.items[2].items3, function (obj, item) {
                     conta_filas_equiponr2++;
 
                     $("#equiponr_2 tbody").append(
-                        "<tr id='equiponr_2_fila_"+conta_filas_equipo2+"'>"+
-                        "<td><div><p class='text-center'>"+conta_filas_equiponr2+"</p></div></td>"+
-                        "<td><div><span id='spn_equiponr2_nompro'>"+item.nomproducto+"</span></div></td>"+
-                        "<td><div><span id='spn_equiponr2_modpro'>"+item.modelo+"</span></div></td>"+
-                        "<td><div><span id='spn_equiponr2_marpro'>"+item.marca+"</span></div></td>"+
-                        "<td><div><span id='spn_equiponr2_medpro'>"+item.umedida+"</span></div></td>"+
-                        "<td><div><span id='spn_equiponr2_canpro'>"+item.cantidad+"</span></div></td>"+
+                        "<tr id='equiponr_2_fila_" + conta_filas_equipo2 + "'>" +
+                        "<td><div><p class='text-center'>" + conta_filas_equiponr2 + "</p></div></td>" +
+                        "<td><div><span id='spn_equiponr2_nompro'>" + item.nomproducto + "</span></div></td>" +
+                        "<td><div><span id='spn_equiponr2_modpro'>" + item.modelo + "</span></div></td>" +
+                        "<td><div><span id='spn_equiponr2_marpro'>" + item.marca + "</span></div></td>" +
+                        "<td><div><span id='spn_equiponr2_medpro'>" + item.umedida + "</span></div></td>" +
+                        "<td><div><span id='spn_equiponr2_canpro'>" + item.cantidad + "</span></div></td>" +
                         "</tr>"
                     );
                 });
+            }
+        }
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);

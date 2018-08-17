@@ -1,5 +1,5 @@
 var JSONobjGeneralEq2;
-//////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
+//////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUEr
 var idRowProdSolEq2="";
 var sSolucionEq2="";
 var rowEqui2ObjIn = {};
