@@ -32,7 +32,7 @@
 </head>
 <body>
 
-<!-- Buttons -->
+<!-- Buttonss -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">
