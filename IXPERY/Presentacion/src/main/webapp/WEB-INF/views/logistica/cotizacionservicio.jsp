@@ -243,9 +243,20 @@
                 }
             });
         }
+
         function actualizar_salario_cl(idCargo) {
-            // alert("ID CARGO: "+idCargo);
-            AddMenu(mSueldos);
+            $.ajax({
+                method: "POST",
+                async: false,
+                url: "/cargolaboral/sesioncl",
+                data: {"idCargo": idCargo},
+                success: function(valor) {
+                    console.log("SESION CARGO CREADA: "+valor)
+                },
+                error: function errores(msg) {
+                    alert('Error: ' + msg.responseText);
+                }
+            });
         }
 
         function servicio_enviar_a_operaciones(){

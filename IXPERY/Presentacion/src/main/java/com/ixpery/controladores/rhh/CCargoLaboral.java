@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +26,17 @@ public class CCargoLaboral {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BCargoLaboral obCargoLaboral = (BCargoLaboral) applicationContext.getBean("beanCargoLaboral");
     BArea obArea = (BArea) applicationContext.getBean("beanArea");
+
+    @RequestMapping("/cargolaboral/sesioncl")
+    public @ResponseBody  String SesionCl(
+            HttpServletRequest request,
+            @RequestParam(value="idCargo") Integer idCargo
+    )throws Exception{
+        HttpSession session = request.getSession();
+        session.setAttribute("cargolaboral", idCargo);
+        String cargolaboral = session.getAttribute("cargolaboral").toString();
+        return cargolaboral;
+    }
 
     @RequestMapping("/cargolaboral")
     public ModelAndView CargoLaboral() throws Exception{
@@ -62,9 +75,10 @@ public class CCargoLaboral {
     @RequestMapping(value="/historialsalariocl/register", method = RequestMethod.POST)
     public @ResponseBody String RegistrarHistorialSalario(
             @RequestParam(value="json") String json,
-            @RequestParam(value="values") String values,
+            @RequestParam(value="idCargo") String idCargo,
             @RequestParam(value="fechafin") String fecha
-    ){
+    ) throws Exception{
+        obCargoLaboral.RegistrarHistorialSalario(json,idCargo,fecha);
         return "";
     }
 
