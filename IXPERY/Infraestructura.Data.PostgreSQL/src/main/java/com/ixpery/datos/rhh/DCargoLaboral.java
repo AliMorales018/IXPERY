@@ -49,6 +49,24 @@ public class DCargoLaboral {
         }
     }
 
+    public void RegistrarHistorialSalario(String json, String idCargo, String fechFin) throws  Exception{
+        try{
+            System.out.println(json);
+            listaParametros.clear();
+            json = jg.JsonConvert(json);
+            System.out.println(json);
+            System.out.println("462172"+","+idCargo+","+fechFin);
+            SqlParameter pJson = new SqlParameter("json",json);
+            SqlParameter pValues = new SqlParameter("values", "462172"+","+idCargo+","+fechFin);
+            listaParametros.add(pJson);
+            listaParametros.add(pValues);
+            com.TransUnica("gen_insertar_historial_precio",listaParametros);
+        }
+        catch(Exception ex){
+            throw ex;
+        }
+    }
+
     public String ValidarDatosDB(List<ECargoLaboral> listCargoLaboral) throws Exception {
         try{
             listCargoLaboral = addListId(listCargoLaboral);

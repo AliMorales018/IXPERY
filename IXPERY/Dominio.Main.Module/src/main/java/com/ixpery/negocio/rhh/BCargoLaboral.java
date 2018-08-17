@@ -37,4 +37,9 @@ public class BCargoLaboral {
     public String ListarHistorialSalario(Integer idCL) throws Exception{
         return odCargoLaboral.ListarHistorialSalario(idCL);
     }
+
+    public void RegistrarHistorialSalario(String json, String idCargo, String fechaFin) throws Exception{
+        odCargoLaboral.RegistrarHistorialSalario(json,idCargo,fechaFin);
+    }
+
 }
