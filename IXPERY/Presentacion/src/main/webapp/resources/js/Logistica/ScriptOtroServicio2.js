@@ -215,5 +215,5 @@ function crearSesProvSoli(idtr){
 }
 
 function abrir_prove_ot2(){
-    
+AddMenu(mProveedor);
 }
