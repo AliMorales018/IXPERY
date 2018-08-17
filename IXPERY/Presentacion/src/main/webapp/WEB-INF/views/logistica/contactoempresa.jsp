@@ -7,8 +7,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto de Empresa</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
 </head>
 
 <body>
@@ -200,10 +198,7 @@
 <!-- End Table -->
 
 <!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptContactoEmpresa.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script >
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <!-- End JavaScript -->
 
 <script>

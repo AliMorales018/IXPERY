@@ -273,9 +273,7 @@
     </div>
 </div>
 
-<div id="editor"></div>
 <!-- JavaScript -->
-
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptUtilidadCoti.js"></script>
 <script>
     $(document).ready(function () {

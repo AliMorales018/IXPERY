@@ -40,6 +40,9 @@
             padding-top: 500px;
         }
     </style>
+
+    <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 </head>
 
 <body>
@@ -92,8 +95,7 @@
 </footer>
 
 <!-- JavaScript -->
-<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
+
 <script language="JavaScript" src="${urlPublic}/js/Sistema/ScriptSistemaIntegral.js"></script>
 <!-- End JavaScript -->
 

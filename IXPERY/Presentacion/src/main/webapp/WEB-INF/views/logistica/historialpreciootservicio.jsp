@@ -144,7 +144,6 @@
 </div>
 <!-- End TNuevo Precio -->
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptHistorialPrecioOtServ.js"></script>
-
 <script>
      $(document).ready(function() {
        setOptions("txt_select_busproveedorotserv","onkeyup='select_buscar_proveedorotserv(event,this);'");
