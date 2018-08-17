@@ -11,7 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,16 +28,21 @@ public class CEquipo {
 
     @RequestMapping("/equipo")
     public ModelAndView Equipo(){
-        ModelAndView modelAndView = new ModelAndView("logistica/equipo");
-        return modelAndView;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateParse = sdf.format(date);
+        ModelAndView modelView = new ModelAndView("logistica/equipo");
+        modelView.addObject("fecha",dateParse);
+        return modelView;
     }
 
     /*
      * guardarfull*/
     @RequestMapping(value="/equipo/register", method = RequestMethod.POST)
     public @ResponseBody
-    String RegistrarEquipo(@RequestBody Map<String,List<String[]>> values) throws Exception{
+    String RegistrarEquipo(HttpServletRequest request,@RequestBody Map<String,List<String[]>> values) throws Exception{
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        HttpSession session = request.getSession();
 
         Integer sizeListEqSol = values.get("values0").size();
         Integer sizeListEqReg = values.get("values1").size();
@@ -54,7 +61,7 @@ public class CEquipo {
             oeEquipo.setEstado("1");
             oeEquipo.setFechaReg(timestamp.toString());
             //CAMBIAR LUEGO POR LA SESSIÓN
-            oeEquipo.setUserReg("LUIS AZALDE LEYVA");
+            oeEquipo.setUserReg(session.getAttribute("user").toString());
             listEquipo.add(oeEquipo);
         }
 
@@ -72,7 +79,7 @@ public class CEquipo {
             oeProdSolucion.setEstado("1");
             oeProdSolucion.setFecharegistro(timestamp.toString());
             //CAMBIAR LUEGO POR LA SESSIÓN
-            oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
+            oeProdSolucion.setUserregistro(session.getAttribute("user").toString());
             oeProdSolucion.setIdproducto(Integer.parseInt(rowProdSol[0]));
             oeProdSolucion.setEnviadocotizar("1");
             listProdSolucion.add(oeProdSolucion);

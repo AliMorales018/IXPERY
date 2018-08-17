@@ -1,8 +1,5 @@
 package com.ixpery.controladores.log;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.ixpery.entidades.log.EProveedor;
 import com.ixpery.entidades.log.EServicioProveedor;
 import com.ixpery.entidades.log.EServiciosSolicitados;
@@ -14,12 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.security.Timestamp;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 @Controller
 public class CHistorialPrecioOtServ {
@@ -28,7 +22,7 @@ public class CHistorialPrecioOtServ {
     BProveedor obProveedor = (BProveedor) applicationContext.getBean("beanProveedor");
     BServicioSolicitados obServSoli = (BServicioSolicitados) applicationContext.getBean("beanServSolicitados");
 
-    @RequestMapping("/historialpreciootservicio")
+    @RequestMapping("/hpviaticos")
     public ModelAndView HistorialPrecio() throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
@@ -37,8 +31,6 @@ public class CHistorialPrecioOtServ {
         modelView.addObject("fecha",dateParse);
         return modelView;
     }
-
-
 
     @RequestMapping("/historialprecioOtServicio/busservsolic")
     public @ResponseBody String BuscarProductoHP(
@@ -80,11 +72,11 @@ public class CHistorialPrecioOtServ {
     public @ResponseBody
     String GuardarFullEquipo(
             @RequestParam(value = "json") String json,
-            @RequestParam(value = "vals") String vals
+            @RequestParam(value = "idsersoli") String idsersoli,
+            @RequestParam(value = "fecfin") String fecfin
     ) throws Exception{
 
-
-        obServSoli.GuardarFull(json,vals);
+        obServSoli.GuardarFull(json,idsersoli,fecfin);
 
         System.out.println("ENTRE EN REGISTER");
         return "";

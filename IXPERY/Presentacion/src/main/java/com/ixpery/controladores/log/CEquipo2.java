@@ -7,8 +7,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,14 +30,19 @@ public class CEquipo2 {
 
     @RequestMapping("/equipo2")
     public ModelAndView Equipo(){
-        ModelAndView modelAndView = new ModelAndView("logistica/equipo2");
-        return modelAndView;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateParse = sdf.format(date);
+        ModelAndView modelView = new ModelAndView("logistica/equipo2");
+        modelView.addObject("fecha",dateParse);
+        return modelView;
     }
 
     @RequestMapping(value="/equipo2/register", method = RequestMethod.POST)
     public @ResponseBody
-    String RegistrarEquipo(@RequestBody Map<String,List<String[]>> values) throws Exception{
+    String RegistrarEquipo(HttpServletRequest request, @RequestBody Map<String,List<String[]>> values) throws Exception{
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        HttpSession session = request.getSession();
 
         Integer sizeListEqSol = values.get("values0").size();
         Integer sizeListEqReg = values.get("values1").size();
@@ -51,7 +61,7 @@ public class CEquipo2 {
             oeEquipo.setEstado("1");
             oeEquipo.setFechaReg(timestamp.toString());
             //CAMBIAR LUEGO POR LA SESSIÓN
-            oeEquipo.setUserReg("LUIS AZALDE LEYVA");
+            oeEquipo.setUserReg(session.getAttribute("user").toString());
             listEquipo.add(oeEquipo);
         }
 
@@ -69,7 +79,7 @@ public class CEquipo2 {
             oeProdSolucion.setEstado("1");
             oeProdSolucion.setFecharegistro(timestamp.toString());
             //CAMBIAR LUEGO POR LA SESSIÓN
-            oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
+            oeProdSolucion.setUserregistro(session.getAttribute("user").toString());
             oeProdSolucion.setIdproducto(Integer.parseInt(rowProdSol[0]));
             oeProdSolucion.setEnviadocotizar("1");
             listProdSolucion.add(oeProdSolucion);
@@ -146,12 +156,24 @@ public class CEquipo2 {
     public @ResponseBody String BuscarEquipoSol(
             @RequestParam(value="idsol") String busIdsol
     ) throws Exception{
-
         String rpta= obEquipo.BuscarSolucionEquipo(busIdsol);
-
         return rpta;
-
-
     }
 
+    @RequestMapping("/equipo2/sesproverod")
+    public @ResponseBody  String CrearSesProdProv(
+            @RequestParam(value = "prove") String prove,
+            @RequestParam(value = "prod") String prod,
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("proveedor", prove);
+        session.setAttribute("producto", prod);
+
+//        Ejemplo para llamar la sesion de la solucion
+//        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
+        String proveedor = session.getAttribute("proveedor").toString();
+        String producto = session.getAttribute("producto").toString();
+        return "proveedor: "+proveedor+" producto: "+producto;
+    }
 }

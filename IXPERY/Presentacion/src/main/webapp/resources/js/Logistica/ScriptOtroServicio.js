@@ -20,7 +20,7 @@ var arrGuardarFinPreRegServ = [];
 
 var idRowPreRegServ="";
 // var rowPreRegEquiObjIn = {};
-var rowPreRegEquiObjOut = {};
+var rowPreRegOtSObjOut = {};
 
 function VerEstaGuardaItem3(){
     if(estOperaOtSer===0){
@@ -423,24 +423,24 @@ $(document).ready(function () {
                 estadoDesServOtroSerReg===1 &&
                 estadoCanServOtroSerReg===1)
             {
-                rowPreRegEquiObjOut['prs1']  = idRowPreRegServ;
-                rowPreRegEquiObjOut['prs4']  = nomServOtroSerReg;
-                rowPreRegEquiObjOut['prs5']  = canServOtroSerReg;
-                rowPreRegEquiObjOut['prs9']  = desServOtroSerReg;
+                rowPreRegOtSObjOut['prs1']  = idRowPreRegServ;
+                rowPreRegOtSObjOut['prs4']  = nomServOtroSerReg;
+                rowPreRegOtSObjOut['prs5']  = canServOtroSerReg;
+                rowPreRegOtSObjOut['prs9']  = desServOtroSerReg;
 
 
                 $.each(JSONobjGeneralOtSer.items[2].items3, function (obj, item) {
-                    if(item.idpreregserv===rowPreRegEquiObjOut.prs1){
-                        objProEdit["prs1"] = rowPreRegEquiObjOut.prs1;
+                    if(item.idpreregserv===rowPreRegOtSObjOut.prs1){
+                        objProEdit["prs1"] = rowPreRegOtSObjOut.prs1;
 
-                        if (item.servsolicitado!== rowPreRegEquiObjOut.prs4) {
-                            objProEdit["prs4"] = rowPreRegEquiObjOut.prs4;
+                        if (item.servsolicitado!== rowPreRegOtSObjOut.prs4) {
+                            objProEdit["prs4"] = rowPreRegOtSObjOut.prs4;
                         }
-                        if (item.cantidad !== rowPreRegEquiObjOut.prs5) {
-                            objProEdit["prs5"] = rowPreRegEquiObjOut.prs5;
+                        if (item.cantidad !== rowPreRegOtSObjOut.prs5) {
+                            objProEdit["prs5"] = rowPreRegOtSObjOut.prs5;
                         }
-                        if (item.descripcion !== rowPreRegEquiObjOut.prs9) {
-                            objProEdit["prs9"] = rowPreRegEquiObjOut.prs9;
+                        if (item.descripcion !== rowPreRegOtSObjOut.prs9) {
+                            objProEdit["prs9"] = rowPreRegOtSObjOut.prs9;
                         }
 
                         var countKeys = Object.keys(objProEdit).length;
@@ -573,7 +573,7 @@ function borrar_select2(){
 }
 function selCmbServ(fila){
     let data = $('tbody#tbody_otroservi tr#row-otroservi-'+fila).find('select').select2('data');
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
     // let selectId = obj.id;
     // let data = $("#"+selectId).select2('data');
     let idServ=data[0].id;
@@ -583,7 +583,7 @@ function selCmbServ2(obj){
     let selectId = obj.id;
     let data = $("#"+selectId).select2('data');
     let idServ=data[0].id;
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
     $("#"+selectId).closest('tr').find('span[id=spn_otroservi_idservsoli]').text(idServ);
 }
 
@@ -666,9 +666,9 @@ function eliminar_fila_tabla_otroservisnr(fila){
     }
 }
 
-function reordernar_num_tabla_otroservinr(idEquiponr){
+function reordernar_num_tabla_otroservinr(idOtSernr){
     var contadornr = 1;
-    var obj = $("#"+idEquiponr+ " tbody tr");
+    var obj = $("#"+idOtSernr+ " tbody tr");
 
     $(obj).each(function () {
         $(this).removeAttr('id');
@@ -681,11 +681,11 @@ function reordernar_num_tabla_otroservinr(idEquiponr){
 }
 
 //GUARDAR PRODUCTOS EQUIPOS REGISTRADOS Y NO REGISTRADOS
-var arrayDatos_extras=[];
-var arrayDatos_servre=[];
-var arrayDatos_servnr=[];
-var arrayData_re;
-var arrayData_nr;
+var arrayDatos_extrasOtS=[];
+var arrayDatos_servreOtS=[];
+var arrayDatos_servnrOtS=[];
+var arrayData_reOtS;
+var arrayData_nrOtS;
 var arrayData_completoserv;
 
 function RegistrarOtro_servicio() {
@@ -726,10 +726,10 @@ function RegistrarOtro_servicio() {
                 filaData.push(nom);
                 filaData.push(des);
                 filaData.push(cnt);
-                arrayDatos_servre.push(filaData);
+                arrayDatos_servreOtS.push(filaData);
             }else{
                 filaOkEqReg=0;
-                arrayDatos_servre=[];
+                arrayDatos_servreOtS=[];
                 return false;
             }
 
@@ -752,7 +752,7 @@ function RegistrarOtro_servicio() {
                     filaData.push(desnr);
                     filaData.push(cntnr);
 
-                    arrayDatos_servnr.push(filaData);
+                    arrayDatos_servnrOtS.push(filaData);
                 }else if(nomnr==="" && desnr==="" && cntnr===""){
                     filaOkEqNoReg=1;
                 }else{
@@ -765,10 +765,10 @@ function RegistrarOtro_servicio() {
                     filaData.push(desnr);
                     filaData.push(cntnr);
 
-                    arrayDatos_servnr.push(filaData);
+                    arrayDatos_servnrOtS.push(filaData);
                 }else{
                     filaOkEqNoReg=0;
-                    arrayDatos_servnr=[];
+                    arrayDatos_servnrOtS=[];
                     return false;
                 }
             }
@@ -778,11 +778,11 @@ function RegistrarOtro_servicio() {
         //}
         if(filaOkEqReg===1 && filaOkEqNoReg===1){
             filaDataExtras.push(sid);
-            arrayDatos_extras.push(filaDataExtras);
+            arrayDatos_extrasOtS.push(filaDataExtras);
             arrayData_completoserv = {
-                values0:arrayDatos_extras,
-                values1: arrayDatos_servre,
-                values2: arrayDatos_servnr
+                values0:arrayDatos_extrasOtS,
+                values1: arrayDatos_servreOtS,
+                values2: arrayDatos_servnrOtS
             };
 
             console.log(JSON.stringify(arrayData_completoserv));
@@ -794,7 +794,7 @@ function RegistrarOtro_servicio() {
                 data: JSON.stringify(arrayData_completoserv),
                 success: function resultado(valor) {
                     limpiarInsUpdTotServi();
-                    alert("Servicio Registrado Correctamente id"+sid);
+                    alert("Datos Registrados Correctamente");
                     BuscarSolucionOtroServis(sid);
                 },
                 error: function errores(msg) {
@@ -803,8 +803,8 @@ function RegistrarOtro_servicio() {
             });
         }else{
             alert("Faltan completar datos");
-            arrayDatos_servre=[];
-            arrayDatos_servnr=[];
+            arrayDatos_servreOtS=[];
+            arrayDatos_servnrOtS=[];
         }
   /*  }else{
         alert("Selecione una Solución o Empresa por favor...");
@@ -837,7 +837,7 @@ function addOtroServisUpdate_otroservi(obj){
         $("label#lbl_otroservi_idotroserv").text(item.idoserv);
         /*<i class='icon-checkmark icon-hp-habil'></i>";
         <i class='icon-cross icon-hp-desh'></i>";        */
-        borrar_select2();
+       // borrar_select2();
         clonar_select2OtroServicio(conta_filas_otroservi);
 
         $("#select2-cmb_otroservi_nombre"+conta_filas_otroservi+"-container").text(item.servsolicitado);
@@ -955,14 +955,14 @@ function limpiarInsUpdTotServi(){
     arrGuardarFinPreRegServ = [];
 
     idRowPreRegServ="";
-    rowPreRegEquiObjOut = {};
+    rowPreRegOtSObjOut = {};
 
 
 
-   arrayDatos_extras=[];
-   arrayDatos_servre=[];
-   arrayDatos_servnr=[];
-   arrayData_re;
-   arrayData_nr;
+   arrayDatos_extrasOtS=[];
+   arrayDatos_servreOtS=[];
+   arrayDatos_servnrOtS=[];
+   arrayData_reOtS;
+   arrayData_nrOtS;
    arrayData_completoserv={};
 }

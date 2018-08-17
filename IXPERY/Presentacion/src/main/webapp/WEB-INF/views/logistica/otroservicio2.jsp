@@ -8,11 +8,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viaticos</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
+    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
+    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
     <style type="text/css">
 
-        .icon-add-row{
+      /*  .icon-add-row{
             background-color: #D34539;
             border-radius: 50%;
             color:white;
@@ -27,7 +27,7 @@
 
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 23px;
-        }
+        }*/
     </style>
 </head>
 
@@ -160,23 +160,16 @@
     </div>
 </div>
 <!-- Fin otroservicios -->
-
-<!-- JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio2.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <script>
-    var contPrimervez=0;
-    var filaOtS2=0;
-    var id=2;
+
     var conta_filas_otroservicio2=0;
     var conta_filas_otroservicionr2=0;
     $(document).ready(function () {
         BuscarOtroServicio();
     });
     function BuscarOtroServicio(){
-       /* let id = "";
+        let id = "";
         $.ajax({
             method: "POST",
             async: false,
@@ -192,13 +185,14 @@
                 alert('Error: ' + msg.responseText);
             }
         });
-        ++countsc;*/
+        ++countsc;
+        ++countso;
         //  console.log("id");
         //  console.log(id);
         $.ajax({
             method: "POST",
             url: "/otroservicio2/buscarotroserviciosol",
-            data: {"idsol": 1},
+            data: {"idsol": id},
             success: function resultado(valor) {
 
                 JSONobjGeneralServ2 = JSON.parse(valor);
@@ -229,6 +223,7 @@
                             servprov = item.idservprov
                         }
                         //falta total luego agregar si es necesario
+                        var trvalos2="otroservicio_2_fila_"+conta_filas_otroservicio2;
                         $("#otroservicio_2 tbody").append(
                             "<tr id='otroservicio_2_fila_" + conta_filas_otroservicio2 + "' class='otroservicio2-edit'>" +
                             "<td><div><p class='text-center'>" + conta_filas_otroservicio2 + "</p></div></td>" +
@@ -241,7 +236,7 @@
                             "<td><div><span id='spn_otroservicio2_canser'>" + item.cantidad + "</div></td>" +
                             "<td><div><span id='spn_otroservicio2_preser'>" + cosUnit + "</span></div></td>" +
                             "<td><div><span id='spn_otroservicio2_subtot'></span>" + subUnit + "</div></td>" +
-                            "<td><div><button id='btn_otroservicio2_actser" + conta_filas_otroservicio2 + "' name='btn_otroservicio2_actser" + conta_filas_otroservicio2 + "'>Actualizar Precio</button></div></td>" +
+                            "<td><div><button id='btn_otroservicio2_actser" + conta_filas_otroservicio2 + "' name='btn_otroservicio2_actser" + conta_filas_otroservicio2 + "' onclick='crearSesProvSoli(`"+trvalos2+"`);'>Actualizar Precio</button></div></td>" +
                             "<td hidden><div><span id='spn_otroservicio2_idservicsolu'>" + item.idservicsolu + "</span></div></td>" +
                             "<td hidden><div><span id='spn_otroservicio2_idotroservi'>" + item.idoserv + "</span></div></td>" +
                             "<td hidden><div><span id='spn_otroservicio2_idserprov'>" + servprov + "</span></div></td>" +

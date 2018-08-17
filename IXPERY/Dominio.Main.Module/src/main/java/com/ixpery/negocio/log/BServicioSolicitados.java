@@ -26,9 +26,9 @@ public class BServicioSolicitados {
         return odServSolic.RegistrarPrecioHistorial(oeProdProv);
     }
 
-    public String GuardarFull(String json, String vals) throws Exception{
+    public String GuardarFull(String json, String idsersoli,String fecfin) throws Exception{
         String result = "";
-        odServSolic.GuardarFull(json,vals);
+        odServSolic.GuardarFull(json,idsersoli,fecfin);
         return result;
     }
     //FIN LUIS

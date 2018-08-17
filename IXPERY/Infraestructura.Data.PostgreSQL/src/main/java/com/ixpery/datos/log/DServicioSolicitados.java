@@ -92,15 +92,15 @@ public class DServicioSolicitados {
         return jsonParse;
     }
 
-    public void GuardarFull(String json, String vals) {
+    public void GuardarFull(String json, String idsersoli,String fecfin) {
         try{
             listParameter.clear();
+            String vals=getNomTabSerSolicita()+","+idsersoli+","+fecfin;
             json = jsonGeneral.JsonConvert(json);
-//            json = jsonGeneral.JsonConvertId(json);
             SqlParameter paramJson = new SqlParameter("@json", json);
-            SqlParameter paramVals = new SqlParameter("@json", json);
+            SqlParameter paramVals = new SqlParameter("@vals", vals);
             listParameter.add(paramJson);
-//            com.TransUnica("gen_insertar_json", listParametros);
+            listParameter.add(paramVals);
             com.TransUnica("gen_insertar_historial_precio", listParameter);
         }
         catch (Exception e){

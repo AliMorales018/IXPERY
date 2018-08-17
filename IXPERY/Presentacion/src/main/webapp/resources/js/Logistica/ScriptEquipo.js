@@ -211,7 +211,6 @@ var dollyRowEquipoHTML = $.parseHTML(dollyRowEquipo);
 
 var rowCloneEquipo;
 
-
 $(document).ready(function () {
     $("#selectEmpresaEquipo_Proyecto").select2({
         ajax: {
@@ -610,7 +609,7 @@ function borrar_select2(){
 }
 function selCmbProd(fila){
     let data = $('tbody#tbody_equipo tr#row-equipo-'+fila).find('select').select2('data');
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
     // let selectId = obj.id;
     // let data = $("#"+selectId).select2('data');
     let idProd=data[0].id;
@@ -833,7 +832,7 @@ function RegistrarEquipo_equipo() {
                 data: JSON.stringify(arrayData_completo),
                 success: function resultado(valor) {
                     limpiarInsUpdTot();
-                    alert("Equipo Registrado Correctamente id"+sid);
+                    alert("Datos Registrados Correctamente");
                     BuscarSolucionEquipos(sid);
                 },
                 error: function errores(msg) {
@@ -906,7 +905,7 @@ function selCmbProd2(obj){
     let selectId = obj.id;
     let data = $("#"+selectId).select2('data');
     let idProd=data[0].id;
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
     $("#"+selectId).closest('tr').find('span[id=spn_equipo_codpro]').text(data[0].codigo);
     $("#"+selectId).closest('tr').find('span[id=spn_equipo_modpro]').text(data[0].modelo);
     $("#"+selectId).closest('tr').find('span[id=spn_equipo_marpro]').text(data[0].marca);

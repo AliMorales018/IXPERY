@@ -8,9 +8,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viaticos</title>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">--%>
+
     <style type="text/css">
 
         .icon-add-row{
@@ -100,13 +98,13 @@
 </div>
 <!-- End Date -->
 <!-- Combo ProyectoEmpresa -->
-<div class="grid-container">
+<div class="grid-container" style="display: none;">
     <div class="cell large-9">
         <div class="grid-x grid-margin-x">
             <div class="cell large-4 container-combo">
                 <div class="form-group">
                     <label class="label text-primary" style="line-height: 1.5;"><b>Seleccione Solución:</b></label>
-                    <select id="selectEmpresaOtroServi_Proyecto" onchange="BuscarSolucionOtroServis($(this).val())"></select>
+                    <select id="selectEmpresaOtroServi_Proyecto"></select>
                 </div>
             </div>
         </div>
@@ -117,7 +115,7 @@
 <!-- otroservis Regitrados-->
 <div id="container_otroservi" style="margin-top: 15px;">
     <div id="otroservi_1" class="actividad grid-container">
-        <label id="lbl_otroservi_idotroserv"></label>
+        <label id="lbl_otroservi_idotroserv" style="visibility: hidden;"></label>
         <!-- Table -->
         <div class="grid-x grid-padding-x">
             <div class="cell large-9">
@@ -216,7 +214,6 @@
 <!-- Fin otroservis -->
 
 <!-- JavaScript -->
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio.js"></script>
 <script>
     $(document).ready(function () {
@@ -275,7 +272,6 @@
 
 
 </script>
-<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <!-- End JavaScript -->
 </body>
 </html>

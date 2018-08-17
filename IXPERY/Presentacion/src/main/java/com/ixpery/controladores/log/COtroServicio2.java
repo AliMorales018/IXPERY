@@ -11,8 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +34,12 @@ public class COtroServicio2 {
 
     @RequestMapping("/otroservicio2")
     public ModelAndView Equipo(){
-        ModelAndView modelAndView = new ModelAndView("logistica/otroservicio2");
-        return modelAndView;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateParse = sdf.format(date);
+        ModelAndView modelView = new ModelAndView("logistica/otroservicio2");
+        modelView.addObject("fecha",dateParse);
+        return modelView;
     }
 
  /*   @RequestMapping(value="/otroservicio2/register", method = RequestMethod.POST)
@@ -153,11 +161,24 @@ public class COtroServicio2 {
     public @ResponseBody String BuscarEquipoSol(
             @RequestParam(value="idsol") String busIdsol
     ) throws Exception{
-
         String rpta= obOtroServ.BuscarSolucionOtroServicio(busIdsol);
-
         return rpta;
+    }
 
+    @RequestMapping("/otroservicio2/sesproverod")
+    public @ResponseBody  String CrearSesProvSoli(
+            @RequestParam(value = "prove") String prove,
+            @RequestParam(value = "soli") String soli,
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("proveedor", prove);
+        session.setAttribute("sersolicitado", soli);
 
+//        Ejemplo para llamar la sesion de la solucion
+//        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
+        String proveedor = session.getAttribute("proveedor").toString();
+        String producto = session.getAttribute("sersolicitado").toString();
+        return "proveedor: "+proveedor+" sersolicitado: "+soli;
     }
 }
