@@ -159,7 +159,6 @@
 
 <script>
     $(document).ready(function() {
-
         //Verificar sesion
         let idCargo;
         $.ajax({
@@ -169,7 +168,7 @@
             success: function resultado(data) {
                 idCargo = data;
                 //SESION CARGO
-                console.log(idCargo);
+                console.log("SESION ID CARGO: "+idCargo);
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
