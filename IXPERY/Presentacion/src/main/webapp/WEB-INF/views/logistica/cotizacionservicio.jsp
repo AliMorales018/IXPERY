@@ -79,6 +79,7 @@
                 }
             });
             ++countsc;
+            ++countso;
 
             $.ajax({
                 method: "POST",
@@ -257,6 +258,7 @@
                     alert('Error: ' + msg.responseText);
                 }
             });
+            AddMenu(mSueldos);
         }
 
         function servicio_enviar_a_operaciones(){
