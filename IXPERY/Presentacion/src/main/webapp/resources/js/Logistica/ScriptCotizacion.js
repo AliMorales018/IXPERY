@@ -111,6 +111,7 @@ function EnviarSolucionOperaciones(){
 
         $.ajax({
             method: "POST",
+            async: false,
             url: "/solucion/GuardarSolucion",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(jsonGuardarCotizacion),
@@ -132,8 +133,7 @@ function EnviarSolucionOperaciones(){
         });
 
     }
-
-
+    LimpiarSetCotizacion();
 }
 
 function LimpiarCamposCot() {
@@ -146,12 +146,6 @@ function LimpiarCamposCot() {
 function AddSetCotizacion() {
 
     if(setCotizacion){
-        console.log('mServicioCot');
-        console.log(mServicioCot);
-        console.log('mEquipoCot');
-        console.log(mEquipoCot);
-
-
         menuNivel3.push(`<li><a id='menu-tab__${mEquipoCot.idmenu}' class='tab'><span>${mEquipoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
         menuNivel3.push(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
         menuNivel3.push(`<li><a id='menu-tab__${mViaticoCot.idmenu}' class='tab'><span>${mViaticoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
@@ -206,4 +200,34 @@ function SesionSolucionCot(sol) {
 
 
 
+function LimpiarSetCotizacion() {
+    let i;
+    i = menuNivel3.indexOf(`<li><a id='menu-tab__${mEquipoCot.idmenu}' class='tab'><span>${mEquipoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+    console.log('i1');
+    console.log(i);
+    if(i > 0){
+        $('#tabBar').find(`a#menu-tab__${mEquipoCot.idmenu}`).remove();
+        $('#panel__' + mEquipoCot.idmenu).remove();
+        menuNivel3.splice(i,1);
+    }
 
+    i = menuNivel3.indexOf(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+    console.log('i2');
+    console.log(i);
+    if(i > 0){
+        $('#tabBar').find(`a#menu-tab__${mServicioCot.idmenu}`).remove();
+        $('#panel__' + mServicioCot.idmenu).remove();
+        menuNivel3.splice(i,1);
+    }
+
+    i = menuNivel3.indexOf(`<li><a id='menu-tab__${mViaticoCot.idmenu}' class='tab'><span>${mViaticoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+    console.log('i3');
+    console.log(i);
+    if(i > 0){
+        $('#tabBar').find(`a#menu-tab__${mViaticoCot.idmenu}`).remove();
+        $('#panel__' + mViaticoCot.idmenu).remove();
+        menuNivel3.splice(i,1);
+        setCotizacion = true;
+    }
+
+}

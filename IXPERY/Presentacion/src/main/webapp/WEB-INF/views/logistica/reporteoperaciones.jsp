@@ -164,7 +164,7 @@
             <div class="cell large-6">
                 <img src="${urlPublic}/img/logo.svg" height="30" width="230"/>
             </div>
-            <div class="cell large-3" style="padding-top:2rem;padding-left:1rem;">
+            <div class="cell large-3" style="padding-top:.5rem;padding-left:.5rem;">
                 <button class="boton-reporte" onclick="GenerarReporte();">REPORTE</button>
             </div>
             <div class="cell large-3">

@@ -16,20 +16,10 @@
             line-height: 23px;
         }
 
-        .selectempresa2-result-empresa{
-            font-size: 9.55px;
-            padding: 5px 15px 10px;
-        }
-        .selectempresa2-result-proyecto{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectempresa2-result-solucion{
-            font-size: 9.55px;
-            padding: 0px 15px 5px;
-        }
-        .selectempresa2-span-result{
-            font-size: 9.9px;
+        .select2-results{
+            /*JS*/
+            font-size: 10px;
+            padding: .12rem;
         }
 
         #tbody-solucion-operaciones tr:hover {
@@ -41,8 +31,8 @@
             -webkit-appearance: none;
         }
 
-
         .row-selected{
+            /*JS*/
             color: #D34539;
             border-top: .13rem solid grey;
             border-bottom: .13rem solid grey;
@@ -69,20 +59,23 @@
         </div>
     </div>
     <div class="cell large-2"></div>
-    <div class="cell large-6">
+    <div class="cell large-7">
         <div class="grid-x align-center-middle">
-            <div class="cell small-4 medium-4 large-4 text-center">
+            <div class="cell small-4 medium-4 large-3 text-center">
                 <button type="button" id="btn_operaciones_pendientes" class="btn btn-primary" onclick="BuscarSolucionesPendientes();">Pendientes</button>
             </div>
-            <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_operaciones_guardar" class="btn btn-primary" onclick="Registrar_Operaciones();">Aprobar</button>
+            <div class="cell small-4 medium-4 large-3 text-center">
+                <button type="button" id="btn_operaciones_guardar" class="btn btn-primary" onclick="Registrar_Operaciones();">Guardar</button>
             </div>
-            <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_operaciones_rechazar" class="btn btn-secondary">Rechazar</button>
+            <div class="cell small-4 medium-4 large-3 text-center">
+                <button type="button" id="btn_operaciones_aprobar" class="btn btn-primary" onclick="AprobarOperaciones();">Aprobar</button>
+            </div>
+            <div class="cell small-4 medium-4 large-3 text-center">
+                <button type="button" id="btn_operaciones_rechazar" class="btn btn-secondary" onclick="RechazarOperaciones();">Rechazar</button>
             </div>
         </div>
     </div>
-    <div class="cell large-3">
+    <div class="cell large-2">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
                 <button type="button" id="btn_operaciones_reporte" class="btn btn-primary" onclick="AbrirReporte();">Reporte</button>
@@ -115,7 +108,7 @@
             <div class="cell large-2">
                 <div class="form-group">
                     <label class="label text-primary"><b>VALIDEZ</b></label>
-                    <input id="txt_validezofer_opera" style="text-align: right" class="form-control" required="required" placeholder='Ej 1' type="number"/>
+                    <input id="txt_validezofer_opera" class="form-control unstyled" required="required" placeholder='Ejm: 1' type="number"/>
                 </div>
             </div>
         </div>

@@ -42,6 +42,10 @@ let htmlITME3 = ``;
 let htmlPieTabla = ``;
 let htmlMemo = ``;
 
+let totalITEM1 = false;
+let totalITEM2 = false;
+let totalITEM3 = false;
+
 
 //LLENADO DE LA TABLA REPORTE
 //LLEANDO DE ITEM1
@@ -56,21 +60,22 @@ for(let i = 0; i < lengthITEM1; ++i){
     let preciosubtotal = '';
 
     if(arrITEM1[i].punitvisible === '1'){
-        preciounitario = 'PREC UNIT';
+        preciounitario = 'PRECIO';
         $('input#item1-check-prunitario').attr( 'checked', true );
     }
     else{
         preciounitario = 'INCLUIDO';
-        $('input#item1-check-prunitario').checked = false;
+        $('input#item1-check-prunitario').attr( 'checked', false );
     }
 
     if(arrITEM1[i].pstotalvisible === '1'){
-        preciosubtotal = 'SUBTOTAL';
-        $('input#item1-check-prsubtotal').checked = true;
+        preciosubtotal = 'SUB TOTAL';
+        $('input#item1-check-prsubtotal').attr( 'checked', true );
     }
     else{
-        preciosubtotal = 'TOTAL';
-        $('input#item1-check-prsubtotal').checked = false;
+        preciosubtotal = 'SUB TOTAL';
+        totalITEM1 = true;
+        $('input#item1-check-prsubtotal').attr( 'checked', false );
     }
 
     htmlITME1 += `<tr name="item1-fila-${i+1}">`;
@@ -96,17 +101,22 @@ for(let i = 0; i < lengthITEM2; ++i){
     let preciosubtotal = '';
 
     if(arrITEM2[i].punitvisible === '1'){
-        preciounitario = 'PREC UNIT';
+        preciounitario = 'PRECIO';
+        $('input#item2-check-prunitario').attr( 'checked', true );
     }
     else{
         preciounitario = 'INCLUIDO';
+        $('input#item2-check-prunitario').attr( 'checked', false );
     }
 
     if(arrITEM2[i].pstotalvisible === '1'){
-        preciosubtotal = 'SUBTOTAL';
+        preciosubtotal = 'SUB TOTAL';
+        $('input#item2-check-prsubtotal').attr( 'checked', true );
     }
     else{
-        preciosubtotal = 'TOTAL';
+        preciosubtotal = 'SUB TOTAL';
+        totalITEM2 = true;
+        $('input#item2-check-prsubtotal').attr( 'checked', false );
     }
 
     htmlITME2 += `<tr name="item2-fila-${i+1}">`;
@@ -132,17 +142,22 @@ for(let i = 0; i < lengthITEM3; ++i){
     let preciosubtotal = '';
 
     if(arrITEM3[i].punitvisible === '1'){
-        preciounitario = 'PREC UNIT';
+        preciounitario = 'PRECIO';
+        $('input#item3-check-prunitario').attr( 'checked', true );
     }
     else{
         preciounitario = 'INCLUIDO';
+        $('input#item3-check-prunitario').attr( 'checked', false );
     }
 
     if(arrITEM3[i].pstotalvisible === '1'){
-        preciosubtotal = 'SUBTOTAL';
+        preciosubtotal = 'SUB TOTAL';
+        $('input#item3-check-prsubtotal').attr( 'checked', true );
     }
     else{
-        preciosubtotal = 'TOTAL';
+        preciosubtotal = 'SUB TOTAL';
+        totalITEM3 = true;
+        $('input#item3-check-prsubtotal').attr( 'checked', false );
     }
 
     htmlITME3 += `<tr name="item3-fila-${i+1}">`;
@@ -242,8 +257,25 @@ $('tbody#reporte-ITEM3').find('tr[name=item3-fila-1]').append(`<td rowspan="${le
 $('#reporte-memo').html(htmlMemo);
 
 //INSERCION PIE DE PAGINA
-$('#reporte-piepagina').offset({top:700,left:35});
+$('#reporte-piepagina').offset({top:770,left:35});
 // $('button#boton-reporte').offset({top:50,left:200});
+
+if(totalITEM1){
+    $('tbody#reporte-ITEM1')
+        .find('.item1-prtotal').show().closest('tbody')
+        .find('.item1-prsubtotal').closest('td').hide();
+}
+if(totalITEM2){
+    $('tbody#reporte-ITEM2')
+        .find('.item2-prtotal').show().closest('tbody')
+        .find('.item2-prsubtotal').closest('td').hide();
+}
+if(totalITEM3){
+    $('tbody#reporte-ITEM3')
+        .find('.item3-prtotal').show().closest('tbody')
+        .find('.item3-prsubtotal').closest('td').hide();
+}
+
 
 
 
@@ -251,27 +283,27 @@ $('tbody#reporte-ITEM1')
     .find('input#item1-check-prunitario').on('change', function(){
     if(this.checked){
         $(this).closest('tbody').find('.item1-prunitario').each(function(){
-            $(this).html('INCLUIDO');
+            $(this).html('PRECIO');
 
         });
     }
     else{
         $(this).closest('tbody').find('.item1-prunitario').each(function(){
             for(let i = 0; i < lengthITEM1; ++i){
-                $(this).html('PREC UNIT');
+                $(this).html('INCLUIDO');
             }
         });
     }
 }).closest('tbody')
     .find('input#item1-check-prsubtotal').on('change', function(){
     if(this.checked){
-        $(this).closest('tbody').find('.item1-prsubtotal').closest('td').hide();
-        $(this).closest('tbody').find('.item1-prtotal').show();
+        $(this).closest('tbody').find('.item1-prtotal').hide();
+        $(this).closest('tbody').find('.item1-prsubtotal').closest('td').show();
 
     }
     else{
-        $(this).closest('tbody').find('.item1-prsubtotal').closest('td').show();
-        $(this).closest('tbody').find('.item1-prtotal').hide();
+        $(this).closest('tbody').find('.item1-prtotal').show();
+        $(this).closest('tbody').find('.item1-prsubtotal').closest('td').hide();
     }
 });
 
@@ -279,27 +311,27 @@ $('tbody#reporte-ITEM2')
     .find('input#item2-check-prunitario').on('change', function(){
     if(this.checked){
         $(this).closest('tbody').find('.item2-prunitario').each(function(){
-            $(this).html('INCLUIDO');
+            $(this).html('PRECIO');
 
         });
     }
     else{
         $(this).closest('tbody').find('.item2-prunitario').each(function(){
             for(let i = 0; i < lengthITEM2; ++i){
-                $(this).html('PREC UNIT');
+                $(this).html('INCLUIDO');
             }
         });
     }
 }).closest('tbody')
     .find('input#item2-check-prsubtotal').on('change', function(){
     if(this.checked){
-        $(this).closest('tbody').find('.item2-prsubtotal').closest('td').hide();
-        $(this).closest('tbody').find('.item2-prtotal').show();
+        $(this).closest('tbody').find('.item2-prtotal').hide();
+        $(this).closest('tbody').find('.item2-prsubtotal').closest('td').show();
 
     }
     else{
-        $(this).closest('tbody').find('.item2-prsubtotal').closest('td').show();
-        $(this).closest('tbody').find('.item2-prtotal').hide();
+        $(this).closest('tbody').find('.item2-prtotal').show();
+        $(this).closest('tbody').find('.item2-prsubtotal').closest('td').hide();
     }
 });
 
@@ -307,27 +339,27 @@ $('tbody#reporte-ITEM3')
     .find('input#item3-check-prunitario').on('change', function(){
     if(this.checked){
         $(this).closest('tbody').find('.item3-prunitario').each(function(){
-            $(this).html('INCLUIDO');
+            $(this).html('PRECIO');
 
         });
     }
     else{
         $(this).closest('tbody').find('.item3-prunitario').each(function(){
             for(let i = 0; i < lengthITEM3; ++i){
-                $(this).html('PREC UNIT');
+                $(this).html('INCLUIDO');
             }
         });
     }
 }).closest('tbody')
     .find('input#item3-check-prsubtotal').on('change', function(){
     if(this.checked){
-        $(this).closest('tbody').find('.item3-prsubtotal').closest('td').hide();
-        $(this).closest('tbody').find('.item3-prtotal').show();
+        $(this).closest('tbody').find('.item3-prtotal').hide();
+        $(this).closest('tbody').find('.item3-prsubtotal').closest('td').show();
 
     }
     else{
-        $(this).closest('tbody').find('.item3-prsubtotal').closest('td').show();
-        $(this).closest('tbody').find('.item3-prtotal').hide();
+        $(this).closest('tbody').find('.item3-prtotal').show();
+        $(this).closest('tbody').find('.item3-prsubtotal').closest('td').hide();
     }
 });
 
@@ -335,7 +367,7 @@ $('tbody#reporte-ITEM3')
 
 
 $(document).ready(function() {
-    // GenerarReporte();
+    GenerarReporte();
     Remover();
 });
 
@@ -345,9 +377,7 @@ function GuardarReporte() {
 
     $('tbody#reporte-ITEM1').find('tr[name ^= item1-fila]').each(function(){
         let jsonItem = {};
-
         jsonItem.cod1 = parseInt($(this).find('span').html());
-
         $('input#item1-check-prunitario').each(function(){
             if($(this).is(':checked')){
                 jsonItem.cod20 = "1";
@@ -357,6 +387,48 @@ function GuardarReporte() {
             }
         });
         $('input#item1-check-prsubtotal').each(function(){
+            if($(this).is(':checked')){
+                jsonItem.cod21 = "1";
+            }
+            else{
+                jsonItem.cod21 = "0";
+            }
+        });
+        arrGuardar.push(jsonItem);
+    });
+    $('tbody#reporte-ITEM2').find('tr[name ^= item2-fila]').each(function(){
+        let jsonItem = {};
+        jsonItem.cod1 = parseInt($(this).find('span').html());
+        $('input#item2-check-prunitario').each(function(){
+            if($(this).is(':checked')){
+                jsonItem.cod20 = "1";
+            }
+            else{
+                jsonItem.cod20 = "0";
+            }
+        });
+        $('input#item2-check-prsubtotal').each(function(){
+            if($(this).is(':checked')){
+                jsonItem.cod21 = "1";
+            }
+            else{
+                jsonItem.cod21 = "0";
+            }
+        });
+        arrGuardar.push(jsonItem);
+    });
+    $('tbody#reporte-ITEM3').find('tr[name ^= item3-fila]').each(function(){
+        let jsonItem = {};
+        jsonItem.cod1 = parseInt($(this).find('span').html());
+        $('input#item3-check-prunitario').each(function(){
+            if($(this).is(':checked')){
+                jsonItem.cod20 = "1";
+            }
+            else{
+                jsonItem.cod20 = "0";
+            }
+        });
+        $('input#item3-check-prsubtotal').each(function(){
             if($(this).is(':checked')){
                 jsonItem.cod21 = "1";
             }

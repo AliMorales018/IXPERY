@@ -1,14 +1,20 @@
 var JSONobjGeneralOpera;
 
 var setOperaciones = true;
+var countsc = 0;
 var countso = 0;
 var isolOperaciones;
 
+var countSelOpe = false;
+
+
 
 $(document).ready(function () {
+    BuscarSolucionesPendientes();
+
     $("#selectEmpresa_Proyecto_Sol_Opera").select2({
         ajax: {
-            url: "/equipo/busempresa",
+            url: "/operaciones/BuscarSolucionPendiente",
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -17,7 +23,9 @@ $(document).ready(function () {
                 };
             },
             processResults: function (data, params) {
-                console.log(data.items);
+                $.each(data.items, function(i, d) {
+                    data.items[i]['id'] = d.idsol;
+                });
                 return {
                     results: data.items
                 };
@@ -36,23 +44,35 @@ function formatRepo (repo) {
     if (repo.loading) {
         return repo.text;
     }
-    var markup = "<div class='selectempresa2-result-empresa'><span class='selectempresa2-span-result'>EMPRESA: </span>"+repo.nomempresa+" - " + repo.ruc +"</div>"+
-        "<div class='selectempresa2-result-proyecto'><span class='selectempresa2-span-result'>PROYECTO: </span>"+repo.nomproyecto+"</span></div>"+
-        "<div class='selectempresa2-result-solucion'><span class='selectempresa2-span-result'>SOLUCION: </span>"+repo.solucion+"</span></div>";
+    var markup = "<div class='select2-results'>EMP: "+repo.nomempresa+"</div>"+
+        "<div class='select2-results'>PRO: "+repo.nomproyecto+"</span></div>"+
+        "<div class='select2-results'>REQ: "+repo.requerimiento+"</span></div>"+
+        "<div class='select2-results'>SOL: "+repo.solucion+"</span></div>";
     return markup;
 }
 
 function formatRepoSelection (repo) {
-    return repo.text || repo.nomempresa + " - " + repo.solucion;
+    if(countSelOpe){
+        isolOperaciones = repo.id;
+        SesionSolucionOpe(isolOperaciones);
+        // AddSetOperaciones();
+    }
+    countSelOpe = true;
+    return repo.text || repo.solucion;
 }
 
 function BuscarSolucionOperaciones(id){
+    console.log('id');
+    console.log(id);
     if(id!="" || id!=undefined){
+
         $.ajax({
             method: "POST",
             url: "/operaciones/buscaroperacionsol",
-            data: {"idsol": id},
+            data: {"sol": id},
             success: function resultado(valor) {
+                console.log('valor condicion');
+                console.log(valor);
                 $("#txt_condcomer_opera").val(valor.toString());
             },
             error: function errores(msg) {
@@ -83,13 +103,26 @@ function Registrar_Operaciones() {
            verificaCajas(txtEjecu,"txt_timeejecu_opera")  === true &&
            verificaCajas(txtCond,"txt_condcomer_opera")   === true
         ){
-            //alert("Todos Ok");
+            idEmp = 1;
+            console.log("idEmp");
+            console.log(idEmp);
+            console.log('idPro');
+            console.log(idPro);
+            console.log('idSol');
+            console.log(idSol);
+            console.log('cadena');
+            console.log(cadena);
+            console.log('cond');
+            console.log(txtCond);
             $.ajax({
                 method: "POST",
                 url: "/operaciones/register",
                 data: {"idEmp":idEmp,"idPro":idPro,"idSol":idSol,"cadena":cadena,"cond":txtCond},
                 success: function resultado(valor) {
-
+                    console.log('valor');
+                    console.log(valor);
+                    alert('La solución ha fue guardada correctamente');
+                    LimpiarCamposOperaciones();
                 },
                 error: function errores(msg) {
                     alert('Error: ' + msg.responseText);
@@ -105,6 +138,125 @@ function Registrar_Operaciones() {
         alert("Selecione una Solución o Empresa por favor...");
     }
 }
+
+function AprobarOperaciones() {
+    let id = "";
+    let jsonAprobarOperaciones = {};
+    let arrAporbarOperaciones = [];
+    let jsonItem = {};
+
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/VerificarSesionSolucion",
+        success: function(valor) {
+            console.log('valor');
+            console.log(valor);
+            id = valor;
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+    jsonItem.sol1 = parseInt(id);
+    jsonItem.sol19 = '1';
+
+    arrAporbarOperaciones.push(jsonItem);
+    jsonAprobarOperaciones.sol = arrAporbarOperaciones;
+
+    console.log('jsonAprobarOperaciones');
+    console.log(jsonAprobarOperaciones);
+
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/GuardarSolucion",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(jsonAprobarOperaciones),
+        success: function resultado(valor) {
+            if (valor === "0") {
+                alert("La solución fue aprobada.");
+                LimpiarCamposOperaciones();
+                BuscarSolucionesPendientes();
+                // LimpiarVariables();
+                // if(modSolPend === '1'){
+                //     BuscarRequerimientos();
+                // }
+            }
+            else {
+                alert("Error en la red. No se han guardado cambios.");
+            }
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+    LimpiarSetOperaciones();
+}
+
+
+
+
+function RechazarOperaciones() {
+    let id = "";
+    let jsonRechazarOperaciones = {};
+    let arrRechazarOperaciones = [];
+    let jsonItem = {};
+
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/VerificarSesionSolucion",
+        success: function(valor) {
+            console.log('valor');
+            console.log(valor);
+            id = valor;
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+    jsonItem.sol1 = parseInt(id);
+    jsonItem.sol18 = '1';
+
+    arrRechazarOperaciones.push(jsonItem);
+    jsonRechazarOperaciones.sol = arrRechazarOperaciones;
+
+    console.log('jsonRechazarOperaciones');
+    console.log(jsonRechazarOperaciones);
+
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/GuardarSolucion",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(jsonRechazarOperaciones),
+        success: function resultado(valor) {
+            if (valor === "0") {
+                alert("La solución fue rechazada.");
+                LimpiarCamposOperaciones();
+                BuscarSolucionesPendientes();
+                // LimpiarVariables();
+                // if(modSolPend === '1'){
+                //     BuscarRequerimientos();
+                // }
+            }
+            else {
+                alert("Error en la red. No se han guardado cambios.");
+            }
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+    LimpiarSetOperaciones();
+}
+
+
+
+
 function verificaCajas(valCaja,id){
     if(valCaja!==""){
        $("#"+id).removeClass('is-invalid');
@@ -116,6 +268,7 @@ function verificaCajas(valCaja,id){
 }
 
 function AbrirReporte() {
+
     window.open('/reportes/ReporteOperaciones');
     // $.ajax({
     //     method: "POST",
@@ -133,9 +286,18 @@ function AbrirReporte() {
 }
 
 
+function LimpiarCamposOperaciones() {
+    $('input#txt_validezofer_opera').val("");
+    $('input#txt_timeentre_opera').val("");
+    $('input#txt_timeejecu_opera').val("");
+    $('select#selectEmpresa_Proyecto_Sol_Opera').html("");
+    $('textarea#txt_condcomer_opera').val("");
+}
 
 
 function BuscarSolucionesPendientes(){
+    // AddMenu(mEquipoCot);
+
     $.ajax({
         method: "POST",
         url: "/operaciones/BuscarSolucionesPendientes",
@@ -258,7 +420,9 @@ function AddSetOperaciones() {
         });
         setOperaciones = false;
     }
-    $('#menu-tab__' + icotJson).addClass('tab-active');
+    console.log('iopeJson');
+    console.log(iopeJson);
+    $('#menu-tab__' + iopeJson).addClass('tab-active');
 
     if(countso !== 0){
         console.log('entre');
@@ -290,7 +454,37 @@ function SesionSolucionOpe(sol) {
 
 
 
+function LimpiarSetOperaciones() {
+    let i;
+    i = menuNivel3.indexOf(`<li><a id='menu-tab__${mEquipoCot.idmenu}' class='tab'><span>${mEquipoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+    console.log('i1');
+    console.log(i);
+    if(i > 0){
+        $('#tabBar').find(`a#menu-tab__${mEquipoCot.idmenu}`).remove();
+        $('#panel__' + mEquipoCot.idmenu).remove();
+        menuNivel3.splice(i,1);
+    }
 
+    i = menuNivel3.indexOf(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+    console.log('i2');
+    console.log(i);
+    if(i > 0){
+        $('#tabBar').find(`a#menu-tab__${mServicioCot.idmenu}`).remove();
+        $('#panel__' + mServicioCot.idmenu).remove();
+        menuNivel3.splice(i,1);
+    }
+
+    i = menuNivel3.indexOf(`<li><a id='menu-tab__${mViaticoCot.idmenu}' class='tab'><span>${mViaticoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+    console.log('i3');
+    console.log(i);
+    if(i > 0){
+        $('#tabBar').find(`a#menu-tab__${mViaticoCot.idmenu}`).remove();
+        $('#panel__' + mViaticoCot.idmenu).remove();
+        menuNivel3.splice(i,1);
+        setOperaciones = true;
+    }
+
+}
 
 
 

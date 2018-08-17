@@ -13,8 +13,11 @@ var mViatico = {};
 var mEquipoCot = {};
 var mServicioCot = {};
 var mViaticoCot = {};
+var mSueldos = {};
+
 var isolJson;
 var icotJson;
+var iopeJson;
 
 
 var navbar;
@@ -101,6 +104,12 @@ $(document).ready(function () {
                         }
 
                         if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 37) {
+                                iopeJson = JSONobj[i].idmenu;
+                            }
+                        }
+
+                        if(JSONobj[i]){
                             if(JSONobj[i].idmenu === 38) {
                                 mEquipoCot = JSONobj[i];
                                 JSONobj.splice(i,1);
@@ -121,6 +130,12 @@ $(document).ready(function () {
                             }
                         }
 
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 42) {
+                                mSueldos = JSONobj[i];
+                                // JSONobj.splice(i,1);
+                            }
+                        }
 
 
 
@@ -389,6 +404,18 @@ $(document).ready(function () {
                     $('#panel__' + mViaticoCot.idmenu).remove();
                 }
 
+                if(idCerrar == iopeJson){
+                    menuNivel3.splice(menuNivel3.indexOf(mEquipoCot), 1);
+                    menuNivel3.splice(menuNivel3.indexOf(mServicioCot), 1);
+                    menuNivel3.splice(menuNivel3.indexOf(mViaticoCot), 1);
+                    $('#menu-tab__' + mEquipoCot.idmenu).closest('li').remove();
+                    $('#menu-tab__' + mServicioCot.idmenu).closest('li').remove();
+                    $('#menu-tab__' + mViaticoCot.idmenu).closest('li').remove();
+                    $('#panel__' + mEquipoCot.idmenu).remove();
+                    $('#panel__' + mServicioCot.idmenu).remove();
+                    $('#panel__' + mViaticoCot.idmenu).remove();
+                }
+
 
             });
 
@@ -411,3 +438,37 @@ function FijarMenu() {
         navbar.classList.remove("sticky");
     }
 }
+
+
+
+
+function AddMenu(newMenu) {
+    // console.log('trueMenu1');
+    // console.log(trueMenu);
+    let i = menuNivel3.indexOf(`<li><a id='menu-tab__${newMenu.idmenu}' class='tab'><span>${newMenu.descripcion}</span><div id='tab-cerrar__${newMenu.idmenu}' class='icon-cerrar'><i class='icon-x'></i></div></a></li>`);
+    console.log('i');
+    console.log(i);
+    if(i < 0){
+        menuNivel3.push(`<li><a id='menu-tab__${newMenu.idmenu}' class='tab'><span>${newMenu.descripcion}</span><div id='tab-cerrar__${newMenu.idmenu}' class='icon-cerrar'><i class='icon-x'></i></div></a></li>`);
+        $('#tabBar').html(menuNivel3);
+        $('#main')
+            .append(`<div id='panel__${newMenu.idmenu}' class="ocultar"></div>`);
+
+        $.post(newMenu.url, function (htmlExterno) {
+            $('#panel__' + newMenu.idmenu).html(htmlExterno);
+        });
+        // trueMenu = false;
+        // console.log('trueMenu2');
+        // console.log(trueMenu);
+        $('#menu-tab__' + newMenu.idmenu).addClass('tab-active');
+        $('div[id ^= panel__]').addClass("ocultar");
+        $('#panel__' + newMenu.idmenu).removeClass("ocultar");
+
+    }
+
+
+}
+
+
+
+

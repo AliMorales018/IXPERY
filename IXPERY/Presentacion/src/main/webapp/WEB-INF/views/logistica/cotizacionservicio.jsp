@@ -244,7 +244,8 @@
             });
         }
         function actualizar_salario_cl(idCargo) {
-            alert("ID CARGO: "+idCargo);
+            // alert("ID CARGO: "+idCargo);
+            AddMenu(mSueldos);
         }
 
         function servicio_enviar_a_operaciones(){

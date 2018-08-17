@@ -31,18 +31,26 @@ public class DOperaciones {
         com.TransUnica("crear_reg_cotizacion", listParameter);
     }
 
-    //LUIS 21/07/18 10:49 --
-    public String BuscarSolucionOpera() throws Exception{
+    public String BuscarSolucionOpera(Integer sol) throws Exception{
         listParameter.clear();
-  /*      SqlParameter pValorLike = new SqlParameter();
-        listParameter.add(pValorLike);*/
-        return com.EjecutaConsultaJson("retornar_condicion", listParameter);
+        SqlParameter pValue = new SqlParameter("value", sol);
+        listParameter.add(pValue);
+        String mensaje = com.EjecutaConsultaJson("filtrar_cotizacion_j", listParameter);
+        return mensaje;
     }
 
 
     public String BuscarSolucionesPendientes() throws Exception{
         listParameter.clear();
         SqlParameter pValue = new SqlParameter("value", "/");
+        listParameter.add(pValue);
+        String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_o", listParameter);
+        return json;
+    }
+
+    public String BuscarSolucionPendiente(String value) throws Exception{
+        listParameter.clear();
+        SqlParameter pValue = new SqlParameter("value", value);
         listParameter.add(pValue);
         String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_o", listParameter);
         return json;
