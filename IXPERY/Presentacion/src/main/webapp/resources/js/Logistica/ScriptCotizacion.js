@@ -147,21 +147,21 @@ function AddSetCotizacion() {
 
     if(setCotizacion){
         menuNivel3.push(`<li><a id='menu-tab__${mEquipoCot.idmenu}' class='tab'><span>${mEquipoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
-        menuNivel3.push(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+        // menuNivel3.push(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
         menuNivel3.push(`<li><a id='menu-tab__${mViaticoCot.idmenu}' class='tab'><span>${mViaticoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
         $('#tabBar').html(menuNivel3);
 
         $('#main')
             .append(`<div id='panel__${mEquipoCot.idmenu}' class="ocultar"></div>`)
-            .append(`<div id='panel__${mServicioCot.idmenu}' class="ocultar"></div>`)
+            // .append(`<div id='panel__${mServicioCot.idmenu}' class="ocultar"></div>`)
             .append(`<div id='panel__${mViaticoCot.idmenu}' class="ocultar"></div>`);
 
         $.post(mEquipoCot.url, function (htmlExterno) {
             $('#panel__' + mEquipoCot.idmenu).html(htmlExterno);
         });
-        $.post(mServicioCot.url, function (htmlExterno) {
-            $('#panel__' + mServicioCot.idmenu).html(htmlExterno);
-        });
+        // $.post(mServicioCot.url, function (htmlExterno) {
+        //     $('#panel__' + mServicioCot.idmenu).html(htmlExterno);
+        // });
         $.post(mViaticoCot.url, function (htmlExterno) {
             $('#panel__' + mViaticoCot.idmenu).html(htmlExterno);
         });
@@ -172,7 +172,7 @@ function AddSetCotizacion() {
     if(countsc !== 0){
         console.log('entre');
         BuscarSesionSol();
-        BuscarServicioCotizacion();
+        // BuscarServicioCotizacion();
         BuscarOtroServicio();
     }
 
@@ -211,14 +211,14 @@ function LimpiarSetCotizacion() {
         menuNivel3.splice(i,1);
     }
 
-    i = menuNivel3.indexOf(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
-    console.log('i2');
-    console.log(i);
-    if(i > 0){
-        $('#tabBar').find(`a#menu-tab__${mServicioCot.idmenu}`).remove();
-        $('#panel__' + mServicioCot.idmenu).remove();
-        menuNivel3.splice(i,1);
-    }
+    // i = menuNivel3.indexOf(`<li><a id='menu-tab__${mServicioCot.idmenu}' class='tab'><span>${mServicioCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
+    // console.log('i2');
+    // console.log(i);
+    // if(i > 0){
+    //     $('#tabBar').find(`a#menu-tab__${mServicioCot.idmenu}`).remove();
+    //     $('#panel__' + mServicioCot.idmenu).remove();
+    //     menuNivel3.splice(i,1);
+    // }
 
     i = menuNivel3.indexOf(`<li><a id='menu-tab__${mViaticoCot.idmenu}' class='tab'><span>${mViaticoCot.descripcion}</span><div class='icon-cerrar'><i></i></div></a></li>`);
     console.log('i3');

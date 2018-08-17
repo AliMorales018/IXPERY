@@ -73,7 +73,12 @@ function BuscarSolucionOperaciones(id){
             success: function resultado(valor) {
                 console.log('valor condicion');
                 console.log(valor);
-                $("#txt_condcomer_opera").val(valor.toString());
+                let arrItem;
+                arrItem = valor.items;
+                $("#txt_validezofer_opera").val(arrItem[0].validezoferta);
+                $("#txt_timeentre_opera").val(arrItem[0].tiempoentrega);
+                $("#txt_timeejecu_opera").val(arrItem[0].tiempoejecucion);
+                $("#txt_condcomer_opera").val(arrItem[0].condicioncomercial);
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
