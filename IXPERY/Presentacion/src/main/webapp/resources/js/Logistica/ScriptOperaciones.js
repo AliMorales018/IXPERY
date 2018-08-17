@@ -1,7 +1,7 @@
 var JSONobjGeneralOpera;
 
 var setOperaciones = true;
-// var countsc = 0;
+var countsc = 0;
 var countso = 0;
 var isolOperaciones;
 
