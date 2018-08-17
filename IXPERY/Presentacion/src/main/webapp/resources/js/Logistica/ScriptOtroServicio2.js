@@ -11,24 +11,24 @@ var arrGuardarOtroSer2 = [];
 var arrProEdit2OtSer2 = [];
 
 $(document).ready(function () {
-    let idProdProvEq2;
-    let preProdEq2;
-    let subProdEq2;
+    let idProdProvOs2;
+    let preProdOs2;
+    let subProdOs2;
     $('#otroservicio_2 tbody')
         .on('focusin', 'tr[class=otroservicio2-edit]', function () {
             idRowProdSolOtS2 = parseInt($(this).find('span[id = spn_otroservicio2_idservicsolu]').html());
-            idProdProvEq2 = parseInt($(this).find('span[id = spn_otroservicio2_idserprov]').html());
+            idProdProvOs2 = parseInt($(this).find('span[id = spn_otroservicio2_idserprov]').html());
         })
         .on('focusout', 'tr[class=otroservicio2-edit]', function () {
             let objProEdit = {};
-            idProdProvEq2 = parseInt($(this).find('span[id = spn_otroservicio2_idserprov]').html());
-            preProdEq2 = parseFloat($(this).find('span[id = spn_otroservicio2_preser]').html());
-            subProdEq2 = parseFloat($(this).find('span[id = spn_otroservicio2_subtot]').html());
+            idProdProvOs2 = parseInt($(this).find('span[id = spn_otroservicio2_idserprov]').html());
+            preProdOs2 = parseFloat($(this).find('span[id = spn_otroservicio2_preser]').html());
+            subProdOs2 = parseFloat($(this).find('span[id = spn_otroservicio2_subtot]').html());
 
             rowOtroSer2ObjOut['ssl1'] = idRowProdSolOtS2;
-            rowOtroSer2ObjOut['ssl3'] = idProdProvEq2;
-            rowOtroSer2ObjOut['ssl17'] = preProdEq2;
-            rowOtroSer2ObjOut['ssl7'] = subProdEq2;
+            rowOtroSer2ObjOut['ssl3'] = idProdProvOs2;
+            rowOtroSer2ObjOut['ssl17'] = preProdOs2;
+            rowOtroSer2ObjOut['ssl7'] = subProdOs2;
 
 
             $.each(JSONobjGeneralServ2.items[1].items2, function (obj, item) {
@@ -44,10 +44,10 @@ $(document).ready(function () {
                             item.costosubtotal=rowOtroSer2ObjOut.ssl7;
 
                             let objProdProv={};
-                            objProdProv.spr1=idProdProvEq2;
+                            objProdProv.spr1=idProdProvOs2;
                             objProEdit["ssl3"] =objProdProv;
-                            objProEdit["ssl17"] = preProdEq2;
-                            objProEdit["ssl7"] = subProdEq2;
+                            objProEdit["ssl17"] = preProdOs2;
+                            objProEdit["ssl7"] = subProdOs2;
 
                             arrProEdit2OtSer2.push(objProEdit);
                             arrGuardarOtroSer2 = arrProEdit2OtSer2.slice();
@@ -119,7 +119,6 @@ function eliminarObjetosDuplicados(arr, prop) {
 
 
 
-var filaOtS2=0;
 function clonar_selectOtroSer2(fila,id){
 
     $('#cmb_otroservicio2_provee'+fila).select2({
@@ -148,13 +147,9 @@ function clonar_selectOtroSer2(fila,id){
 
 }
 
-function borrar_select4(){
-    $('.js-example-basic-single').select2("destroy");
-}
 
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS
 function formatRepoProveOtS2 (repo) {
-    //alert(repo.precio);
     if (repo.loading) {
         return repo.text;
     }
@@ -171,7 +166,6 @@ function selCmbProveeOtS2(obj){
     let data = $("#"+selectId).select2('data');
     let idProdProv=data[0].id;
     let subTot;
-    alert(JSON.stringify(data));
     $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_preser]').text(data[0].precio);
     $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_idserprov]').text(idProdProv);
     subTot=parseFloat(data[0].precio)*parseFloat($("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_canser]').html());
@@ -189,15 +183,30 @@ function InsUpdDelOtroServ2() {
         data: JSON.stringify(jsonGuardarFullOtroSer2),
         success: function resultado(valor) {
             if (valor == "") {
-                alert("Entro en IF");
-                //
-                // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
-                // CargarJS_proyecto(0, 1, 0);
+                alert("Datos Guardados Correctamente");
             }
             else {
                 console.log("Entro en ELSE");
-                // alert(valor);
             }
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
+
+function crearSesProvSoli(idtr){
+    let idProve = $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div select[id ^= cmb_otroservicio2_provee]").val();
+    let idSoli =  $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id = spn_otroservicio2_idsersoli]").text();
+    console.log("idProveedor: "+idProve);
+    console.log("idSoli: "+idSoli);
+    $.ajax({
+        method: "POST",
+        url: "/otroservicio2/sesproverod",
+        data: {"prove": idProve,"soli": idSoli},
+        success: function resultado(valor) {
+            console.log("Rpta de sesion");
+            console.log(valor);
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);

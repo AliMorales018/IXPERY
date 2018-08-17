@@ -86,13 +86,13 @@
     </div>
     <!-- End Date -->
     <!-- Combo ProyectoEmpresa -->
-    <div class="grid-container">
+    <div class="grid-container" style="display: none;">
         <div class="cell large-9">
             <div class="grid-x grid-margin-x">
                 <div class="cell large-4 container-combo">
                     <div class="form-group">
                         <label class="label text-primary" style="line-height: 1.5;"><b>Seleccione Solución:</b></label>
-                        <select id="selectEmpresaEquipo_Proyecto" onchange="BuscarSolucionEquipos($(this).val())"></select>
+                        <select id="selectEmpresaEquipo_Proyecto"></select>
                     </div>
                 </div>
             </div>

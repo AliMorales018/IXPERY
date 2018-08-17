@@ -53,6 +53,8 @@ function searchProducto_hpOtServ(){
                     console.log("listando");
                     $("#selectProducto_hpOtServ").empty();
                     var JSONobj = JSON.parse(data);
+                    console.log("Datos de BD");
+                    console.log(JSONobj);
                     $("#selectProducto_hpOtServ").append("<option value=''></option>");
                     $.each(JSONobj, function (obj, item) {
                         $("#selectProducto_hpOtServ").append('<option value="' + item.servsol + '">' + item.servsolicitado + '</option>');
@@ -80,6 +82,7 @@ function ListarHistorial_PreciosOtServ(){
                 if(data != "0"){
                     count_historialOtServ = 1;
                     var JSONobj = JSON.parse(data);
+                    console.log("Datos de Data");
                     console.log(JSONobj);
                     $("#tbody_historialprecioOtServ").empty();
                     ocultar_precio_nuevoOtServ();
@@ -191,53 +194,67 @@ function convertDate(inputFormat) {
 function guardar_nuevo_PrecioOtServ() {
     if(cont_nuevo_preciOtServ > 1) {
         if ($("#new_date_hpOtServ").val() != "" && $("#new_precio_hpOtServ").val() != "") {
-            let objFilaServProv={};
-            let objServSolic={};
-            let objProvee={};
+            let objFilaServProv = {};
+            let objServSolic = {};
+            let objProvee = {};
 
             let idProducto = $("#selectProducto_hpOtServ").val();
             let idProveedor = $("#selectProveedor_hpOtServ").val();
             let fechaInicio = $("#new_date_hpOtServ").val();
             let precio = $("#new_precio_hpOtServ").val();
+            let ultimaFecha = $("#tbody_historialprecioOtServ tr:last-child td").eq(2).find("span").text();
 
             var d = new Date(fechaInicio);
-             let fechaRes=sumOresDias(d,-1);
-             let fechaFin=convertDate(fechaRes);
+            let fechaRes = sumOresDias(d, -1);
+            let fechaFin = convertDate(fechaRes);
 
+            objServSolic.sso1 = idProducto;//foránea de Serv Solicitados
+            objProvee.prd1 = idProveedor;
 
-            objServSolic.sso1=idProducto;//foránea de Serv Solicitados
-            objProvee.prd1=idProveedor;
-
-            objFilaServProv.spr1=0;
-            objFilaServProv.spr2=objServSolic;
-            objFilaServProv.spr3=objProvee;
-            objFilaServProv.spr4=precio;
-            objFilaServProv.spr5="1";
-            objFilaServProv.spr9=fechaInicio;
+            objFilaServProv.spr1 = 0;
+            objFilaServProv.spr2 = objServSolic;
+            objFilaServProv.spr3 = objProvee;
+            objFilaServProv.spr4 = precio;
+            objFilaServProv.spr5 = "1";
+            objFilaServProv.spr9 = fechaInicio;
 
             arrGuardarHOtSer.push(objFilaServProv);
-            jsonGuardarHOtSer.spr=arrGuardarHOtSer;
+            jsonGuardarHOtSer.spr = arrGuardarHOtSer;
 
-
-            let vals=idProducto+","+fechaFin;
+            let idsersoli = idProducto;
+            let fecfin=fechaFin;
             console.log("Json A Guardar");
             console.log(jsonGuardarHOtSer);
             console.log("Fecha Inicio");
             console.log(fechaInicio);
             console.log("Fecha fechaUlt");
             console.log(fechaFin);
-            $.ajax({
-                method: "POST",
-                url: "/historialprecioOtServicio/guardarfull",
-                data: {"json":JSON.stringify(jsonGuardarHOtSer),"vals":vals},
-                success: function resultado(data) {
-                    //Cargar otra vez la tabla
-                    ListarHistorial_PreciosOtServ();
-                },
-                error: function errores(msg) {
-                    alert('Error: ' + msg.responseText);
+
+            function compararFechasOtSer() {
+                if (Date.parse(fechaInicio) <= Date.parse(ultimaFecha)) {
+                    return false;
                 }
-            });
+                else {
+                    return true;
+                }
+            }
+
+            if (compararFechasOtSer()){
+                $.ajax({
+                    method: "POST",
+                    url: "/historialprecioOtServicio/guardarfull",
+                    data: {"json": JSON.stringify(jsonGuardarHOtSer), "idsersoli": idsersoli,"fecfin":fecfin},
+                    success: function resultado(data) {
+                        //Cargar otra vez la tabla
+                        ListarHistorial_PreciosOtServ();
+                    },
+                    error: function errores(msg) {
+                        alert('Error: ' + msg.responseText);
+                    }
+                });
+            }else{
+                alert("La fecha de inicio debe ser mayor a la última fecha de registro");
+            }
         }
         else {
             alert("Complete los campos necesarios para registrar un nuevo precio.");

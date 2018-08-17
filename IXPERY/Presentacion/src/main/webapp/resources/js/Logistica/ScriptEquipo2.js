@@ -114,12 +114,7 @@ function eliminarObjetosDuplicados(arr, prop) {
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
 
-
-
-
-var filaEq2=0;
 function clonar_selectEq2(fila,id){
 
     $('#cmb_equipo2_provee'+fila).select2({
@@ -172,7 +167,7 @@ function selCmbProveeEq2(obj){
     let data = $("#"+selectId).select2('data');
     let idProdProv=data[0].id;
     let subTot;
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
     $("#"+selectId).closest('tr').find('span[id=spn_equipo2_prepro]').text(data[0].precio);
     $("#"+selectId).closest('tr').find('span[id=spn_equipo2_idprprov]').text(idProdProv);
     subTot=parseFloat(data[0].precio)*parseFloat($("#"+selectId).closest('tr').find('span[id=spn_equipo2_canpro]').html());
@@ -190,7 +185,7 @@ function InsUpdDelEquipo2() {
         data: JSON.stringify(jsonGuardarFullEq2),
         success: function resultado(valor) {
             if (valor == "") {
-                alert("Entro en IF");
+                alert("Datos Guardados correctamente");
                 //
                 // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
                 // CargarJS_proyecto(0, 1, 0);
@@ -204,4 +199,24 @@ function InsUpdDelEquipo2() {
             alert('Error: ' + msg.responseText);
         }
     });
+}
+
+function crearSesProvProd(idtr){
+    let idProve = $("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").val();
+    let idProd =  $("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id = spn_equipo2_idproduc]").text();
+    console.log("idProveedor: "+idProve);
+    console.log("idProducto: "+idProd);
+    $.ajax({
+        method: "POST",
+        url: "/equipo2/sesproverod",
+        data: {"prove": idProve,"prod": idProd},
+        success: function resultado(valor) {
+            console.log("Rpta de sesion");
+            console.log(valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
 }

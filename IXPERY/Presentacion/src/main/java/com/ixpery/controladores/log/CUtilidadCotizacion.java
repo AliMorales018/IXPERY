@@ -17,7 +17,7 @@ public class CUtilidadCotizacion {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BUtilidadCotizacion obUtiCoti = (BUtilidadCotizacion) applicationContext.getBean("beanUtilidadCotizacion");
 
-    @RequestMapping("/utilidadcotizacion")
+    @RequestMapping("/utilcoti")
     public ModelAndView Utilidadcotizacion(){
         ModelAndView modelAndView = new ModelAndView("logistica/utilidadcotizacion");
         return modelAndView;

@@ -53,7 +53,8 @@
             </div>
         </div>
     </div>
-    <div class="cell small-12 medium-4">
+    <div class="cell large-2"></div>
+    <div class="cell large-6">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
                 <button type="button" id="btn_equipo2_save" class="btn btn-secondary" onclick="InsUpdDelEquipo2();">Guardar</button>
@@ -66,6 +67,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="cell small-12 medium-4">
         <!-- Notify -->
     </div>
@@ -171,9 +174,7 @@
 <!-- Fin Equipos -->
 
 <!-- JavaScript -->
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEquipo2.js"></script>
-<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <script>
     function BuscarSesionSol(){
         let id = "";
@@ -193,6 +194,7 @@
             }
         });
        ++countsc;
+       ++countso;
        //  console.log("id");
        //  console.log(id);
         $.ajax({
@@ -207,7 +209,7 @@
 
                 //RECORREMOS EQUIPO PRODUCTOS REGISTRADOS
                 if (JSONobjGeneralEq2.items.length > 0) {
-                    if (JSONobjGeneralEq2.items[1].length > 0) {
+                    // if (JSONobjGeneralEq2.items[1].length > 0) {
                         $.each(JSONobjGeneralEq2.items[1].items2, function (obj, item) {
                             conta_filas_equipo2++;
                             let cosUnit = "";
@@ -229,6 +231,7 @@
                                 prodprov = item.idprodprov
                             }
                             //falta total luego agregar si es necesario
+                            var trvaleq2="equipo_2_fila_"+conta_filas_equipo2;
                             $("#equipo_2 tbody").append(
                                 "<tr id='equipo_2_fila_" + conta_filas_equipo2 + "' class='equipo2-edit'>" +
                                 "<td><div><p class='text-center'>" + conta_filas_equipo2 + "</p></div></td>" +
@@ -241,7 +244,7 @@
                                 "<td><div><span id='spn_equipo2_canpro'>" + item.cantidad + "</div></td>" +
                                 "<td><div><span id='spn_equipo2_prepro'>" + cosUnit + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_subtot'></span>" + subUnit + "</div></td>" +
-                                "<td><div><button id='btn_equipo2_actpre" + conta_filas_equipo2 + "' name='btn_equipo2_actpre1'>Actualizar Precio</button></div></td>" +
+                                "<td><div><button id='btn_equipo2_actpre" + conta_filas_equipo2 + "' name='btn_equipo2_actpre1' onclick='crearSesProvProd(`"+trvaleq2+"`);'>Actualizar Precio</button></div></td>" +
                                 "<td hidden><div><span id='spn_equipo2_idprodsol'>" + item.idprodsol + "</span></div></td>" +
                                 "<td hidden><div><span id='spn_equipo2_idequipo'>" + item.idequipo + "</span></div></td>" +
                                 "<td hidden><div><span id='spn_equipo2_idprprov'>" + prodprov + "</span></div></td>" +
@@ -253,14 +256,14 @@
 
                             $("#select2-cmb_equipo2_provee" + conta_filas_equipo2 + "-container").text(item.nomempresa);
                         });
-                    }
+                  //  }
                 }
 
                 //NO REGISTRADOS SI EXISTEN MOSTRARr
 
                 $("#tbody_equiponr2").empty();
                 if(JSONobjGeneralEq2.items.length > 0) {
-                    if(JSONobjGeneralEq2.items[2].length>0){
+                    // if(JSONobjGeneralEq2.items[2].length>0){
                 $.each(JSONobjGeneralEq2.items[2].items3, function (obj, item) {
                     conta_filas_equiponr2++;
 
@@ -275,7 +278,7 @@
                         "</tr>"
                     );
                 });
-            }
+            // }
         }
             },
             error: function errores(msg) {
@@ -283,9 +286,7 @@
             }
         });
     }
-    var contPrimervez=0;
-    var filaEq2=0;
-    var id=1;
+
     var conta_filas_equipo2=0;
     var conta_filas_equiponr2=0;
     $(document).ready(function () {

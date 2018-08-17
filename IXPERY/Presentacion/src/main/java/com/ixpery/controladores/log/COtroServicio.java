@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +35,12 @@ public class COtroServicio {
 
     @RequestMapping("/otroservicio")
     public ModelAndView Equipo(){
-        ModelAndView modelAndView = new ModelAndView("logistica/otroservicio");
-        return modelAndView;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String dateParse = sdf.format(date);
+        ModelAndView modelView = new ModelAndView("logistica/otroservicio");
+        modelView.addObject("fecha",dateParse);
+        return modelView;
     }
 
     //Busqueda Producto Combo de Tabla
@@ -45,12 +51,11 @@ public class COtroServicio {
         return obServSolic.BuscarServicioCombo(var);
     }
 
-
-
     @RequestMapping(value="/otroservi/register", method = RequestMethod.POST)
     public @ResponseBody
-    String RegistrarOtroServ(@RequestBody Map<String,List<String[]>> values) throws Exception{
+    String RegistrarOtroServ(HttpServletRequest request, @RequestBody Map<String,List<String[]>> values) throws Exception{
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        HttpSession session = request.getSession();
 
         Integer sizeListOtroServ = values.get("values0").size();
         Integer sizeListEqReg = values.get("values1").size();
@@ -69,7 +74,7 @@ public class COtroServicio {
             oeOtroServ.setEstado("1");
             oeOtroServ.setFecharegistro(timestamp.toString());
             //CAMBIAR LUEGO POR LA SESSIÓN
-            oeOtroServ.setUserregistro("LUIS AZALDE LEYVA");
+            oeOtroServ.setUserregistro(session.getAttribute("user").toString());
             listOtroServ.add(oeOtroServ);
         }
 
@@ -89,7 +94,7 @@ public class COtroServicio {
             oeServSolucion.setEstado("1");
             oeServSolucion.setFecharegistro(timestamp.toString());
             //CAMBIAR LUEGO POR LA SESSIÓN
-            oeServSolucion.setUserregistro("LUIS AZALDE LEYVA");
+            oeServSolucion.setUserregistro(session.getAttribute("user").toString());
             oeServSolucion.setIdservsol(Integer.parseInt(rowServSol[0]));
             oeServSolucion.setEnviadocotizar("1");
             listServSolucion.add(oeServSolucion);
@@ -118,7 +123,7 @@ public class COtroServicio {
                 oePreRegServicio.setEstado("1");
                 oePreRegServicio.setFecharegistro(timestamp.toString());
                 //CAMBIAR LUEGO POR LA SESSIÓN
-                oePreRegServicio.setUserregistro("LUIS AZALDE LEYVA");
+                oePreRegServicio.setUserregistro(session.getAttribute("user").toString());
                 listPreRegServicio.add(oePreRegServicio);
             }
         }
@@ -136,7 +141,7 @@ public class COtroServicio {
                 oePreRegServicio.setEstado("1");
                 oePreRegServicio.setFecharegistro(timestamp.toString());
                 //CAMBIAR LUEGO POR LA SESSIÓN
-                oePreRegServicio.setUserregistro("LUIS AZALDE LEYVA");
+                oePreRegServicio.setUserregistro(session.getAttribute("user").toString());
 
                 listPreRegServicio.add(oePreRegServicio);
             }
