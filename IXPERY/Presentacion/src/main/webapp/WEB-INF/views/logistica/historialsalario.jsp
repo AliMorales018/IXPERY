@@ -168,6 +168,7 @@
             data:{},
             success: function resultado(data) {
                 idCargo = data;
+                //SESION CARGO
                 console.log(idCargo);
             },
             error: function errores(msg) {
