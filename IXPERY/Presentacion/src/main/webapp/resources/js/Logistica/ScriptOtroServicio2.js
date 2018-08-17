@@ -207,6 +207,7 @@ function crearSesProvSoli(idtr){
         success: function resultado(valor) {
             console.log("Rpta de sesion");
             console.log(valor);
+
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
