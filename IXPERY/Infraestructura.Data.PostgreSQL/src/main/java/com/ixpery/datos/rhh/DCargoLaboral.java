@@ -57,7 +57,7 @@ public class DCargoLaboral {
             System.out.println(json);
             System.out.println("462172"+","+idCargo+","+fechFin);
             SqlParameter pJson = new SqlParameter("json",json);
-            SqlParameter pValues = new SqlParameter("values", "462172"+","+idCargo+","+fechFin);
+            SqlParameter pValues = new SqlParameter("values", "462172"+","+idCargo+","+fechFin+","+"1");
             listaParametros.add(pJson);
             listaParametros.add(pValues);
             com.TransUnica("gen_insertar_historial_precio",listaParametros);
