@@ -1,7 +1,7 @@
 var JSONobjGeneralOpera;
 
 var setOperaciones = true;
-var countsc = 0;
+// var countsc = 0;
 var countso = 0;
 var isolOperaciones;
 
@@ -73,12 +73,13 @@ function BuscarSolucionOperaciones(id){
             success: function resultado(valor) {
                 console.log('valor condicion');
                 console.log(valor);
-                let arrItem;
-                arrItem = valor.items;
-                $("#txt_validezofer_opera").val(arrItem[0].validezoferta);
-                $("#txt_timeentre_opera").val(arrItem[0].tiempoentrega);
-                $("#txt_timeejecu_opera").val(arrItem[0].tiempoejecucion);
-                $("#txt_condcomer_opera").val(arrItem[0].condicioncomercial);
+
+                let json = JSON.parse(valor);
+                let arrJson = json.items;
+                $("#txt_validezofer_opera").val(arrJson[0].validezoferta);
+                $("#txt_timeentre_opera").val(arrJson[0].tiempoentrega);
+                $("#txt_timeejecu_opera").val(arrJson[0].tiempoejecucion);
+                $("#txt_condcomer_opera").val(arrJson[0].condicioncomercial);
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
@@ -432,7 +433,7 @@ function AddSetOperaciones() {
     if(countso !== 0){
         console.log('entre');
         BuscarSesionSol();
-        BuscarServicioOperaciones();
+        BuscarServicioCotizacion();
         BuscarOtroServicio();
     }
 

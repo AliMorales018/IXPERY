@@ -390,6 +390,7 @@ $(document).ready(function () {
                     $('#panel__' + mEquipo.idmenu).remove();
                     $('#panel__' + mServicio.idmenu).remove();
                     $('#panel__' + mViatico.idmenu).remove();
+                    DestruirSesion();
                 }
 
                 if(idCerrar == icotJson){
@@ -402,6 +403,8 @@ $(document).ready(function () {
                     $('#panel__' + mEquipoCot.idmenu).remove();
                     $('#panel__' + mServicioCot.idmenu).remove();
                     $('#panel__' + mViaticoCot.idmenu).remove();
+                    DestruirSesion();
+
                 }
 
                 if(idCerrar == iopeJson){
@@ -414,6 +417,8 @@ $(document).ready(function () {
                     $('#panel__' + mEquipoCot.idmenu).remove();
                     $('#panel__' + mServicioCot.idmenu).remove();
                     $('#panel__' + mViaticoCot.idmenu).remove();
+                    DestruirSesion();
+
                 }
 
 
@@ -467,6 +472,21 @@ function AddMenu(newMenu) {
     }
 
 
+}
+
+
+function DestruirSesion() {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/DestruirSesionSolucion",
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
 }
 
 
