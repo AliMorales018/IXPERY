@@ -387,8 +387,7 @@ function guardar_actividades_servicio(){
                                 $.ajax({
                                     method: "POST",
                                     url: "/servicios/register",
-                                    contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify(jsonGuardarFullItem2),
+                                    data: {"json":JSON.stringify(jsonGuardarFullItem2),"idSol":$("#select_solucion_servicio_cl").val()},
                                     success: function resultado(valor) {
                                         if (valor == "") {
                                             alert("Servicio Registrado Correctamente");
@@ -513,7 +512,7 @@ function get_actividad_campos(){
          arrayDatosActividad = [];
          return "invalid" ;
     }
-    //DATOS PARA GUARDAR EN TABLA ACTIVIDAD
+    //DATOS PARA GUARDAR EN TABLA ACTIVIDAD C
 }
 
 function get_tablas_cargoslaborales(){
@@ -567,7 +566,12 @@ function get_tablas_cargoslaborales(){
                             else{
                                 objForIdCargo.cal1 = parseInt(value);
                                 objFilaTablaCL.acc3 = objForIdCargo;
-                                objFilaTablaCL.acc1 = 0;
+                                if (objForIdActiv["act1"] < 0){
+                                    objFilaTablaCL.acc1 = 0;
+                                }
+                                else{
+                                    objFilaTablaCL.acc1 = parseInt(objForIdActiv["act1"].toString()+objForIdCargo["cal1"].toString());
+                                }
                             }
                         }
                         if (index === 1) {

@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>Aplicacion</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
 </head>
 <body>
     <input type="hidden" id="hdn_aplicacion" />
@@ -93,9 +92,7 @@
     <!-- End Table -->
 
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script language="JavaScript" src="${urlPublic}/js/Sistema/ScriptAplicacion.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script >
     <!-- End JavaScript -->
 
 </body>

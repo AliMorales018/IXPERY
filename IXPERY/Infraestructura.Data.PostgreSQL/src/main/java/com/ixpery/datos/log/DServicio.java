@@ -144,7 +144,7 @@ public class DServicio {
         return jsonParse;
     }
 
-    public String GuardarFull(String json) {
+    public String GuardarFull(String json, Integer idSol) {
         try{
             listaParametros.clear();
             json = jsonGeneral.JsonITEM2(json);
@@ -156,7 +156,7 @@ public class DServicio {
             com.TransUnica("gen_guardar", listaParametros);
             String a = paramSalid.Value.toString();
             if (a.equals("0")) {
-                GenerarCostes(1);
+                GenerarCostes(idSol);
                 return "0";
             }
             else{

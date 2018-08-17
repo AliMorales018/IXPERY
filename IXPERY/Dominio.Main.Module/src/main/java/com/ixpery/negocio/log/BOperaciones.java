@@ -11,16 +11,17 @@ public class BOperaciones {
         odOpera.RegisterOperaciones(idEmp,idPro,idSol,cadena,cond);
     }
 
-    //LUIS 17/07/2018 10:00 AM
-    public String BuscarSolucionOpera() throws Exception{
-        return odOpera.BuscarSolucionOpera();
+    public String BuscarSolucionOpera(Integer sol) throws Exception{
+        return odOpera.BuscarSolucionOpera(sol);
     }
 
     public String BuscarSolucionesPendientes() throws Exception{
         return odOpera.BuscarSolucionesPendientes();
     }
 
-
+    public String BuscarSolucionPendiente(String value) throws Exception{
+        return odOpera.BuscarSolucionPendiente(value);
+    }
 
 
 }

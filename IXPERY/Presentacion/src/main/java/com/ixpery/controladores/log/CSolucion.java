@@ -158,4 +158,18 @@ public class CSolucion {
 
 
 
+    @RequestMapping("/solucion/DestruirSesionSolucion")
+    public @ResponseBody
+    void EliminarSesionSolucion(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.removeAttribute("solucion");
+    }
+
+
+
+
+
+
 }

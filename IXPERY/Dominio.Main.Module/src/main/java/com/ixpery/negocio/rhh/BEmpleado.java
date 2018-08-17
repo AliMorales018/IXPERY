@@ -6,23 +6,24 @@ import com.ixpery.entidades.rhh.EEmpleado;
 import java.util.List;
 
 public class BEmpleado {
+
     DEmpleado odEmpleado = new DEmpleado();
 
     public BEmpleado() throws Exception {
     }
 
-    public void Insertar(String json) throws Exception {
+  /*  public void Insertar(String json) throws Exception {
         odEmpleado.InsertarEmpleado(json);
-    }
+    }*/
 
-    public String ValidarDatosDB(String json) throws Exception {
+    public String ValidarDatosDB(List<EEmpleado> listApli) throws Exception {
         String result = "";
-        result = odEmpleado.ValidarDatosDB(json);
+        result = odEmpleado.ValidarDatosDB(listApli);
         return result;
     }
 
-    public void Modificar(String json, String campos) throws Exception  {
-        odEmpleado.ModificarEmpleado(json, campos);
+    public void Modificar(EEmpleado oeEmpleado) throws Exception  {
+        odEmpleado.ModificarEmpleado(oeEmpleado);
     }
 
     public void Eliminar(String campos) throws Exception {

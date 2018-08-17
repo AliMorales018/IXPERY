@@ -9,6 +9,8 @@ var setSolucion = true;
 var countss = 0;
 
 $(document).ready(function(){
+    BuscarRequerimientos();
+
     $('select[name="cmb-solucion-enc"]')
         .select2({
             ajax: {
@@ -436,6 +438,7 @@ function EnviarSolucionCotizacion(){
 
         $.ajax({
             method: "POST",
+            async: false,
             url: "/solucion/GuardarSolucion",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(jsonGuardarSolucion),
@@ -458,8 +461,7 @@ function EnviarSolucionCotizacion(){
         });
 
     }
-
-
+    LimpiarSetSolucion();
 }
 
 
@@ -537,3 +539,7 @@ function FormatReportReqProEmp (repo) {
     }
     return  repo.text || repo.nomempresa + ' - ' + repo.nomproyecto  + ' - ' + repo.requerimiento ;
 }
+
+
+
+

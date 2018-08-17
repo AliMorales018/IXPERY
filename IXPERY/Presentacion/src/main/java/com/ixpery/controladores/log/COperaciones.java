@@ -38,9 +38,9 @@ public class COperaciones {
     @RequestMapping(value="/operaciones/buscaroperacionsol", method=RequestMethod.POST)
     public @ResponseBody
     String BuscarEquipoSol(
-            @RequestParam(value="idsol") String busIdsol
+            @RequestParam(value="sol") Integer sol
     ) throws Exception{
-        String rpta= obOperaciones.BuscarSolucionOpera();
+        String rpta= obOperaciones.BuscarSolucionOpera(sol);
         return rpta;
     }
 
@@ -51,9 +51,12 @@ public class COperaciones {
         return obOperaciones.BuscarSolucionesPendientes();
     }
 
-
-
-
+    @RequestMapping(value = "/operaciones/BuscarSolucionPendiente", produces = "application/json")
+    public @ResponseBody String BuscarSolucionPendiente(
+            @RequestParam(value="q") String value
+    ) throws Exception {
+        return obOperaciones.BuscarSolucionPendiente(value);
+    }
 
 
 

@@ -34,7 +34,6 @@
     <bean id="beanProveedor" class="com.ixpery.negocio.log.BProveedor" />
     <bean id="beanContactoEmpresa" class="com.ixpery.negocio.log.BContactoEmpresa" />
     <bean id="beanPreRegistroProducto" class="com.ixpery.negocio.log.BPreRegistroProducto" />
-    <bean id="beanCargoLaboral" class="com.ixpery.negocio.log.BCargoLaboral" />
     <bean id="beanServicio" class="com.ixpery.negocio.log.BServicio" />
     <bean id="beanServSolicitados" class="com.ixpery.negocio.log.BServicioSolicitados" />
     <bean id="beanOperaciones" class="com.ixpery.negocio.log.BOperaciones" />
@@ -45,6 +44,7 @@
     <!-- Beans RRHH -->
     <bean id="beanEmpleado" class="com.ixpery.negocio.rhh.BEmpleado" />
     <bean id="beanArea" class="com.ixpery.negocio.rhh.BArea" />
+    <bean id="beanCargoLaboral" class="com.ixpery.negocio.rhh.BCargoLaboral" />
 
 <!-- End Beans Config -->
 </beans>

@@ -34,7 +34,7 @@
         <div class="cell small-12 medium-4">
             <div class="grid-x align-center-middle">
                 <div class="cell small-4 medium-4 large-4 text-center">
-                    <button type="button" class="btn btn-secondary" onclick="servicio_enviar_a_operaciones();">Enviar a operaciones</button>
+                    <!--button type="button" class="btn btn-secondary" onclick="servicio_enviar_a_operaciones();">Guardar</button-->
                 </div>
             </div>
         </div>
@@ -58,8 +58,6 @@
     <div id="contenedor_cotizacion_servicio">
 
     </div>
-
-    <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
     <script>
         $(document).ready(function() {
             BuscarServicioCotizacion();
@@ -81,6 +79,7 @@
                 }
             });
             ++countsc;
+            ++countso;
 
             $.ajax({
                 method: "POST",
@@ -245,13 +244,21 @@
                 }
             });
         }
+
         function actualizar_salario_cl(idCargo) {
-            var r = confirm("ID CARGO: "+idCargo);
-            if (r == true) {
-                alert("SI");
-            } else {
-                alert("NO");
-            }
+            $.ajax({
+                method: "POST",
+                async: false,
+                url: "/cargolaboral/sesioncl",
+                data: {"idCargo": idCargo},
+                success: function(valor) {
+                    console.log("SESION CARGO CREADA: "+valor)
+                },
+                error: function errores(msg) {
+                    alert('Error: ' + msg.responseText);
+                }
+            });
+            AddMenu(mSueldos);
         }
 
         function servicio_enviar_a_operaciones(){
