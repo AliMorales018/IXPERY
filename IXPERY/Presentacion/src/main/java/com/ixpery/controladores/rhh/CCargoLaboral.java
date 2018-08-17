@@ -34,8 +34,15 @@ public class CCargoLaboral {
     )throws Exception{
         HttpSession session = request.getSession();
         session.setAttribute("cargolaboral", idCargo);
-        String cargolaboral = session.getAttribute("cargolaboral").toString();
-        return cargolaboral;
+        return "CREADA";
+    }
+
+    @RequestMapping("/cargolaboral/getsesioncl")
+    public @ResponseBody String VerifSesionCl(
+            HttpServletRequest request
+    )throws Exception{
+        HttpSession session = request.getSession();
+        return session.getAttribute("cargolaboral").toString();
     }
 
     @RequestMapping("/cargolaboral")
