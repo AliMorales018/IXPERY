@@ -281,10 +281,8 @@
 
 
 <!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEmpresa.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/validaciones.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script >
 <!-- End JavaScript -->
 </body>
 </html>

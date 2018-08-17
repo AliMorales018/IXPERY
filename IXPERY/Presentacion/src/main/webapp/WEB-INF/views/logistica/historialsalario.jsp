@@ -7,8 +7,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial Salario</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
     <style>
         .icon-hp-habil{
             background-color: #D34539;
@@ -152,11 +150,7 @@
     </div>
 </div>
 <!-- End Nuevo Precio -->
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="${urlPublic}/js/select2.js"></script>
 <script src="${urlPublic}/js/RRHH/ScriptHistorialSalario.js"></script>
-
 <script>
     $(document).ready(function() {
         //Verificar sesion

@@ -2,12 +2,10 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <spring:url value="/resources" var="urlPublic"></spring:url>
-<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuarios</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
 </head>
 
 <body>
@@ -119,9 +117,7 @@
 <!-- End Table -->
 
 <!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script language="JavaScript" src="${urlPublic}/js/Sistema/ScriptUsuario.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script >
 <!-- End JavaScript -->
 </body>
 </html>
