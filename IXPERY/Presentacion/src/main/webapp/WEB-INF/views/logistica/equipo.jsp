@@ -8,9 +8,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipos</title>
-    <%--    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-        <link rel="stylesheet" href="${urlPublic}/css/select2.css">
-        <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">--%>
     <style type="text/css">
 
         .icon-add-row{
@@ -206,7 +203,6 @@
 
 <!-- JavaScript -->
 
-<%--<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 <!-- End JavaScript -->
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEquipo.js"></script>
 
