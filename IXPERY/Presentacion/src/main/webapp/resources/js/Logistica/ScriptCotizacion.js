@@ -117,7 +117,7 @@ function EnviarSolucionOperaciones(){
             data: JSON.stringify(jsonGuardarCotizacion),
             success: function resultado(valor) {
                 if (valor === "0") {
-                    alert("La solución fue enviada a cotizar.");
+                    alert("La solución fue enviada a operaciones.");
                     // LimpiarCampos();
                     // LimpiarVariables();
                     BuscarSolucionesPendientes();
