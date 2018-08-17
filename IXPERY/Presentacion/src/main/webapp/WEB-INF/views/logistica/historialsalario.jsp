@@ -7,8 +7,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial Salario</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
     <style>
         .icon-hp-habil{
             background-color: #D34539;
@@ -153,8 +151,6 @@
 </div>
 <!-- End Nuevo Precio -->
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="${urlPublic}/js/select2.js"></script>
 <script src="${urlPublic}/js/RRHH/ScriptHistorialSalario.js"></script>
 
 <script>
@@ -164,41 +160,52 @@
         $.ajax({
             method: "POST",
             url:"/cargolaboral/getsesioncl",
-            data:{},
             success: function resultado(data) {
                 idCargo = data;
-                //SESION CARGO
-                console.log("SESION ID CARGO: "+idCargo);
+                console.log("ID CARGO: "+idCargo);
+                if(idCargo === 0){
+                    console.log("ENTRO");
+                    $("#selectCargoLaboral_histsal").select2({
+                        ajax: {
+                            url: "/servicios/listarcargolaboral",
+                            dataType: 'json',
+                            delay: 250,
+                            data: function (params) {
+                                return {
+                                    q: params.term.toUpperCase()
+                                };
+                            },
+                            processResults: function (data, params) {
+                                return {
+                                    results: data.items
+                                };
+                            },
+                            cache: true
+                        },
+                        placeholder: 'Buscar cargo laboral / area . . .',
+                        escapeMarkup: function (markup) { return markup; },
+                        minimumInputLength: 2,
+                        templateResult: formatRepo_historialcls,
+                        templateSelection: formatRepoSelection_historialcls
+                    })
+                }
+                else{
+                    llenar_combo_salario_cl(idCargo);
+                }
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
             }
         });
-
-        $("#selectCargoLaboral_histsal").select2({
-            ajax: {
-                url: "/servicios/listarcargolaboral",
-                dataType: 'json',
-                delay: 250,
-                data: function (params) {
-                    return {
-                        q: params.term.toUpperCase()
-                    };
-                },
-                processResults: function (data, params) {
-                    return {
-                        results: data.items
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Buscar cargo laboral / area . . .',
-            escapeMarkup: function (markup) { return markup; },
-            minimumInputLength: 2,
-            templateResult: formatRepo_historialcls,
-            templateSelection: formatRepoSelection_historialcls
-        })
     });
+
+    function llenar_combo_salario_cl(idCargo){
+        //COMBO DE SOLUCION
+        let data = {id: idCargo , text: "Hola Mundo"};
+        let newOption = new Option(data.text, data.id, false, false);
+        $('#selectCargoLaboral_histsal').select2().empty().append(newOption).trigger('change');
+    }
+
     function formatRepo_historialcls (repo) {
         if (repo.loading) {
             return repo.text;

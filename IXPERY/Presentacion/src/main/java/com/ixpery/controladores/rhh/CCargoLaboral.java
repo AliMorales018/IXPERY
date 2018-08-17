@@ -38,11 +38,16 @@ public class CCargoLaboral {
     }
 
     @RequestMapping("/cargolaboral/getsesioncl")
-    public @ResponseBody String VerifSesionCl(
+    public @ResponseBody Integer VerifSesionCl(
             HttpServletRequest request
     )throws Exception{
         HttpSession session = request.getSession();
-        return session.getAttribute("cargolaboral").toString();
+        Integer idCargo = (Integer) session.getAttribute("cargolaboral");
+        if (idCargo == null){
+            return 0;
+        }else{
+            return idCargo;
+        }
     }
 
     @RequestMapping("/cargolaboral")
