@@ -43,4 +43,18 @@ public class COperaciones {
         String rpta= obOperaciones.BuscarSolucionOpera();
         return rpta;
     }
+
+    @RequestMapping("/operaciones/BuscarSolucionesPendientes")
+    public @ResponseBody
+    String BuscarSolucionesPendientes(
+    ) throws Exception {
+        return obOperaciones.BuscarSolucionesPendientes();
+    }
+
+
+
+
+
+
+
 }

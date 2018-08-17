@@ -100,6 +100,27 @@ $(document).ready(function () {
                             }
                         }
 
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 38) {
+                                mEquipoCot = JSONobj[i];
+                                JSONobj.splice(i,1);
+                            }
+                        }
+
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 39) {
+                                mServicioCot = JSONobj[i];
+                                JSONobj.splice(i,1);
+                            }
+                        }
+
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 40) {
+                                mViaticoCot = JSONobj[i];
+                                JSONobj.splice(i,1);
+                            }
+                        }
+
 
 
 

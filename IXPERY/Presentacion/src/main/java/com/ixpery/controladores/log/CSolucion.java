@@ -146,9 +146,12 @@ public class CSolucion {
     @RequestMapping("/solucion/ReporteOperaciones")
     public @ResponseBody
     String ReporteOperaciones(
-            @RequestParam(value = "sol") Integer sol
+            HttpServletRequest request
     ) throws Exception {
-        String json = obSolucion.ReporteOperaciones(sol);
+        HttpSession session = request.getSession();
+        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
+//        Integer solucion = 1;
+        String json = obSolucion.ReporteOperaciones(solucion);
         return json;
     }
 
