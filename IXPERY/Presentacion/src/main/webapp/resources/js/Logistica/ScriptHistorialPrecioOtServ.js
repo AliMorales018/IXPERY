@@ -208,8 +208,8 @@ function guardar_nuevo_PrecioOtServ() {
             let fechaRes = sumOresDias(d, -1);
             let fechaFin = convertDate(fechaRes);
 
-            objServSolic.sso1 = idProducto;//foránea de Serv Solicitados
-            objProvee.prd1 = idProveedor;
+            objServSolic.sso1 = parseInt(idProducto);//foránea de Serv Solicitados
+            objProvee.prd1 = parseInt(idProveedor);
 
             objFilaServProv.spr1 = 0;
             objFilaServProv.spr2 = objServSolic;

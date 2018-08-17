@@ -9,9 +9,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UtilidadCoti</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
-    <link rel="stylesheet" href="${urlPublic}/css/checkmulti.css">
     <style type="text/css">
 
         .select2-container .select2-selection--single {
@@ -278,7 +275,6 @@
 
 <div id="editor"></div>
 <!-- JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptUtilidadCoti.js"></script>
 <script>
@@ -346,7 +342,6 @@
         }
     }
 </script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
 <!-- End JavaScript -->
 </body>
 </html>
