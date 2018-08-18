@@ -288,7 +288,7 @@ function ValidarCampos_tbl_requerimiento() {
         var arrayDatos = [];
         for (var i = 1; i <= cFila_requerimiento; i++) {
             if (validoIngresados == true) {
-                var filaData = []
+                var filaData = {};
                 for (var j = 1; j <= totalCol_requerimiento - 2; j++) {
                     var id = arrayElem_requerimiento[j][1];
                     id = "#" + id.substring(0, id.length - 1);
@@ -313,16 +313,22 @@ function ValidarCampos_tbl_requerimiento() {
             }
             arrayDatos.push(filaData);
         }
-
-
+        console.log("ARRAYDATOS: "+JSON.stringify(arrayDatos));
         if (validoIngresados == true) {
             if($("#selectEmpresa_Proyecto").val() != null) {
-                var iP = $("#selectEmpresa_Proyecto").val()
+                var iP = $("#selectEmpresa_Proyecto").val();
+
+                var dataRQ = {
+                    "values": arrayDatos,
+                    "iP": iP
+                };
+                console.log("DATACOMPLETA: "+JSON.stringify(dataRQ))
                 //METODO AJAX
                 $.ajax({
                     method: "POST",
                     url: "/requerimiento/register",
-                    data: {"values":arrayDatos.toString(),"iP":iP},
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(dataRQ),
                     success: function resultado(valor) {
                         if (valor == "") {
                             alert("Requerimiento(s) registrado(s) correctamente.");
