@@ -23,20 +23,32 @@ function llenar_combo_salario_cl(id, text){
     $('#selectCargoLaboral_histsal').attr("disabled",true);
 }
 
-function ListarHistorial_SalariosCL(){
+function ListarHistorial_SalariosCL(idCargo,reset){
         let idCargoLab = "";
-        $.ajax({
-            method: "POST",
-            async: false,
-            url:"/cargolaboral/getsesioncl",
-            success: function (valor) {
+        if(!reset) {
+            $.ajax({
+                method: "POST",
+                async: false,
+                url: "/cargolaboral/getsesioncl",
+                success: function (valor) {
                     idCargoLab = valor;
-            },
-            error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
-            }
-        });
-        ++contador_hs_cl;
+                    if (valor !== "0") {
+                        BuscarServicioCotizacion();
+                    }
+                    else{
+                        setSelect2_hs_cl();
+                    }
+                },
+                error: function errores(msg) {
+                    alert('Error: ' + msg.responseText);
+                }
+            });
+            ++contador_hs_cl;
+        }
+        else{
+            BuscarServicioCotizacion();
+            idCargoLab = idCargo;
+        }
         $.ajax({
             method: "POST",
             url: "/verhistorialcargolab",
@@ -125,7 +137,7 @@ function guardar_nuevo_SalarioCL(){
                 success: function resultado(data) {
                     if (data === "") {
                         //Cargar otra vez la tabla
-                        ListarHistorial_SalariosCL(idCargo);
+                        ListarHistorial_SalariosCL(idCargo,true);
                     }
                 },
                 error: function errores(msg) {
