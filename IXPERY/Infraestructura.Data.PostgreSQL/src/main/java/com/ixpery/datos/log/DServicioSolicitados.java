@@ -19,7 +19,7 @@ public class DServicioSolicitados {
     List<SqlParameter> listParameter = new ArrayList<SqlParameter>();
     JsonGeneral jsonGeneral = new JsonGeneral();
 
-    public static String getNomTabSerSolicita() { return "46771"; }
+    public static String getNomTabSerSolicita() { return "467762"; }
     public static String getNomTabServProveedor() { return "46776"; }
 
     public static String getKeyId() { return "467711"; }
