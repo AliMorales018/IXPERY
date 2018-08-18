@@ -187,7 +187,7 @@ function InsUpdDelEquipo2() {
             if (valor == "") {
                 alert("Datos Guardados correctamente");
                 //
-                // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
+                // $("#" + nomBodggy_proyecto).html(filaTabla_proyecto);
                 // CargarJS_proyecto(0, 1, 0);
             }
             else {
@@ -219,4 +219,8 @@ function crearSesProvProd(idtr){
         }
     });
 
+}
+
+function abrir_equipo2_regprod(){
+    /// AddMenu(mProveedor);
 }

@@ -31,6 +31,16 @@ public class BServicioSolicitados {
         odServSolic.GuardarFull(json,idsersoli,fecfin);
         return result;
     }
+
+    public String Buscar(String campos) throws Exception{
+        return odServSolic.BuscarServSolic(campos);
+    }
+
+    public String Guardar(String json) throws Exception{
+        String result = "";
+        odServSolic.Guardar(json);
+        return result;
+    }
     //FIN LUIS
     //LUIS 02/08/2018 17:00
    /* public String BuscarProductoEquipoCombo(String var) throws Exception{
