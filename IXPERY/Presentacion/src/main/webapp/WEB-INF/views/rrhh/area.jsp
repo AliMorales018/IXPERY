@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>Área</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
 </head>
 <body>
 <input type="hidden" id="hdn_area" />
@@ -89,7 +88,6 @@
 <!-- End Table -->
 
 <!-- JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script language="JavaScript" src="${urlPublic}/js/RRHH/ScriptArea.js"></script>
 <!-- End JavaScript -->
 

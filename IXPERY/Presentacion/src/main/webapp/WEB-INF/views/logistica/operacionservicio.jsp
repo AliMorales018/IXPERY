@@ -5,8 +5,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O. Servicios</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
     <style>
         .select_actividad_cargolab:focus{
             -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
@@ -251,10 +249,7 @@
     </div>
 </div>
 <!-- Actividades -->
-<script src="${urlPublic}/js/jquery-3.3.1.js"></script>
-<script src="${urlPublic}/js/select2.js"></script>
 <script src="${urlPublic}/js/Logistica/ScriptOperacionServicio.js"></script>
-
 <script>
     $(document).ready(function(){
         $("#select_solucion_servicio_cl").select2();

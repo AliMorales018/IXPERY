@@ -18,13 +18,7 @@
         .select2-span-result{
             font-size: 9.9px;
         }
-        /*.container-combo{
-            background-color: #ffffff;
-            border-radius: 0.25rem;
-            border: 1px solid rgba(0,0,0,0.2,0.15);
-            padding: 10px 0px 5px 20px;
-            margin-bottom: 20px;
-        }*/
+
     </style>
 </head>
 <body>

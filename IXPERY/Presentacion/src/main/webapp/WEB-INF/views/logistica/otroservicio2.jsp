@@ -8,27 +8,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viaticos</title>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/styles.css">--%>
-    <%--<link rel="stylesheet" href="${urlPublic}/css/select2.css">--%>
-    <style type="text/css">
-
-      /*  .icon-add-row{
-            background-color: #D34539;
-            border-radius: 50%;
-            color:white;
-            padding: 4px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .select2-container .select2-selection--single {
-            height: 25.15px;
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__rendered {
-            line-height: 23px;
-        }*/
-    </style>
 </head>
 
 <body>

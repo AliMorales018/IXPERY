@@ -5,7 +5,6 @@
 <html>
 <head>
     <title>Empleado</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
 </head>
 <body>
 <input type="hidden" id="hdn_empleado" />

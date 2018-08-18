@@ -6,8 +6,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial de precios</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css">
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css">
     <style>
         .icon-hp-habilOtServ{
             background-color: #D34539;
@@ -145,10 +143,7 @@
     </div>
 </div>
 <!-- End TNuevo Precio -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptHistorialPrecioOtServ.js"></script>
-<script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
-
 <script>
      $(document).ready(function() {
        setOptions("txt_select_busproveedorotserv","onkeyup='select_buscar_proveedorotserv(event,this);'");
