@@ -85,14 +85,21 @@
         </div>
     </nav>
 </header>
-<main id="main" class="main">
+<main id="main" class="main" style="min-height: 100vh;">
     <div id="panel__0" class="logo-fondo">
         <img src="${urlPublic}/img/logo.svg" height="400" width="800" />
     </div>
 </main>
-<footer>
-    <p></p>
+
+<!-- Fotter -->
+<footer style="display:none">
+    <div class="grid-x grid-padding-x align-center-middle" style="background-color:#1A1A1A;">
+        <div class="cel text-center ">
+            <div class="p-3" style="color:#e9e9e9"><small>IXPERY SERVICE S.A.C - 20601857601</small></div>
+        </div>
+    </div>
 </footer>
+<!-- End Fotter -->
 
 <!-- JavaScript -->
 

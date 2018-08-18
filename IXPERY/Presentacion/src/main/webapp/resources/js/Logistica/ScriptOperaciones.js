@@ -273,23 +273,23 @@ function verificaCajas(valCaja,id){
     }
 }
 
-function AbrirReporte() {
-
-    window.open('/reportes/ReporteOperaciones');
-    // $.ajax({
-    //     method: "POST",
-    //     url: "/reporteoperaciones",
-    //     success: function resultado(valor) {
-    //         console.log(valor);
-    //         // alert('reporte');
-    //
-    //     },
-    //     error: function errores(msg) {
-    //         alert('Error: ' + msg.responseText);
-    //     }
-    // });
-
-}
+// function AbrirReporte() {
+//
+//     window.open('/reportes/ReporteOperaciones');
+//     // $.ajax({
+//     //     method: "POST",
+//     //     url: "/reporteoperaciones",
+//     //     success: function resultado(valor) {
+//     //         console.log(valor);
+//     //         // alert('reporte');
+//     //
+//     //     },
+//     //     error: function errores(msg) {
+//     //         alert('Error: ' + msg.responseText);
+//     //     }
+//     // });
+//
+// }
 
 
 function LimpiarCamposOperaciones() {
@@ -357,9 +357,9 @@ function BuscarSolucionesPendientes(){
                                 else{
                                     // LimpiarCampos();
                                 }
-                                $('.spn-operaciones-emp').html(`EMPRESA: <span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
-                                $('.spn-operaciones-pro').html(`PROYECTO: <span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
-                                $('.spn-operaciones-req').html(`REQUERIMIENTO: <span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
+                                $('.spn-operaciones-emp').html(`<span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
+                                $('.spn-operaciones-pro').html(`<span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
+                                $('.spn-operaciones-req').html(`<span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
                             }
                         }
                         AddSetOperaciones();
