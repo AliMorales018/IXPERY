@@ -14,6 +14,8 @@ var mEquipoCot = {};
 var mServicioCot = {};
 var mViaticoCot = {};
 var mSueldos = {};
+var mProveedor = {};
+var mProducto = {};
 
 var isolJson;
 var icotJson;
@@ -59,6 +61,18 @@ $(document).ready(function () {
                             if (JSONobj[i].idmenu === 23) {
                                 mEquipo = JSONobj[i];
                                 JSONobj.splice(i, 1);
+                            }
+                        }
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 24) {
+                                mProducto = JSONobj[i];
+                            }
+                        }
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 28) {
+                                mProveedor = JSONobj[i];
                             }
                         }
 
