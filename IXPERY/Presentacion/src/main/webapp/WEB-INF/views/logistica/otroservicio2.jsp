@@ -32,7 +32,7 @@
                 <button type="button" id="btn_otroservicio2_save" class="btn btn-secondary" onclick="InsUpdDelOtroServ2();">Guardar</button>
             </div>
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_otroservicio2_regprovee" class="btn btn-secondary" onclick="">Reg. Proveedor</button>
+                <button type="button" id="btn_otroservicio2_regprovee" class="btn btn-secondary" onclick="abrir_prove_ot2();">Reg. Proveedor</button>
             </div>
         </div>
     </div>
