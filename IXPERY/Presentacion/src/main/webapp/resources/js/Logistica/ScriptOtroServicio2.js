@@ -207,6 +207,7 @@ function crearSesProvSoli(idtr){
         success: function resultado(valor) {
             console.log("Rpta de sesion");
             console.log(valor);
+
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
@@ -215,5 +216,5 @@ function crearSesProvSoli(idtr){
 }
 
 function abrir_prove_ot2(){
-    
+AddMenu(mProveedor);
 }
