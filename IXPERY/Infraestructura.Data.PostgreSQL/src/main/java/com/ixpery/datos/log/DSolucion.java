@@ -114,6 +114,16 @@ public class DSolucion {
         return json;
     }
 
+    public String BuscarSolucionesAprobadas() throws Exception {
+        listParametros.clear();
+        SqlParameter pValue = new SqlParameter("value", "/");
+        listParametros.add(pValue);
+        String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_sa", listParametros);
+        return json;
+    }
+
+
+
 
 
 }

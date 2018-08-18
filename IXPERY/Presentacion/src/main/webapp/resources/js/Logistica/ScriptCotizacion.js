@@ -62,9 +62,9 @@ function BuscarSolucionesPendientes(){
                                 else{
                                     // LimpiarCampos();
                                 }
-                                $('.spn-cotizacion-emp').html(`EMPRESA: <span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
-                                $('.spn-cotizacion-pro').html(`PROYECTO: <span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
-                                $('.spn-cotizacion-req').html(`REQUERIMIENTO: <span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
+                                $('.spn-cotizacion-emp').html(`<span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
+                                $('.spn-cotizacion-pro').html(`<span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
+                                $('.spn-cotizacion-req').html(`<span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
                             }
                         }
                         AddSetCotizacion();
