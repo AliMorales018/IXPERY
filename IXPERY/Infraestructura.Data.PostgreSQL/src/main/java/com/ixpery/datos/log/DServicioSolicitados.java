@@ -20,6 +20,7 @@ public class DServicioSolicitados {
     JsonGeneral jsonGeneral = new JsonGeneral();
 
     public static String getNomTabSerSolicita() { return "467762"; }
+    public static String getNomTabSerSolicita2() { return "46771"; }
     public static String getNomTabServProveedor() { return "46776"; }
 
     public static String getKeyId() { return "467711"; }
@@ -102,6 +103,46 @@ public class DServicioSolicitados {
             listParameter.add(paramJson);
             listParameter.add(paramVals);
             com.TransUnica("gen_insertar_historial_precio", listParameter);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
+    public String BuscarServSolic(String campos) throws Exception{
+        String value = jsonGeneral.StringConvert(campos);
+//        sol = jsonGeneral.StringConvert(sol);
+
+        if(value.equals("/")){
+            value = "467713,%";
+        }
+        else{
+            value = value + ";467714,1";
+        }
+//        value = "460513,%;460094,JUA;460519,1";
+
+        listParameter.clear();
+        SqlParameter pTab = new SqlParameter("tab", getNomTabSerSolicita2());
+        SqlParameter pValue = new SqlParameter("value", value);
+        SqlParameter pCamTab1 = new SqlParameter("campTab1", "467711,467713,467714");
+        SqlParameter pCamTab2 = new SqlParameter();
+
+        listParameter.add(pTab);
+        listParameter.add(pValue);
+        listParameter.add(pCamTab1);
+        listParameter.add(pCamTab2);
+        String json = com.EjecutaConsultaJson("gen_buscar", listParameter);
+        json =  jsonGeneral.JsonConvertInvert(json);
+        return json;
+    }
+
+    public void Guardar(String json) {
+        try{
+            listParameter.clear();
+            json = jsonGeneral.JsonConvert(json);
+            SqlParameter paramJson = new SqlParameter("@json", json);
+            listParameter.add(paramJson);
+            com.TransUnica("gen_guardar", listParameter);
         }
         catch (Exception e){
             throw e;

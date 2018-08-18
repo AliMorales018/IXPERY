@@ -129,19 +129,6 @@
                         </tr>
                         </thead>
                         <tbody id="tbody_equipo">
-                        <%--<tr id="equipo_1_fila_1" class="equipo-insert">
-                            <td><div><p class="text-center">1</p></div></td>
-                            &lt;%&ndash;<td><div><select   id="cmb_equipo_nompro1" name="cmb_equipo_nompro1" class="select_equipo_equipos" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>&ndash;%&gt;
-                            <td><div><select   id="cmb_equipo_nompro" class="select_equipo_equipos" onchange="selCmbProd(this)" style="width: 100%;"></select></div></td>
-                            <td><div><span id="spn_equipo_codpro"></span></div></td>
-                            <td><div><span id="spn_equipo_modpro"></span></div></td>
-                            <td><div><span id="spn_equipo_marpro"></span></div></td>
-                            <td><div><span id="spn_equipo_umepro"></span></div></td>
-                            <td><div><input id="txt_equipo_canpro" type="text" class="form-control" required/></div></td>
-                            <td hidden><div><span id="spn_equipo_idprod"></span></div></td>
-                            <td hidden><div><span id="spn_equipo_idprodsol"></span></div></td>
-                            <td><div class="text-center"><button type="button" onclick="eliminar_fila_tabla_equipos(`equipo_1_fila_1`);"><i class="icon-cross icon-hp-desh"></i></button></div></td>
-                        </tr>--%>
                         </tbody>
                     </table>
                 </div>

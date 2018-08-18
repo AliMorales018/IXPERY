@@ -994,7 +994,7 @@ public class Diccionario {
         sso.put("sso1", "467711");
         //idestado
         sso.put("sso2", "467712");
-        //nomactividad
+        //servsolicitado
         sso.put("sso3", "467713");
         //estado
         sso.put("sso4", "467714");
