@@ -151,68 +151,47 @@
 </div>
 <!-- End Nuevo Precio -->
 
+<jsp:include page="../includes/footer.jsp"></jsp:include>
 <script src="${urlPublic}/js/RRHH/ScriptHistorialSalario.js"></script>
 
 <script>
     $(document).ready(function() {
-        //Verificar sesion
-        let idCargo;
-        $.ajax({
-            method: "POST",
-            url:"/cargolaboral/getsesioncl",
-            success: function resultado(data) {
-                idCargo = data;
-                console.log("ID CARGO: "+idCargo);
-                if(idCargo === 0){
-                    console.log("ENTRO");
-                    $("#selectCargoLaboral_histsal").select2({
-                        ajax: {
-                            url: "/servicios/listarcargolaboral",
-                            dataType: 'json',
-                            delay: 250,
-                            data: function (params) {
-                                return {
-                                    q: params.term.toUpperCase()
-                                };
-                            },
-                            processResults: function (data, params) {
-                                return {
-                                    results: data.items
-                                };
-                            },
-                            cache: true
-                        },
-                        placeholder: 'Buscar cargo laboral / area . . .',
-                        escapeMarkup: function (markup) { return markup; },
-                        minimumInputLength: 2,
-                        templateResult: formatRepo_historialcls,
-                        templateSelection: formatRepoSelection_historialcls
-                    })
-                }
-                else{
-                    llenar_combo_salario_cl(idCargo);
-                }
-            },
-            error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
-            }
-        });
+        $('#selectCargoLaboral_histsal').select2()
+        ListarHistorial_SalariosCL();
     });
 
-    function llenar_combo_salario_cl(idCargo){
-        //COMBO DE SOLUCION
-        let data = {id: idCargo , text: "Hola Mundo"};
-        let newOption = new Option(data.text, data.id, false, false);
-        $('#selectCargoLaboral_histsal').select2().empty().append(newOption).trigger('change');
+    function setSelect2_hs_cl() {
+        $("#selectCargoLaboral_histsal").select2({
+            ajax: {
+                url: "/servicios/listarcargolaboral",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term.toUpperCase()
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar cargo laboral / area . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 2,
+            templateResult: formatRepo_historialcls,
+            templateSelection: formatRepoSelection_historialcls
+        })
     }
 
     function formatRepo_historialcls (repo) {
         if (repo.loading) {
             return repo.text;
         }
-
         return  "<div class='select2-result-cargolab'><span class='select2-span-result'>CARGO: </span>"+repo.cargo+"</div>"+
-            "<div class='select2-result-area'><span class='select2-span-result'>AREA: </span>"+repo.area+"</span></div>";
+                "<div class='select2-result-area'><span class='select2-span-result'>AREA: </span>"+repo.area+"</span></div>";
     }
 
     function formatRepoSelection_historialcls (repo) {
