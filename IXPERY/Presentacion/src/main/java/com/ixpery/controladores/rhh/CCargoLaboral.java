@@ -228,8 +228,22 @@ public class CCargoLaboral {
         oeCargoLaboral.setNomcargo(nom);
         oeCargoLaboral.setSalario(sal);
         oeCargoLaboral.setEstado(estado);
-
         obCargoLaboral.Modificar(oeCargoLaboral);
         return "";
     }
+
+
+    @RequestMapping("/cargolaboral/DestruirSesionCargoLaboral")
+    public @ResponseBody
+    void EliminarSesionSolucion(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("cargolaboral", 0);
+    }
+
+
+
+
+
 }
