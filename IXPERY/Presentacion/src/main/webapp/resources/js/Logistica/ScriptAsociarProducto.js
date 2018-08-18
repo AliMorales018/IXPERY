@@ -40,7 +40,7 @@ function CargarProductosNRBDD(sol) {
                         "<td style='display: none'><span id='txt_id_preregistro_" + count_productos_pr + "'>"+item.IDPREREGISTRO+"</span></td>" +
                         "<td><span class='line-height-asoprod'>" + item.NOMPRODUCTO + "</span></td>" +
                         "<td style='width: 280px'><select id='select_filtrar_insumo_" + count_productos_pr + "' style='width: 250px'></select></td>" +
-                        "<td class='text-center'><a href='/producto' class='btn btn-sm-search'><i class='icon icon-plus2'></i></a></td>" +
+                        "<td class='text-center'><button class='btn btn-sm-search' onclick='AddMenu(mProducto);'><i class='icon icon-plus2'></i></button></td>" +
                         "</tr>"
                     );
                     count_productos_pr++;

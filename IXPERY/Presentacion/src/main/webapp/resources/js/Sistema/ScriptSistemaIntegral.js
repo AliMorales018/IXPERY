@@ -24,6 +24,9 @@ var isolJson;
 var icotJson;
 var iopeJson;
 
+var iAsPrecio;
+var iSueldos;
+
 
 var navbar;
 var sticky;
@@ -77,6 +80,13 @@ $(document).ready(function () {
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 24) {
                                 mProducto = JSONobj[i];
+                            }
+                        }
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 25) {
+                                iAsPrecio = JSONobj[i].idmenu;
+                                // mAsPrecio = JSONobj[i];
                             }
                         }
 
@@ -162,7 +172,9 @@ $(document).ready(function () {
 
                         if(JSONobj[i]){
                             if(JSONobj[i].idmenu === 42) {
+                                iSueldos = JSONobj[i].idmenu;
                                 mSueldos = JSONobj[i];
+
                             }
                         }
 
@@ -425,7 +437,7 @@ $(document).ready(function () {
                     $('#panel__' + mEquipo.idmenu).remove();
                     $('#panel__' + mServicio.idmenu).remove();
                     $('#panel__' + mViatico.idmenu).remove();
-                    DestruirSesion();
+                    DestruirSesionSolucion();
                 }
 
                 if(idCerrar == icotJson){
@@ -438,7 +450,8 @@ $(document).ready(function () {
                     $('#panel__' + mEquipoCot.idmenu).remove();
                     $('#panel__' + mServicioCot.idmenu).remove();
                     $('#panel__' + mViaticoCot.idmenu).remove();
-                    DestruirSesion();
+                    DestruirSesionSolucion();
+
 
                 }
 
@@ -452,9 +465,19 @@ $(document).ready(function () {
                     $('#panel__' + mEquipoCot.idmenu).remove();
                     $('#panel__' + mServicioCot.idmenu).remove();
                     $('#panel__' + mViaticoCot.idmenu).remove();
-                    DestruirSesion();
+                    DestruirSesionSolucion();
 
                 }
+
+                if(idCerrar == iSueldos){
+                    DestruirSesionCargoLaboral();
+                }
+
+                if(idCerrar == iAsPrecio){
+                    DestruirSesionProducto();
+                    DestruirSesionProveedor();
+                }
+
 
 
             });
@@ -510,7 +533,7 @@ function AddMenu(newMenu) {
 }
 
 
-function DestruirSesion() {
+function DestruirSesionSolucion() {
     $.ajax({
         method: "POST",
         async: false,
@@ -524,6 +547,46 @@ function DestruirSesion() {
     });
 }
 
+function DestruirSesionCargoLaboral() {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/cargolaboral/DestruirSesionCargoLaboral",
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
 
+function DestruirSesionProducto() {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/producto/DestruirSesionProducto",
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
+
+function DestruirSesionProveedor() {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/proveedor/DestruirSesionProveedor",
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
 
 
