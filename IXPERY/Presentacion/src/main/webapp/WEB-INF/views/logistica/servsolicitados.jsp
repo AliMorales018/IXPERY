@@ -25,7 +25,7 @@
 
 <body>
 
-<!-- Buttons -->
+<!-- Buttoggns -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos controles-permanentes">
     <div class="cell small-12 medium-4 text-white">
         <div class="grid-x align-center-middle">

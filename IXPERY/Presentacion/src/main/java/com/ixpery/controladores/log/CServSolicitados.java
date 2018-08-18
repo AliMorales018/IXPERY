@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class CServSolicitados {ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BServicioSolicitados obServSolic =(BServicioSolicitados) applicationContext.getBean("beanServSolicitados");
-
+//fdfdf
     @RequestMapping("/servsolic")
     public ModelAndView ServSolic(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
