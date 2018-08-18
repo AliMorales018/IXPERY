@@ -61,7 +61,7 @@
                 <button type="button" id="btn_equipo2_regprovee" class="btn btn-light">Reg. Proveedor</button>
             </div>
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_equipo2_asocprod" class="btn btn-secondary">Asociar Prod.</button>
+                <button type="button" id="btn_equipo2_regprod" class="btn btn-secondary"  onclick="abrir_equipo2_regprod();">Reg. Productos</button>
             </div>
         </div>
     </div>

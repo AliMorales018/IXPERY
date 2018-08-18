@@ -218,3 +218,6 @@ function crearSesProvSoli(idtr){
 function abrir_prove_ot2(){
 AddMenu(mProveedor);
 }
+function abrir_servsolic_ot2(){
+AddMenu(mHpViaticos);
+}

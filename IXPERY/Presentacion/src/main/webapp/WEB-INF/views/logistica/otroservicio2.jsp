@@ -34,6 +34,9 @@
             <div class="cell small-4 medium-4 large-4 text-center">
                 <button type="button" id="btn_otroservicio2_regprovee" class="btn btn-secondary" onclick="abrir_prove_ot2();">Reg. Proveedor</button>
             </div>
+            <div class="cell small-4 medium-4 large-4 text-center">
+                <button type="button" id="btn_otroservicio2_regserv" class="btn btn-secondary" onclick="abrir_servsolic_ot2();">Reg. Servicios</button>
+            </div>
         </div>
     </div>
     <div class="cell small-12 medium-4">

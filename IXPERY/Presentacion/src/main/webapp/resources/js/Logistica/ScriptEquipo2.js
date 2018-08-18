@@ -220,3 +220,7 @@ function crearSesProvProd(idtr){
     });
 
 }
+
+function abrir_equipo2_regprod(){
+    // AddMenu(mProveedor);
+}
