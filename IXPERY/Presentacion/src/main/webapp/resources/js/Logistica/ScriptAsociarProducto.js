@@ -1,11 +1,30 @@
 var count_productos_pr;
 
 $(document).ready(function() {
-    CargarProductosNRBDD();
+    let sol = 0;
+    $.ajax({
+        method: "POST",
+        async: false,
+        url:"/solucion/VerificarSesionSolucion",
+        data:{},
+        success: function resultado(data) {
+            sol = data;
+            //SESION CARGO
+            console.log("SESION ID CARGO: "+ sol);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+    CargarProductosNRBDD(sol);
 });
 
-function CargarProductosNRBDD() {
-    var idSolucion = 1;
+
+
+
+function CargarProductosNRBDD(sol) {
+    var idSolucion = sol;
     count_productos_pr = 1;
     $.ajax({
         method: "POST",

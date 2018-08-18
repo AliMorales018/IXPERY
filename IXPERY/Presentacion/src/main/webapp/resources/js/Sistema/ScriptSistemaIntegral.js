@@ -16,6 +16,9 @@ var mViaticoCot = {};
 var mSueldos = {};
 var mProveedor = {};
 var mProducto = {};
+var mAsociarProd = {};
+var mHpViaticos = {};
+var mHisPrecio = {};
 
 var isolJson;
 var icotJson;
@@ -51,6 +54,13 @@ $(document).ready(function () {
                         menuNivel1.push("<li><a id='menu-pri__" + JSONobj[i].idmenu + "' href='" + JSONobj[i].url + "'><div class='cell small-12 medium-2 large-2 celda'>" + JSONobj[i].descripcion + "</div></a></li>");
                     }
                     if (key==="id" && String(value)==="2") {
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 10) {
+                                mHisPrecio = JSONobj[i].idmenu;
+                            }
+                        }
+
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 13) {
                                 isolJson = JSONobj[i].idmenu;
@@ -67,6 +77,12 @@ $(document).ready(function () {
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 24) {
                                 mProducto = JSONobj[i];
+                            }
+                        }
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 26) {
+                                mAsociarProd = JSONobj[i];
                             }
                         }
 
@@ -147,7 +163,12 @@ $(document).ready(function () {
                         if(JSONobj[i]){
                             if(JSONobj[i].idmenu === 42) {
                                 mSueldos = JSONobj[i];
-                                // JSONobj.splice(i,1);
+                            }
+                        }
+
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 43) {
+                                mHpViaticos = JSONobj[i];
                             }
                         }
 
