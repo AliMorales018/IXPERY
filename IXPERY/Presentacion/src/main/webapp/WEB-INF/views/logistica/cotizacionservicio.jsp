@@ -78,7 +78,8 @@
                     alert('Error: ' + msg.responseText);
                 }
             });
-            ++countsc;
+
+
             ++countso;
 
             $.ajax({
