@@ -19,6 +19,8 @@ var mProducto = {};
 var mAsociarProd = {};
 var mHpViaticos = {};
 var mHisPrecio = {};
+var mAsPrecio={};
+var mAsociarServ={};
 
 var isolJson;
 var icotJson;
@@ -86,7 +88,7 @@ $(document).ready(function () {
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 25) {
                                 iAsPrecio = JSONobj[i].idmenu;
-                                // mAsPrecio = JSONobj[i];
+                                mAsPrecio = JSONobj[i];
                             }
                         }
 
@@ -181,6 +183,12 @@ $(document).ready(function () {
                         if(JSONobj[i]){
                             if(JSONobj[i].idmenu === 43) {
                                 mHpViaticos = JSONobj[i];
+                            }
+                        }
+
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 47) {
+                                mAsociarServ = JSONobj[i];
                             }
                         }
 
