@@ -9,6 +9,7 @@ import com.ixpery.entidades.log.EServiciosSolicitados;
 import com.ixpery.entidades.log.ESolucion;
 import com.ixpery.utilitario.Datacnx;
 import com.ixpery.utilitario.DtUtilitario;
+import com.ixpery.utilitario.ParameterDirection;
 import com.ixpery.utilitario.SqlParameter;
 
 import java.util.ArrayList;
@@ -161,6 +162,18 @@ public class DServicioSolicitados {
         SqlParameter pValor = new SqlParameter("valor",valor);
         listParameter.add(pValor);
         return com.EjecutaConsultaJson("filtrar_servicio_insumo", listParameter);
+    }
+
+    public String RegistrarSerAsociado(String cadena){
+        listParameter.clear();
+        SqlParameter pValor = new SqlParameter("valor",cadena);
+        SqlParameter paramSalid = new SqlParameter("@reporte", "");
+        paramSalid.Direction = ParameterDirection.Output;
+        listParameter.add(pValor);
+        listParameter.add(paramSalid);
+        com.TransUnica("actualizar_preregistroproducto", listParameter);
+        String a  = paramSalid.Value.toString();
+        return a;
     }
 //FIN LUISfdfdf
 }

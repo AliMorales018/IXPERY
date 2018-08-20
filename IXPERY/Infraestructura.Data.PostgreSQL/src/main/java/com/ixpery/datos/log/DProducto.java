@@ -257,6 +257,18 @@ public class DProducto {
         oeProProv.setIdProProv(NextId);
         return oeProProv;
     }
-
+//DANTE
+public String RegistrarProAsociado(String cadena){
+    listaParametros.clear();
+    SqlParameter pValor = new SqlParameter("valor",cadena);
+    SqlParameter paramSalid = new SqlParameter("@reporte", "");
+    paramSalid.Direction = ParameterDirection.Output;
+    listaParametros.add(pValor);
+    listaParametros.add(paramSalid);
+    com.TransUnica("actualizar_preregistroproducto", listaParametros);
+    String a  = paramSalid.Value.toString();
+    return a;
+}
+    //DANTE
 
 }

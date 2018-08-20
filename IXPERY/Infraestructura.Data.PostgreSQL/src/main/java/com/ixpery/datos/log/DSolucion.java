@@ -114,6 +114,14 @@ public class DSolucion {
         return json;
     }
 
+    public String ReporteGerencia(Integer sol) throws Exception {
+        listParametros.clear();
+        SqlParameter pValue = new SqlParameter("value", sol);
+        listParametros.add(pValue);
+        String json = com.EjecutaConsultaJson("generarreporte", listParametros);
+        return json;
+    }
+
     public String BuscarSolucionesAprobadas() throws Exception {
         listParametros.clear();
         SqlParameter pValue = new SqlParameter("value", "/");

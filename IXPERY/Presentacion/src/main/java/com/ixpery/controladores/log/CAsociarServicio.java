@@ -42,4 +42,17 @@ public class CAsociarServicio {
     ) throws Exception{
         return obServSolici.ListarServInsumo(valor);
     }
+
+    @RequestMapping("/asociarproducto/register")
+    public @ResponseBody String RegistrarServAso(
+            @RequestParam(value="value") String valorCadena
+    ) throws Exception{
+        String a = obServSolici.RegistrarServicioAsociado(valorCadena);
+        if(a.equals("actualizados")){
+            return "";
+        }
+        else{
+            return "ERROR: No se pudo Asociar los productos";
+        }
+    }
 }

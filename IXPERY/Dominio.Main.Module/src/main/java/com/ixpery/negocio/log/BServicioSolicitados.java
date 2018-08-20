@@ -50,6 +50,10 @@ public class BServicioSolicitados {
     public String ListarServInsumo(String valor)throws Exception {
         return odServSolic.ListarServInsumo(valor);
     }
+
+    public String  RegistrarServicioAsociado(String cadena)throws Exception {
+        return odServSolic.RegistrarSerAsociado(cadena);
+    }
     //FIN LUIS
     //LUIS 02/08/2018 17:00
    /* public String BuscarProductoEquipoCombo(String var) throws Exception{

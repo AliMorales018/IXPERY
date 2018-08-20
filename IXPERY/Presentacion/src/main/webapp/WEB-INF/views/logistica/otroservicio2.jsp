@@ -26,16 +26,17 @@
             </div>
         </div>
     </div>
-    <div class="cell small-12 medium-4">
+    <div class="cell large-2"></div>
+    <div class="cell large-6">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
                 <button type="button" id="btn_otroservicio2_save" class="btn btn-secondary" onclick="InsUpdDelOtroServ2();">Guardar</button>
             </div>
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_otroservicio2_regprovee" class="btn btn-secondary" onclick="abrir_prove_ot2();">Reg. Proveedor</button>
+                <button type="button" id="btn_otroservicio2_regprovee" class="btn btn-light" onclick="abrir_prove_ot2();">Reg. Proveedor</button>
             </div>
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_otroservicio2_regserv" class="btn btn-secondary" onclick="abrir_servsolic_ot2();">Reg. Servicios</button>
+                <button type="button" id="btn_otroservicio2_regserv" class="btn btn-secondary" onclick="abrir_asociar_ots2();">Reg. Servicios</button>
             </div>
         </div>
     </div>
