@@ -97,8 +97,8 @@ public class CProyecto {
     public @ResponseBody String BuscarEmpresasRuc(
             @RequestParam(value="emp") String value
     ) throws Exception {
-        String campo = "emp4," + value;
-        return obProyecto.BuscarEmpresaRuc(campo);
+//        String campo = "emp4," + value;
+        return obProyecto.BuscarEmpresaRuc(value);
     }
 
     //Busqueda de Empleado.
