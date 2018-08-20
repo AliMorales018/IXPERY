@@ -246,13 +246,13 @@
 </div>
 <!-- Actividades -->
 
-<jsp:include page="../includes/footer.jsp"></jsp:include>
 <script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
 
 <script>
     $(document).ready(function(){
         $("#select_solucion_servicio_cl").select2();
         BuscarSolucionServiciosCL();
+        $('footer').show();
     });
 
     function formatRepo_servicio (repo) {

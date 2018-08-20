@@ -15,7 +15,6 @@
             padding: 4px;
             font-size: 12px;
         }
-
         .icon-hp-desh{
             background-color: #666666;
             border-radius: 50%;
@@ -94,7 +93,7 @@
             <div class="cell large-6">
                 <div class="form-group">
                     <label class="label text-primary" style="line-height: 1.5"><b>Cargo Laboral:</b></label>
-                    <select id="selectCargoLaboral_histsal" onchange="ListarHistorial_SalariosCL(this.value);">
+                    <select id="selectCargoLaboral_histsal" onchange="ListarHistorial_SalariosCL(this.value,'historial');">
                         <option></option>
                     </select>
                 </div>
@@ -134,7 +133,7 @@
             </div>
         </div>
         <div class="grid-x grid-margin-x">
-            <div class="cell large-3">
+            <div class="cell large-4">
                 <div class="form-group">
                     <label class="label text-primary" style="line-height: 1.5"><b>Fecha de Inicio:</b></label>
                     <input type="date" class="form-control" id="new_date_hs_cl" placeholder="Fecha de Inicio">
@@ -151,13 +150,28 @@
 </div>
 <!-- End Nuevo Precio -->
 
-<jsp:include page="../includes/footer.jsp"></jsp:include>
 <script src="${urlPublic}/js/RRHH/ScriptHistorialSalario.js"></script>
 
 <script>
     $(document).ready(function() {
-        $('#selectCargoLaboral_histsal').select2()
-        ListarHistorial_SalariosCL();
+        $('#selectCargoLaboral_histsal').select2();
+        $.ajax({
+            method: "POST",
+            async: false,
+            url: "/cargolaboral/getsesioncl",
+            success: function (valor) {
+                if (valor !== 0) {
+                    ListarHistorial_SalariosCL(valor,"cotizacion");
+                }
+                else{
+                    setSelect2_hs_cl();
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+        $('footer').show();
     });
 
     function setSelect2_hs_cl() {

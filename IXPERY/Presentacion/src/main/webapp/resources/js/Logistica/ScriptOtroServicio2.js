@@ -205,8 +205,10 @@ function crearSesProvSoli(idtr){
         url: "/otroservicio2/sesproverod",
         data: {"prove": idProve,"soli": idSoli},
         success: function resultado(valor) {
+
             console.log("Rpta de sesion");
             console.log(valor);
+            AddMenu(mHpViaticos);
 
         },
         error: function errores(msg) {
@@ -218,6 +220,6 @@ function crearSesProvSoli(idtr){
 function abrir_prove_ot2(){
 AddMenu(mProveedor);
 }
-function abrir_servsolic_ot2(){
-// AddMenu(mHpViaticos);
+function abrir_asociar_ots2(){
+AddMenu(mAsociarServ);
 }

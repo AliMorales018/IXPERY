@@ -117,13 +117,16 @@ function save_productos_asociados() {
                     alert("Productos Asociados Correctamente");
                     $("#tbody_asociarproducto").empty();
                     CargarProductosNRBDD();
+                    if( typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
+                        BuscarSesionSol();
+                    }
                 }
                 else{
                     alert(data);
                 }
             },
             error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
+                // alert('Error: ' + msg.responseText);
             }
         });
     }

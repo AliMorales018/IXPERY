@@ -42,4 +42,17 @@ public class CAsociarProducto {
     ) throws Exception{
         return obProducto.ListarProInusmo(valor);
     }
+
+    @RequestMapping("/asociarproducto/register")
+    public @ResponseBody String RegistrarProAso(
+            @RequestParam(value="value") String valorCadena
+    ) throws Exception{
+        String a = obProducto.RegistrarProductoAsociado(valorCadena);
+        if(a.equals("actualizados")){
+            return "";
+        }
+        else{
+            return "ERROR: No se pudo Asociar los productos";
+        }
+    }
 }
