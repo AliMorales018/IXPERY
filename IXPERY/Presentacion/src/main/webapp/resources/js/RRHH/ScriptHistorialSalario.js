@@ -23,36 +23,25 @@ function llenar_combo_salario_cl(id, text){
     $('#selectCargoLaboral_histsal').attr("disabled",true);
 }
 
-function ListarHistorial_SalariosCL(idCargo,reset){
-        let idCargoLab = "";
-        if(!reset) {
-            $.ajax({
-                method: "POST",
-                async: false,
-                url: "/cargolaboral/getsesioncl",
-                success: function (valor) {
-                    idCargoLab = valor;
-                    if (valor !== "0") {
-                        BuscarServicioCotizacion();
-                    }
-                    else{
-                        setSelect2_hs_cl();
-                    }
-                },
-                error: function errores(msg) {
-                    alert('Error: ' + msg.responseText);
-                }
-            });
-            ++contador_hs_cl;
-        }
-        else{
-            BuscarServicioCotizacion();
-            idCargoLab = idCargo;
-        }
+function sumOresDias_HS(fecha,dias) {
+    fecha.setDate(fecha.getDate() + dias + 1);
+    return fecha;
+}
+
+function convertDate_HS(inputFormat) {
+    function pad(s) {
+        return (s < 10) ? '0' + s : s;
+    }
+
+    var d = new Date(inputFormat);
+    return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
+}
+
+function ListarHistorial_SalariosCL(idCargo,bandera){
         $.ajax({
             method: "POST",
             url: "/verhistorialcargolab",
-            data: {"idCL":idCargoLab},
+            data: {"idCL":idCargo},
             success: function resultado(data) {
                 //console.log(data);
                 let JSONobj = JSON.parse(data);
@@ -60,7 +49,10 @@ function ListarHistorial_SalariosCL(idCargo,reset){
                 $("#btn_historialsal_nue").removeAttr("disabled");
                 ocultar_precio_nuevo_hscl();
                 //Llenar Combo
-                llenar_combo_salario_cl(JSONobj.cal[0].cal1,JSONobj.cal[0].cal3+" - "+JSONobj.are[0].are2);
+                if(bandera === "cotizacion") {
+                    llenar_combo_salario_cl(JSONobj.cal[0].cal1, JSONobj.cal[0].cal3 + " - " + JSONobj.are[0].are2);
+                    ++contador_hs_cl;
+                }
                 //console.log(JSONobj);
                 if(JSONobj.hic.length > 0) {
                     $("#tbody_historialsalariocl").empty();
@@ -68,8 +60,7 @@ function ListarHistorial_SalariosCL(idCargo,reset){
                     let contador;
                     contador = 1;
                     $.each(JSONobj.hic, function (obj, item) {
-                        let estado = item.hic5 === "1"? "<i class='icon-checkmark icon-hp-habil'></i>":"<i class='icon-cross icon-hp-desh'></i>";
-                        //let claseUltReg = item.hic3 === "0"? "class='ult_reg_cl'":"";
+                        estado = item.hic5 === "1"? "<i class='icon-checkmark icon-hp-habil'></i>":"<i class='icon-cross icon-hp-desh'></i>";
                         let row = "<tr>" +
                             "<td class='text-center'><p class='text-center' style='font-size: 11px'>" + contador + "</p></td>" +
                             "<td class='text-center'><span>" + item.hic2 + "</span></td>" +
@@ -89,7 +80,7 @@ function ListarHistorial_SalariosCL(idCargo,reset){
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
             }
-        });
+        })
 }
 
 function guardar_nuevo_SalarioCL(){
@@ -122,7 +113,6 @@ function guardar_nuevo_SalarioCL(){
             else{
                 fechaCorrecta = true;
             }
-            //console.log(FechaFin);
         }
         else{
             FechaFin = "0";
@@ -137,7 +127,10 @@ function guardar_nuevo_SalarioCL(){
                 success: function resultado(data) {
                     if (data === "") {
                         //Cargar otra vez la tabla
-                        ListarHistorial_SalariosCL(idCargo,true);
+                        ListarHistorial_SalariosCL(idCargo,"historial");
+                        if( typeof BuscarServicioCotizacion !== 'undefined' && jQuery.isFunction(BuscarServicioCotizacion)) {
+                            BuscarServicioCotizacion();
+                        }
                     }
                 },
                 error: function errores(msg) {
@@ -151,18 +144,4 @@ function guardar_nuevo_SalarioCL(){
     }else{
         alert("Complete los campos necesarios para registrar un nuevo salario.");
     }
-}
-
-function sumOresDias_HS(fecha,dias) {
-    fecha.setDate(fecha.getDate() + dias + 1);
-    return fecha;
-}
-
-function convertDate_HS(inputFormat) {
-    function pad(s) {
-        return (s < 10) ? '0' + s : s;
-    }
-
-    var d = new Date(inputFormat);
-    return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
 }

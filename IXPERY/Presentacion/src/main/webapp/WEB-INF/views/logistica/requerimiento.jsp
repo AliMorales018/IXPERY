@@ -120,9 +120,7 @@
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptRequerimiento.js"></script>
 
 <script>
-
     $(document).ready(function () {
-
         $("#selectEmpresa_Proyecto").select2({
             ajax: {
                 url: "/requerimiento/busempresa",
@@ -146,6 +144,7 @@
             templateResult: formatRepo,
             templateSelection: formatRepoSelection
         });
+        $("footer").show();
     });
 
     function formatRepo (repo) {
