@@ -100,6 +100,7 @@
 </div>
 <!-- End Table -->
 
+
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptProyecto.js"></script>
 
 </body>

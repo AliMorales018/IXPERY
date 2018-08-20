@@ -111,6 +111,7 @@ public class CSolucion {
             @RequestParam(value = "value") String value
     ) throws Exception {
 //        String a = obSolucion.BuscarEmpleado("epl1," + value);
+
         return obSolucion.BuscarEmpleado(value);
     }
 
@@ -164,7 +165,8 @@ public class CSolucion {
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
-        session.removeAttribute("solucion");
+        session.setAttribute("solucion", 0);
+//        session.removeAttribute("solucion");
     }
 
 

@@ -281,11 +281,11 @@ $(document).ready(function () {
             // console.log(arrGuardarProyecto);
 
 
-        })
+        });
 
 
 
-
+    $('footer').show();
 });
 
 

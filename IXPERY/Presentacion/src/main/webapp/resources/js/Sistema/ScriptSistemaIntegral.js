@@ -16,10 +16,16 @@ var mViaticoCot = {};
 var mSueldos = {};
 var mProveedor = {};
 var mProducto = {};
+var mAsociarProd = {};
+var mHpViaticos = {};
+var mHisPrecio = {};
 
 var isolJson;
 var icotJson;
 var iopeJson;
+
+var iAsPrecio;
+var iSueldos;
 
 
 var navbar;
@@ -51,6 +57,13 @@ $(document).ready(function () {
                         menuNivel1.push("<li><a id='menu-pri__" + JSONobj[i].idmenu + "' href='" + JSONobj[i].url + "'><div class='cell small-12 medium-2 large-2 celda'>" + JSONobj[i].descripcion + "</div></a></li>");
                     }
                     if (key==="id" && String(value)==="2") {
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 10) {
+                                mHisPrecio = JSONobj[i].idmenu;
+                            }
+                        }
+
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 13) {
                                 isolJson = JSONobj[i].idmenu;
@@ -67,6 +80,19 @@ $(document).ready(function () {
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 24) {
                                 mProducto = JSONobj[i];
+                            }
+                        }
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 25) {
+                                iAsPrecio = JSONobj[i].idmenu;
+                                // mAsPrecio = JSONobj[i];
+                            }
+                        }
+
+                        if(JSONobj[i]) {
+                            if (JSONobj[i].idmenu === 26) {
+                                mAsociarProd = JSONobj[i];
                             }
                         }
 
@@ -146,8 +172,15 @@ $(document).ready(function () {
 
                         if(JSONobj[i]){
                             if(JSONobj[i].idmenu === 42) {
+                                iSueldos = JSONobj[i].idmenu;
                                 mSueldos = JSONobj[i];
-                                // JSONobj.splice(i,1);
+
+                            }
+                        }
+
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 43) {
+                                mHpViaticos = JSONobj[i];
                             }
                         }
 
@@ -404,7 +437,7 @@ $(document).ready(function () {
                     $('#panel__' + mEquipo.idmenu).remove();
                     $('#panel__' + mServicio.idmenu).remove();
                     $('#panel__' + mViatico.idmenu).remove();
-                    DestruirSesion();
+                    DestruirSesionSolucion();
                 }
 
                 if(idCerrar == icotJson){
@@ -417,7 +450,8 @@ $(document).ready(function () {
                     $('#panel__' + mEquipoCot.idmenu).remove();
                     $('#panel__' + mServicioCot.idmenu).remove();
                     $('#panel__' + mViaticoCot.idmenu).remove();
-                    DestruirSesion();
+                    DestruirSesionSolucion();
+
 
                 }
 
@@ -431,9 +465,19 @@ $(document).ready(function () {
                     $('#panel__' + mEquipoCot.idmenu).remove();
                     $('#panel__' + mServicioCot.idmenu).remove();
                     $('#panel__' + mViaticoCot.idmenu).remove();
-                    DestruirSesion();
+                    DestruirSesionSolucion();
 
                 }
+
+                if(idCerrar == iSueldos){
+                    DestruirSesionCargoLaboral();
+                }
+
+                if(idCerrar == iAsPrecio){
+                    DestruirSesionProducto();
+                    DestruirSesionProveedor();
+                }
+
 
 
             });
@@ -489,7 +533,7 @@ function AddMenu(newMenu) {
 }
 
 
-function DestruirSesion() {
+function DestruirSesionSolucion() {
     $.ajax({
         method: "POST",
         async: false,
@@ -503,6 +547,46 @@ function DestruirSesion() {
     });
 }
 
+function DestruirSesionCargoLaboral() {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/cargolaboral/DestruirSesionCargoLaboral",
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
 
+function DestruirSesionProducto() {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/producto/DestruirSesionProducto",
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
+
+function DestruirSesionProveedor() {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/proveedor/DestruirSesionProveedor",
+        success: function(valor) {
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
 
 

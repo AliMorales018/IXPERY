@@ -174,9 +174,9 @@ function BuscarRequerimientos() {
                                 else{
                                     LimpiarCampos();
                                 }
-                                $('.spn-solucion-emp').html(`EMPRESA: <span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
-                                $('.spn-solucion-pro').html(`PROYECTO: <span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
-                                $('.spn-solucion-req').html(`REQUERIMIENTO: <span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
+                                $('.spn-solucion-emp').html(`<span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
+                                $('.spn-solucion-pro').html(`<span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
+                                $('.spn-solucion-req').html(`<span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
                             }
                         }
 
@@ -519,18 +519,18 @@ function FormatReqProEmp (repo) {
     if (repo.loading) {
         return repo.text;
     }
-    let markup = `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Empresa: ${repo.nomempresa}</div>`+
-        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Proyecto: ${repo.nomproyecto}</div>`+
-        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Requerimiento: ${repo.requerimiento}</div>`;
+    let markup = `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>${repo.nomempresa}</div>`+
+        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>${repo.nomproyecto}</div>`+
+        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>${repo.requerimiento}</div>`;
     return markup;
 }
 
 
 function FormatReportReqProEmp (repo) {
     if(repo.nomempresa !== undefined){
-        $('.spn-solucion-emp').html(`EMPRESA: <span style="font-size:14px">${repo.nomempresa}</span>`);
-        $('.spn-solucion-pro').html(`PROYECTO: <span style="font-size:14px">${repo.nomproyecto}</span>`);
-        $('.spn-solucion-req').html(`REQUERIMIENTO: <span style="font-size:12px">${repo.requerimiento}</span>`);
+        $('.spn-solucion-emp').html(`<span style="font-size:14px">${repo.nomempresa}</span>`);
+        $('.spn-solucion-pro').html(`<span style="font-size:14px">${repo.nomproyecto}</span>`);
+        $('.spn-solucion-req').html(`<span style="font-size:12px">${repo.requerimiento}</span>`);
 
         ireqSolucion = repo.idreq;
         isolSolucion = repo.idsol;

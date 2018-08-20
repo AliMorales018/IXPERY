@@ -167,6 +167,11 @@ textarea {
     margin: 0;
     /* 2 */ }
 
+/*Texto a Mayusculas*/
+input, [type="text"]{
+    text-transform: uppercase;
+}
+
 /**
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.
@@ -9187,20 +9192,24 @@ ul.container-tabs li {
     font-family: "Lato-Regular", cursive;
     font-size: 12px;
     color: rgba(222, 133, 126, 0.7);
-    padding: 0px 5px; }
+    padding: 0px 5px;
+    text-transform: capitalize}
 :-ms-input-placeholder {
     font-family: "Lato-Regular", cursive;
     font-size: 12px;
+    text-transform: capitalize;
     color: rgba(222, 133, 126, 0.7);
     padding: 0px 5px; }
 ::-ms-input-placeholder {
     font-family: "Lato-Regular", cursive;
     font-size: 12px;
+    text-transform: capitalize;
     color: rgba(222, 133, 126, 0.7);
     padding: 0px 5px; }
 ::placeholder {
     font-family: "Lato-Regular", cursive;
     font-size: 12px;
+    text-transform: capitalize;
     color: rgba(222, 133, 126, 0.7);
     padding: 0px 5px; }
 

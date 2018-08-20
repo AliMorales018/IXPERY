@@ -41,5 +41,9 @@ public class BSolucion {
         return odSol.ReporteOperaciones(sol);
     }
 
+    public String BuscarSolucionesAprobadas() throws Exception{
+        return odSol.BuscarSolucionesAprobadas();
+    }
+
 
 }

@@ -148,6 +148,7 @@ public class DProveedor {
         listaParametros.clear();
         SqlParameter pIdEmpresa = new SqlParameter("value",value);
         listaParametros.add(pIdEmpresa);
-        return com.EjecutaConsultaJson("filtrar_empresa_proveedor", listaParametros);
+        String mensaje = com.EjecutaConsultaJson("filtrar_empresa_proveedor", listaParametros);
+        return mensaje;
     }
 }

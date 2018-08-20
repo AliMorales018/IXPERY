@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -181,4 +183,16 @@ public class CProducto {
 
         return "";
     }
+
+
+    @RequestMapping("/producto/DestruirSesionProducto")
+    public @ResponseBody
+    void EliminarSesionSolucion(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("producto", 0);
+    }
+
+
 }

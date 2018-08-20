@@ -54,9 +54,9 @@ public class DSolucion {
 //        select gen_buscar('46061', '460611,', '460611,460613', '460612:460511,460513');
         listParametros.clear();
         SqlParameter pValue = new SqlParameter("value", "/");
-//        SqlParameter pPerfil = new SqlParameter("perfil", perfil);
+        SqlParameter pPerfil = new SqlParameter("perfil", perfil);
         listParametros.add(pValue);
-//        listParametros.add(pPerfil);
+        listParametros.add(pPerfil);
         String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_s", listParametros);
 //        json =  jsonGeneral.JsonConvertInvert(json);
         return json;
@@ -113,6 +113,16 @@ public class DSolucion {
         String json = com.EjecutaConsultaJson("generarreportesp", listParametros);
         return json;
     }
+
+    public String BuscarSolucionesAprobadas() throws Exception {
+        listParametros.clear();
+        SqlParameter pValue = new SqlParameter("value", "/");
+        listParametros.add(pValue);
+        String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_sa", listParametros);
+        return json;
+    }
+
+
 
 
 

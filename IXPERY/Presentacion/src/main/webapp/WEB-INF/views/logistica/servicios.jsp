@@ -208,8 +208,8 @@
 
         <!-- Cabecera de tabla -->
         <div class="grid-x grid-padding-x">
-            <div class="cell large-3"><div class="form-group"><label class="label text-primary"><b>Nombre de actividad:</b></label><input disabled type="text" class="data-control form-control" type="text" placeholder="Nombre de actividad"></div></div>
-            <div class="cell large-3"><div class="form-group"><label class="label text-primary"><b>Descripción:</b></label><input disabled type="text" class="data-control form-control" type="text"  placeholder="Descripcion"></div></div>
+            <div class="cell large-3"><div class="form-group"><label class="label text-primary"><b>Nombre de actividad:</b></label><input disabled type="text" class="data-control form-control" type="text"></div></div>
+            <div class="cell large-3"><div class="form-group"><label class="label text-primary"><b>Descripción:</b></label><input disabled type="text" class="data-control form-control" type="text"></div></div>
             <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Cantidad:</b></label><input disabled type="number" class="data-control form-control" type="number" placeholder="Cantidad"></div></div>
             <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Riesgo:</b></label><input disabled type="text" class="data-control form-control" type="number" placeholder="Riesgo"></div></div>
             <div class="cell large-2"><div class="form-group"><label class="label text-primary"><b>Adicionales:</b></label><input disabled type="text" class="data-control form-control" type="number" placeholder="Adicionales"></div></div>
@@ -246,6 +246,7 @@
 </div>
 <!-- Actividades -->
 
+<jsp:include page="../includes/footer.jsp"></jsp:include>
 <script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
 
 <script>

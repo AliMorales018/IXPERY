@@ -76,11 +76,11 @@
         </div>
     </div>
     <div class="cell large-2">
-        <div class="grid-x align-center-middle">
-            <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_operaciones_reporte" class="btn btn-primary" onclick="AbrirReporte();">Reporte</button>
-            </div>
-        </div>
+        <%--<div class="grid-x align-center-middle">--%>
+            <%--<div class="cell small-4 medium-4 large-4 text-center">--%>
+                <%--<button type="button" id="btn_operaciones_reporte" class="btn btn-primary" onclick="AbrirReporte();">Reporte</button>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div>
 </div>
 <!-- End Buttons -->

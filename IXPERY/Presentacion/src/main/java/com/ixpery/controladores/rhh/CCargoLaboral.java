@@ -28,21 +28,25 @@ public class CCargoLaboral {
     BArea obArea = (BArea) applicationContext.getBean("beanArea");
 
     @RequestMapping("/cargolaboral/sesioncl")
-    public @ResponseBody  String SesionCl(
+    public @ResponseBody void SesionCl(
             HttpServletRequest request,
             @RequestParam(value="idCargo") Integer idCargo
     )throws Exception{
         HttpSession session = request.getSession();
         session.setAttribute("cargolaboral", idCargo);
-        return "CREADA";
     }
 
     @RequestMapping("/cargolaboral/getsesioncl")
-    public @ResponseBody String VerifSesionCl(
+    public @ResponseBody Integer VerifSesionCl(
             HttpServletRequest request
     )throws Exception{
         HttpSession session = request.getSession();
-        return session.getAttribute("cargolaboral").toString();
+        Integer idCargo = (Integer) session.getAttribute("cargolaboral");
+        if (idCargo == null){
+            return 0;
+        }else{
+            return idCargo;
+        }
     }
 
     @RequestMapping("/cargolaboral")
@@ -224,8 +228,22 @@ public class CCargoLaboral {
         oeCargoLaboral.setNomcargo(nom);
         oeCargoLaboral.setSalario(sal);
         oeCargoLaboral.setEstado(estado);
-
         obCargoLaboral.Modificar(oeCargoLaboral);
         return "";
     }
+
+
+    @RequestMapping("/cargolaboral/DestruirSesionCargoLaboral")
+    public @ResponseBody
+    void EliminarSesionSolucion(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("cargolaboral", 0);
+    }
+
+
+
+
+
 }

@@ -15,18 +15,52 @@ function ocultar_precio_nuevo_hscl() {
     $("#new_precio_hs_cl").val("");
 }
 
-function ListarHistorial_SalariosCL(idCargo){
-    if(idCargo !== "") {
-        $("#btn_historialsal_nue").removeAttr("disabled");
-        ocultar_precio_nuevo_hscl();
-        //console.log("IDCARGO: " + idCargo);
+function llenar_combo_salario_cl(id, text){
+    //COMBO DE SOLUCION
+    let data = {id: id , text: text};
+    let newOption = new Option(data.text, data.id, false, false);
+    $('#selectCargoLaboral_histsal').empty().append(newOption);
+    $('#selectCargoLaboral_histsal').attr("disabled",true);
+}
+
+function ListarHistorial_SalariosCL(idCargo,reset){
+        let idCargoLab = "";
+        if(!reset) {
+            $.ajax({
+                method: "POST",
+                async: false,
+                url: "/cargolaboral/getsesioncl",
+                success: function (valor) {
+                    idCargoLab = valor;
+                    if (valor !== "0") {
+                        BuscarServicioCotizacion();
+                    }
+                    else{
+                        setSelect2_hs_cl();
+                    }
+                },
+                error: function errores(msg) {
+                    alert('Error: ' + msg.responseText);
+                }
+            });
+            ++contador_hs_cl;
+        }
+        else{
+            BuscarServicioCotizacion();
+            idCargoLab = idCargo;
+        }
         $.ajax({
             method: "POST",
             url: "/verhistorialcargolab",
-            data: {"idCL":idCargo},
+            data: {"idCL":idCargoLab},
             success: function resultado(data) {
                 //console.log(data);
                 let JSONobj = JSON.parse(data);
+                console.log(JSONobj);
+                $("#btn_historialsal_nue").removeAttr("disabled");
+                ocultar_precio_nuevo_hscl();
+                //Llenar Combo
+                llenar_combo_salario_cl(JSONobj.cal[0].cal1,JSONobj.cal[0].cal3+" - "+JSONobj.are[0].are2);
                 //console.log(JSONobj);
                 if(JSONobj.hic.length > 0) {
                     $("#tbody_historialsalariocl").empty();
@@ -56,7 +90,6 @@ function ListarHistorial_SalariosCL(idCargo){
                 alert('Error: ' + msg.responseText);
             }
         });
-    }
 }
 
 function guardar_nuevo_SalarioCL(){
@@ -104,7 +137,7 @@ function guardar_nuevo_SalarioCL(){
                 success: function resultado(data) {
                     if (data === "") {
                         //Cargar otra vez la tabla
-                        ListarHistorial_SalariosCL(idCargo);
+                        ListarHistorial_SalariosCL(idCargo,true);
                     }
                 },
                 error: function errores(msg) {

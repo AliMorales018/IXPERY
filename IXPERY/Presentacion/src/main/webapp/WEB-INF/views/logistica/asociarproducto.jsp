@@ -38,7 +38,7 @@
     <div class="cell small-12 medium-4">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_asociarpro_save" class="btn btn-secondary">Guardar</button>
+                <button type="button" id="btn_asociarpro_save" class="btn btn-secondary" onclick="save_productos_asociados();">Guardar</button>
             </div>
         </div>
     </div>
