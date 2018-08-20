@@ -30,8 +30,7 @@
     <div class="cell small-12 medium-4">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" class="btn btn-light" id="btn_producto_nue">Nuevo</button>
-                <button type="button" class="btn btn-light" id="btn_producto_nue_reload" onclick="CargarJS_producto(0,1,1);" style="display:none">Nuevo</button>
+                <button type="button" class="btn btn-light" id="btn_producto_nue" onclick="limpiarTotalProd();">Nuevo</button>
             </div>
             <div class="cell small-4 medium-4 large-4 text-center">
                 <div style="display: none;"><button type="button" id="btn_producto_save" class="btn btn-secondary" onclick="guardaProducto(); ">Guardar</button></div>
@@ -159,16 +158,11 @@
                 <th>
                     <div class="input-group" id="divControlProd">
                         <input type="text" id="txt_producto_busnom" name='txt_producto_busnom' onblur="convertUpperCase(this);" placeholder='Nombre Producto' class="form-con txtBus" />
-                        <button type="button" id="btn_producto_busnom" class="btn btn-sm-search" onclick="buscar_producto();"><i class="icon icon-search4"></i></button>
+                        <button type="button" id="btn_producto_busnom" class="btn btn-sm-search" onclick="CargarProductos();"><i class="icon icon-search4"></i></button>
                     </div>
                 </th>
                 <th class="p-3">Familia</th>
                 <th class="p-3">Categoría</th>
-                <!-- <div class="input-group" id="divControlCate">
-                     <input type="text" id="txt_producto_buscat" name='txt_producto_buscat' placeholder='Nombre Categoria' class="form-con txtBus" />
-                     <button type="button" id="btn_producto_buscat" class="btn btn-sm-search"><i class="icon icon-search4"></i></button>
-                 </div>
-             </th>-->
                 <th class="p-3">U. Medida</th>
                 <th class="p-3">Código</th>
                 <th style="display: none;" class="p-3">Estado</th>
@@ -187,9 +181,6 @@
             </thead>
             <tbody id="tbody_producto">
             <tr id="firstRowBody_producto">
-                <td colspan="20" class="text-center font-weight-light">
-                    <div id="campoempresa1">NO SE HA BUSCADO PRODUCTO</div>
-                </td>
             </tr>
             </tbody>
         </table>

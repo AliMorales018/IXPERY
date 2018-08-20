@@ -3,6 +3,7 @@ package com.ixpery.negocio.log;
 import com.ixpery.datos.log.DServicioSolicitados;
 import com.ixpery.entidades.log.EProveedor;
 import com.ixpery.entidades.log.EServicioProveedor;
+import com.ixpery.entidades.log.ESolucion;
 
 public class BServicioSolicitados {
     DServicioSolicitados odServSolic = new DServicioSolicitados();
@@ -40,6 +41,14 @@ public class BServicioSolicitados {
         String result = "";
         odServSolic.Guardar(json);
         return result;
+    }
+
+    public String ListarServNOBBDDSolucion(ESolucion oeSolucion)throws Exception {
+        return odServSolic.ListarServNOBBDDSolucion(oeSolucion);
+    }
+
+    public String ListarServInsumo(String valor)throws Exception {
+        return odServSolic.ListarServInsumo(valor);
     }
     //FIN LUIS
     //LUIS 02/08/2018 17:00

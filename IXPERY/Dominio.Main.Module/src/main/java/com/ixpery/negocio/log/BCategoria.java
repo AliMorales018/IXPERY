@@ -29,8 +29,9 @@ public class BCategoria {
         return odCategoria.ListarCategoria();
     }*/
 
-    public List<ECategoria> Buscar(String campos)throws Exception {
-        return odCategoria.BuscarCategoria(campos);
+
+    public String BuscarCategoria(Integer var) throws Exception{
+        return odCategoria.BuscarCategoria(var);
     }
 
     public List<ECategoria> BuscarCategoriaFam(String campos)throws Exception {

@@ -6,6 +6,7 @@ import com.ixpery.datos.tools.JsonParcellable;
 import com.ixpery.entidades.log.EProveedor;
 import com.ixpery.entidades.log.EServicioProveedor;
 import com.ixpery.entidades.log.EServiciosSolicitados;
+import com.ixpery.entidades.log.ESolucion;
 import com.ixpery.utilitario.Datacnx;
 import com.ixpery.utilitario.DtUtilitario;
 import com.ixpery.utilitario.SqlParameter;
@@ -111,7 +112,6 @@ public class DServicioSolicitados {
 
     public String BuscarServSolic(String campos) throws Exception{
         String value = jsonGeneral.StringConvert(campos);
-//        sol = jsonGeneral.StringConvert(sol);
 
         if(value.equals("/")){
             value = "467713,%";
@@ -148,5 +148,19 @@ public class DServicioSolicitados {
             throw e;
         }
     }
-//FIN LUIS
+
+    public String ListarServNOBBDDSolucion(ESolucion oeSolucion) throws Exception {
+        listParameter.clear();
+        SqlParameter pIdSol = new SqlParameter("idSolucion",oeSolucion.getIdSolucion());
+        listParameter.add(pIdSol);
+        return com.EjecutaConsultaJson("filtrar_servicio_nobbdd_solucion", listParameter);
+    }
+
+    public String ListarServInsumo(String valor) throws Exception {
+        listParameter.clear();
+        SqlParameter pValor = new SqlParameter("valor",valor);
+        listParameter.add(pValor);
+        return com.EjecutaConsultaJson("filtrar_servicio_insumo", listParameter);
+    }
+//FIN LUISfdfdf
 }

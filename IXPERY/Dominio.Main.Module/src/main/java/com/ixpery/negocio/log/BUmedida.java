@@ -29,8 +29,9 @@ public class BUmedida {
         return odUmedida.ListarUmedida();
     }
 
-    public List<EUMedida> Buscar(String campos)throws Exception {
-        return odUmedida.BuscarUmedida(campos);
+
+    public String BuscarUmedida(String var) throws Exception{
+        return odUmedida.BuscarUmedida(var);
     }
     public List<EUMedida> BuscarUmedProducto(String campos)throws Exception {
         return odUmedida.BuscarUmedProducto(campos);

@@ -29,8 +29,8 @@ public class BFamilia {
         return odFamilia.ListarFamilia();
     }
 
-    public List<EFamilia> Buscar(String campos)throws Exception {
-        return odFamilia.BuscarFamilia(campos);
+    public String BuscarFamilia(String var) throws Exception{
+        return odFamilia.BuscarFamilia(var);
     }
     public List<EFamilia> BuscarFamCategoria(String campos)throws Exception {
         return odFamilia.BuscarFamCategoria(campos);

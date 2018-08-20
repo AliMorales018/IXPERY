@@ -26,11 +26,11 @@ public class BProducto {
         odProducto.EliminarProducto(campos);
     }
 
-    public List<EProducto> Listar() throws Exception {
+   /* public List<EProducto> Listar() throws Exception {
         return odProducto.ListarProducto();
-    }
+    }*/
 
-    public List<EProducto> Buscar(String campos)throws Exception {
+    public String BuscarProducto(String campos) throws Exception{
         return odProducto.BuscarProducto(campos);
     }
 
