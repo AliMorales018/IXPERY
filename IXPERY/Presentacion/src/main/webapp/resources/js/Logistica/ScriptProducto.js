@@ -1,15 +1,213 @@
-var nomBody_producto;
-var idPriFilaBody_producto = "firstRowBody_producto";
+var c_fil_producto;
+var dollyRowProducto = '';
+dollyRowProducto+= '<tr class="producto-edit">';
+dollyRowProducto+= '<td><div><p class="text-center" id="p_producto_num"></p></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_idpro"/></div></td>';
+dollyRowProducto+= '<td><div><span id="spn_producto_nombre"/></div></td>';
+dollyRowProducto+= '<td><div><span id="spn_producto_famil"/></div></td>';
+dollyRowProducto+= '<td><div><span id="spn_producto_categ"/></div></td>';
+dollyRowProducto+= '<td><div><span id="spn_producto_umedi"/></div></td>';
+dollyRowProducto+= '<td><div><span id="spn_producto_codig"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_estad"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_sreal"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_smini"/></div></td>';
+dollyRowProducto+= '<td><div><span id="spn_producto_model"/></div></td>';
+dollyRowProducto+= '<td><div><span id="spn_producto_marca"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_fregi"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_uregi"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_insum"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_pfina"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_einsu"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_epfin"/></div></td>';
+dollyRowProducto+= '<td><div class="text-center"><button type="button"><i class="icon-cross icon-hp-desh"></i></button></div></td>';
+dollyRowProducto+= '</tr>';
 
-CargarJS_producto(0,0,0);
+var dollyRowProductoHTML = $.parseHTML(dollyRowProducto);
 
-function limpiarTotal() {
+var rowCloneProducto;
+function CargarProductos() {
+    limpiarTotalProd();
+    var nomProd = $("#txt_producto_busnom").val();
+    c_fil_producto = 0;
+    $.ajax({
+        method: "POST",
+        url: "/producto/search",
+        data: {"prod":nomProd},
+        success: function resultado(data) {
+            if(data != 0) {
+                let JSONobjProducto = JSON.parse(data);
+                console.log(JSONobjProducto);
+                $("table #tbody_producto").empty();
+                $.each(JSONobjProducto.pdt, function (obj, item) {
+
+                    c_fil_producto++;
+                    let rowCloneProducto=$(dollyRowProductoHTML).clone().prop({id:'fila_producto' + c_fil_producto});
+                    rowCloneProducto.find('p').html(c_fil_producto);
+                    rowCloneProducto.find('span[id=spn_producto_idpro]').html(item.pdt1);
+                    rowCloneProducto.find('span[id=spn_producto_nombre]').html(item.pdt7);
+                    rowCloneProducto.find('span[id=spn_producto_famil]').html(item.pdt2.cat3);
+                    rowCloneProducto.find('span[id=spn_producto_categ]').html(item.pdt2.cat2);
+                    rowCloneProducto.find('span[id=spn_producto_umedi]').html(item.pdt4);
+                    rowCloneProducto.find('span[id=spn_producto_codig]').html(item.pdt6);
+                    rowCloneProducto.find('span[id=spn_producto_estad]').html(item.pdt8);
+                    rowCloneProducto.find('span[id=spn_producto_sreal]').html(item.pdt9);
+                    rowCloneProducto.find('span[id=spn_producto_smini]').html(item.pdt10);
+                    rowCloneProducto.find('span[id=spn_producto_model]').html(item.pdt11);
+                    rowCloneProducto.find('span[id=spn_producto_marca]').html(item.pdt12);
+                    rowCloneProducto.find('span[id=spn_producto_fregi]').html(item.pdt13);
+                    rowCloneProducto.find('span[id=spn_producto_uregi]').html(item.pdt14);
+                    rowCloneProducto.find('span[id=spn_producto_insum]').html(item.pdt15);
+                    rowCloneProducto.find('span[id=spn_producto_pfina]').html(item.pdt16);
+                    rowCloneProducto.find('span[id=spn_producto_einsu]').html(item.pdt17);
+                    rowCloneProducto.find('span[id=spn_producto_epfin]').html(item.pdt18);
+
+                    $("table #tbody_producto").append(rowCloneProducto);
+                });
+
+            }else{
+                $("table #tbody_producto").empty();
+                $("table #tbody_producto").append("<td colspan='20' class='text-center font-weight-light'><div id='campoempresa1'>NO SE HA BUSCADO PRODUCTO</div></td>");
+            }
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
+$(document).ready(function () {
+    CargarProductos();
+    listarFamilia("");
+    listarUmedida_producto("");
+    listarEsta_producto("contentcheck_producto");
+    $('table #tbody_producto')
+        .on('click','tr[class=producto-edit]',function(){
+            $("#txt_producto_idprodd").val(parseInt($(this).find('span[id = spn_producto_idpro]').html()));
+            $("#txt_producto_nombb").val($(this).find('span[id = spn_producto_nombre]').text());
+            $("#txt_producto_codd").val($(this).find('span[id = spn_producto_codig]').text());
+            $("#txt_producto_sminn").val($(this).find('span[id = spn_producto_smini]').text());
+            $("#txt_producto_saldd").val($(this).find('span[id = spn_producto_sreal]').text());
+            $("#txt_producto_modee").val($(this).find('span[id = spn_producto_model]').text());
+            $("#txt_producto_marcc").val($(this).find('span[id = spn_producto_marca]').text());
+            $("#cmb_producto_estadd").val($(this).find('span[id = spn_producto_estad]').text());
+
+            let insum=$(this).find('span[id=spn_producto_insum]').text();
+            let einsu=$(this).find('span[id=spn_producto_einsu]').text();
+            let pfina=$(this).find('span[id=spn_producto_pfina]').text();
+            let epfin=$(this).find('span[id=spn_producto_epfin]').text();
+
+            $('input[type=checkbox]').prop('checked',false);
+            $("#contentcheck_producto_estadd  input").each(function(){
+                if ($(this).val() ===insum){
+                    $("#"+$(this).attr("id")).prop('checked', true);
+                }else if($(this).val()===einsu){
+                    $("#"+$(this).attr("id")).prop('checked', true);
+                }else if($(this).val()===pfina){
+                    $("#"+$(this).attr("id")).prop('checked', true);
+                }else if($(this).val()===epfin){
+                    $("#"+$(this).attr("id")).prop('checked', true);
+                }
+            });
+        })
+});
+function listarFamilia(nomFam){
+    if (nomFam===""){
+        $("#cmb_producto_famii").select2({
+            ajax: {
+                url: "/producto/listarfami",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    console.log(data.items);
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar por familia . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: formatRepoFamilia,
+            templateSelection: formatRepoSelectionFam
+        });
+    }else{
+        $("#cmb_producto_famii").select2({
+            ajax: {
+                url: "/producto/listarfami",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: nomFam
+                    };
+                },
+                processResults: function (data, params) {
+                    console.log(data.items);
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar por familia . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: formatRepoFamilia,
+            templateSelection: formatRepoSelectionFam
+        });
+    }
+
+
+}
+function formatRepoFamilia (repo) {
+    if (repo.loading) {
+        return repo.text;
+    }
+    var markup = "<div class='selectempresa2-result-familia'><span class='selectempresa2-span-equiporesult'>FAMILIA: </span>"+repo.familia+"</div>"+
+                 "<div class='selectempresa2-result-categoria'><span class='selectempresa2-span-equiporesult'>CATEGORIA: </span>"+repo.categoria+"</div>";
+    return markup;
+}
+
+function formatRepoSelectionFam (repo) {
+    return repo.text || repo.familia +"-"+repo.categoria;
+}
+
+function formatRepoCategoria (repo) {
+    if (repo.loading) {
+        return repo.text;
+    }
+    var markup = "<div class='selectempresa2-result-equipo'><span class='selectempresa2-span-equiporesult'>CATEGORIA: </span>"+repo.categoria+"</div>";
+    return markup;
+}
+function formatRepoSelectionCat (repo) {
+    return repo.text || repo.categoria;
+}
+
+function formatRepoUmedida (repo) {
+    if (repo.loading) {
+        return repo.text;
+    }
+    var markup = "<div class='selectempresa2-result-equipo'><span class='selectempresa2-span-equiporesult'>U. MEDIDA: </span>"+repo.medida+"</div>";
+    return markup;
+}
+function formatRepoSelectionUme (repo) {
+    return repo.text || repo.medida;
+}
+
+
+function limpiarTotalProd() {
     var arrayCajas=["txt_producto_nombb","txt_producto_codd","txt_producto_sminn","txt_producto_saldd","txt_producto_modee",
-        "txt_producto_marcc","txt_producto_idprodd"]
+        "txt_producto_marcc","txt_producto_idprodd","txt_producto_busnom"]
 
     var arrayCombo = ["cmb_producto_famii","cmb_producto_catee","cmb_producto_umedd"];
     limpiaCombo(arrayCombo);
     limpiarCajas(arrayCajas);
+    $('input[type=checkbox]').prop('checked',false);
 }
 function validarcampos(){
     if($("#txt_producto_nombb").val()=="" || $("#txt_producto_sminn").val()=="" || $("#txt_producto_saldd").val()==""){
@@ -46,7 +244,7 @@ function CargarJS_producto(estado, childNodes, reloadTabla) {
     listarUmedida_producto("cmb_producto_umedd","");
     listarEsta_producto("contentcheck_producto");
     buscar_producto();
-    limpiarTotal();
+    limpiarTotalProd();
     //Nombre del body
     nomBody_producto = "tbody_producto";
     //ID del Body
@@ -56,26 +254,6 @@ function convertUpperCase(e) {
     e.value = e.value.toUpperCase();
 }
 
-//METODOS AJAX
-/*function elimRegistro_producto(posicionFila) {
-
-    var i = $("#txt_producto_idpre" + posicionFila).val();
-
-    $.ajax({
-        method: "POST",
-        url: "/producto/delete",
-        data: {"i":i},
-        success: function resultado(valor) {
-            if (valor == "") {
-                alert("Se dió de baja al Producto.");
-                $("#fila_producto" + posicionFila).remove();
-            }
-        },
-        error: function errores(msg) {
-            alert('Error: ' + msg.responseText);
-        }
-    });
-}*/
 
 function editRegistro_producto(posicionFila) {
 
@@ -100,26 +278,7 @@ function editRegistro_producto(posicionFila) {
     });
 }
 
-function buscar_producto() {
-    //Alterna funcion del boton nuevo.
-    $("#btn_producto_nue").css("display", "none");
-    $("#btn_producto_nue_reload").css("display", "inline");
-    $("#btn_producto_save").attr("disabled", true);
-    var prod = $("#txt_producto_busnom").val();
-    // var cate = $("#txt_producto_buscat").val().toUpperCase();
-    $.ajax({
-        method: "POST",
-        url: "/producto/search",
-        data: {"prod":prod},
-        success: function resultado(valor) {
-            // $("#thEditar_producto").css("display", "block");
-            $("#" + nomBody_producto).html(valor);
-        },
-        error: function errores(msg) {
-            alert('Error: ' + msg.responseText);
-        }
-    });
-}
+
 var id_fila_antigua="";
 function llenarRegistro_producto(idtr,posicionFila){
     if(id_fila_antigua==""){//hover fila
@@ -212,7 +371,7 @@ function listarFami_producto(combo, famil) {
     $.ajax({
         method: "POST",
         url: "/producto/listarfami",
-        data: {"combo":combo,"famil":famil},
+        data: {"famil":famil},
         success: function resultado(valor) {
             if(valor=="anidados"){
                 llenarCate_anidado(combo,famil);
@@ -259,58 +418,100 @@ function listarEsta_producto(divcheck) {
         }
     });
 }
-function llenarCate_producto(idfami,idcate) {
-    $.ajax({
-        method: "POST",
-        url: "/producto/listarcate",
-        data: {"idfami":idfami},
-        success: function resultado(valor) {
-            $("#cmb_producto_catee").html(valor);
-            if(idcate==""){}else{
-                $("#cmb_producto_catee option").each(function() {
-                    if ($(this).text() == idcate) {
-                        $("#cmb_producto_catee option[value=" + $(this).val() + "]").attr("selected", true);
-                    }
-                });
-            }
+
+function llenarCate_producto(idfami) {
+    $("#cmb_producto_catee").select2({
+        ajax: {
+            url: "/producto/listarcate",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: idfami
+                };
+            },
+            processResults: function (data, params) {
+                console.log(data.items);
+                return {
+                    results: data.items
+                };
+            },
+            cache: true
         },
-        error: function errores(msg) {
-            alert('Error: ' + msg.responseText);
-        }
+        placeholder: 'Buscar por categoría . . .',
+        escapeMarkup: function (markup) { return markup; },
+        //minimumInputLength: 3,
+        templateResult: formatRepoCategoria,
+        templateSelection: formatRepoSelectionCat
     });
 }
-function listarUmedida_producto(combo,umed) {
-    $.ajax({
-        method: "POST",
-        url: "/producto/listarumed",
-        data: {"combo":combo,"umed":umed},
-        success: function resultado(valor) {
-            if(valor=="anidados"){
-                llenarCate_anidado(combo,fami);
-            }else{
-                $("#" + combo).html(valor);
-            }
 
-        },
-        error: function errores(msg) {
-            alert('Error: ' + msg.responseText);
-        }
-    });
+function listarUmedida_producto(umed) {
+    if(umed===""){
+        $("#cmb_producto_umedd").select2({
+            ajax: {
+                url: "/producto/listarumed",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    console.log(data.items);
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar por u. medida . . .',
+            escapeMarkup: function (markup) { return markup; },
+            minimumInputLength: 3,
+            templateResult: formatRepoUmedida,
+            templateSelection: formatRepoSelectionUme
+        });
+    }else{
+        $("#cmb_producto_umedd").select2({
+            ajax: {
+                url: "/producto/listarumed",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: umed
+                    };
+                },
+                processResults: function (data, params) {
+                    console.log(data.items);
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar por u. medida . . .',
+            escapeMarkup: function (markup) { return markup; },
+            //minimumInputLength: 3,
+            templateResult: formatRepoUmedida,
+            templateSelection: formatRepoSelectionUme
+        });
+
+    }
+
+
 }
 function guardaProducto(){
     var valida=validarcampos();
     if(valida==true) {
-        $("#cmb_producto_umedd option").each(function () {
-            if ($(this).val() == "sel") {
-                $(this).removeAttr("selected");
-                $(this).remove();
-            }
-        });
 
         var i = $("#txt_producto_idprodd").val();
         var idcate = $("#cmb_producto_catee").val();
         var idumed = $("#cmb_producto_umedd").val();
-        var umed = $('select[name="cmb_producto_umedd"] option:selected').text();
+
+        var umed = $("#cmb_producto_umedd").select2('data')[0].medida;
+
         var cod = $("#txt_producto_codd").val().toUpperCase();
         var nomb = $("#txt_producto_nombb").val().toUpperCase();
         var esta = $("#cmb_producto_estadd").val();
@@ -378,12 +579,13 @@ function guardaProducto(){
             data: JSON.stringify(arrayData),
             success: function resultado(valor) {
                 if (valor == "0") {//0:update
-                    alert("Producto Actualizado Correctamente");
-                } else {
                     alert("Producto Registrado Correctamente");
+                } else {
+                    alert("Producto Actualizado Correctamente");
                 }
-                buscar_producto();
+                CargarProductos();
                 $("#txt_producto_idprodd").val("");
+                $("#txt_producto_busnom").val("");
             },
             error: function errores(msg) {
                 alert('Error: ' + msg.responseText);
@@ -406,12 +608,7 @@ function eliProducto(){
             success: function resultado(valor) {
                 if (valor == "") {
                     alert("Se dió de baja al Producto.");
-                    $("tbody tr td input").each(function() {
-                        if ($(this).val() == i) {
-                            $(this).closest('tr').remove();
-                        }
-                    });
-                    CargarJS_producto(0,1,1);
+                    CargarProductos;
                 }
             },
             error: function errores(msg) {

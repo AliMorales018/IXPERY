@@ -1,6 +1,7 @@
 package com.ixpery.datos.log;
 
 import com.ixpery.datos.tools.DConexion;
+import com.ixpery.datos.tools.JsonGeneral;
 import com.ixpery.datos.tools.JsonParcellable;
 import com.ixpery.entidades.log.EProducto;
 import com.ixpery.entidades.log.EProductoProveedor;
@@ -16,6 +17,7 @@ import java.util.List;
 public class DProducto {
     DConexion c = new DConexion();
     DtUtilitario com = new DtUtilitario(c.ConectarBD());
+    JsonGeneral jsonGeneral = new JsonGeneral();
 
     public DProducto() throws Exception { }
 
@@ -110,52 +112,31 @@ public class DProducto {
     }
 
     /*FUNCION LISTAR TODAS LAS ProductoES*/
-    public List<EProducto> ListarProducto() throws Exception {
-        listaParametros.clear();
-        SqlParameter pTabla = new SqlParameter("@tabla", getNomTabProducto());
-        listaParametros.add(pTabla);
-        String json = com.EjecutaConsultaJson("gen_listar", listaParametros);
-        //CONVERTIR JSON A LISTA DE ProductoES
-        List<EProducto> listApli = new ArrayList<EProducto>();
-        return listApli;
-    }
+    public String BuscarProducto(String campos) throws Exception{
+        String value = jsonGeneral.StringConvert(campos);
 
-    /*FUNCION LISTAR POR CAMPO ESPECÍFICO
-      campos=nomColumna,valorBuscado;
-      nomColumna2,valorBuscado*/
-    public List<EProducto> BuscarProducto(String campos) throws Exception {
-
-        if(!campos.equals("/")) {
-            //SEPARAMOS POR COMAS PARA PODER AGREGAR EL NOMBRE DE LA COLUMNA(CODIGO)
-            String[] addColumna = campos.split(",");
-            for (int i = 0; i < addColumna.length; i++){
-                if (addColumna[i].equals("%")) {
-                    addColumna[i] = "";
-                }
-            }
-            campos = getKeyNombre() + "," + addColumna[0];
-            System.out.println("Campos: " + campos);
+        if(value.equals("/")){
+            value = "461447,%";
         }
+        else{
+            value = value;
+//            value = value + ";461448,1";
+        }
+//        value = "460513,%;460094,JUA;460519,1";
 
         listaParametros.clear();
-        SqlParameter pTabla = new SqlParameter("tabla", getNomTabProducto());
-        SqlParameter pCampos = new SqlParameter("campos", campos);
-        listaParametros.add(pTabla);
-        listaParametros.add(pCampos);
+        SqlParameter pTab = new SqlParameter("tab", getNomTabProducto());
+        SqlParameter pValue = new SqlParameter("value", value);
+        SqlParameter pCamTab1 = new SqlParameter("campTab1", "461441,461443,461444,461446,461447,461448,461449,4614410,4614411,4614412,4614413,4614414,4614415,4614416,4614417,4614418");
+        SqlParameter pCamTab2 = new SqlParameter("campTab2", "461442:459201,459202,459203");
 
-        String jsonResult = com.EjecutaConsultaJson("gen_filtrar_like", listaParametros);
-
-        List<EProducto> listProd = new ArrayList<EProducto>();
-        if(!jsonResult.equals("")) {
-            //CONVERTIR JSON A LISTA DE ARRAY
-            JsonParcellable parser = new JsonParcellable();
-            List<Object> listObject = parser.getListObjectJson(jsonResult, new EProducto());
-            for (int i = 0; i < listObject.size(); i++) {
-                EProducto oprod= (EProducto) listObject.get(i);
-                listProd.add(oprod);
-            }
-        }
-        return listProd;
+        listaParametros.add(pTab);
+        listaParametros.add(pValue);
+        listaParametros.add(pCamTab1);
+        listaParametros.add(pCamTab2);
+        String json = com.EjecutaConsultaJson("gen_buscar", listaParametros);
+        json =  jsonGeneral.JsonConvertInvert(json);
+        return json;
     }
 
     public Integer NextId(){

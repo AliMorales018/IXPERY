@@ -1,5 +1,9 @@
 package com.ixpery.controladores.log;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ixpery.controladores.tools.GeneralHTML;
 import com.ixpery.entidades.log.EEmpresa;
 import com.ixpery.entidades.log.EEstado;
@@ -48,23 +52,27 @@ public class CRequerimiento {
 
     @RequestMapping(value="/requerimiento/register", method = RequestMethod.POST)
     public @ResponseBody String RegistrarRequerimiento(
-            @RequestParam(value = "iP") Integer iP,
-            @RequestParam(value = "values") String lisRq
-    ) throws Exception{
-        String[] array = lisRq.split(",");
+            @RequestBody String json
+    ) throws Exception {
         List<ERequerimiento> listRQ= new ArrayList<>();
         ERequerimiento oeRequerimiento;
+        JsonParser parser = new JsonParser();
+        JsonObject root = parser.parse(json).getAsJsonObject();
 
-        for (int i = 0; i < array.length; i++){
+        Integer idProyecto = Integer.parseInt(root.get("iP").getAsString());
+        JsonArray jsonArray = root.get("values").getAsJsonArray();
+
+        for (JsonElement jsonElement : jsonArray) {
+            JsonObject newJsonObject = (JsonObject) jsonElement;
             oeRequerimiento = new ERequerimiento();
             oeRequerimiento.setIdrequerimiento(0);
-            oeRequerimiento.setIdproyecto(new EProyecto(iP));
-            oeRequerimiento.setNomrequerimiento(array[i]);
-            oeRequerimiento.setIdestado(Integer.parseInt(array[i+1]));
-            oeRequerimiento.setEstado(array[i+2]);
+            oeRequerimiento.setIdproyecto(new EProyecto(idProyecto));
+            oeRequerimiento.setNomrequerimiento(newJsonObject.get("0").getAsString());
+            oeRequerimiento.setIdestado(Integer.parseInt(newJsonObject.get("1").getAsString()));
+            oeRequerimiento.setEstado(newJsonObject.get("2").getAsString());
             listRQ.add(oeRequerimiento);
-            i+=2;
         }
+
         obRequerimiento.Insertar(listRQ);
         return "";
     }

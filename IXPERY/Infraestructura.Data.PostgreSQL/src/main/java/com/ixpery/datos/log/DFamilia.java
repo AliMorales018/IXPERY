@@ -118,26 +118,11 @@ public class DFamilia {
     /*FUNCION LISTAR POR CAMPO ESPECÍFICO
       campos=nomColumna,valorBuscado;
       nomColumna2,valorBuscado*/
-    public List<EFamilia> BuscarFamilia(String campos) throws Exception {
+    public String BuscarFamilia(String campos) throws Exception {
         listaParametros.clear();
-        SqlParameter pTabla = new SqlParameter("tabla", getNomTabFamilia());
-        SqlParameter pCampos = new SqlParameter("campos", campos);
-        listaParametros.add(pTabla);
-        listaParametros.add(pCampos);
-
-        String jsonResult = com.EjecutaConsultaJson("gen_filtrar_like", listaParametros);
-
-        List<EFamilia> listFami = new ArrayList<EFamilia>();
-        if(!jsonResult.equals("")) {
-            //CONVERTIR JSON A LISTA DE ARRAY
-            JsonParcellable parser = new JsonParcellable();
-            List<Object> listObject = parser.getListObjectJson(jsonResult, new EFamilia());
-            for (int i = 0; i < listObject.size(); i++) {
-                EFamilia oFami  = (EFamilia) listObject.get(i);
-                listFami.add(oFami);
-            }
-        }
-        return listFami;
+        SqlParameter pValorLike = new SqlParameter("varLike", campos);
+        listaParametros.add(pValorLike);
+        return com.EjecutaConsultaJson("filtrar_familias", listaParametros);
     }
     public List<EFamilia> BuscarFamCategoria(String campos) throws Exception {
         campos = getKeyId() + "," + campos;

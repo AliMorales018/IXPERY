@@ -114,30 +114,13 @@ public class DCategoria {
     /*FUNCION LISTAR POR CAMPO ESPECÍFICO
       campos=nomColumna,valorBuscado;
       nomColumna2,valorBuscado*/
-    public List<ECategoria> BuscarCategoria(String campos) throws Exception {
-        campos = getKeyIdFamilia() + "," + campos;
-        System.out.println("Campos: " + campos);
-
-        listaParametros.clear();
-        SqlParameter pTabla = new SqlParameter("tabla", getNomTabCategoria());
-        SqlParameter pCampos = new SqlParameter("campos", campos);
-        listaParametros.add(pTabla);
-        listaParametros.add(pCampos);
-
-        String jsonResult = com.EjecutaConsultaJson("gen_filtrar", listaParametros);
-
-        List<ECategoria> listCate = new ArrayList<ECategoria>();
-        if(!jsonResult.equals("")) {
-            //CONVERTIR JSON A LISTA DE ARRAY
-            JsonParcellable parser = new JsonParcellable();
-            List<Object> listObject = parser.getListObjectJson(jsonResult, new ECategoria());
-            for (int i = 0; i < listObject.size(); i++) {
-                ECategoria oCate  = (ECategoria) listObject.get(i);
-                listCate.add(oCate);
-            }
+        public String BuscarCategoria(Integer var) throws Exception{
+            listaParametros.clear();
+            SqlParameter pValorLike = new SqlParameter("varLike", var);
+            listaParametros.add(pValorLike);
+            return com.EjecutaConsultaJson("filtrar_categorias", listaParametros);
         }
-        return listCate;
-    }
+
     public List<ECategoria> BuscarCateFamilia(String campos) throws Exception {
 
         campos = getKeyId() + "," + campos;

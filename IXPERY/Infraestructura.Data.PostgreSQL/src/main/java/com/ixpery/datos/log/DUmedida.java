@@ -115,29 +115,11 @@ public class DUmedida {
         return listUmed;
     }
 
-    /*FUNCION LISTAR POR CAMPO ESPECÍFICO
-      campos=nomColumna,valorBuscado;
-      nomColumna2,valorBuscado*/
-    public List<EUMedida> BuscarUmedida(String campos) throws Exception {
+    public String BuscarUmedida(String campos) throws Exception {
         listaParametros.clear();
-        SqlParameter pTabla = new SqlParameter("tabla", getNomTabUmedida());
-        SqlParameter pCampos = new SqlParameter("campos", campos);
-        listaParametros.add(pTabla);
-        listaParametros.add(pCampos);
-
-        String jsonResult = com.EjecutaConsultaJson("gen_filtrar_like", listaParametros);
-
-        List<EUMedida> listUmed = new ArrayList<EUMedida>();
-        if(!jsonResult.equals("")) {
-            //CONVERTIR JSON A LISTA DE ARRAY
-            JsonParcellable parser = new JsonParcellable();
-            List<Object> listObject = parser.getListObjectJson(jsonResult, new EUMedida());
-            for (int i = 0; i < listObject.size(); i++) {
-                EUMedida oUmed  = (EUMedida) listObject.get(i);
-                listUmed.add(oUmed);
-            }
-        }
-        return listUmed;
+        SqlParameter pValorLike = new SqlParameter("varLike", campos);
+        listaParametros.add(pValorLike);
+        return com.EjecutaConsultaJson("filtrar_umedida", listaParametros);
     }
     public List<EUMedida> BuscarUmedProducto(String campos) throws Exception {
         campos = getKeyId() + "," + campos;
