@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
-
+//comentario
 public class CAsociarServicio {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BServicioSolicitados obServSolici = (BServicioSolicitados) applicationContext.getBean("beanServSolicitados");
@@ -43,7 +43,7 @@ public class CAsociarServicio {
         return obServSolici.ListarServInsumo(valor);
     }
 
-    @RequestMapping("/asociarproducto/register")
+    @RequestMapping("/asociarservicio/register")
     public @ResponseBody String RegistrarServAso(
             @RequestParam(value="value") String valorCadena
     ) throws Exception{
@@ -52,7 +52,7 @@ public class CAsociarServicio {
             return "";
         }
         else{
-            return "ERROR: No se pudo Asociar los productos";
+            return "ERROR: No se pudo Asociar los servicios";
         }
     }
 }
