@@ -59,12 +59,11 @@
 
     </div>
 
-    <jsp:include page="../includes/footer.jsp"></jsp:include>
-
     <script>
         var contador_hs_cl = 0;
         $(document).ready(function() {
             BuscarServicioCotizacion();
+            $('footer').show();
         });
         function BuscarServicioCotizacion(){
             console.log("SERVICIOS COTIZACION");
@@ -256,7 +255,8 @@
                 async: false,
                 url: "/cargolaboral/sesioncl",
                 data: {"idCargo": idCargo},
-                success: function() {
+                success: function(valor) {
+                    console.log("SESION CREADA CARGO: "+valor)
                 },
                 error: function errores(msg) {
                     alert('Error: ' + msg.responseText);
@@ -265,7 +265,7 @@
             AddMenu(mSueldos);
             //El menú ya ha sido creado
             if(contador_hs_cl !== 0){
-                ListarHistorial_SalariosCL();
+                ListarHistorial_SalariosCL(idCargo,"cotizacion");
             }
         }
 
