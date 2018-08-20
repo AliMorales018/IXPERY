@@ -281,7 +281,7 @@
         }
             },
             error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
+                //alert('Error: ' + msg.responseText);
             }
         });
     }

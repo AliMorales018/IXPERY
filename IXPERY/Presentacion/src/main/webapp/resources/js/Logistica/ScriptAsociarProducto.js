@@ -126,7 +126,7 @@ function save_productos_asociados() {
                 }
             },
             error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
+                // alert('Error: ' + msg.responseText);
             }
         });
     }
