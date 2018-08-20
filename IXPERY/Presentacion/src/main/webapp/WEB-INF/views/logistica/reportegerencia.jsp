@@ -12,28 +12,28 @@
     <link rel="icon" href="${urlPublic}/css/Iconos/ixpery.ico"/>
 
     <style>
-        .reporte-body{
+        .reporte-ger-body{
             background-color: white;
             font-size: 9px;
         }
-        .reporte{
+        .reporte-ger{
             padding-top: 35px;
             padding-left: 35px;
         }
-        .reporte-botones{
+        .reporte-ger-botones{
             margin-top: 150px;
             text-align: center;
         }
-        .reporte-presentacion{
+        .reporte-ger-presentacion{
             font-size: 4px;
         }
-        .tabla-reporte{
+        .tabla-reporte-ger{
             border-collapse: collapse;
             width: 100%;
             max-width: 100%;
             background-color: transparent;
         }
-        .tabla-reporte th{
+        .tabla-reporte-ger th{
             font-family: "Lato-Regular", cursive;
             padding: .2rem;
             vertical-align: top;
@@ -41,46 +41,46 @@
             text-align: center;
             font-size: 10px;
         }
-        .tabla-reporte td{
+        .tabla-reporte-ger td{
             font-family: "Lato-Regular", cursive;
             padding: .2rem;
             vertical-align: top;
             border-top: 1px solid #DEE2E6;
         }
-        .reporte-item{
+        .reporte-ger-item{
             background-color: #DEE2E6;
             text-align: center;
         }
-        .reporte-resaltar{
+        .reporte-ger-resaltar{
             background-color: #D34539;
             color: #FFFFFF;
         }
-        .reporte-resaltar-sec{
+        .reporte-ger-resaltar-sec{
             background-color: #FDBDB7;
         }
-        .reporte-color-primary{
+        .reporte-ger-color-primary{
             margin-top: .2rem;
             margin-bottom: .05rem;
             color: #D34539;
         }
-        .reporte-color-black{
+        .reporte-ger-color-black{
             margin-top: .2rem;
             /*margin-bottom: .05rem;*/
         }
-        /*.reporte-sub{*/
+        /*.reporte-ger-sub{*/
         /*border-bottom: 1px solid #D34539;*/
         /*text-align: center;*/
         /*color: #D34539;*/
         /*}*/
 
-        .reporte-cabecera{
+        .reporte-ger-cabecera{
             border-bottom: 2px solid #D34539;
             padding-bottom: .2rem;
             margin-bottom: .5rem;
 
         }
 
-        .reporte-tabla-cabecera{
+        .reporte-ger-tabla-cabecera{
             border-bottom: 1px solid black;
             border-right: 1px solid black;
             border-left: 1px solid black;
@@ -88,22 +88,22 @@
             font-size: 8px;
         }
 
-        .reporte-piepagina{
+        .reporte-ger-piepagina{
             border-top: 2px solid #D34539;
             padding-top: .3rem;
         }
 
-        .reporte-totales{
+        .reporte-ger-totales{
             vertical-align:middle;
             text-align:center;
             background-color: #DEE2E6;
         }
 
-        .reporte-ocultar{
+        .reporte-ger-ocultar{
             display: none;
         }
 
-        .reporte-vertical{
+        .reporte-ger-vertical{
             /*width:20px;*/
             /*word-wrap: break-word;*/
             /*text-align:center;*/
@@ -117,7 +117,7 @@
             fill: black;
         }
 
-        .boton-reporte {
+        .boton-reporte-ger {
             cursor:pointer;
             display: inline-block;
             font-weight: 400;
@@ -142,10 +142,31 @@
             border-color: #D34539;
             background-color: #D34539;
         }
-        .boton-reporte:hover {
+        .boton-reporte-ger:hover {
             color: #FFFFFF;
             background-color: #B3002A;
             border-color: #B3002A;
+        }
+
+        .moneda{
+            font-weight: bold;
+            text-align: right;
+        }
+        .moneda::before{
+            content: "S/. ";
+        }
+
+        .moneda::after{
+            content: ".00";
+        }
+        .sinmoneda{
+            font-weight: bold;
+            text-align: right;
+        }
+        /*div[class^='miclase']{*/
+        div[class $= 'cantidad']{
+            font-weight: bold;
+            text-align: center;
         }
 
     </style>
@@ -153,19 +174,19 @@
 
 
 </head>
-<body class="reporte-body">
+<body class="reporte-ger-body">
 
 <div class="grid-x">
     <!--REPORTE-->
-    <div class="cell large-5 reporte">
+    <div class="cell large-5 reporte-ger">
 
         <!--CABECERA-->
-        <div class="grid-x reporte-cabecera">
+        <div class="grid-x reporte-ger-cabecera">
             <div class="cell large-6">
                 <img src="${urlPublic}/img/logo.svg" height="30" width="230"/>
             </div>
             <div class="cell large-3" style="padding-top:.5rem;padding-left:.5rem;">
-                <button class="boton-reporte" onclick="GenerarReporte();">REPORTE</button>
+                <%--<button class="boton-reporte-ger" onclick="GenerarReporteGer();">REPORTE</button>--%>
             </div>
             <div class="cell large-3">
                 <div class="text-right">
@@ -177,15 +198,15 @@
 
         <!--DATOS-->
         <div class="grid-x grid-padding-x">
-            <div id="reporte-datos-cliente" class="cell large-6"></div>
-            <div id="reporte-datos-cotizacion" class="cell large-6"></div>
+            <div id="reporte-ger-datos-cliente" class="cell large-6"></div>
+            <div id="reporte-ger-datos-cotizacion" class="cell large-6"></div>
         </div>
         <!--FIN DATOS-->
         <!--TABLA-->
         <div style="margin-top: .3rem">
-            <table class="tabla-reporte">
+            <table class="tabla-reporte-ger">
                 <thead>
-                <tr class="reporte-resaltar">
+                <tr class="reporte-ger-resaltar">
                     <th>ITEM</th>
                     <th>CODIGO</th>
                     <th>MARCA - MODELO</th>
@@ -195,32 +216,32 @@
                     <th>TOTAL</th>
                 </tr>
                 </thead>
-                <tbody id="reporte-ITEM1">
-                <tr class="reporte-item">
+                <tbody id="reporte-ger-ITEM1">
+                <tr class="reporte-ger-item">
                     <td colspan="3"></td>
                     <td><div>EQUIPOS</div></td>
                     <td></td>
-                    <td><center><input id="item1-check-prunitario" type="checkbox" /></center></td>
-                    <td><center><input id="item1-check-prsubtotal" type="checkbox" /></center></td>
+                    <td><center><input id="item1-check-prunitario" type="checkbox" style="display:none" /></center></td>
+                    <td><center><input id="item1-check-prsubtotal" type="checkbox" style="display:none" /></center></td>
                 </tr>
 
                 </tbody>
-                <tbody id="reporte-ITEM2">
-                <tr class="reporte-item">
+                <tbody id="reporte-ger-ITEM2">
+                <tr class="reporte-ger-item">
                     <td colspan="3"></td>
                     <td><div>SERVICIOS E INSTALACIONES</div></td>
                     <td></td>
-                    <td><center><input id="item2-check-prunitario" type="checkbox" /></center></td>
-                    <td><center><input id="item2-check-prsubtotal" type="checkbox" /></center></td>
+                    <td><center><input id="item2-check-prunitario" type="checkbox" style="display:none" /></center></td>
+                    <td><center><input id="item2-check-prsubtotal" type="checkbox" style="display:none" /></center></td>
                 </tr>
                 </tbody>
-                <tbody id="reporte-ITEM3">
-                <tr class="reporte-item">
+                <tbody id="reporte-ger-ITEM3">
+                <tr class="reporte-ger-item">
                     <td colspan="3"></td>
                     <td><div>OTROS</div></td>
                     <td></td>
-                    <td><center><input id="item3-check-prunitario" type="checkbox" /></center></td>
-                    <td><center><input id="item3-check-prsubtotal" type="checkbox" /></center></td>
+                    <td><center><input id="item3-check-prunitario" type="checkbox" style="display:none" /></center></td>
+                    <td><center><input id="item3-check-prsubtotal" type="checkbox" style="display:none" /></center></td>
                 </tr>
                 </tbody>
             </table>
@@ -228,25 +249,25 @@
         <!--TABLA-->
 
         <!--MEMO-->
-        <div id="reporte-memo"></div>
+        <div id="reporte-ger-memo"></div>
         <!--FIN MEMO-->
 
         <!--PIE PAGINA-->
-        <div id="reporte-piepagina" class="grid-x">
+        <div id="reporte-ger-piepagina" class="grid-x">
             <div class="cell large-6"></div>
             <div class="cell large-6 text-center">
                 <img class="" src="${urlPublic}/img/firma.svg" height="10" width="100"/>
             </div>
-            <div class="cell large-6 reporte-piepagina">
+            <div class="cell large-6 reporte-ger-piepagina">
                 <div>IXPERY&nbsp;SERVICE&nbsp;S.A.C</div>
                 <div style="margin:.2rem auto">Lima: Av.San Pedro 845 Int 501, Surquillo</div>
                 <div><div style="display:inline;color:#D34539">Chiclayo :</div> Av.Alfonso Ugarte 665, 4to piso</div>
             </div>
-            <div class="cell large-6 reporte-piepagina">
+            <div class="cell large-6 reporte-ger-piepagina">
                 <div class="text-center">
                     <div class="text-center" style="font-weight:bold">Yannick&nbsp;Morales&nbsp;Mio</div>
-                    <div class="text-center reporte-color-black">Gerente</div>
-                    <div class="text-center reporte-color-black">Celular: 962500511</div>
+                    <div class="text-center reporte-ger-color-black">Gerente</div>
+                    <div class="text-center reporte-ger-color-black">Celular: 962500511</div>
                 </div>
             </div>
         </div>
@@ -256,7 +277,7 @@
 
 
     <!--PDF-->
-    <div id="reporte-pdf" class="cell large-7"></div>
+    <div id="reporte-ger-pdf" class="cell large-7"></div>
     <!--FIN PDF-->
 </div>
 
@@ -264,7 +285,7 @@
 <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
 <script src="${urlPublic}/js/jspdf.debug.js"></script>
 <script src="${urlPublic}/js/html2pdf.js"></script>
-<script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptReportesOperaciones.js"></script>
+<script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptReporteGerencia.js"></script>
 
 
 

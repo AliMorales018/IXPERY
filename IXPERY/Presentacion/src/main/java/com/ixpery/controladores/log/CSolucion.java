@@ -157,6 +157,19 @@ public class CSolucion {
     }
 
 
+    @RequestMapping("/solucion/RerporteGererencia")
+    public @ResponseBody
+    String RerporteGererencia(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
+//        Integer solucion = 1;
+        String json = obSolucion.ReporteGerencia(solucion);
+        return json;
+    }
+
+
 
 
     @RequestMapping("/solucion/DestruirSesionSolucion")
