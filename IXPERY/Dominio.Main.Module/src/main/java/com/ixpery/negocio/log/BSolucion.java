@@ -41,6 +41,10 @@ public class BSolucion {
         return odSol.ReporteOperaciones(sol);
     }
 
+    public String ReporteGerencia(Integer sol) throws Exception{
+        return odSol.ReporteGerencia(sol);
+    }
+
     public String BuscarSolucionesAprobadas() throws Exception{
         return odSol.BuscarSolucionesAprobadas();
     }

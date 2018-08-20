@@ -34,4 +34,13 @@ public class CReportes {
     }
 
 
+    @RequestMapping("/reportes/ReporteGerencia")
+    public ModelAndView ReporteGerencia(){
+        ModelAndView modelAndView = new ModelAndView("/logistica/reportegerencia");
+        return modelAndView;
+    }
+
+
+
+
 }
