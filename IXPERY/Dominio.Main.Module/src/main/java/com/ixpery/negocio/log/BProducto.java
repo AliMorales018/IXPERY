@@ -67,6 +67,11 @@ public class BProducto {
         return odProducto.BuscarProveProductoCombo(var);
     }
 //FIN LUIS
+//DANTE
+public String  RegistrarProductoAsociado(String cadena)throws Exception {
+    return odProducto.RegistrarProAsociado(cadena);
+}
+    //DANTE
 
 }
 

@@ -213,14 +213,19 @@ function crearSesProvProd(idtr){
         success: function resultado(valor) {
             console.log("Rpta de sesion");
             console.log(valor);
+            AddMenu(mAsPrecio);
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
         }
     });
 
+
 }
 
 function abrir_equipo2_regprod(){
      AddMenu(mAsociarProd);
+}
+function abrir_equipo2_regprove(){
+     AddMenu(mProveedor);
 }
