@@ -77,11 +77,13 @@ $(document).ready(function () {
                     };
                 },
                 processResults: function (data) {
-                    $.each(data.emp, function(i, d) {
-                        data.emp[i]['id'] = d.emp1;
+                    $.each(data.ITEMS, function(i, d) {
+                        data.ITEMS[i]['id'] = d.idempresa;
                     });
+                    console.log('data.items');
+                    console.log(data.items);
                     return {
-                        results: data.emp,
+                        results: data.ITEMS,
                     };
                 },
                 cache: true
@@ -716,14 +718,14 @@ function FormatRepoEmp (repo) {
     if (repo.loading) {
         return repo.text;
     }
-    let markup = `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Empresa: ${repo.emp4}</div>`+
-        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>RUC: ${repo.emp3}</div>`;
+    let markup = `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>Empresa: ${repo.nomempresa}</div>`+
+        `<div class='select2-result-reqproemp'><span class='select2-span-result'></span>RUC: ${repo.ruc}</div>`;
     return markup;
 }
 
 
 function FormatRepoSelectionEmp (repo) {
-    return  repo.text || repo.emp4 + ' - ' + repo.emp3 ;
+    return  repo.text || repo.nomempresa;
 }
 
 

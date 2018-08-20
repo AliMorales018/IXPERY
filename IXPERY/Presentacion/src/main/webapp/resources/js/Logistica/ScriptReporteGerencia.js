@@ -55,12 +55,12 @@ for(let i = 0; i < lengthITEM1; ++i){
             arrITEM1[i][key] = '';
         }
     });
-
+    // Number(value).toLocaleString('en');
     let preciounitario = '';
     let preciosubtotal = '';
 
     if(arrITEM1[i].punitvisible === '1'){
-        preciounitario = `<div class="moneda">${arrITEM1[i].preciounitario}</div>`;
+        preciounitario = `<div class="moneda">${Number(arrITEM1[i].preciounitario).toLocaleString('en')}</div>`;
         $('input#item1-check-prunitario').attr( 'checked', true );
     }
     else{
@@ -69,7 +69,7 @@ for(let i = 0; i < lengthITEM1; ++i){
     }
 
     if(arrITEM1[i].pstotalvisible === '1'){
-        preciosubtotal = `<div class="moneda">${arrITEM1[i].preciosubtotal}</div>`;
+        preciosubtotal = `<div class="moneda">${Number(arrITEM1[i].preciosubtotal).toLocaleString('en')}</div>`;
         $('input#item1-check-prsubtotal').attr( 'checked', true );
     }
     else{
@@ -77,7 +77,7 @@ for(let i = 0; i < lengthITEM1; ++i){
         totalITEM1 = true;
         $('input#item1-check-prsubtotal').attr( 'checked', false );
     }
-
+    // Number(value).toLocaleString('en');
     htmlITME1 += `<tr name="item1-fila-${i+1}">`;
     htmlITME1 += `<td><div>${i+1}</div></td>`;
     htmlITME1 += `<td style="display:none"><span>${arrITEM1[i].idcotdet}</span></td>>`;
@@ -101,7 +101,7 @@ for(let i = 0; i < lengthITEM2; ++i){
     let preciosubtotal = '';
 
     if(arrITEM2[i].punitvisible === '1'){
-        preciounitario = `<div class="moneda">${arrITEM2[i].preciounitario}</div>`;
+        preciounitario = `<div class="moneda">${Number(arrITEM2[i].preciounitario).toLocaleString('en')}</div>`;
         $('input#item2-check-prunitario').attr( 'checked', true );
     }
     else{
@@ -110,7 +110,7 @@ for(let i = 0; i < lengthITEM2; ++i){
     }
 
     if(arrITEM2[i].pstotalvisible === '1'){
-        preciosubtotal = `<div class="moneda">${arrITEM2[i].preciosubtotal}</div>`;
+        preciosubtotal = `<div class="moneda">${Number(arrITEM2[i].preciosubtotal).toLocaleString('en')}</div>`;
         $('input#item2-check-prsubtotal').attr( 'checked', true );
     }
     else{
@@ -142,7 +142,7 @@ for(let i = 0; i < lengthITEM3; ++i){
     let preciosubtotal = '';
 
     if(arrITEM3[i].punitvisible === '1'){
-        preciounitario = `<div class="moneda">${arrITEM3[i].preciounitario}</div>`;
+        preciounitario = `<div class="moneda">${Number(arrITEM3[i].preciounitario).toLocaleString('en')}</div>`;
 
         $('input#item3-check-prunitario').attr( 'checked', true );
     }
@@ -152,7 +152,7 @@ for(let i = 0; i < lengthITEM3; ++i){
     }
 
     if(arrITEM3[i].pstotalvisible === '1'){
-        preciosubtotal =  `<div class="moneda">${arrITEM3[i].preciosubtotal}</div>`;
+        preciosubtotal =  `<div class="moneda">${Number(arrITEM3[i].preciosubtotal).toLocaleString('en')}</div>`;
         $('input#item3-check-prsubtotal').attr( 'checked', true );
     }
     else{
@@ -187,7 +187,7 @@ for(let i = 0; i < lengthCabecera; ++i){
 htmlPieTabla += `<tr>`;
 htmlPieTabla += `<td colspan="5"></td>`;
 htmlPieTabla += `<td class="reporte-ger-resaltar"><div>TOTAL</div></td>`;
-htmlPieTabla += `<td class="reporte-ger-resaltar-sec"><div class="moneda">${arrCabecera[0].preciototal}</div></td>`;
+htmlPieTabla += `<td class="reporte-ger-resaltar-sec"><div class="moneda">${Number(arrCabecera[0].preciototal).toLocaleString('en')}</div></td>`;
 htmlPieTabla += `</tr>`;
 //FIN DE LLENADO DE TABLA REPORTE
 
@@ -249,9 +249,9 @@ $('#reporte-ger-ITEM1').append(htmlITME1);
 $('#reporte-ger-ITEM2').append(htmlITME2);
 $('#reporte-ger-ITEM3').append(htmlITME3).append(htmlPieTabla);
 
-$('tbody#reporte-ger-ITEM1').find('tr[name=item1-fila-1]').append(`<td rowspan="${lengthITEM1}" class="reporte-ger-ocultar item1-prtotal reporte-ger-totales" style="vertical-align:middle"><div class="moneda">${arrCabecera[0].precioItem1}</div></td>`);
-$('tbody#reporte-ger-ITEM2').find('tr[name=item2-fila-1]').append(`<td rowspan="${lengthITEM2}" class="reporte-ger-ocultar item2-prtotal reporte-ger-totales" style="vertical-align:middle"><div class="moneda">${arrCabecera[0].precioItem2}</div></td>`);
-$('tbody#reporte-ger-ITEM3').find('tr[name=item3-fila-1]').append(`<td rowspan="${lengthITEM3}" class="reporte-ger-ocultar item3-prtotal reporte-ger-totales" style="vertical-align:middle"><div class="moneda">${arrCabecera[0].precioItem3}</div></td>`);
+$('tbody#reporte-ger-ITEM1').find('tr[name=item1-fila-1]').append(`<td rowspan="${lengthITEM1}" class="reporte-ger-ocultar item1-prtotal reporte-ger-totales" style="vertical-align:middle"><div class="moneda">${Number(arrCabecera[0].precioItem1).toLocaleString('en')}</div></td>`);
+$('tbody#reporte-ger-ITEM2').find('tr[name=item2-fila-1]').append(`<td rowspan="${lengthITEM2}" class="reporte-ger-ocultar item2-prtotal reporte-ger-totales" style="vertical-align:middle"><div class="moneda">${Number(arrCabecera[0].precioItem2).toLocaleString('en')}</div></td>`);
+$('tbody#reporte-ger-ITEM3').find('tr[name=item3-fila-1]').append(`<td rowspan="${lengthITEM3}" class="reporte-ger-ocultar item3-prtotal reporte-ger-totales" style="vertical-align:middle"><div class="moneda">${Number(arrCabecera[0].precioItem3).toLocaleString('en')}</div></td>`);
 // // style="vertical-align:middle;text-align:center"
 
 //INSERCION MEMO

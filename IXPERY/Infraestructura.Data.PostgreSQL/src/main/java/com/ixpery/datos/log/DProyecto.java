@@ -44,15 +44,27 @@ public class DProyecto {
     }
 
 
+//    public String BuscarEmpresaRuc(String campos) throws Exception{
+//        listParametros.clear();
+//        String value = jsonGeneral.StringConvert(campos);
+//        SqlParameter pNomTabla = new SqlParameter("nomTabla", getTableEmpresa());
+//        SqlParameter pValue = new SqlParameter("value", value);
+//        listParametros.add(pNomTabla);
+//        listParametros.add(pValue);
+//        String cadena = com.EjecutaConsultaJson("", listParametros);
+//        return jsonGeneral.JsonConvertInvert(cadena);
+//    }
+
     public String BuscarEmpresaRuc(String campos) throws Exception{
         listParametros.clear();
-        String value = jsonGeneral.StringConvert(campos);
-        SqlParameter pNomTabla = new SqlParameter("nomTabla", getTableEmpresa());
-        SqlParameter pValue = new SqlParameter("value", value);
-        listParametros.add(pNomTabla);
+//        String value = jsonGeneral.StringConvert(campos);
+//        SqlParameter pNomTabla = new SqlParameter("nomTabla", getTableEmpresa());
+        SqlParameter pValue = new SqlParameter("value", campos);
+//        listParametros.add(pNomTabla);
         listParametros.add(pValue);
-        String cadena = com.EjecutaConsultaJson("gen_filtrar_like", listParametros);
-        return jsonGeneral.JsonConvertInvert(cadena);
+        String cadena = com.EjecutaConsultaJson("filtrar_empresa_cliente_j", listParametros);
+//        return jsonGeneral.JsonConvertInvert(cadena);
+        return cadena;
     }
 
     public String BuscarEmpleado(String value) throws Exception{
