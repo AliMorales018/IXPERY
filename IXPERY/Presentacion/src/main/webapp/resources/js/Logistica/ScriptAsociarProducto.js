@@ -97,37 +97,49 @@ function save_productos_asociados() {
     var campos;
     var cadena = "";
 
-    for (var i = 1; i < count_productos_pr; i++) {
-        if ($("#select_filtrar_insumo_" + i).val() != null) {
-            idSolucion = 1;
-            idPreRegistro = $("#txt_id_preregistro_" + i).text();
-            idProducto = $("#select_filtrar_insumo_" + i).val();
-            campos = idSolucion + "," + idPreRegistro + "," + idProducto;
-            cadena = cadena + campos + ";";
-        }
-    }
-
-    if (cadena != "") {
-        $.ajax({
-            method: "POST",
-            url: "/asociarproducto/register",
-            data: {"value": cadena},
-            success: function resultado(data) {
-                if(data == ""){
-                    alert("Productos Asociados Correctamente");
-                    $("#tbody_asociarproducto").empty();
-                    CargarProductosNRBDD();
-                    if( typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
-                        BuscarSesionSol();
-                    }
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/VerificarSesionSolucion",
+        data: {},
+        success: function resultado(data) {
+        idSolucion=data;
+            console.log("SESION ID CARGO: "+ idSolucion);
+            for (var i = 1; i < count_productos_pr; i++) {
+                if ($("#select_filtrar_insumo_" + i).val() != null) {
+                    idPreRegistro = $("#txt_id_preregistro_" + i).text();
+                    idProducto = $("#select_filtrar_insumo_" + i).val();
+                    console.log(idProducto);
+                    campos = idSolucion + "," + idPreRegistro + "," + idProducto;
+                    cadena = cadena + campos + ";";
                 }
-                else{
-                    alert(data);
-                }
-            },
-            error: function errores(msg) {
-                // alert('Error: ' + msg.responseText);
             }
-        });
-    }
+
+            if (cadena != "") {
+                $.ajax({
+                    method: "POST",
+                    url: "/asociarproducto/register",
+                    data: {"value": cadena},
+                    success: function resultado(data) {
+                        if(data == ""){
+                            alert("Productos Asociados Correctamente");
+                            $("#tbody_asociarproducto").empty();
+                            CargarProductosNRBDD();
+                            if( typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
+                                BuscarSesionSol();
+                            }
+                        }
+                        else{
+                            alert(data);
+                        }
+                    },
+                    error: function errores(msg) {
+                        // alert('Error: ' + msg.responseText);
+                    }
+                });
+            }
+        }
+    });
+
+
 }

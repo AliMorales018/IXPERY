@@ -167,13 +167,13 @@ public class CEquipo2 {
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
-        session.setAttribute("proveedor", prove);
-        session.setAttribute("producto", prod);
+        session.setAttribute("proveedorp", prove);
+        session.setAttribute("productop", prod);
 
 //        Ejemplo para llamar la sesion de la solucion
 //        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
-        String proveedor = session.getAttribute("proveedor").toString();
-        String producto = session.getAttribute("producto").toString();
+        String proveedor = session.getAttribute("proveedorp").toString();
+        String producto = session.getAttribute("productop").toString();
         return "proveedor: "+proveedor+" producto: "+producto;
     }
 }
