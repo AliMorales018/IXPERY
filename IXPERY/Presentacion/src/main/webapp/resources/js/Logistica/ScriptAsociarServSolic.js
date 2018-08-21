@@ -125,7 +125,7 @@ function save_servsoli_asociados() {
                     cadena = cadena + campos + ";";
                 }
             });
-
+//COMENTARIO
             if (cadena != "") {
                 $.ajax({
                     method: "POST",
