@@ -114,6 +114,7 @@ function save_productos_asociados() {
                     cadena = cadena + campos + ";";
                 }
             }
+            
 
             if (cadena != "") {
                 $.ajax({
