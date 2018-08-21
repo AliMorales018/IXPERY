@@ -61,7 +61,7 @@ function InsUpdDelOtroServ() {
             console.log(arrGuardarPreRegServ);
         }
     });
-    $('tbody#tbody_equiponr').find('tr[class=otroservinr-insert]').each(function () {
+    $('tbody#tbody_otroservinr').find('tr[class=otroservinr-insert]').each(function () {
         let objFilaPreReg = {};
         let objServSolu= {};
         let objFilaProSolPre = {};
@@ -74,10 +74,10 @@ function InsUpdDelOtroServ() {
 
         objFilaPreReg.prs1=0;
         objFilaPreReg.prs3=objServSolu;
-        objFilaPreReg.prs4=$(this).find("td div input[id = txt_otroservinr_nomserv]").val();
-        objFilaPreReg.prs5=$(this).find("td div input[id = txt_otroservinr_canpro]").val();
+        objFilaPreReg.prs4=$(this).find("input[id = txt_otroservinr_nomserv]").val();
+        objFilaPreReg.prs5=$(this).find("input[id = txt_otroservinr_canpro]").val();
         objFilaPreReg.prs6="1";
-        objFilaPreReg.prs9=$(this).find("td div input[id = txt_otroservinr_desserv]").val();
+        objFilaPreReg.prs9=$(this).find("input[id = txt_otroservinr_desserv]").val();
 
         arrGuardarFinPreRegServ.push(objFilaPreReg);
 
@@ -90,9 +90,9 @@ function InsUpdDelOtroServ() {
 
         objFilaProSolPre.ssl1=0;
         objFilaProSolPre.ssl2=objOtroServ;//objeto foránea equipo
-        objFilaProSolPre.ssl4= $(this).find("td div input[id = txt_otroservinr_nomserv]").val();
-        objFilaProSolPre.ssl5= $(this).find("td div input[id = txt_otroservinr_desserv]").val();
-        objFilaProSolPre.ssl6= $(this).find("td div input[id = txt_otroservinr_canpro]").val();
+        objFilaProSolPre.ssl4= $(this).find("input[id = txt_otroservinr_nomserv]").val();
+        objFilaProSolPre.ssl5= $(this).find("input[id = txt_otroservinr_desserv]").val();
+        objFilaProSolPre.ssl6= $(this).find("input[id = txt_otroservinr_canpro]").val();
         objFilaProSolPre.ssl9="1";
         //objFilaProSolPre.pso11=objServSoli;
         objFilaProSolPre.ssl13="1";
@@ -159,7 +159,7 @@ function InsUpdDelOtroServ() {
     jsonGuardarFullOtroServ.prs=arrGuardarFinPreRegServ;//TPREREGSERV
 
 
-    console.log("Json A Guardar");
+    console.log("Json A GuardarFULLLL");
     console.log(jsonGuardarFullOtroServ);
 
 
@@ -449,7 +449,7 @@ $(document).ready(function () {
                     }
                 });
             }
-        })
+        });
     BuscarSolucionOtroServis(1);
 });
 //INICIO DE FUNCIONES PARA EQUIPOS REGISTRADOS

@@ -187,6 +187,7 @@ function InsUpdDelEquipo2() {
         data: JSON.stringify(jsonGuardarFullEq2),
         success: function resultado(valor) {
             if (valor == "") {
+                BuscarSesionSol();
                 alert("Datos Guardados correctamente");
                 //
                 // $("#" + nomBodggy_proyecto).html(filaTabla_proyecto);

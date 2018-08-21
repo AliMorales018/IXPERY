@@ -183,6 +183,7 @@ function InsUpdDelOtroServ2() {
         data: JSON.stringify(jsonGuardarFullOtroSer2),
         success: function resultado(valor) {
             if (valor == "") {
+                BuscarOtroServicio();
                 alert("Datos Guardados Correctamente");
             }
             else {

@@ -22,7 +22,7 @@ import java.util.Map;
 
 @Controller
 public class CCargoLaboral {
-
+    //Contexto
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BCargoLaboral obCargoLaboral = (BCargoLaboral) applicationContext.getBean("beanCargoLaboral");
     BArea obArea = (BArea) applicationContext.getBean("beanArea");
