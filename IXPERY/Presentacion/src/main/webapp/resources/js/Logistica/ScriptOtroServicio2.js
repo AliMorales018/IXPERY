@@ -196,8 +196,14 @@ function InsUpdDelOtroServ2() {
 }
 
 function crearSesProvSoli(idtr){
-    let idProve = $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div select[id ^= cmb_otroservicio2_provee]").val();
-    let idSoli =  $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id = spn_otroservicio2_idsersoli]").text();
+    let idProve;
+    let idSoli= $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id = spn_otroservicio2_idsersoli]").text();
+    if(($("tbody#tbody_otroservicio2 tr#"+idtr).find("td div select[id ^= cmb_otroservicio2_provee]").val())!==null){
+        idProve=$("tbody#tbody_otroservicio2 tr#"+idtr).find("td div select[id ^= cmb_otroservicio2_provee]").select2('data')[0].idproveedor;
+    }else{
+        idProve="0";
+    }
+
     console.log("idProveedor: "+idProve);
     console.log("idSoli: "+idSoli);
     $.ajax({

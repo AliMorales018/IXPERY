@@ -129,6 +129,8 @@ function clonar_selectEq2(fila,id){
                 };
             },
             processResults: function (data, params) {
+                // conosole.log('dataitem2');
+                // conosole.log(data.items);
                 return {
                     results: data.items
                 };
@@ -202,8 +204,14 @@ function InsUpdDelEquipo2() {
 }
 
 function crearSesProvProd(idtr){
-    let idProve = $("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").select2('data')[0].idproveedor  ;
-    let idProd =  $("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id = spn_equipo2_idproduc]").text();
+    let idProve;
+    let idProd= $("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id = spn_equipo2_idproduc]").text();
+    if(($("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").val())!=='0'){
+        idProve=$("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").val();
+    }else{
+        idProve="0";
+    }
+
     console.log("idProveedor: "+idProve);
     console.log("idProducto: "+idProd);
     $.ajax({
@@ -214,7 +222,7 @@ function crearSesProvProd(idtr){
             console.log("Rpta de sesion");
             console.log(valor);
             AddMenu(mAsPrecio);
-            
+
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
