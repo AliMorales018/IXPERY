@@ -202,7 +202,7 @@ function InsUpdDelEquipo2() {
 }
 
 function crearSesProvProd(idtr){
-    let idProve = $("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").val();
+    let idProve = $("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").select2('data')[0].idproveedor  ;
     let idProd =  $("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id = spn_equipo2_idproduc]").text();
     console.log("idProveedor: "+idProve);
     console.log("idProducto: "+idProd);
@@ -214,6 +214,7 @@ function crearSesProvProd(idtr){
             console.log("Rpta de sesion");
             console.log(valor);
             AddMenu(mAsPrecio);
+            
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
