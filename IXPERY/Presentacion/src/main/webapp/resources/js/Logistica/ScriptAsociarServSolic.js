@@ -124,7 +124,7 @@ function save_servsoli_asociados() {
                     campos = idSolServSoli2 + "," + idPreRegistro + "," + idServSolic;
                     cadena = cadena + campos + ";";
                 }
-            }
+            });
 
             if (cadena != "") {
                 $.ajax({
@@ -137,9 +137,9 @@ function save_servsoli_asociados() {
                             $("#tbody_asociarservsolic").empty();
                             CargarOtSerNRBDD(solAscoServ);
                             if( typeof BuscarOtroServicio !== 'undefined' && jQuery.isFunction(BuscarOtroServicio)) {
-                                alert("L2");
+                                // alert("L2");
                                 BuscarOtroServicio();
-                                alert("L3");
+                                // alert("L3");
                             }
                         }
                         else{
