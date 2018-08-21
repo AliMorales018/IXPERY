@@ -89,7 +89,7 @@ function InsUpdDelEquipo() {
 
         objFilaProSolPre.pso1=0;
         objFilaProSolPre.pso2=objEqu;//objeto foránea equipo
-        objFilaProSolPre.pso4= $(this).find("td div input[id = txt_equiponr_canpro]").val();
+        objFilaProSolPre.pso4= $(this).find("input[id = txt_equiponr_canpro]").val();
         objFilaProSolPre.pso8="1";
         //objFilaProSolPre.pso11=objProd;
         objFilaProSolPre.pso12="1";
@@ -112,22 +112,6 @@ function InsUpdDelEquipo() {
             console.log("ELIMINAR");
             console.log(arrGuardarEquipo);
         }else{
-            /* if(pid!==""){
-                 filaOkEqReg=1;
-
-                 filaData.push(pid);
-                 filaData.push(cod);
-                 filaData.push(mod);
-                 filaData.push(mrc);
-                 filaData.push(ume);
-                 filaData.push(cnt);
-                 arrayDatos_re.push(filaData);
-             }else{
-                 filaOkEqReg=0;
-                 arrayDatos_re=[];
-                 return false;
-             }*/
-
         }
     }).closest('tbody').find('tr[class=equipo-insert]').each(function () {
         let objFilaProSol = {};

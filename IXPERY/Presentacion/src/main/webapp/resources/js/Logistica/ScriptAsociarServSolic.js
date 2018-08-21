@@ -34,7 +34,7 @@ $(document).ready(function() {
 
 function CargarOtSerNRBDD(solAscoServ) {
     var idSolucion=solAscoServ;
-    count_otroserpr = 0;
+    count_otroserpr = 1;
     $.ajax({
         method: "POST",
         url: "/asociarservicio/verservicionbsolucion",
@@ -42,7 +42,6 @@ function CargarOtSerNRBDD(solAscoServ) {
         success: function resultado(data) {
             if(data != 0) {
                 let JSONobjServSolic = JSON.parse(data);
-                console.log(JSONobjServSolic)
                 $.each(JSONobjServSolic, function (obj, item) {
                     count_otroserpr++;
                     let rowCloneOtSer2=$(dolRowOtroSer2HTML).clone().prop({id:'row-otrosepr-' + count_otroserpr});
