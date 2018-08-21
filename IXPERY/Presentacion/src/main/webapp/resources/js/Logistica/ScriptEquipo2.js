@@ -131,6 +131,10 @@ function clonar_selectEq2(fila,id){
             processResults: function (data, params) {
                 // conosole.log('dataitem2');
                 // conosole.log(data.items);
+               /* $.each(data.items, function(i,d){
+                    data.items[i]["id"] = data.items[i]["idproveedor"];
+                });*/
+
                 return {
                     results: data.items
                 };
@@ -174,6 +178,7 @@ function selCmbProveeEq2(obj){
     $("#"+selectId).closest('tr').find('span[id=spn_equipo2_idprprov]').text(idProdProv);
     subTot=parseFloat(data[0].precio)*parseFloat($("#"+selectId).closest('tr').find('span[id=spn_equipo2_canpro]').html());
     $("#"+selectId).closest('tr').find('span[id=spn_equipo2_subtot]').text(subTot);
+    $("#"+selectId).closest('tr').find('span[id=spn_equipo2_idprovee]').text(data[0].idproveedor);
 }
 
 function InsUpdDelEquipo2() {
@@ -187,6 +192,7 @@ function InsUpdDelEquipo2() {
         data: JSON.stringify(jsonGuardarFullEq2),
         success: function resultado(valor) {
             if (valor == "") {
+                BuscarSesionSol();
                 alert("Datos Guardados correctamente");
                 //
                 // $("#" + nomBodggy_proyecto).html(filaTabla_proyecto);
@@ -206,8 +212,8 @@ function InsUpdDelEquipo2() {
 function crearSesProvProd(idtr){
     let idProve;
     let idProd= $("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id = spn_equipo2_idproduc]").text();
-    if(($("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").val())!=='0'){
-        idProve=$("tbody#tbody_equipo2 tr#"+idtr).find("td div select[id ^= cmb_equipo2_provee]").val();
+    if(($("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id ^= spn_equipo2_idprovee]").text())!=='0' ){
+        idProve=$("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id ^= spn_equipo2_idprovee]").text();
     }else{
         idProve="0";
     }

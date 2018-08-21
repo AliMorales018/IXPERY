@@ -244,6 +244,7 @@
                                 "<td><div><span id='spn_equipo2_nompro'>" + item.producto + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_codpro'>" + item.codigo + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_modpro'>" + item.modelo + "</span></div></td>" +
+                                "<td hidden><div><span id='spn_equipo2_idprovee'>" + item.idproveedor + "</span></div></td>" +
                                 "<td><div><select id='cmb_equipo2_provee" + conta_filas_equipo2 + "' name='cmb_equipo2_provee' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProveeEq2(this);'><option value='"+item.idproveedor+"' selected='selected'>"+item.nomempresa+"</option></select>" +
                                 "<td><div><span id='spn_equipo2_marpro'>" + item.marca + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_medpro'>" + item.nomumedida + "</span></div></td>" +

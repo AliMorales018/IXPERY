@@ -15,11 +15,10 @@ public class DSolucion {
     private DConexion c = new DConexion();
     private DtUtilitario com = new DtUtilitario(c.ConectarBD());
     private List<SqlParameter> listParametros = new ArrayList<>();
+    private static String getNameTableSolucion() { return "46071"; }
+    private static String getNameTableEmpleado() { return "46227"; }
 
-    JsonGeneral jsonGeneral = new JsonGeneral();
-
-    public static String getNameTableSolucion() { return "46071"; }
-    public static String getNameTableEmpleado() { return "46227"; }
+    private JsonGeneral jsonGeneral = new JsonGeneral();
 
     public DSolucion() throws Exception { }
 
@@ -129,6 +128,26 @@ public class DSolucion {
         String json = com.EjecutaConsultaJson("filtrar_empresa_proyecto_requerimiento_solucion_sa", listParametros);
         return json;
     }
+
+    public Integer LastId(){
+        try{
+            listParametros.clear();
+            SqlParameter nomTbl = new SqlParameter("tabla", getNameTableSolucion());
+            listParametros.add(nomTbl);
+            String id = com.EjecutaConsultaJson("gen_retornaid", listParametros);
+            Integer lastId = Integer.parseInt(id) - 1;
+            return lastId;
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ERROR: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
 
 
 
