@@ -28,12 +28,14 @@ public class CCargoLaboral {
     BArea obArea = (BArea) applicationContext.getBean("beanArea");
 
     @RequestMapping("/cargolaboral/sesioncl")
-    public @ResponseBody void SesionCl(
+    public @ResponseBody Integer SesionCl(
             HttpServletRequest request,
             @RequestParam(value="idCargo") Integer idCargo
     )throws Exception{
         HttpSession session = request.getSession();
         session.setAttribute("cargolaboral", idCargo);
+        Integer id = (Integer) session.getAttribute("cargolaboral");
+        return id;
     }
 
     @RequestMapping("/cargolaboral/getsesioncl")

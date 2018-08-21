@@ -1,30 +1,31 @@
 var count_productos_pr;
-
+var solAscoProd;
 $(document).ready(function() {
-    let sol = 0;
     $.ajax({
         method: "POST",
         async: false,
         url:"/solucion/VerificarSesionSolucion",
         data:{},
         success: function resultado(data) {
-            sol = data;
+            solAscoProd = data;
             //SESION CARGO
-            console.log("SESION ID CARGO: "+ sol);
+            console.log("SESION ID CARGO: "+ solAscoProd);
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
         }
     });
 
-    CargarProductosNRBDD(sol);
+    CargarProductosNRBDD(solAscoProd);
 });
 
 
 
 
-function CargarProductosNRBDD(sol) {
-    var idSolucion = sol;
+function CargarProductosNRBDD(solAscoProd) {
+    var idSolucion = solAscoProd;
+    console.log("idsolucion");
+    console.log(idSolucion);
     count_productos_pr = 1;
     $.ajax({
         method: "POST",
@@ -126,16 +127,21 @@ function save_productos_asociados() {
                         if(data == ""){
                             alert("Productos Asociados Correctamente");
                             $("#tbody_asociarproducto").empty();
-                            CargarProductosNRBDD();
+                            CargarProductosNRBDD(solAscoProd);
+                            alert("L1");
                             if( typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
+                                alert("L2");
                                 BuscarSesionSol();
+                                alert("L3");
                             }
                         }
                         else{
+                            alert("else");
                             alert(data);
                         }
                     },
                     error: function errores(msg) {
+                        alert("error");
                         // alert('Error: ' + msg.responseText);
                     }
                 });

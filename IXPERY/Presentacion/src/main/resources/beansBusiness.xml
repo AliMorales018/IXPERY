@@ -40,6 +40,7 @@
     <bean id="beanOtroServicio" class="com.ixpery.negocio.log.BOtroServicio" />
     <bean id="beanServicioProveedor" class="com.ixpery.negocio.log.BServicioProveedor" />
     <bean id="beanUtilidadCotizacion" class="com.ixpery.negocio.log.BUtilidadCotizacion" />
+    <bean id="beanProductoProveedor" class="com.ixpery.negocio.log.BProductoProveedor" />
 
     <!-- Beans RRHH -->
     <bean id="beanEmpleado" class="com.ixpery.negocio.rhh.BEmpleado" />

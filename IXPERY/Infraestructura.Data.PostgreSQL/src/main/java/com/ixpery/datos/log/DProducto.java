@@ -172,11 +172,10 @@ public class DProducto {
         return listAddId;
     }
 
-
-    public String BuscarProductoCombo(EProveedor oePro) throws Exception {
+    public String BuscarProductoCombo(String var) throws Exception {
         listaParametros.clear();
-        SqlParameter pId = new SqlParameter("campos", oePro.getIdproveedor());
-        listaParametros.add(pId);
+        SqlParameter pVal = new SqlParameter("campos", var);
+        listaParametros.add(pVal);
         String jsonResult = com.EjecutaConsultaJson("filtrar_producto_proveedor2", listaParametros);
         System.out.println(jsonResult);
         return jsonResult;
@@ -203,7 +202,9 @@ public class DProducto {
         SqlParameter pIdProd = new SqlParameter("idProd", oeProvProd.getIdProducto().getIdproducto());
         listaParametros.add(pIdProv);
         listaParametros.add(pIdProd);
-        return com.EjecutaConsultaJson("filtrar_historial_precio", listaParametros);
+        String a = com.EjecutaConsultaJson("filtrar_historial_precio", listaParametros);
+        a = jsonGeneral.JsonConvertInvert(a);
+        return a;
     }
 
     public String RegistrarPrecioHistorial(EProductoProveedor oeProd) throws Exception {

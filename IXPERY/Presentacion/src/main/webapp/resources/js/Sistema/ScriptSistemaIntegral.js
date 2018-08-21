@@ -21,6 +21,7 @@ var mHpViaticos = {};
 var mHisPrecio = {};
 var mAsPrecio={};
 var mAsociarServ={};
+var mServicioSol={};
 
 var isolJson;
 var icotJson;
@@ -95,6 +96,7 @@ $(document).ready(function () {
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 26) {
                                 mAsociarProd = JSONobj[i];
+                                JSONobj.splice(i, 1);
                             }
                         }
 
@@ -183,6 +185,12 @@ $(document).ready(function () {
                         if(JSONobj[i]){
                             if(JSONobj[i].idmenu === 43) {
                                 mHpViaticos = JSONobj[i];
+                            }
+                        }
+
+                        if(JSONobj[i]){
+                            if(JSONobj[i].idmenu === 45) {
+                                mServicioSol = JSONobj[i];
                             }
                         }
 

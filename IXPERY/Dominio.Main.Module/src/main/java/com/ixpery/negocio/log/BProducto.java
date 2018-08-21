@@ -38,8 +38,8 @@ public class BProducto {
         return odProducto.RetornaTB();
     }
 
-    public String BuscarProductoCombo(EProveedor oeProv)throws Exception {
-        return odProducto.BuscarProductoCombo(oeProv);
+    public String BuscarProductoCombo(String var)throws Exception {
+        return odProducto.BuscarProductoCombo(var);
     }
 
     public String VerHistorialPrecios(EProductoProveedor oeProvProd)throws Exception {
