@@ -162,8 +162,8 @@ public class CEquipo2 {
 
     @RequestMapping("/equipo2/sesproverod")
     public @ResponseBody  String CrearSesProdProv(
-            @RequestParam(value = "prove") String prove,
-            @RequestParam(value = "prod") String prod,
+            @RequestParam(value = "prove") Integer prove,
+            @RequestParam(value = "prod") Integer prod,
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
@@ -183,8 +183,8 @@ public class CEquipo2 {
     ) throws Exception {
         HttpSession session = request.getSession();
 
-        Integer idProv = Integer.parseInt(session.getAttribute("proveedorp").toString());
-        Integer idProd = Integer.parseInt(session.getAttribute("productop").toString());
+        Integer idProv = (Integer) session.getAttribute("proveedorp");
+        Integer idProd = (Integer) session.getAttribute("productop");
 
         if (idProd == null || idProv == null){
             return "0";

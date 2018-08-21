@@ -254,8 +254,9 @@ function guardar_nuevo_Precio() {
                             if (data === "") {
                                 //Cargar otra vez la tabla
                                 ListarHistorial_Precios();
-                                if (typeof BuscarSolucionEquipos !== 'undefined' && jQuery.isFunction(BuscarSolucionEquipos)) {
-                                    BuscarSolucionEquipos();
+                                if (typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
+                                    console.log("Recalculando Solución");
+                                    BuscarSesionSol();
                                 }
                             }
                         },
