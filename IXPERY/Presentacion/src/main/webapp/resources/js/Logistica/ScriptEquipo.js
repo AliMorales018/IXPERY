@@ -945,6 +945,7 @@ function BuscarSolucionEquipos(idSol){
     if(id!="" || id!=undefined){
         $.ajax({
             method: "POST",
+            async: false,
             url: "/equipo/buscarequiposol",
             data: {"idsol": id},
             success: function resultado(valor) {

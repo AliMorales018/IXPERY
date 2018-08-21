@@ -33,12 +33,12 @@ $(document).ready(function() {
 });
 
 function CargarOtSerNRBDD(solAscoServ) {
-    var idSolucion=solAscoServ;
-    count_otroserpr = 1;
+    let idSolServSoli=solAscoServ;
+    count_otroserpr = 0;
     $.ajax({
         method: "POST",
         url: "/asociarservicio/verservicionbsolucion",
-        data: {"i":idSolucion},
+        data: {"i":idSolServSoli},
         success: function resultado(data) {
             if(data != 0) {
                 let JSONobjServSolic = JSON.parse(data);
@@ -101,27 +101,27 @@ function formatRepoSelectionAsocOtS2 (repo) {
 
 
 function save_servsoli_asociados() {
- let idSolucion;
+ let idSolServSoli2;
  let idPreRegistro;
  let idServSolic;
  let campos;
  let cadena="";
-    let sol = 0;
+    let soll = 0;
     $.ajax({
         method: "POST",
         async: false,
         url:"/solucion/VerificarSesionSolucion",
         data:{},
         success: function resultado(data) {
-            sol = data;
+            soll = data;
             //SESION CARGO
-            console.log("SESION ID CARGO: "+ sol);
-            for(let i=0; i<count_otroserpr;i++){
+            console.log("SESION ID CARGO: "+ soll);
+            $('tbody#tbody_asociarservsolic').find('tr').each(function() {
                 if ($(this).find('select[id=select_filtrar_insumoot2]').val() != null) {
-                    idSolucion = sol;
+                    idSolServSoli2 = soll;
                     idPreRegistro = $(this).find('span[id=spn_otrosepr_idpreregsoli]').text();
                     idServSolic = $(this).find('select[id=select_filtrar_insumoot2]').val();
-                    campos = idSolucion + "," + idPreRegistro + "," + idServSolic;
+                    campos = idSolServSoli2 + "," + idPreRegistro + "," + idServSolic;
                     cadena = cadena + campos + ";";
                 }
             }
