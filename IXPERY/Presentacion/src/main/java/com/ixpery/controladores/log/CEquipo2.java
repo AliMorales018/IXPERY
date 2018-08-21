@@ -174,6 +174,22 @@ public class CEquipo2 {
 //        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
         String proveedor = session.getAttribute("proveedorp").toString();
         String producto = session.getAttribute("productop").toString();
-        return "proveedor: "+proveedor+" producto: "+producto;
+        return proveedor+"@"+producto;
+    }
+
+    @RequestMapping("/equipo2/getsesionpp")
+    public @ResponseBody  String GetSesionSesProdProv(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+
+        Integer idProv = Integer.parseInt(session.getAttribute("proveedorp").toString());
+        Integer idProd = Integer.parseInt(session.getAttribute("productop").toString());
+
+        if (idProd == null || idProv == null){
+            return "0";
+        }else{
+            return idProv+"@"+idProd;
+        }
     }
 }

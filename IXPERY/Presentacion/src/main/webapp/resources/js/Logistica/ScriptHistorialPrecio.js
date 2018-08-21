@@ -7,6 +7,20 @@ function agregar_nuevo_Precio() {
     }
 }
 
+function llenar_combo_proveedor_producto_hp(id, text, id2, text2){
+    //COMBO DE SOLUCION
+    let data = {id: id , text: text};
+    let data2 = {id: id2 , text: text2};
+    let newOption = new Option(data.text, data.id, false, false);
+    let newOption2 = new Option(data2.text, data2.id, false, false);
+    //Proveedor
+    $('#selectProveedor_hp').empty().append(newOption);
+    $('#selectProveedor_hp').attr("disabled",true);
+    //Producto
+    $('#selectProducto_hp').empty().append(newOption2);
+    $('#selectProducto_hp').attr("disabled",true);
+}
+
 function ocultar_precio_nuevo(){
     $("#btn_historialpre_save").attr("disabled",true);
     $("#contenedor_nuevo_precio").css("visibility", "hidden");
@@ -28,10 +42,20 @@ function convertDate_HP(inputFormat) {
     return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
 }
 
-function ListarHistorial_Precios(){
-    let idProv = $("#selectProveedor_hp").val();
-    let idProd = $("#selectProducto_hp").val();
+function ListarHistorial_Precios(idSesionProv,idSesionProd,bandera){
+    let idProv;
+    let idProd;
+    if(bandera === "equipo2"){
+        idProv = idSesionProv;
+        idProd = idSesionProd;
+    }
+    else{
+        idProv = $("#selectProveedor_hp").val();
+        idProd = $("#selectProducto_hp").val();
+    }
     if(idProv !== "" && idProd !== ""){
+        console.log("ID1: "+idProd);
+        console.log("ID2: "+idProv);
         //Verificar si se encuentran asociados
         $.ajax({
             method: "POST",
@@ -43,10 +67,11 @@ function ListarHistorial_Precios(){
                     $("#contasociar_pro_prov").css("visibility","visible");
                     $("#vppa").val("0");
                     $("#tbody_historialprecio").html("<tr><td colspan='5' class='text-center'><div class='p-3' style='font-size: 10px'>Seleccione proveedor y/o producto ó Asocie producto/proveedor</div></td></tr>");
+                    listar_historial_precios(null,null,null,"loadData")
                 }
                 else{
                     $("#contasociar_pro_prov").css("visibility","hidden");
-                    listar_historial_precios(idProv,idProd);
+                    listar_historial_precios(idProv,idProd,bandera);
                     $("#vppa").val("1");
                 }
             },
@@ -57,7 +82,7 @@ function ListarHistorial_Precios(){
     }
 }
 
-function listar_historial_precios(idProv,idProd){
+function listar_historial_precios(idProv,idProd,bandera,combos) {
     //Listar Historial de Precios
     $.ajax({
         method: "POST",
@@ -66,35 +91,46 @@ function listar_historial_precios(idProv,idProd){
         data: {"idProv":idProv,"idProd":idProd},
         success: function resultado(data) {
             let JSONobj = JSON.parse(data);
-            $("#btn_historialpre_nue").removeAttr("disabled");
-            ocultar_precio_nuevo();
-            if(JSONobj.ppr.length > 0){
-                if(JSONobj.ppr.length === 1 && JSONobj.ppr[0].ppr4 === null){
-                    $("#tbody_historialprecio").html("<tr class='no-registers act-precio'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'><input type='hidden' value='"+JSONobj.ppr[0].ppr1+"'>Ingrese un precio para el producto.</div></td></tr>");
-                    $("#contenedor_nuevo_precio").css("visibility","visible");
-                    $("#btn_historialpre_save").removeAttr("disabled");
-                }
-                else{
-                    $("#tbody_historialprecio").empty();
-                    let contador = 1;
-                    let estado;
-                    $.each(JSONobj.ppr, function (obj, item) {
-                        estado = item.ppr8 === "1"? "<i class='icon-checkmark icon-hp-habil'></i>":"<i class='icon-cross icon-hp-desh'></i>";
-                        let row = "<tr>" +
-                            "<td class='text-center'><p class='text-center'>"+contador+"</p></td>" +
-                            "<td class='text-center'><span>"+item.ppr6+"</span></td>" +
-                            "<td class='text-center'><span>"+item.ppr7+"</span></td>" +
-                            "<td class='text-center text-primary'><span><b>S/ "+item.ppr4+"</b></span></td>" +
-                            "<td class='text-center'><span>"+estado+"</span></td>" +
-                            "</tr>>";
-
-                        $("#tbody_historialprecio").append(row);
-                        contador++;
-                    });
-                }
+            console.log(JSONobj)
+            if(combos === "loadData"){
+                llenar_combo_proveedor_producto_hp(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
             }
             else{
-                $("#tbody_historialprecio").html("<tr class='no-registers'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'>No se encontró un historial de precios para el producto seleccionado.</div></td></tr>");
+                $("#btn_historialpre_nue").removeAttr("disabled");
+                ocultar_precio_nuevo();
+                if (bandera === "equipo2") {
+                    console.log("LLENANDO COMBOOO3")
+                    llenar_combo_proveedor_producto_hp(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3, JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                    ++contador_equipo2_s;
+                }
+                if (JSONobj.ppr.length > 0) {
+                    if (JSONobj.ppr.length === 1 && JSONobj.ppr[0].ppr4 === null) {
+                        $("#tbody_historialprecio").html("<tr class='no-registers act-precio'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'><input type='hidden' value='" + JSONobj.ppr[0].ppr1 + "'>Ingrese un precio para el producto.</div></td></tr>");
+                        $("#contenedor_nuevo_precio").css("visibility", "visible");
+                        $("#btn_historialpre_save").removeAttr("disabled");
+                    }
+                    else {
+                        $("#tbody_historialprecio").empty();
+                        let contador = 1;
+                        let estado;
+                        $.each(JSONobj.ppr, function (obj, item) {
+                            estado = item.ppr8 === "1" ? "<i class='icon-checkmark icon-hp-habil'></i>" : "<i class='icon-cross icon-hp-desh'></i>";
+                            let row = "<tr>" +
+                                "<td class='text-center'><p class='text-center'>" + contador + "</p></td>" +
+                                "<td class='text-center'><span>" + item.ppr6 + "</span></td>" +
+                                "<td class='text-center'><span>" + item.ppr7 + "</span></td>" +
+                                "<td class='text-center text-primary'><span><b>S/ " + item.ppr4 + "</b></span></td>" +
+                                "<td class='text-center'><span>" + estado + "</span></td>" +
+                                "</tr>>";
+
+                            $("#tbody_historialprecio").append(row);
+                            contador++;
+                        });
+                    }
+                }
+                else {
+                    $("#tbody_historialprecio").html("<tr class='no-registers'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'>No se encontró un historial de precios para el producto seleccionado.</div></td></tr>");
+                }
             }
         },
         error: function errores(msg) {
@@ -195,7 +231,7 @@ function guardar_nuevo_Precio() {
                         success: function resultado(data) {
                             if (data === "0") {
                                 //Cargar otra vez la tabla
-                                ListarHistorial_Precios();
+                                ListarHistorial_Precios(null,null,"historial");
                                 if (typeof BuscarSolucionEquipos !== 'undefined' && jQuery.isFunction(BuscarSolucionEquipos)) {
                                     BuscarSolucionEquipos();
                                 }
@@ -232,7 +268,6 @@ function guardar_nuevo_Precio() {
             else {
                 alert("La Fecha de inicio debe ser mayor a la última fecha de registro.");
             }
-
         }
         else {
             alert("Complete los campos necesarios para registrar un nuevo precio.");
