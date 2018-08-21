@@ -116,6 +116,7 @@ function BuscarSolucion(sol) {
 function BuscarRequerimientos() {
     $.ajax({
         method: "POST",
+        async: false,
         url: "/solucion/BuscarRequerimientos",
         success: function (data) {
             if (data !== "0") {
@@ -311,6 +312,7 @@ function GuardarSolucion(){
 
         $.ajax({
             method: "POST",
+            async: false,
             url: "/solucion/GuardarSolucion",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(jsonGuardarSolucion),
@@ -319,9 +321,54 @@ function GuardarSolucion(){
                     alert("La solución fue guardada correctamente.");
                     LimpiarCampos();
                     LimpiarVariables();
+
+
+                    // isolSolucion = LastSolucion();
+
+                    $.ajax({
+                        method: "POST",
+                        async: false,
+                        url: "/solucion/LastSolucion",
+                        success: function(valor) {
+                            isolSolucion = valor;
+                            // alert("La sesion de solucion es: " + valor);
+                        },
+                        error: function errores(msg) {
+                            alert('Error: ' + msg.responseText);
+                        }
+                    });
+
+
+                    // $.ajax({
+                    //     method: "POST",
+                    //     async: false,
+                    //     url: "/solucion/VerificarSesionSolucion",
+                    //     success: function(valor) {
+                    //         console.log('sesion solucion');
+                    //         console.log(valor);
+                    //         // alert("La sesion de solucion es: " + valor);
+                    //     },
+                    //     error: function errores(msg) {
+                    //         alert('Error: ' + msg.responseText);
+                    //     }
+                    // });
+
+
+
+
+                    console.log('isolSolucionlast');
+                    console.log(isolSolucion);
+                    if(isolSolucion !== '0'){
+                        $('button#btn_enviar_solucion_cotizacion').show();
+                        AddSetSolucion();
+                    }
+
                     if(modSolPend === '1'){
                         BuscarRequerimientos();
                     }
+
+
+
                 }
                 else {
                     alert("Error en la red. No se han guardado cambios.");
@@ -405,6 +452,8 @@ function EliminarSolucion() {
                 if(modSolPend === '1'){
                     BuscarRequerimientos();
                 }
+
+
             }
             else {
                 alert("Error en la red. No se han guardado cambios.");
@@ -481,7 +530,20 @@ function SesionSolucion(sol) {
 
 }
 
+function LastSolucion() {
+    $.ajax({
+        method: "POST",
+        url: "/solucion/LastSolucion",
+        success: function(valor) {
+            return valor;
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
 
+}
 
 
 
@@ -500,6 +562,9 @@ function LimpiarVariables() {
     jsonGuardarSolucion = {};
     arrSolucion = [];
 }
+
+
+
 
 
 //****************************************************************************//

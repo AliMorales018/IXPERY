@@ -49,5 +49,9 @@ public class BSolucion {
         return odSol.BuscarSolucionesAprobadas();
     }
 
+    public Integer LastId() throws Exception{
+        return  odSol.LastId();
+    }
+
 
 }
