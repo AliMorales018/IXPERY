@@ -6,8 +6,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asociar Servicio</title>
-    <link rel="stylesheet" href="${urlPublic}/css/styles.css" />
-    <link rel="stylesheet" href="${urlPublic}/css/select2.css" />
+<%--    <link rel="stylesheet" href="${urlPublic}/css/styles.css" />
+    <link rel="stylesheet" href="${urlPublic}/css/select2.css" />--%>
     <style>
         .select2-container .select2-selection--single {
             height: 25.15px;
@@ -19,8 +19,8 @@
             line-height: 25.15px;
         }
     </style>
-    <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="${urlPublic}/js/select2.js"></script>
+   <%-- <script src="${urlPublic}/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="${urlPublic}/js/select2.js"></script>--%>
 </head>
 <body>
 
@@ -41,7 +41,7 @@
     <div class="cell small-12 medium-4">
         <div class="grid-x align-center-middle">
             <div class="cell small-4 medium-4 large-4 text-center">
-                <button type="button" id="btn_asociarservsoli_save" class="btn btn-secondary">Guardar</button>
+                <button type="button" id="btn_asociarservsoli_save" class="btn btn-secondary" onclick="save_servsoli_asociados();">Guardar</button>
             </div>
         </div>
     </div>

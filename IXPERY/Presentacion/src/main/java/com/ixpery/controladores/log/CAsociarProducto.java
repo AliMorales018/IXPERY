@@ -51,8 +51,10 @@ public class CAsociarProducto {
         if(a.equals("actualizados")){
             return "";
         }
+
         else{
             return "ERROR: No se pudo Asociar los productos";
         }
     }
 }
+

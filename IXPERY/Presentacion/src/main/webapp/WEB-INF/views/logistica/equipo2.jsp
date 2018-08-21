@@ -243,7 +243,7 @@
                                 "<td><div><span id='spn_equipo2_canpro'>" + item.cantidad + "</div></td>" +
                                 "<td><div><span id='spn_equipo2_prepro'>" + cosUnit + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_subtot'></span>" + subUnit + "</div></td>" +
-                                "<td><div><button id='btn_equipo2_actpre" + conta_filas_equipo2 + "' name='btn_equipo2_actpre1' onclick='crearSesProvProd(`"+trvaleq2+"`);'>Actualizar Precio</button></div></td>" +
+                                "<td><div><button id='btn_equipo2_actpre" + conta_filas_equipo2 + "' class='btn-icon-salario' name='btn_equipo2_actpre1' onclick='crearSesProvProd(`"+trvaleq2+"`);'>Actualizar Precio</button></div></td>" +
                                 "<td hidden><div><span id='spn_equipo2_idprodsol'>" + item.idprodsol + "</span></div></td>" +
                                 "<td hidden><div><span id='spn_equipo2_idequipo'>" + item.idequipo + "</span></div></td>" +
                                 "<td hidden><div><span id='spn_equipo2_idprprov'>" + prodprov + "</span></div></td>" +
@@ -281,7 +281,7 @@
         }
             },
             error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
+                //alert('Error: ' + msg.responseText);
             }
         });
     }

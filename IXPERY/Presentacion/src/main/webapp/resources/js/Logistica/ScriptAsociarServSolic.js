@@ -117,40 +117,41 @@ function save_servsoli_asociados() {
             sol = data;
             //SESION CARGO
             console.log("SESION ID CARGO: "+ sol);
+            for(let i=0; i<count_otroserpr;i++){
+                if ($(this).find('select[id=select_filtrar_insumoot2]').val() != null) {
+                    idSolucion = sol;
+                    idPreRegistro = $(this).find('span[id=spn_otrosepr_idpreregsoli]').text();
+                    idServSolic = $(this).find('select[id=select_filtrar_insumoot2]').val();
+                    campos = idSolucion + "," + idPreRegistro + "," + idServSolic;
+                    cadena = cadena + campos + ";";
+                }
+            }
+
+            if (cadena != "") {
+                $.ajax({
+                    method: "POST",
+                    url: "/asociarservicio/register",
+                    data: {"value": cadena},
+                    success: function resultado(data) {
+                        if(data == ""){
+                            alert("Servicios Asociados Correctamente");
+                            $("#tbody_asociarservsolic").empty();
+                            CargarOtSerNRBDD();
+                        }
+                        else{
+                            alert(data);
+                        }
+                    },
+                    error: function errores(msg) {
+                        alert('Error: ' + msg.responseText);
+                    }
+                });
+            }
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
         }
     });
- for(let i=0; i<count_otroserpr;i++){
-     if ($(this).find('select[id=select_filtrar_insumoot2]').val() != null) {
-         idSolucion = sol;
-         idPreRegistro = $(this).find('span[id=spn_otrosepr_idpreregsoli]').text();
-         idServSolic = $(this).find('select[id=select_filtrar_insumoot2]').val();
-         campos = idSolucion + "," + idPreRegistro + "," + idServSolic;
-         cadena = cadena + campos + ";";
-     }
- }
 
-    if (cadena != "") {
-        $.ajax({
-            method: "POST",
-            url: "/asociarservicio/register",
-            data: {"value": cadena},
-            success: function resultado(data) {
-                if(data == ""){
-                    alert("Servicios Asociados Correctamente");
-                    $("#tbody_asociarservsolic").empty();
-                    CargarOtSerNRBDD();
-                }
-                else{
-                    alert(data);
-                }
-            },
-            error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
-            }
-        });
-    }
 
 }

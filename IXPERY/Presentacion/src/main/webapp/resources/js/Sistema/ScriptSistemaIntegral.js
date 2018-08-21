@@ -95,6 +95,7 @@ $(document).ready(function () {
                         if(JSONobj[i]) {
                             if (JSONobj[i].idmenu === 26) {
                                 mAsociarProd = JSONobj[i];
+                                JSONobj.splice(i, 1);
                             }
                         }
 

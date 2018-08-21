@@ -156,11 +156,11 @@
             content: "S/. ";
         }
 
-        .moneda::after{
-            content: ".00";
-        }
+        /*.moneda::after{*/
+            /*content: ".00";*/
+        /*}*/
         .sinmoneda{
-            font-weight: bold;
+            /*font-weight: bold;*/
             text-align: right;
         }
         /*div[class^='miclase']{*/

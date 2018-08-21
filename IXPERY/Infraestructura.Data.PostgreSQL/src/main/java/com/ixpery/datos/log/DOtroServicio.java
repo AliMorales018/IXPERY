@@ -228,7 +228,8 @@ public class DOtroServicio {
                     oeServSolucion.setEstado("1");
                     oeServSolucion.setFecharegistro(timestamp.toString());
                     //CAMBIAR LUEGO POR LA SESSIÓN
-                    oeServSolucion.setUserregistro("LUIS AZALDE LEYVA");
+//                    oeServSolucion.setUserregistro("LUIS AZALDE LEYVA");
+                    oeServSolucion.setUserregistro(listPreRegServicio.get(i).getUserregistro());
                     oeServSolucion.setEnviadocotizar("1");
                     oeServSolucion.setIdpreregserv(listPreRegServicio.get(i).getIdpreregserv());
 
@@ -261,7 +262,7 @@ public class DOtroServicio {
                 oeServSolucion.setEstado("1");
                 oeServSolucion.setFecharegistro(timestamp.toString());
                 //CAMBIAR LUEGO POR LA SESSIÓN
-                oeServSolucion.setUserregistro("LUIS AZALDE LEYVA");
+                oeServSolucion.setUserregistro(listPreRegServicio.get(i).getUserregistro());
                 oeServSolucion.setEnviadocotizar("1");
                 oeServSolucion.setIdpreregserv(listPreRegServicio.get(i).getIdpreregserv());
 

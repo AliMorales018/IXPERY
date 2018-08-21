@@ -54,7 +54,8 @@ function InsUpdDelEquipo() {
             console.log("ELIMINAR");
             console.log(arrGuardarPreRegEq);
         }
-    }).closest('tbody').find('tr[class=equiponr-insert]').each(function () {
+    });
+    $('tbody#tbody_equiponr').find('tr[class=equiponr-insert]').each(function () {
         let objFilaPreReg = {};
         let objProdSol= {};
         let objFilaProSolPre = {};
@@ -67,13 +68,17 @@ function InsUpdDelEquipo() {
 
         objFilaPreReg.prp1=0;
         objFilaPreReg.prp2=objProdSol;
-        objFilaPreReg.prp4=$(this).find("td div input[id = txt_equiponr_nompro]").val();
-        objFilaPreReg.prp5=$(this).find("td div input[id = txt_equiponr_umepro]").val();
-        objFilaPreReg.prp6=$(this).find("td div input[id = txt_equiponr_canpro]").val();
+        objFilaPreReg.prp4=$(this).find("input[id = txt_equiponr_nompro]").val();
+        objFilaPreReg.prp5=$(this).find("input[id = txt_equiponr_umepro]").val();
+        objFilaPreReg.prp6=$(this).find("input[id = txt_equiponr_canpro]").val();
         objFilaPreReg.prp7="1";
-        objFilaPreReg.prp8=$(this).find("td div input[id = txt_equiponr_modpro]").val();
-        objFilaPreReg.prp9=$(this).find("td div input[id = txt_equiponr_marpro]").val();
+        objFilaPreReg.prp8=$(this).find("input[id = txt_equiponr_modpro]").val();
+        objFilaPreReg.prp9=$(this).find("input[id = txt_equiponr_marpro]").val();
+        console.log('objFilaPreReg');
+        console.log(objFilaPreReg);
         arrGuardarFinPreRegEq.push(objFilaPreReg);
+        console.log('arrGuardarFinPreRegEq');
+        console.log(arrGuardarFinPreRegEq);
 
         //REGISTRO PRODUCTO SOLUCIÓN
 
@@ -90,6 +95,8 @@ function InsUpdDelEquipo() {
         objFilaProSolPre.pso12="1";
         objFilaProSolPre.pso14=objPreReg;
         arrGuardarFinEquipo.push(objFilaProSolPre);
+        console.log('arrGuardarFinEquipo');
+        console.log(arrGuardarFinEquipo);
     });
 
 
@@ -163,15 +170,20 @@ function InsUpdDelEquipo() {
         data: JSON.stringify(jsonGuardarFullEq),
         success: function resultado(valor) {
             if (valor == "") {
-                limpiarInsUpdTot();
+                alert('Los datos fueron guardados correctamente.');
                 // var sid=$("#selectEmpresaEquipo_Proyecto").val();
                 var sid=sSolucionEq;
                 BuscarSolucionEquipos(sid);
+                limpiarInsUpdTot();
+
+
                 //
                 // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
                 // CargarJS_proyecto(0, 1, 0);
             }
             else {
+                alert('Error en la red. No se guardaron los cambios.');
+
                 console.log("Entro en ELSE");
                 // alert(valor);
             }

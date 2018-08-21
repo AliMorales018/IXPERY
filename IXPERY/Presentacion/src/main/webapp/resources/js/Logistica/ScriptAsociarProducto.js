@@ -1,30 +1,31 @@
 var count_productos_pr;
-
+var solAscoProd;
 $(document).ready(function() {
-    let sol = 0;
     $.ajax({
         method: "POST",
         async: false,
         url:"/solucion/VerificarSesionSolucion",
         data:{},
         success: function resultado(data) {
-            sol = data;
+            solAscoProd = data;
             //SESION CARGO
-            console.log("SESION ID CARGO: "+ sol);
+            console.log("SESION ID CARGO: "+ solAscoProd);
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
         }
     });
 
-    CargarProductosNRBDD(sol);
+    CargarProductosNRBDD(solAscoProd);
 });
 
 
 
 
-function CargarProductosNRBDD(sol) {
-    var idSolucion = sol;
+function CargarProductosNRBDD(solAscoProd) {
+    var idSolucion = solAscoProd;
+    console.log("idsolucion");
+    console.log(idSolucion);
     count_productos_pr = 1;
     $.ajax({
         method: "POST",
@@ -97,34 +98,56 @@ function save_productos_asociados() {
     var campos;
     var cadena = "";
 
-    for (var i = 1; i < count_productos_pr; i++) {
-        if ($("#select_filtrar_insumo_" + i).val() != null) {
-            idSolucion = 1;
-            idPreRegistro = $("#txt_id_preregistro_" + i).text();
-            idProducto = $("#select_filtrar_insumo_" + i).val();
-            campos = idSolucion + "," + idPreRegistro + "," + idProducto;
-            cadena = cadena + campos + ";";
-        }
-    }
-
-    if (cadena != "") {
-        $.ajax({
-            method: "POST",
-            url: "/asociarproducto/register",
-            data: {"value": cadena},
-            success: function resultado(data) {
-                if(data == ""){
-                    alert("Productos Asociados Correctamente");
-                    $("#tbody_asociarproducto").empty();
-                    CargarProductosNRBDD();
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/solucion/VerificarSesionSolucion",
+        data: {},
+        success: function resultado(data) {
+        idSolucion=data;
+            console.log("SESION ID CARGO: "+ idSolucion);
+            for (var i = 1; i < count_productos_pr; i++) {
+                if ($("#select_filtrar_insumo_" + i).val() != null) {
+                    idPreRegistro = $("#txt_id_preregistro_" + i).text();
+                    idProducto = $("#select_filtrar_insumo_" + i).val();
+                    console.log(idProducto);
+                    campos = idSolucion + "," + idPreRegistro + "," + idProducto;
+                    cadena = cadena + campos + ";";
                 }
-                else{
-                    alert(data);
-                }
-            },
-            error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
             }
-        });
-    }
+
+
+
+            if (cadena != "") {
+                $.ajax({
+                    method: "POST",
+                    url: "/asociarproducto/register",
+                    data: {"value": cadena},
+                    success: function resultado(data) {
+                        if(data == ""){
+                            alert("Productos Asociados Correctamente");
+                            $("#tbody_asociarproducto").empty();
+                            CargarProductosNRBDD(solAscoProd);
+                            alert("L1");
+                            if( typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
+                                alert("L2");
+                                BuscarSesionSol();
+                                alert("L3");
+                            }
+                        }
+                        else{
+                            alert("else");
+                            alert(data);
+                        }
+                    },
+                    error: function errores(msg) {
+                        alert("error");
+                        // alert('Error: ' + msg.responseText);
+                    }
+                });
+            }
+        }
+    });
+
+
 }

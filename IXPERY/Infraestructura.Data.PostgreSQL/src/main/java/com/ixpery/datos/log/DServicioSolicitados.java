@@ -171,7 +171,7 @@ public class DServicioSolicitados {
         paramSalid.Direction = ParameterDirection.Output;
         listParameter.add(pValor);
         listParameter.add(paramSalid);
-        com.TransUnica("actualizar_preregistroproducto", listParameter);
+        com.TransUnica("actualizar_preregistro_servicsolic", listParameter);
         String a  = paramSalid.Value.toString();
         return a;
     }
