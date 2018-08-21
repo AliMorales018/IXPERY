@@ -454,6 +454,9 @@ $(document).ready(function () {
                     $('#panel__' + mServicio.idmenu).remove();
                     $('#panel__' + mViatico.idmenu).remove();
                     DestruirSesionSolucion();
+
+                    DestruirSesionProducto();
+                    DestruirSesionProveedor();
                 }
 
                 if(idCerrar == icotJson){
@@ -468,6 +471,8 @@ $(document).ready(function () {
                     $('#panel__' + mViaticoCot.idmenu).remove();
                     DestruirSesionSolucion();
 
+                    DestruirSesionProducto();
+                    DestruirSesionProveedor();
 
                 }
 
@@ -482,6 +487,9 @@ $(document).ready(function () {
                     $('#panel__' + mServicioCot.idmenu).remove();
                     $('#panel__' + mViaticoCot.idmenu).remove();
                     DestruirSesionSolucion();
+
+                    DestruirSesionProducto();
+                    DestruirSesionProveedor();
 
                 }
 
