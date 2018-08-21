@@ -176,6 +176,7 @@ function InsUpdDelEquipo() {
                 BuscarSolucionEquipos(sid);
                 limpiarInsUpdTot();
 
+
                 //
                 // $("#" + nomBody_proyecto).html(filaTabla_proyecto);
                 // CargarJS_proyecto(0, 1, 0);

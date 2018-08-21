@@ -116,6 +116,7 @@ function save_productos_asociados() {
             }
 
 
+
             if (cadena != "") {
                 $.ajax({
                     method: "POST",
