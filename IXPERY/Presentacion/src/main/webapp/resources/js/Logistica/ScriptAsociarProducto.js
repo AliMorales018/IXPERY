@@ -128,15 +128,11 @@ function save_productos_asociados() {
                             alert("Productos Asociados Correctamente");
                             $("#tbody_asociarproducto").empty();
                             CargarProductosNRBDD(solAscoProd);
-                            alert("L1");
                             if( typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
-                                alert("L2");
                                 BuscarSesionSol();
-                                alert("L3");
                             }
                         }
                         else{
-                            alert("else");
                             alert(data);
                         }
                     },

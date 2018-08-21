@@ -174,7 +174,11 @@
 <!-- JavaScript -->
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEquipo2.js"></script>
 <script>
+    var conta_filas_equipo2;
+    var conta_filas_equiponr2;
     function BuscarSesionSol(){
+        conta_filas_equipo2=0;
+        conta_filas_equiponr2=0;
         let id = "";
         $.ajax({
             method: "POST",
@@ -201,6 +205,9 @@
             url: "/equipo2/buscarequiposol",
             data: {"idsol": id},
             success: function resultado(valor) {
+
+                console.log('ACAAAAAAAAAAA');
+                console.log(valor);
 
                 JSONobjGeneralEq2 = JSON.parse(valor);
                 // alert(JSON.stringify(JSONobj));
@@ -237,7 +244,7 @@
                                 "<td><div><span id='spn_equipo2_nompro'>" + item.producto + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_codpro'>" + item.codigo + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_modpro'>" + item.modelo + "</span></div></td>" +
-                                "<td><div><select id='cmb_equipo2_provee" + conta_filas_equipo2 + "' name='cmb_equipo2_provee' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProveeEq2(this);'></select>" +
+                                "<td><div><select id='cmb_equipo2_provee" + conta_filas_equipo2 + "' name='cmb_equipo2_provee' class='select_equipo_equipos' style='width: 100%;' onchange='selCmbProveeEq2(this);'><option value='"+item.idproveedor+"' selected='selected'>"+item.nomempresa+"</option></select>" +
                                 "<td><div><span id='spn_equipo2_marpro'>" + item.marca + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_medpro'>" + item.nomumedida + "</span></div></td>" +
                                 "<td><div><span id='spn_equipo2_canpro'>" + item.cantidad + "</div></td>" +
@@ -253,7 +260,11 @@
                             // borrar_select3();
                             clonar_selectEq2(conta_filas_equipo2, item.idproducto);
 
-                            $("#select2-cmb_equipo2_provee" + conta_filas_equipo2 + "-container").text(item.nomempresa);
+                            console.log('item.idproveedor');
+                            console.log(item.idproveedor);
+                            // $("#select2-cmb_equipo2_provee" + conta_filas_equipo2 + "-container").text(item.nomempresa);
+                            // $("#select2-cmb_equipo2_provee" + conta_filas_equipo2 + "-container").value = item.idproveedor;
+
                         });
                   //  }
                 }
@@ -286,11 +297,20 @@
         });
     }
 
-    var conta_filas_equipo2=0;
-    var conta_filas_equiponr2=0;
+
     $(document).ready(function () {
         BuscarSesionSol();
     });
+
+
+    function llenar_combo_proveedor_equipo2(id, text){
+        //COMBO DE SOLUCION
+        let data = {id: id , text: text};
+        let newOption = new Option(data.text, data.id, false, false);
+        $('#selectCargoLaboral_histsal').empty().append(newOption);
+        $('#selectCargoLaboral_histsal').attr("disabled",true);
+    }
+
 </script>
 <!-- End JavaScript -->
 </body>
