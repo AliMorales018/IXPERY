@@ -1,31 +1,129 @@
+function agregar_nuevo_Precio() {
+    if ($("#contenedor_nuevo_precio").css("visibility") !== "visible") {
+        if ( $("#selectProveedor_hp").val() !== "" && $("#selectProducto_hp").val() !== "") {
+            $("#btn_historialpre_save").removeAttr("disabled");
+            $("#contenedor_nuevo_precio").css("visibility", "visible");
+        }
+    }
+}
 
-//Funciones para llenar Combos
+function ocultar_precio_nuevo(){
+    $("#btn_historialpre_save").attr("disabled",true);
+    $("#contenedor_nuevo_precio").css("visibility", "hidden");
+    $("#new_date_hp").val("");
+    $("#new_precio_hp").val("");
+}
 
-var contador_nuevo_precio = 1;
-var count_historial = 1;
+function sumOresDias_HP(fecha,dias) {
+    fecha.setDate(fecha.getDate() + dias + 1);
+    return fecha;
+}
 
-function searchProveedor_hp(searchLike){
-    $("#tbody_historialprecio").empty();
-    $("#selectProducto_hp").empty();
+function convertDate_HP(inputFormat) {
+    function pad(s) {
+        return (s < 10) ? '0' + s : s;
+    }
+
+    var d = new Date(inputFormat);
+    return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
+}
+
+function ListarHistorial_Precios(){
+    let idProv = $("#selectProveedor_hp").val();
+    let idProd = $("#selectProducto_hp").val();
+    if(idProv !== "" && idProd !== ""){
+        //Verificar si se encuentran asociados
+        $.ajax({
+            method: "POST",
+            url: "/historialprecio/consultarasociados",
+            data: {"idProv":idProv,"idProd":idProd},
+            success: function resultado(data) {
+                if(data === "0"){
+                    $("#contenedor_nuevo_precio").css("visibility", "hidden");
+                    $("#contasociar_pro_prov").css("visibility","visible");
+                    $("#vppa").val("0");
+                    $("#tbody_historialprecio").html("<tr><td colspan='5' class='text-center'><div class='p-3' style='font-size: 10px'>Seleccione proveedor y/o producto ó Asocie producto/proveedor</div></td></tr>");
+                }
+                else{
+                    $("#contasociar_pro_prov").css("visibility","hidden");
+                    listar_historial_precios(idProv,idProd);
+                    $("#vppa").val("1");
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+    }
+}
+
+function listar_historial_precios(idProv,idProd){
+    //Listar Historial de Precios
     $.ajax({
         method: "POST",
-        url: "/historialprecio/busproveedor",
-        data: {"var":searchLike},
+        url: "/historialprecio/listar",
+        async: false,
+        data: {"idProv":idProv,"idProd":idProd},
         success: function resultado(data) {
-            if(data == "0"){
-                $("#selectProveedor_hp").html("<option></option>");
-                $("#selectProducto_hp").empty();
-                $("#selectProducto_hp").append("<option value=''></option>");
-                $("#tbody_historialprecio").empty();
-                ocultar_precio_nuevo();
+            let JSONobj = JSON.parse(data);
+            $("#btn_historialpre_nue").removeAttr("disabled");
+            ocultar_precio_nuevo();
+            if(JSONobj.ppr.length > 0){
+                if(JSONobj.ppr.length === 1 && JSONobj.ppr[0].ppr4 === null){
+                    $("#tbody_historialprecio").html("<tr class='no-registers act-precio'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'><input type='hidden' value='"+JSONobj.ppr[0].ppr1+"'>Ingrese un precio para el producto.</div></td></tr>");
+                    $("#contenedor_nuevo_precio").css("visibility","visible");
+                    $("#btn_historialpre_save").removeAttr("disabled");
+                }
+                else{
+                    $("#tbody_historialprecio").empty();
+                    let contador = 1;
+                    let estado;
+                    $.each(JSONobj.ppr, function (obj, item) {
+                        estado = item.ppr8 === "1"? "<i class='icon-checkmark icon-hp-habil'></i>":"<i class='icon-cross icon-hp-desh'></i>";
+                        let row = "<tr>" +
+                            "<td class='text-center'><p class='text-center'>"+contador+"</p></td>" +
+                            "<td class='text-center'><span>"+item.ppr6+"</span></td>" +
+                            "<td class='text-center'><span>"+item.ppr7+"</span></td>" +
+                            "<td class='text-center text-primary'><span><b>S/ "+item.ppr4+"</b></span></td>" +
+                            "<td class='text-center'><span>"+estado+"</span></td>" +
+                            "</tr>>";
+
+                        $("#tbody_historialprecio").append(row);
+                        contador++;
+                    });
+                }
             }
             else{
-                $("#selectProveedor_hp").empty();
-                var JSONobj = JSON.parse(data);
-                $("#selectProveedor_hp").append("<option value=''></option>");
-                $.each(JSONobj, function (obj, item) {
-                    $("#selectProveedor_hp").append('<option value="'+item.idproveedor+'">'+item.nomempresa+' - '+item.ruc+'</option>');
-                });
+                $("#tbody_historialprecio").html("<tr class='no-registers'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'>No se encontró un historial de precios para el producto seleccionado.</div></td></tr>");
+            }
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+}
+function asociar_prod_prov(){
+    let objProdProv = {
+        "ppr": [{
+            "ppr1": 0,
+            "ppr2": {
+                        "pdt1": parseInt($("#selectProducto_hp").val())
+                    },
+            "ppr3": {
+                        "prd1": parseInt($("#selectProveedor_hp").val())
+                    },
+        }]
+    };
+    $.ajax({
+        method: "POST",
+        url: "/historialprecio/registrarasociado",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(objProdProv),
+        success: function resultado(data) {
+            if(data === "0"){
+                alert("Se asoció correctamente.");
+                $("#contasociar_pro_prov").css("visibility","hidden");
+                ListarHistorial_Precios();
             }
         },
         error: function errores(msg) {
@@ -34,150 +132,113 @@ function searchProveedor_hp(searchLike){
     });
 }
 
-function searchProducto_hp(){
-    var idProv = $("#selectProveedor_hp").val();
-    if(idProv != "") {
-        $("#tbody_historialprecio").empty();
-        ocultar_precio_nuevo();
-        $.ajax({
-            method: "POST",
-            url: "/historialprecio/busproducto",
-            data: {"idProv": idProv},
-            success: function resultado(data) {
-                if (data == "0") {
-                    $("#selectProducto_hp").html("<option></option>");
-                    console.log("entro");
+function guardar_nuevo_Precio() {
+    if($("#vppa").val() !== "0") {
+        let idProducto = $("#selectProducto_hp").val();
+        let idProveedor = $("#selectProveedor_hp").val();
+        if ($("#new_date_hp").val() !== "" && $("#new_precio_hp").val() !== "") {
+            let data = {
+                "ppr": [
+                    {
+                        "ppr1": 0,
+                        "ppr2": {
+                            "pdt1": parseInt(idProducto)
+                        },
+                        "ppr3": {
+                            "prd1": parseInt(idProveedor)
+                        },
+                        "ppr4": parseFloat($("#new_precio_hp").val()),
+                        "ppr6": $("#new_date_hp").val(),
+                        "ppr8": "1"
+                    }
+                ]
+            };
+            let FechaIni = new Date($("#new_date_hp").val());
+            let FechaFin = sumOresDias_HP(FechaIni, -1);
+            let stateRegisters = $("#tbody_historialprecio :first-child").hasClass("no-registers");
+            let stateRegistersFirst = $("#tbody_historialprecio :first-child").hasClass("act-precio");
+            let ultimaFecha;
+            let fechaCorrecta;
+            if (!stateRegisters) {
+                ultimaFecha = $("#tbody_historialprecio tr:last-child td").eq(1).find("span").text();
+                FechaFin = convertDate_HP(FechaFin);
+                if (Date.parse(FechaIni) <= Date.parse(ultimaFecha)) {
+                    fechaCorrecta = false;
                 }
                 else {
-                    console.log("listando");
-                    $("#selectProducto_hp").empty();
-                    var JSONobj = JSON.parse(data);
-                    $("#selectProducto_hp").append("<option value=''></option>");
-                    $.each(JSONobj, function (obj, item) {
-                        $("#selectProducto_hp").append('<option value="' + item.idproducto + '">' + item.nomproducto + '</option>');
+                    fechaCorrecta = true;
+                }
+            }
+            else {
+                FechaFin = "0";
+                fechaCorrecta = true;
+            }
+            if (fechaCorrecta) {
+                if(stateRegistersFirst){
+                    let idProdProv = parseInt($("#tbody_historialprecio :first-child").find("input").val());
+                    console.log("ID PRODUCTO PROVEEDOR: "+idProdProv)
+                    let ObjProdProvAct = {
+                        "ppr": [
+                            {
+                                "ppr1": idProdProv,
+                                "ppr4": parseFloat($("#new_precio_hp").val()),
+                                "ppr6": $("#new_date_hp").val(),
+                                "ppr8": "1"
+                            }
+                        ]
+                    };
+                    $.ajax({
+                        method: "POST",
+                        url: "/historialprecio/actualizarprecio",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(ObjProdProvAct),
+                        success: function resultado(data) {
+                            if (data === "0") {
+                                //Cargar otra vez la tabla
+                                ListarHistorial_Precios();
+                                if (typeof BuscarSolucionEquipos !== 'undefined' && jQuery.isFunction(BuscarSolucionEquipos)) {
+                                    BuscarSolucionEquipos();
+                                }
+                            }
+                            else{
+                                alert(data);
+                            }
+                        },
+                        error: function errores(msg) {
+                            alert('Error: ' + msg.responseText);
+                        }
                     });
                 }
-            },
-            error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
-            }
-        });
-    }
-}
-
-//Listar Hiatorial de Precios
-
-function ListarHistorial_Precios(){
-    var idProv_ = $("#selectProveedor_hp").val();
-    var idProd_ = $("#selectProducto_hp").val();
-    if(idProd_ != ""){
-        $.ajax({
-            method: "POST",
-            url: "/historialprecio/listar",
-            data: {"idProv":idProv_,"idProd":idProd_},
-            success: function resultado(data) {
-                if(data != "0"){
-                    count_historial = 1;
-                    var JSONobj = JSON.parse(data);
-                    console.log(JSONobj);
-                    $("#tbody_historialprecio").empty();
-                    ocultar_precio_nuevo();
-                    var estado;
-                    var fi;
-                    var ff;
-                    $.each(JSONobj, function (obj, item) {
-                        if(item.estado == 1){
-                            estado = "<i class='icon-checkmark icon-hp-habil'></i>";
+                else {
+                    $.ajax({
+                        method: "POST",
+                        url: "/historialprecio/register",
+                        data: {"json": JSON.stringify(data), "idProd": idProducto, "fechafin": FechaFin},
+                        success: function resultado(data) {
+                            if (data === "") {
+                                //Cargar otra vez la tabla
+                                ListarHistorial_Precios();
+                                if (typeof BuscarSolucionEquipos !== 'undefined' && jQuery.isFunction(BuscarSolucionEquipos)) {
+                                    BuscarSolucionEquipos();
+                                }
+                            }
+                        },
+                        error: function errores(msg) {
+                            alert('Error: ' + msg.responseText);
                         }
-                        else{
-                            estado = "<i class='icon-cross icon-hp-desh'></i>";
-                        }
-                        if(item.fechainicio == null){
-                            fi = "0000-00-00";
-                        }
-                        else{
-                            fi = item.fechainicio;
-                        }
-                        if(item.fechafin == null) {
-                            ff = "0000-00-00";
-                        }
-                        else{
-                            ff = item.fechafin;
-                        }
-                        var row = "<tr>" +
-                            "<td class='text-center'><p class='text-center'>"+count_historial+"</p></td>" +
-                            "<td class='text-center'><span>"+fi+"</span></td>" +
-                            "<td class='text-center'><span>"+ff+"</span></td>" +
-                            "<td class='text-center text-primary'><span><b>s/. "+item.n_preciocompra+"</b></span></td>" +
-                            "<td class='text-center'><span>"+estado+"</span></td>" +
-                            "</tr>>";
-
-                        $("#tbody_historialprecio").append(row);
-                        count_historial++;
                     });
                 }
-                else{
-                    $("#tbody_historialprecio").append("<tr><td colspan='11' class='text-center'><div class='p-3'>No se encontró un historial para el producto seleccionado.</div></td></tr>");
-                }
-            },
-            error: function errores(msg) {
-                alert('Error: ' + msg.responseText);
             }
-        });
-    }
-}
+            else {
+                alert("La Fecha de inicio debe ser mayor a la última fecha de registro.");
+            }
 
-function agregar_nuevo_Precio() {
-    if (contador_nuevo_precio == 1) {
-        if ($("#selectProducto_hp").val() != "") {
-            $("#contenedor_nuevo_precio").css("visibility","visible");
-            contador_nuevo_precio++;
-        }
-        else {
-            alert("Seleccione un producto para agregar un precio a su historial.");
-        }
-    }
-    else{
-        alert("Guarde el registro actual para añadir uno nuevo");
-    }
-}
-
-function guardar_nuevo_Precio() {
-    if(contador_nuevo_precio > 1) {
-        if ($("#new_date_hp").val() != "" && $("#new_precio_hp").val() != "") {
-            var idProducto = $("#selectProducto_hp").val();
-            var idProveedor = $("#selectProveedor_hp").val();
-            var fechaInicio = $("#new_date_hp").val();
-            var precio = $("#new_precio_hp").val();
-
-            $.ajax({
-                method: "POST",
-                url: "/historialprecio/register",
-                data: {"iP": idProducto,"iProv":idProveedor,"fI": fechaInicio, "pre": precio},
-                success: function resultado(data) {
-                    //Cargar otra vez la tabla
-                    ListarHistorial_Precios();
-                },
-                error: function errores(msg) {
-                    alert('Error: ' + msg.responseText);
-                }
-            });
         }
         else {
             alert("Complete los campos necesarios para registrar un nuevo precio.");
         }
     }
     else{
-        alert("Agregue un nuevo precio a un producto.");
+        alert("Asocie el producto al proveedor para poder insertar un nuevo precio.");
     }
-}
-
-function cerrar_nuevo_precio(){
-    ocultar_precio_nuevo();
-}
-
-function ocultar_precio_nuevo(){
-    $("#contenedor_nuevo_precio").css("visibility","hidden");
-    $("#new_precio_hp").val("");
-    contador_nuevo_precio = 1;
 }

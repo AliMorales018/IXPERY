@@ -4,10 +4,12 @@ import com.ixpery.entidades.log.EProducto;
 import com.ixpery.entidades.log.EProductoProveedor;
 import com.ixpery.entidades.log.EProveedor;
 import com.ixpery.negocio.log.BProducto;
+import com.ixpery.negocio.log.BProductoProveedor;
 import com.ixpery.negocio.log.BProveedor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +24,7 @@ public class CHistorialPrecio {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BProveedor obProveedor = (BProveedor) applicationContext.getBean("beanProveedor");
     BProducto obProducto = (BProducto) applicationContext.getBean("beanProducto");
+    BProductoProveedor obProductoProv = (BProductoProveedor) applicationContext.getBean("beanProductoProveedor");
 
     @RequestMapping("/historialprecio")
     public ModelAndView HistorialPrecio() throws Exception {
@@ -36,16 +39,31 @@ public class CHistorialPrecio {
     //Busqueda según valor del combo seleccionado.
     @RequestMapping("/historialprecio/busproveedor")
     public @ResponseBody String BuscarProveedorHP(
-            @RequestParam(value="var") String var
+            @RequestParam(value="q") String var
     ) throws Exception {
         return obProveedor.BuscarProveedorCombo(var);
     }
 
     @RequestMapping("/historialprecio/busproducto")
     public @ResponseBody String BuscarProductoHP(
-            @RequestParam(value="idProv") Integer idProv
+            @RequestParam(value="q") String var
     ) throws Exception {
-        return obProducto.BuscarProductoCombo(new EProveedor(idProv));
+        return obProducto.BuscarProductoCombo(var);
+    }
+
+    @RequestMapping("/historialprecio/consultarasociados")
+    public @ResponseBody String BuscarAsociado(
+            @RequestParam(value="idProv") String idProv,
+            @RequestParam(value="idProd") String iProd
+    ) throws Exception {
+        return obProductoProv.BuscarAsociado(idProv,iProd);
+    }
+
+    @RequestMapping("/historialprecio/registrarasociado")
+    public @ResponseBody String RegistrarAsociado(
+            @RequestBody String json
+    ) throws Exception {
+         return obProductoProv.RegistrarAsociado(json);
     }
 
     @RequestMapping("/historialprecio/listar")
@@ -61,20 +79,19 @@ public class CHistorialPrecio {
 
     @RequestMapping("/historialprecio/register")
     public @ResponseBody String Registrar(
-            @RequestParam(value="iProv") Integer idProv,
-            @RequestParam(value="iP") Integer idProd,
-            @RequestParam(value="fI") String fechaIni,
-            @RequestParam(value="pre") Double precio
+            @RequestParam(value="json") String json,
+            @RequestParam(value="idProd") String idProd,
+            @RequestParam(value="fechafin") String fechaFin
     ) throws Exception {
-        EProductoProveedor oeProductoProveedor = new EProductoProveedor();
-        oeProductoProveedor.setIdProProv(0);
-        oeProductoProveedor.setIdProveedor(new EProveedor(idProv));
-        oeProductoProveedor.setIdProducto(new EProducto(idProd));
-        oeProductoProveedor.setFechaInicio(fechaIni);
-        oeProductoProveedor.setPrecioCompra(precio);
-        oeProductoProveedor.setEstado("1");
-        obProducto.RegistrarPrecioHistorial(oeProductoProveedor);
+        obProductoProv.RegistrarHistorialPrecio(json,idProd,fechaFin);
         return "";
+    }
+
+    @RequestMapping("/historialprecio/actualizarprecio")
+    public @ResponseBody String ActualizarPrecio(
+            @RequestBody String json
+    ) throws Exception {
+        return obProductoProv.ActualizarHistorialPrecio(json);
     }
 }
 

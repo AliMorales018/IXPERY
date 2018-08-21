@@ -31,7 +31,7 @@ public class BProveedor {
     }
 
     public String BuscarProveedorCombo(String var) throws Exception {
-        return odProveedor.BuscarProveedorCombo(var);
+        return odProveedor.BuscarProveedorCombo2(var);
     }
 
     /*public List<EEmpresa> Buscar(String campos)throws Exception {

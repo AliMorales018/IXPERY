@@ -151,4 +151,12 @@ public class DProveedor {
         String mensaje = com.EjecutaConsultaJson("filtrar_empresa_proveedor", listaParametros);
         return mensaje;
     }
+
+    public String BuscarProveedorCombo2(String value) throws Exception{
+        listaParametros.clear();
+        SqlParameter pLike = new SqlParameter("value",value);
+        listaParametros.add(pLike);
+        String mensaje = com.EjecutaConsultaJson("filtrar_empresa_proveedor_2", listaParametros);
+        return mensaje;
+    }
 }
