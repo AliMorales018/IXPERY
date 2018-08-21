@@ -215,6 +215,7 @@
                             "<td><div><span id='spn_otroservicio2_nomserv'>" + item.servsolicitado + "</span></div></td>" +
                             "<td><div><span id='spn_otroservicio2_desserv'>" + item.descripcion + "</span></div></td>" +
                             // "<td><div><span id='spn_otroservicio2_modpro'>"+item.modelo+"</span></div></td>"+
+                            "<td hidden><div><span id='spn_otroservicio2_idprovee'>" + item.idproveedor + "</span></div></td>" +
                             "<td><div><select id='cmb_otroservicio2_provee" + conta_filas_otroservicio2 + "' name='cmb_otroservicio2_provee' class='select_otroservicio_otroservicios' style='width: 100%;' onchange='selCmbProveeOtS2(this);'><option value='"+item.idproveedor+"' selected='selected'>"+item.nomempresa+"</option></select>" +
                             /*                        "<td><div><span id='spn_otroservicio2_marpro'>"+item.marca+"</span></div></td>"+
                                                     "<td><div><span id='spn_otroservicio2_medpro'>"+item.nomumedida+"</span></div></td>"+*/
