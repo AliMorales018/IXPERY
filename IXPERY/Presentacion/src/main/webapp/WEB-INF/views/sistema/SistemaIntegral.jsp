@@ -17,7 +17,7 @@
     <style>
 
         .logo-fondo{
-            opacity: .4;
+            opacity: .15;
             position: absolute;
             left: 20%;
             top: 40%;
