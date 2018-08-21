@@ -177,11 +177,17 @@
                 console.log("VALOR DE RETORNO: "+valor);
                 if (valor !== "0") {
                     let id = valor.split("@");
-                    console.log("ID DE SESION: "+id)
-                    ListarHistorial_Precios(parseInt(id[0]),parseInt(id[1]),"equipo2");
+                    console.log("ID DE SESION: "+id);
+                    if(id[0] !== "0"){
+                        ListarHistorial_Precios(parseInt(id[0]),parseInt(id[1]),"equipo2");
+                    }else{
+                        setSelect2_ProvHP();
+                        listar_historial_precios("0",parseInt(id[1]),null,"loadData");
+                    }
                 }
                 else{
-                    setSelect2Prov_Prod();
+                    setSelect2_ProvHP();
+                    setSelect2_ProdHP();
                 }
             },
             error: function errores(msg) {
@@ -191,7 +197,7 @@
         $('footer').show();
     });
 
-    function setSelect2Prov_Prod(){
+    function setSelect2_ProvHP(){
         $("#selectProveedor_hp").select2({
             ajax: {
                 url: "/historialprecio/busproveedor",
@@ -217,7 +223,8 @@
             templateResult: formatRepo_historialprecio,
             templateSelection: formatRepoSelection_historialprecio
         });
-
+    }
+    function setSelect2_ProdHP(){
         $("#selectProducto_hp").select2({
             ajax: {
                 url: "/historialprecio/busproducto",
