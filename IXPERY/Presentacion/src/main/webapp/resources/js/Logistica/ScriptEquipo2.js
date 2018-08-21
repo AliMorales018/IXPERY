@@ -1,3 +1,6 @@
+var conta_filas_equipo2;
+var conta_filas_equiponr2;
+
 var JSONobjGeneralEq2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUEr
 var idRowProdSolEq2="";
@@ -9,7 +12,6 @@ var jsonGuardarFullEq2 = {};
 var arrGuardarEquipo2 = [];
 
 var arrProEdit2 = [];
-
 $(document).ready(function () {
     let idProdProvEq2;
     let preProdEq2;

@@ -174,11 +174,11 @@
 <!-- JavaScript -->
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptEquipo2.js"></script>
 <script>
-    var conta_filas_equipo2;
-    var conta_filas_equiponr2;
+  /*  var conta_filas_equipo2;
+    var conta_filas_equiponr2;*/
     function BuscarSesionSol(){
-        conta_filas_equipo2=0;
-        conta_filas_equiponr2=0;
+        /*conta_filas_equipo2=0;
+        conta_filas_equiponr2=0;*/
         let id = "";
         $.ajax({
             method: "POST",
@@ -205,7 +205,8 @@
             url: "/equipo2/buscarequiposol",
             data: {"idsol": id},
             success: function resultado(valor) {
-
+                conta_filas_equipo2=0;
+                conta_filas_equiponr2=0;
                 console.log('ACAAAAAAAAAAA');
                 console.log(valor);
 

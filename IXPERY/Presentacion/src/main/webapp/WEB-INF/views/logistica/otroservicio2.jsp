@@ -146,14 +146,13 @@
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio2.js"></script>
 <script>
 
-    var conta_filas_otroservicio2;
-    var conta_filas_otroservicionr2;
+
     $(document).ready(function () {
         BuscarOtroServicio();
     });
     function BuscarOtroServicio(){
-        conta_filas_otroservicio2=0;
-        conta_filas_otroservicionr2=0;
+       /* conta_filas_otroservicio2=0;
+        conta_filas_otroservicionr2=0;*/
         let id = "";
         $.ajax({
             method: "POST",
@@ -179,7 +178,8 @@
             url: "/otroservicio2/buscarotroserviciosol",
             data: {"idsol": id},
             success: function resultado(valor) {
-
+                conta_filas_otroservicio2=0;
+                conta_filas_otroservicionr2=0;
                 JSONobjGeneralServ2 = JSON.parse(valor);
                 // alert(JSON.stringify(JSONobj));
                 $("#tbody_otroservicio2").empty();

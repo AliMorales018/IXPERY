@@ -1,3 +1,6 @@
+var conta_filas_otroservicio2;
+var conta_filas_otroservicionr2;
+
 var JSONobjGeneralServ2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowProdSolOtS2="";
