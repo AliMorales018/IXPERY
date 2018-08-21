@@ -213,10 +213,10 @@
                 JSONobjGeneralEq2 = JSON.parse(valor);
                 // alert(JSON.stringify(JSONobj));
                 $("#tbody_equipo2").empty();
-
+                $("#tbody_equiponr2").empty();
                 //RECORREMOS EQUIPO PRODUCTOS REGISTRADOS
                 if (JSONobjGeneralEq2.items.length > 0) {
-                    // if (JSONobjGeneralEq2.items[1].length > 0) {
+                    if (JSONobjGeneralEq2.items[1].items2.length > 0) {
                         $.each(JSONobjGeneralEq2.items[1].items2, function (obj, item) {
                             conta_filas_equipo2++;
                             let cosUnit = "";
@@ -268,15 +268,14 @@
                             // $("#select2-cmb_equipo2_provee" + conta_filas_equipo2 + "-container").value = item.idproveedor;
 
                         });
-                  //  }
-                }
+                   }
+
 
                 //NO REGISTRADOS SI EXISTEN MOSTRARr
 
-                $("#tbody_equiponr2").empty();
-                if(JSONobjGeneralEq2.items.length > 0) {
-                    // if(JSONobjGeneralEq2.items[2].length>0){
-                $.each(JSONobjGeneralEq2.items[2].items3, function (obj, item) {
+
+                if(JSONobjGeneralEq2.items[2].items3.length>0){
+                    $.each(JSONobjGeneralEq2.items[2].items3, function (obj, item) {
                     conta_filas_equiponr2++;
 
                     $("#equiponr_2 tbody").append(
@@ -290,7 +289,7 @@
                         "</tr>"
                     );
                 });
-            // }
+            }
         }
             },
             error: function errores(msg) {
