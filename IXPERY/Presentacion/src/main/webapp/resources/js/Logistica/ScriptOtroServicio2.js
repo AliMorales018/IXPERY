@@ -232,5 +232,25 @@ function abrir_prove_ot2(){
 AddMenu(mProveedor);
 }
 function abrir_asociar_ots2(){
-AddMenu(mAsociarServ);
+    let solAscoServv="";
+    $.ajax({
+        method: "POST",
+        async: false,
+        url:"/solucion/VerificarSesionSolucion",
+        data:{},
+        success: function resultado(data) {
+            solAscoServv = data;
+            //SESION CARGO
+            console.log("SESION ID CARGO: "+ solAscoServ);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+    AddMenu(mAsociarServ);
+    if( typeof CargarOtSerNRBDD !== 'undefined' && jQuery.isFunction(CargarOtSerNRBDD)) {
+        CargarOtSerNRBDD(solAscoServv);
+    }
+    // CargarOtSerNRBDD(solAscoServ);
 }
