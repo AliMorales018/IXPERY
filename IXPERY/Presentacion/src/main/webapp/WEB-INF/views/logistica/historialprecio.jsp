@@ -143,7 +143,7 @@
     <div class="cell large-8">
         <div class="grid-x grid-padding-x" style="margin-bottom:10px">
             <div class="cell large-12">
-                <label class="text-primary" style="font-size: 18px"><b>Agregar Precio <i onclick="cerrar_nuevo_precio();" class="icon-hp-habil icon-minus2"></i></b></label>
+                <label class="text-primary" style="font-size: 18px"><b>Agregar Precio <i onclick="ocultar_precio_nuevo();" class="icon-hp-habil icon-minus2"></i></b></label>
             </div>
         </div>
         <div class="grid-x grid-margin-x">
@@ -167,6 +167,31 @@
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptHistorialPrecio.js"></script>
 <script>
     $(document).ready(function() {
+        $('#selectProducto_hp').select2();
+        $('#selectProveedor_hp').select2();
+        $.ajax({
+            method: "POST",
+            async: false,
+            url: "/equipo2/getsesionpp",
+            success: function (valor) {
+                console.log("VALOR DE RETORNO: "+valor);
+                if (valor !== "0") {
+                    let id = valor.split("@");
+                    console.log("ID DE SESION: "+id)
+                    ListarHistorial_Precios(parseInt(id[0]),parseInt(id[1]),"equipo2");
+                }
+                else{
+                    setSelect2Prov_Prod();
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+        $('footer').show();
+    });
+
+    function setSelect2Prov_Prod(){
         $("#selectProveedor_hp").select2({
             ajax: {
                 url: "/historialprecio/busproveedor",
@@ -218,10 +243,7 @@
             templateResult: formatRepo_historialpreciopro,
             templateSelection: formatRepoSelection_historialpreciopro
         });
-
-        $('footer').show();
-    });
-
+    }
     function formatRepo_historialprecio(repo) {
         if (repo.loading) {
             return repo.text;
