@@ -141,6 +141,13 @@ public class CSolucion {
         return session.getAttribute("solucion").toString();
     }
 
+    @RequestMapping("/solucion/LastSolucion")
+    public @ResponseBody
+    String LastId(HttpServletRequest request) throws Exception {
+        String id = obSolucion.LastId().toString();
+        id = CrearSessionSolucion(id, request);
+        return id;
+    }
 
 
 
