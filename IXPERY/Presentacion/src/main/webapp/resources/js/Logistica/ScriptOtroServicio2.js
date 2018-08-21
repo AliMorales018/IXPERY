@@ -221,5 +221,5 @@ function abrir_prove_ot2(){
 AddMenu(mProveedor);
 }
 function abrir_asociar_ots2(){
-AddMenu(mAsociarServ);
+AddMenu(mServicioSol);
 }

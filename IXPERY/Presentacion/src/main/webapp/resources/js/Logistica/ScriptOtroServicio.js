@@ -47,12 +47,12 @@ function eliminarObjetosDuplicados(arr, prop) {
 function InsUpdDelOtroServ() {
     let xd=0;
     let filaEdit=0;
-    $('tbody#tbody_otroservinr').find('tr[class=otroservinr-edit]').each(function(){
+    $('tbody#tbody_otroservinr').find('tr[class=otroservinr-edit]').each(function() {
         filaEdit++;
-        if($(this).find('input[type=checkbox]').is(':checked')) {
+        if ($(this).find('input[type=checkbox]').is(':checked')) {
             xd++;
             let objJsonDel = {};
-            $(this).closest('tr').find('span[id=spn_otroservinr_idpreg]').each(function(){
+            $(this).closest('tr').find('span[id=spn_otroservinr_idpreg]').each(function () {
                 objJsonDel.prs1 = parseInt($(this).html());
                 objJsonDel.prs6 = "0";
             });
@@ -60,7 +60,8 @@ function InsUpdDelOtroServ() {
             console.log("ELIMINAR");
             console.log(arrGuardarPreRegServ);
         }
-    }).closest('tbody').find('tr[class=otroservinr-insert]').each(function () {
+    });
+    $('tbody#tbody_equiponr').find('tr[class=otroservinr-insert]').each(function () {
         let objFilaPreReg = {};
         let objServSolu= {};
         let objFilaProSolPre = {};
@@ -112,21 +113,6 @@ function InsUpdDelOtroServ() {
             console.log("ELIMINAR");
             console.log(arrGuardarOtroServ);
         }else{
-            /* if(pid!==""){
-                 filaOkEqReg=1;
-
-                 filaData.push(pid);
-                 filaData.push(cod);
-                 filaData.push(mod);
-                 filaData.push(mrc);
-                 filaData.push(ume);
-                 filaData.push(cnt);
-                 arrayDatos_servre.push(filaData);
-             }else{
-                 filaOkEqReg=0;
-                 arrayDatos_servre=[];
-                 return false;
-             }*/
 
         }
     }).closest('tbody').find('tr[class=otroservi-insert]').each(function () {
@@ -184,12 +170,13 @@ function InsUpdDelOtroServ() {
         data: JSON.stringify(jsonGuardarFullOtroServ),
         success: function resultado(valor) {
             if (valor == "") {
-                limpiarInsUpdTotServi();
-                // var sid=$("#selectEmpresaOtroServi_Proyecto").val();
+                alert('Los datos fueron guardados correctamente.');
                 var sid=sSolucionOtSer;
                 BuscarSolucionOtroServis(sid);
+                limpiarInsUpdTotServi();
             }
             else {
+                alert('Error en la red. No se guardaron los cambios.');
                 console.log("Entro en ELSE");
                 // alert(valor);
             }

@@ -1,5 +1,6 @@
 var count_otroserpr;
 var dolRowOtroSer2 = '';
+var solAscoServ;
 dolRowOtroSer2+= '<tr class="otrosepr-edit">';
 dolRowOtroSer2+= '<td><div><p class="text-center" id="p_otrosepr_num"></p></div></td>';
 dolRowOtroSer2+= '<td><div><span id="spn_otrosepr_nomserv" class="line-height-asoprod"></span></div></td>';
@@ -13,27 +14,26 @@ var dolRowOtroSer2HTML = $.parseHTML(dolRowOtroSer2);
 var rowCloneOtroSer2;
 
 $(document).ready(function() {
-    let sol = 0;
     $.ajax({
         method: "POST",
         async: false,
         url:"/solucion/VerificarSesionSolucion",
         data:{},
         success: function resultado(data) {
-            sol = data;
+            solAscoServ = data;
             //SESION CARGO
-            console.log("SESION ID CARGO: "+ sol);
+            console.log("SESION ID CARGO: "+ solAscoServ);
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
         }
     });
 
-    CargarOtSerNRBDD(sol);
+    CargarOtSerNRBDD(solAscoServ);
 });
 
-function CargarOtSerNRBDD(sol) {
-    var idSolucion=sol;
+function CargarOtSerNRBDD(solAscoServ) {
+    var idSolucion=solAscoServ;
     count_otroserpr = 0;
     $.ajax({
         method: "POST",
@@ -136,7 +136,12 @@ function save_servsoli_asociados() {
                         if(data == ""){
                             alert("Servicios Asociados Correctamente");
                             $("#tbody_asociarservsolic").empty();
-                            CargarOtSerNRBDD();
+                            CargarOtSerNRBDD(solAscoServ);
+                            if( typeof BuscarOtroServicio !== 'undefined' && jQuery.isFunction(BuscarOtroServicio)) {
+                                alert("L2");
+                                BuscarOtroServicio();
+                                alert("L3");
+                            }
                         }
                         else{
                             alert(data);
