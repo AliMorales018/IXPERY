@@ -7,15 +7,17 @@ function agregar_nuevo_Precio() {
     }
 }
 
-function llenar_combo_proveedor_producto_hp(id, text, id2, text2){
+function llenar_combo_proveedor_producto_hp(id, text, id2, text2) {
     //COMBO DE SOLUCION
-    let data = {id: id , text: text};
+    if (id !== null) {
+        let data = {id: id, text: text};
+        let newOption = new Option(data.text, data.id, false, false);
+        //Proveedor
+        $('#selectProveedor_hp').empty().append(newOption);
+    }
+
     let data2 = {id: id2 , text: text2};
-    let newOption = new Option(data.text, data.id, false, false);
     let newOption2 = new Option(data2.text, data2.id, false, false);
-    //Proveedor
-    $('#selectProveedor_hp').empty().append(newOption);
-    $('#selectProveedor_hp').attr("disabled",true);
     //Producto
     $('#selectProducto_hp').empty().append(newOption2);
     $('#selectProducto_hp').attr("disabled",true);
@@ -67,7 +69,7 @@ function ListarHistorial_Precios(idSesionProv,idSesionProd,bandera){
                     $("#contasociar_pro_prov").css("visibility","visible");
                     $("#vppa").val("0");
                     $("#tbody_historialprecio").html("<tr><td colspan='5' class='text-center'><div class='p-3' style='font-size: 10px'>Seleccione proveedor y/o producto ó Asocie producto/proveedor</div></td></tr>");
-                    listar_historial_precios(null,null,null,"loadData")
+                    listar_historial_precios(idProv,idProd,null,"loadData");
                 }
                 else{
                     $("#contasociar_pro_prov").css("visibility","hidden");
@@ -93,13 +95,21 @@ function listar_historial_precios(idProv,idProd,bandera,combos) {
             let JSONobj = JSON.parse(data);
             console.log(JSONobj)
             if(combos === "loadData"){
-                llenar_combo_proveedor_producto_hp(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                if(idProv === "0") {
+                    llenar_combo_proveedor_producto_hp(null, null, JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                    $("#selectProveedor_hp").removeAttr("disabled");
+                    $("#selectProveedor_hp").empty();
+                    setSelect2_ProvHP();
+                }
+                else{
+                    llenar_combo_proveedor_producto_hp(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                }
+                ++contador_equipo2_s;
             }
             else{
                 $("#btn_historialpre_nue").removeAttr("disabled");
                 ocultar_precio_nuevo();
                 if (bandera === "equipo2") {
-                    console.log("LLENANDO COMBOOO3")
                     llenar_combo_proveedor_producto_hp(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3, JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
                     ++contador_equipo2_s;
                 }

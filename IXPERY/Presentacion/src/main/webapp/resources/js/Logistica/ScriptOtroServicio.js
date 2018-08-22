@@ -879,6 +879,9 @@ function BuscarSolucionOtroServis(idSol){
             success: function resultado(valor) {
                 JSONobjGeneralOtSer = JSON.parse(valor);
                 console.log(JSONobjGeneralOtSer);
+                $('.spn-otroservi-emp').html($(".spn-solucion-emp").text());
+                $('.spn-otroservi-pro').html($(".spn-solucion-pro").text());
+                $('.spn-otroservi-req').html($(".spn-solucion-req").text());
                 if(JSONobjGeneralOtSer.items.length>0){
                     estOperaOtSer=1;
                     addOtroServisUpdate_otroservi(valor);

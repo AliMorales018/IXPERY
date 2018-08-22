@@ -89,10 +89,12 @@
         <!-- Table -->
         <div class="grid-x grid-padding-x">
             <div class="cell large-9">
-                <div class="grid-x grid-margin-x">
-                    <div class="cell large-6 container-combo">
+                <div class="grid-x grid-margin-x" >
+                    <div class="cell large-6 container-combo" >
                         <div class="form-group">
-                            <label class="label text-primary" style="line-height: 1.5;"><b>SOLUCION 1</b></label>
+                            <span class="spn-equipo2-emp text-primary" style="font-size:14px;font-weight:bold"></span></br>
+                            <span class="spn-equipo2-pro text-primary" style="font-size:14px;font-weight:bold"></span></br>
+                            <span class="spn-equipo2-req text-primary" style="font-size:14px;font-weight:bold"></span>
                             <div hidden><label hidden id="lblidSol">1</label></div>
                         </div>
                     </div>
@@ -214,6 +216,11 @@
                 // alert(JSON.stringify(JSONobj));
                 $("#tbody_equipo2").empty();
                 $("#tbody_equiponr2").empty();
+
+                $('.spn-equipo2-emp').html($(".spn-cotizacion-emp").text());
+                $('.spn-equipo2-pro').html($(".spn-cotizacion-pro").text());
+                $('.spn-equipo2-req').html($(".spn-cotizacion-req").text());
+
                 //RECORREMOS EQUIPO PRODUCTOS REGISTRADOS
                 if (JSONobjGeneralEq2.items.length > 0) {
                     if (JSONobjGeneralEq2.items[1].items2.length > 0) {
