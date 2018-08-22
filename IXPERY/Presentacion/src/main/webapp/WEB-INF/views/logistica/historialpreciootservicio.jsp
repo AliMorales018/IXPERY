@@ -181,7 +181,7 @@
                     if(id[0] !== "0"){
                         ListarHistorial_PreciosOtServ(parseInt(id[0]),parseInt(id[1]),"otroservicio2");
                     }else{
-                        setSelect2_ProvHPOTS();
+                        // setSelect2_ProvHPOTS();
                         listar_historial_preciosots("0",parseInt(id[1]),null,"loadData");
                     }
                 }

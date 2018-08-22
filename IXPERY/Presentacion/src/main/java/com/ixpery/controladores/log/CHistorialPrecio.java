@@ -67,7 +67,13 @@ public class CHistorialPrecio {
             HttpServletRequest request
     ) throws Exception {
          HttpSession session = request.getSession();
-         Integer idProdSol = (Integer) session.getAttribute("prodsol");
+         String a = session.getAttribute("prodsol").toString();
+//         Integer idProdSol = (Integer) session.getAttribute("prodsol");
+
+        Integer idProdSol = 0;
+        if(!session.getAttribute("prodsol").equals(null)){
+            idProdSol = Integer.parseInt(session.getAttribute("prodsol").toString());
+        }
          return obProductoProv.RegistrarAsociado(json,idProdSol);
     }
 

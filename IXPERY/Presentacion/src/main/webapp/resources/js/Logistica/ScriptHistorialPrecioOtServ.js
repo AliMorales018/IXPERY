@@ -75,7 +75,7 @@ function ListarHistorial_PreciosOtServ(idSesionProv,idSesionServ,bandera){
                     $("#contasociar_pro_provots").css("visibility","visible");
                     $("#vppahis").val("0");
                     $("#tbody_historialprecioOtServ").html("<tr><td colspan='5' class='text-center'><div class='p-3' style='font-size: 10px'>Seleccione proveedor y/o servicio ó Asocie servicio/proveedor</div></td></tr>");
-                    listar_historial_preciosots(idProv,idServ,null,"loadData");
+                    listar_historial_preciosots(idProv,idServ,"historial","loadData");
                 }
                 else{
                     $("#contasociar_pro_provots").css("visibility","hidden");
@@ -105,16 +105,20 @@ function listar_historial_preciosots(idProv,idServ,bandera,combos) {
                     //comenté la línea de abajo pq servicio no tiene marca ni modelo
                     // llenar_combo_proveedor_producto_hpots(null, null, JSONobj.pdt[0].sso1, JSONobj.pdt[0].sso3 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
                     llenar_combo_proveedor_producto_hpots(null, null, JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + "-" + " - " + "-");
+                    ++contador_otroservicio2_s;
                     $("#selectProveedor_hpOtServ").removeAttr("disabled");
                     $("#selectProveedor_hpOtServ").empty();
                     setSelect2_ProvHPOTS();
                 }
                 else{
-                    //comenté la linea de abajo pq no tengo modelo ni marca
-                    // llenar_combo_proveedor_producto_hpots(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
-                    llenar_combo_proveedor_producto_hpots(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + "-" + " - " + "-");
+                    if(bandera === "otroservicio2") {
+                        //comenté la linea de abajo pq no tengo modelo ni marca
+                        // llenar_combo_proveedor_producto_hpots(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                        llenar_combo_proveedor_producto_hpots(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3, JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + "-" + " - " + "-");
+                        ++contador_otroservicio2_s;
+                    }
                 }
-                ++contador_otroservicio2_s;
+
             }
             else{
                 $("#btn_historialpreotserv_nue").removeAttr("disabled");
