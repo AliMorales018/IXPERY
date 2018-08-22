@@ -44,7 +44,7 @@ public class DServicioSolicitados {
         listParameter.clear();
         SqlParameter pId = new SqlParameter("campos", oePro.getIdproveedor());
         listParameter.add(pId);
-        String jsonResult = com.EjecutaConsultaJson("filtrar_serviciosolicitado_proveedor", listParameter);
+        String jsonResult = com.EjecutaConsultaJson("filtrar_empresa_proveedor_2", listParameter);
         System.out.println(jsonResult);
         return jsonResult;
     }
@@ -52,7 +52,7 @@ public class DServicioSolicitados {
         listParameter.clear();
         SqlParameter pId = new SqlParameter("campos", var);
         listParameter.add(pId);
-        String jsonResult = com.EjecutaConsultaJson("filtrar_serviciosolicitado_proveedor", listParameter);
+        String jsonResult = com.EjecutaConsultaJson("filtrar_serviciosolicitado_proveedor2", listParameter);
         System.out.println(jsonResult);
         return jsonResult;
     }

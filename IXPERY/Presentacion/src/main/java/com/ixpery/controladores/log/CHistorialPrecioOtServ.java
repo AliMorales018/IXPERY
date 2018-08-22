@@ -33,14 +33,15 @@ public class CHistorialPrecioOtServ {
         return modelView;
     }
 
-    @RequestMapping("/historialprecioOtServicio/busservsolic")
-    public @ResponseBody String BuscarProductoHP(
-            @RequestParam(value="idProv") Integer idProv
-    ) throws Exception {
-        return obServSoli.BuscarServiciosCombo(new EProveedor(idProv));
-    }
+//    @RequestMapping("/historialprecioOtServicio/busservsolic")
+//    public @ResponseBody String BuscarProductoHP(
+//            @RequestParam(value="idProv") Integer idProv
+//    ) throws Exception {
+//        return obServSoli.BuscarServiciosCombo(new EProveedor(idProv));
+//    }
 
-   /*@RequestMapping("/historialprecioOtServicio/listar")
+/*
+   @RequestMapping("/historialprecioOtServicio/listar")
     public @ResponseBody String ListarHistorial(
             @RequestParam(value="idProv") Integer idProv,
             @RequestParam(value="idProd") Integer idProd
@@ -49,7 +50,8 @@ public class CHistorialPrecioOtServ {
         eoProProv.setIdproveedor(new EProveedor(idProv));
         eoProProv.setIdservsol(new EServiciosSolicitados(idProd));
         return obServSoli.VerHistorialPrecios(eoProProv);
-    }*/
+    }
+    */
     @RequestMapping("/historialprecioOtServicio/register")
     public @ResponseBody String Registrar(
             @RequestParam(value="iProv") Integer idProv,

@@ -40,9 +40,10 @@
     </style>
 </head>
 <body>
-//agregue de dante
+<%--agregue de dante--%>
 <input id="vppahis" type="hidden" value="0">
-//
+<%--agregue de dante--%>
+
 <!-- Buttonss -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos">
     <div class="cell small-12 medium-4 text-white">
@@ -225,7 +226,7 @@
     }
 
     function setSelect2_ProdHPOTS(){
-        $("#selectProducto_hp").select2({
+        $("#selectProducto_hpOtServ").select2({
             ajax: {
                 url: "/historialprecioOtServicio/busservsolic",
                 dataType: 'json',
@@ -233,11 +234,13 @@
                 data: function (params) {
                     return {
                         q: params.term.toUpperCase()
+
                     };
                 },
                 processResults: function (data, params) {
                     return {
-                        results: data.items
+                        results: data
+
                     };
                 },
                 cache: true
@@ -268,12 +271,12 @@
         if (repo.loading) {
             return repo.text;
         }
-        return  "<div class='select2-result-datahpots_f'><span class='select2-span-resultots'>SERVICIO: </span>"+repo.nomproducto+"</div>";
+        return  "<div class='select2-result-datahpots_f'><span class='select2-span-resultots'>SERVICIO: </span>"+repo.servsol+"</div>";
             // "<div class='select2-result-datahpots_f'><span class='select2-span-resultots'>MODELO/MARCA: </span>"+repo.modelo+" - "+repo.marca+"</span></div>";
     }
 
     function formatRepoSelection_historialprecioproots(repo) {
-        return  repo.text || repo.nomproducto + " - " + repo.modelo + " - " + repo.marca;
+        return  repo.text || repo.servsol;
     }
 </script>
 </body>
