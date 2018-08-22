@@ -1,6 +1,3 @@
-var conta_filas_equipo2;
-var conta_filas_equiponr2;
-
 var JSONobjGeneralEq2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUEr
 var idRowProdSolEq2="";
@@ -12,6 +9,9 @@ var jsonGuardarFullEq2 = {};
 var arrGuardarEquipo2 = [];
 
 var arrProEdit2 = [];
+//Comentario
+var contador_equipo2_s = 0;
+
 $(document).ready(function () {
     let idProdProvEq2;
     let preProdEq2;
@@ -231,13 +231,16 @@ function crearSesProvProd(idtr){
         success: function resultado(valor) {
             console.log("Rpta de sesion");
             console.log(valor);
-            AddMenu(mAsPrecio);
-
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
         }
     });
+    AddMenu(mAsPrecio);
+    //El menú ya ha sido creado
+    if(contador_equipo2_s !== 0){
+        ListarHistorial_Precios(idProve,idProd,"equipo2");
+    }
 
     SesionProductoSolucion(idProdSol);
 
