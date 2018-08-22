@@ -174,7 +174,8 @@ function formatRepoFamilia (repo) {
 }
 
 function formatRepoSelectionFam (repo) {
-    return repo.text || repo.familia +"-"+repo.categoria;
+    // return repo.text || repo.familia +"-"+repo.categoria;
+    return repo.text || repo.familia;
 }
 
 function formatRepoCategoria (repo) {
@@ -426,11 +427,14 @@ function llenarCate_producto(idfami) {
             dataType: 'json',
             delay: 250,
             data: function (params) {
+                console.log('idfami');
+                console.log(idfami);
                 return {
                     q: idfami
                 };
             },
             processResults: function (data, params) {
+                console.log('categoria');
                 console.log(data.items);
                 return {
                     results: data.items
@@ -468,7 +472,7 @@ function listarUmedida_producto(umed) {
             },
             placeholder: 'Buscar por u. medida . . .',
             escapeMarkup: function (markup) { return markup; },
-            minimumInputLength: 3,
+            // minimumInputLength: 3,
             templateResult: formatRepoUmedida,
             templateSelection: formatRepoSelectionUme
         });

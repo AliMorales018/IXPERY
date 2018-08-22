@@ -128,7 +128,7 @@
                 delay: 250,
                 data: function (params) {
                     return {
-                        q: params.term
+                        q: ""
                     };
                 },
                 processResults: function (data, params) {
@@ -140,7 +140,6 @@
             },
             placeholder: 'Buscar por empresa o proyecto . . .',
             escapeMarkup: function (markup) { return markup; },
-            minimumInputLength: 3,
             templateResult: formatRepo,
             templateSelection: formatRepoSelection
         });
