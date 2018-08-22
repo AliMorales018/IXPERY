@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+//CEquipo2
 @Controller
 public class CEquipo2 {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
@@ -196,21 +196,15 @@ public class CEquipo2 {
 
     @RequestMapping("/equipo2/SesionProdSol")
     public @ResponseBody
-    String SesionProdSol(
-            @RequestParam(value = "prodsol") String prodsol,
+    Integer SesionProdSol(
+            @RequestParam(value = "prodsol") Integer prodsol,
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
         session.setAttribute("prodsol", prodsol);
-        prodsol = session.getAttribute("prodsol").toString();
+        prodsol = (Integer) session.getAttribute("prodsol");
         return prodsol;
     }
-
-
-
-
-
-
 }
 
 
