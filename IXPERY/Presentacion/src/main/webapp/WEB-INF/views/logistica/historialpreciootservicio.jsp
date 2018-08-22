@@ -14,7 +14,13 @@
             padding: 4px;
             font-size: 12px;
         }
-
+        .select2-result-datahpots_f{
+            font-size: 9.55px;
+            padding: 5px 15px 10px;
+        }
+        .select2-span-resultots{
+            font-size: 9.9px;
+        }
         .icon-hp-desh{
             background-color: #666666;
             border-radius: 50%;
@@ -25,13 +31,18 @@
         input[type=date]{
             height: 25.15px;
         }
-        #contenedor_nuevo_precioOtServ{
+        #contenedor_nuevo_precioOtServ, #contasociar_pro_provots{
             visibility: hidden;
+        }
+        button:disabled{
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body>
-
+//agregue de dante
+<input id="vppahis" type="hidden" value="0">
+//
 <!-- Buttonss -->
 <div class="grid-x grid-padding-x align-center-middle l-comandos">
     <div class="cell small-12 medium-4 text-white">
@@ -79,7 +90,7 @@
             <div class="cell large-4">
                 <div class="form-group">
                     <label class="label text-primary" style="line-height: 1.5"><b>Proveedor:</b></label>
-                    <select class="js-example-basic-single" id="selectProveedor_hpOtServ" onchange="searchProducto_hpOtServ(this);">
+                    <select id="selectProveedor_hpOtServ" onchange="ListarHistorial_PreciosOtServ();">
                         <option></option>
                     </select>
                 </div>
@@ -87,11 +98,20 @@
             <div class="cell large-4">
                 <div class="form-group">
                     <label class="label text-primary" style="line-height: 1.5"><b>Servicios:</b></label>
-                    <select class="js-example-basic-single" id="selectProducto_hpOtServ" onchange="ListarHistorial_PreciosOtServ();">
+                    <select id="selectProducto_hpOtServ" onchange="ListarHistorial_PreciosOtServ();">
                         <option></option>
                     </select>
                 </div>
             </div>
+
+            <div class="cell large-4" id="contasociar_pro_provots">
+                <div class="form-group">
+                    <label class="label text-primary" style="line-height: 1.5"><b>Asociar Prod./Prov.:</b></label>
+                    <button class="form-control" style="line-height: 23.09px;background-color: #D34539;color: white;cursor: pointer;width: 30px" onclick="asociar_prod_provots();"><i class="icon-loop3"></i></button>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
@@ -110,8 +130,8 @@
                 <th class="text-center">Estado</th>
             </tr>
             </thead>
-            <tbody id="tbody_historialprecioOtServ">
-
+            <tbody id="tbody_historialprecioOtServ" style="background-color: #ffffffb5;">
+                <tr><td colspan='5' class='text-center'><div class='p-3' style='font-size: 10px'>Seleccione proveedor y/o producto ó Asocie producto/proveedor</div></td></tr>
             </tbody>
         </table>
     </div>
@@ -123,7 +143,7 @@
     <div class="cell large-8">
         <div class="grid-x grid-padding-x" style="margin-bottom:10px">
             <div class="cell large-12">
-                <label class="text-primary" style="font-size: 18px"><b>Agregar Precio <i onclick="cerrar_nuevo_precioOtServ();" class="icon-hp-habilOtServ icon-minus2"></i></b></label>
+                <label class="text-primary" style="font-size: 18px"><b>Agregar Precio <i onclick="ocultar_precio_nuevoOtServ();" class="icon-hp-habilOtServ icon-minus2"></i></b></label>
             </div>
         </div>
         <div class="grid-x grid-margin-x">
@@ -145,22 +165,115 @@
 <!-- End TNuevo Precio -->
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptHistorialPrecioOtServ.js"></script>
 <script>
-     $(document).ready(function() {
-       setOptions("txt_select_busproveedorotserv","onkeyup='select_buscar_proveedorotserv(event,this);'");
-        $('#selectProveedor_hpOtServ').select2({placeholder : "Buscar Proveedor. . ."});
-
-        setOptions("txt_select_busservsoli","");
-        $('#selectProducto_hpOtServ').select2({placeholder : "Buscar Producto . . ."});
+    $(document).ready(function() {
+        $('#selectProducto_hpOtServ').select2();
+        $('#selectProveedor_hpOtServ').select2();
+        $.ajax({
+            method: "POST",
+            async: false,
+            url: "/otroservicio2/getsesionpp",
+            success: function (valor) {
+                console.log("VALOR DE RETORNO: "+valor);
+                if (valor !== "0") {
+                    let id = valor.split("@");
+                    console.log("ID DE SESION: "+id);
+                    if(id[0] !== "0"){
+                        ListarHistorial_PreciosOtServ(parseInt(id[0]),parseInt(id[1]),"otroservicio2");
+                    }else{
+                        setSelect2_ProvHPOTS();
+                        listar_historial_preciosots("0",parseInt(id[1]),null,"loadData");
+                    }
+                }
+                else{
+                    setSelect2_ProvHPOTS();
+                    setSelect2_ProdHPOTS();
+                }
+            },
+            error: function errores(msg) {
+                alert('Error: ' + msg.responseText);
+            }
+        });
+        $('footer').show();
     });
 
-    function select_buscar_proveedorotserv(event,obj){
-        obj.value = obj.value.toUpperCase();
-        if(event.keyCode == 13) {
-            if (obj.value != "") {
-                searchProveedor_hpOtServ(obj.value);
-                $(".select2-search__field").trigger({type: "keydown", which: 9});
-            }
+    function setSelect2_ProvHPOTS(){
+        $("#selectProveedor_hpOtServ").select2({
+            ajax: {
+                url: "/historialprecioOtServicio/busproveedor",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term.toUpperCase()
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar proveedor . . .',
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 3,
+            templateResult: formatRepo_historialprecioots,
+            templateSelection: formatRepoSelection_historialprecioots
+        });
+    }
+
+    function setSelect2_ProdHPOTS(){
+        $("#selectProducto_hp").select2({
+            ajax: {
+                url: "/historialprecioOtServicio/busservsolic",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term.toUpperCase()
+                    };
+                },
+                processResults: function (data, params) {
+                    return {
+                        results: data.items
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Buscar servicio  . . .',
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 3,
+            templateResult: formatRepo_historialprecioproots,
+            templateSelection: formatRepoSelection_historialprecioproots
+        });
+    }
+
+    function formatRepo_historialprecioots(repo) {
+        if (repo.loading) {
+            return repo.text;
         }
+        return  "<div class='select2-result-datahpots_f'><span class='select2-span-resultots'>PROVEEDOR: </span>"+repo.nomempresa+"</div>"+
+            "<div class='select2-result-datahpots_f'><span class='select2-span-resultots'>RUC: </span>"+repo.ruc+"</span></div>";
+    }
+
+    function formatRepoSelection_historialprecioots(repo) {
+        return  repo.text || repo.nomempresa + " - " + repo.ruc;
+    }
+
+    function formatRepo_historialprecioproots(repo) {
+        if (repo.loading) {
+            return repo.text;
+        }
+        return  "<div class='select2-result-datahpots_f'><span class='select2-span-resultots'>SERVICIO: </span>"+repo.nomproducto+"</div>";
+            // "<div class='select2-result-datahpots_f'><span class='select2-span-resultots'>MODELO/MARCA: </span>"+repo.modelo+" - "+repo.marca+"</span></div>";
+    }
+
+    function formatRepoSelection_historialprecioproots(repo) {
+        return  repo.text || repo.nomproducto + " - " + repo.modelo + " - " + repo.marca;
     }
 </script>
 </body>

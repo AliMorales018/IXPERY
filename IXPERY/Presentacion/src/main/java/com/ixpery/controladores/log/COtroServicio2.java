@@ -42,109 +42,6 @@ public class COtroServicio2 {
         return modelView;
     }
 
- /*   @RequestMapping(value="/otroservicio2/register", method = RequestMethod.POST)
-    public @ResponseBody
-    String RegistrarEquipo(@RequestBody Map<String,List<String[]>> values) throws Exception{
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-        Integer sizeListEqSol = values.get("values0").size();
-        Integer sizeListEqReg = values.get("values1").size();
-        Integer sizeListEqNoReg = values.get("values2").size();
-
-        //REGISTRAMOS EN TABLA EQUIPOS
-        List<EEquipo> listEquipo = new ArrayList<EEquipo>();
-        EEquipo oeEquipo;
-        String[] rowSol;
-
-        for (int i =0; i < sizeListEqSol; i++){
-            oeEquipo = new EEquipo();
-            rowSol = values.get("values0").get(i);
-            oeEquipo.setIdEquipo(0);
-            oeEquipo.setIdSolucion(new ESolucion(Integer.parseInt(rowSol[0])));
-            oeEquipo.setEstado("1");
-            oeEquipo.setFechaReg(timestamp.toString());
-            //CAMBIAR LUEGO POR LA SESSIÓN
-            oeEquipo.setUserReg("LUIS AZALDE LEYVA");
-            listEquipo.add(oeEquipo);
-        }
-
-        //REGISTRAMOS EN TABLA PRODUCTO SOLUCION
-        List<EProductoSolucion> listProdSolucion = new ArrayList<EProductoSolucion>();
-        EProductoSolucion oeProdSolucion;
-        String[] rowProdSol;
-
-        for (int i =0; i < sizeListEqReg; i++){
-            oeProdSolucion = new EProductoSolucion();
-            rowProdSol = values.get("values1").get(i);
-            oeProdSolucion.setIdprodsol(0);
-            oeProdSolucion.setIdequipo(new EEquipo(0));
-            oeProdSolucion.setCantidad(Integer.parseInt(rowProdSol[5]));
-            oeProdSolucion.setEstado("1");
-            oeProdSolucion.setFecharegistro(timestamp.toString());
-            //CAMBIAR LUEGO POR LA SESSIÓN
-            oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
-            oeProdSolucion.setIdproducto(Integer.parseInt(rowProdSol[0]));
-            oeProdSolucion.setEnviadocotizar("1");
-            listProdSolucion.add(oeProdSolucion);
-        }
-
-        //REGISTRAMOS EN TABLA PREREGISTRO PRODUCTOS
-        List<EPreRegistroProducto> listPreRegProducto = new ArrayList<EPreRegistroProducto>();
-        EPreRegistroProducto oePreRegProducto;
-        String[] rowPreRegProducto;
-
-        if(sizeListEqNoReg==1) {
-            for (int i = 0; i < sizeListEqNoReg; i++) {
-                rowPreRegProducto = values.get("values2").get(i);
-
-                oePreRegProducto = new EPreRegistroProducto();
-                oePreRegProducto.setIdprereg(0);
-                oePreRegProducto.setIdprodsol(new EProductoSolucion(0));
-                oePreRegProducto.setNomproducto(rowPreRegProducto[0]);
-                oePreRegProducto.setUmedida(rowPreRegProducto[4]);
-                if(rowPreRegProducto[5].equals("")){
-                    oePreRegProducto.setCantidad(0);
-                }else{
-                    oePreRegProducto.setCantidad(Integer.parseInt(rowPreRegProducto[5]));
-                }
-
-                oePreRegProducto.setEstado("1");
-                oePreRegProducto.setModelo(rowPreRegProducto[2]);
-                oePreRegProducto.setMarca(rowPreRegProducto[3]);
-
-                listPreRegProducto.add(oePreRegProducto);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < sizeListEqNoReg; i++) {
-                rowPreRegProducto = values.get("values2").get(i);
-
-                oePreRegProducto = new EPreRegistroProducto();
-                oePreRegProducto.setIdprereg(0);
-                oePreRegProducto.setIdprodsol(new EProductoSolucion(0));
-                oePreRegProducto.setNomproducto(rowPreRegProducto[0]);
-                oePreRegProducto.setUmedida(rowPreRegProducto[4]);
-                oePreRegProducto.setCantidad(Integer.parseInt(rowPreRegProducto[5]));
-                oePreRegProducto.setEstado("1");
-                oePreRegProducto.setModelo(rowPreRegProducto[2]);
-                oePreRegProducto.setMarca(rowPreRegProducto[3]);
-
-                listPreRegProducto.add(oePreRegProducto);
-            }
-        }
-
-        //ENVIAMOS A PONER IDS A CADA LISTA DE OBJETOS
-        String msjResult = obEquipo.PonerIds(listEquipo,listProdSolucion,listPreRegProducto);
-
-        if(msjResult.equals("0")){
-            return "";
-        }
-        else{
-            return msjResult;
-        }
-    }*/
-
     //Busqueda Producto Combo de Tabla
     @RequestMapping(value = "/otroservicio2/busprovserv", produces = "application/json")
     public @ResponseBody String BuscarProveServicio(
@@ -175,10 +72,24 @@ public class COtroServicio2 {
         session.setAttribute("proveedor", prove);
         session.setAttribute("sersolicitado", soli);
 
-//        Ejemplo para llamar la sesion de la solucion
-//        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
         String proveedor = session.getAttribute("proveedor").toString();
-        String producto = session.getAttribute("sersolicitado").toString();
-        return "proveedor: "+proveedor+" sersolicitado: "+soli;
+        String servicio = session.getAttribute("sersolicitado").toString();
+        return "proveedor: "+proveedor+" sersolicitado: "+servicio;
+    }
+
+    @RequestMapping("/otroservicio2/getsesionpp")
+    public @ResponseBody  String GetSesionSesServProv(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+
+        Integer idProv = (Integer) session.getAttribute("proveedorp");
+        Integer idServ = (Integer) session.getAttribute("productop");
+
+        if (idServ == null || idProv == null){
+            return "0";
+        }else{
+            return idProv+"@"+idServ;
+        }
     }
 }

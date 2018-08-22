@@ -4,6 +4,7 @@ import com.ixpery.entidades.log.EProveedor;
 import com.ixpery.entidades.log.EServicioProveedor;
 import com.ixpery.entidades.log.EServiciosSolicitados;
 import com.ixpery.negocio.log.BProveedor;
+import com.ixpery.negocio.log.BServicioProveedor;
 import com.ixpery.negocio.log.BServicioSolicitados;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,7 +22,7 @@ public class CHistorialPrecioOtServ {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BProveedor obProveedor = (BProveedor) applicationContext.getBean("beanProveedor");
     BServicioSolicitados obServSoli = (BServicioSolicitados) applicationContext.getBean("beanServSolicitados");
-
+    BServicioProveedor obServicioProv = (BServicioProveedor) applicationContext.getBean("beanServicioProveedor");
     @RequestMapping("/hpviaticos")
     public ModelAndView HistorialPrecio() throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -39,7 +40,7 @@ public class CHistorialPrecioOtServ {
         return obServSoli.BuscarServiciosCombo(new EProveedor(idProv));
     }
 
-   @RequestMapping("/historialprecioOtServicio/listar")
+   /*@RequestMapping("/historialprecioOtServicio/listar")
     public @ResponseBody String ListarHistorial(
             @RequestParam(value="idProv") Integer idProv,
             @RequestParam(value="idProd") Integer idProd
@@ -48,7 +49,7 @@ public class CHistorialPrecioOtServ {
         eoProProv.setIdproveedor(new EProveedor(idProv));
         eoProProv.setIdservsol(new EServiciosSolicitados(idProd));
         return obServSoli.VerHistorialPrecios(eoProProv);
-    }
+    }*/
     @RequestMapping("/historialprecioOtServicio/register")
     public @ResponseBody String Registrar(
             @RequestParam(value="iProv") Integer idProv,
@@ -67,7 +68,6 @@ public class CHistorialPrecioOtServ {
         return "";
     }
 
-    //COPIA BARATA DE JUAN
     @RequestMapping(value="/historialprecioOtServicio/guardarfull", method = RequestMethod.POST)
     public @ResponseBody
     String GuardarFullEquipo(
@@ -79,6 +79,64 @@ public class CHistorialPrecioOtServ {
         obServSoli.GuardarFull(json,idsersoli,fecfin);
 
         System.out.println("ENTRE EN REGISTER");
+        return "";
+    }
+
+
+
+    //Busqueda según valor del combo seleccionado.
+    @RequestMapping("/historialprecioOtServicio/busproveedor")
+    public @ResponseBody String BuscarProveedorHPOTS(
+            @RequestParam(value="q") String var
+    ) throws Exception {
+        return obProveedor.BuscarProveedorCombo(var);
+    }
+
+
+    @RequestMapping("/historialprecioOtServicio/busservsolic")
+    public @ResponseBody String BuscarServicioHP(
+            @RequestParam(value="q") String var
+    ) throws Exception {
+        return obServSoli.BuscarServiciosCombo2(var);
+    }
+
+    @RequestMapping("/historialprecioOtServicio/consultarasociados")
+    public @ResponseBody String BuscarAsociado(
+            @RequestParam(value="idProv") String idProv,
+            @RequestParam(value="idServ") String idServ
+    ) throws Exception {
+        return obServicioProv.BuscarAsociado(idProv,idServ);
+    }
+    @RequestMapping("/historialprecioOtServicio/listar")
+    public @ResponseBody String ListarHistorial(
+            @RequestParam(value="idProv") Integer idProv,
+            @RequestParam(value="idServ") Integer idServ
+    ) throws Exception {
+        EServicioProveedor eoProProv = new EServicioProveedor();
+        eoProProv.setIdproveedor(new EProveedor(idProv));
+        eoProProv.setIdservsol(new EServiciosSolicitados(idServ));
+        return obServSoli.VerHistorialPrecios(eoProProv);
+    }
+    @RequestMapping("/historialprecioOtServicio/registrarasociado")
+    public @ResponseBody String RegistrarAsociado(
+            @RequestBody String json
+    ) throws Exception {
+        return obServicioProv.RegistrarAsociado(json);
+    }
+
+    @RequestMapping("/historialprecioOtServicio/actualizarprecio")
+    public @ResponseBody String ActualizarPrecio(
+            @RequestBody String json
+    ) throws Exception {
+        return obServicioProv.ActualizarHistorialPrecio(json);
+    }
+    @RequestMapping("/historialprecioOtServicio/register2")
+    public @ResponseBody String Registrar2(
+            @RequestParam(value="json") String json,
+            @RequestParam(value="idProd") String idProd,
+            @RequestParam(value="fechafin") String fechaFin
+    ) throws Exception {
+        obServicioProv.RegistrarHistorialPrecio(json,idProd,fechaFin);
         return "";
     }
 }

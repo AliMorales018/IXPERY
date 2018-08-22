@@ -18,6 +18,9 @@ public class BServicioSolicitados {
     public String BuscarServiciosCombo(EProveedor oeProv)throws Exception {
         return odServSolic.BuscarServiciosCombo(oeProv);
     }
+    public String BuscarServiciosCombo2(String var)throws Exception {
+        return odServSolic.BuscarServiciosCombo2(var);
+    }
 
     public String VerHistorialPrecios(EServicioProveedor oeProvProd)throws Exception {
         return odServSolic.VerHistorialPrecios(oeProvProd);

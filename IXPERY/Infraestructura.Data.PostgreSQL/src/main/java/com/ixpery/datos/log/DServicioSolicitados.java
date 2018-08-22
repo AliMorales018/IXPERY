@@ -48,7 +48,16 @@ public class DServicioSolicitados {
         System.out.println(jsonResult);
         return jsonResult;
     }
+    public String BuscarServiciosCombo2(String var) throws Exception {
+        listParameter.clear();
+        SqlParameter pId = new SqlParameter("campos", var);
+        listParameter.add(pId);
+        String jsonResult = com.EjecutaConsultaJson("filtrar_serviciosolicitado_proveedor", listParameter);
+        System.out.println(jsonResult);
+        return jsonResult;
+    }
 
+    /*ESTA FUNCION FUE CREADA ANTES DE HACER LOS CAMBIOS PARA HISTORIAL PRECIO*/
     public String VerHistorialPrecios(EServicioProveedor oeProvProd) throws Exception {
         listParameter.clear();
         SqlParameter pIdProv = new SqlParameter("idProv", oeProvProd.getIdproveedor().getIdproveedor());
@@ -57,6 +66,15 @@ public class DServicioSolicitados {
         listParameter.add(pIdProd);
         return com.EjecutaConsultaJson("filtrar_historial_precio_item3", listParameter);
     }
+   /*NUEVA FUNCION QUE USA DANTE PARA HISTORIAL PRECIOS*/
+    /*public String VerHistorialPrecios(EServicioProveedor oeProvProd) throws Exception {
+        listParameter.clear();
+        SqlParameter pIdProv = new SqlParameter("idProv", oeProvProd.getIdproveedor().getIdproveedor());
+        SqlParameter pIdProd = new SqlParameter("idProd", oeProvProd.getIdservsol().getIdservsol());
+        listParameter.add(pIdProv);
+        listParameter.add(pIdProd);
+        return com.EjecutaConsultaJson("filtrar_historial_precio", listParameter);
+    }*/
 
     public String RegistrarPrecioHistorial(EServicioProveedor oeProd) throws Exception {
         oeProd = addListId(oeProd);
