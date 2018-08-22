@@ -22,7 +22,7 @@ import java.util.Date;
 
 @Controller
 public class CHistorialPrecio {
-
+    //Controlador
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
     BProveedor obProveedor = (BProveedor) applicationContext.getBean("beanProveedor");
     BProducto obProducto = (BProducto) applicationContext.getBean("beanProducto");
