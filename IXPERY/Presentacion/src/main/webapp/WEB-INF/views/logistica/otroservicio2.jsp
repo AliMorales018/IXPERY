@@ -146,14 +146,13 @@
 <script language="JavaScript" src="${urlPublic}/js/Logistica/ScriptOtroServicio2.js"></script>
 <script>
 
-    var conta_filas_otroservicio2;
-    var conta_filas_otroservicionr2;
+
     $(document).ready(function () {
         BuscarOtroServicio();
     });
     function BuscarOtroServicio(){
-        conta_filas_otroservicio2=0;
-        conta_filas_otroservicionr2=0;
+       /* conta_filas_otroservicio2=0;
+        conta_filas_otroservicionr2=0;*/
         let id = "";
         $.ajax({
             method: "POST",
@@ -179,7 +178,8 @@
             url: "/otroservicio2/buscarotroserviciosol",
             data: {"idsol": id},
             success: function resultado(valor) {
-
+                conta_filas_otroservicio2=0;
+                conta_filas_otroservicionr2=0;
                 JSONobjGeneralServ2 = JSON.parse(valor);
                 // alert(JSON.stringify(JSONobj));
                 $("#tbody_otroservicio2").empty();
@@ -215,6 +215,7 @@
                             "<td><div><span id='spn_otroservicio2_nomserv'>" + item.servsolicitado + "</span></div></td>" +
                             "<td><div><span id='spn_otroservicio2_desserv'>" + item.descripcion + "</span></div></td>" +
                             // "<td><div><span id='spn_otroservicio2_modpro'>"+item.modelo+"</span></div></td>"+
+                            "<td hidden><div><span id='spn_otroservicio2_idprovee'>" + item.idproveedor + "</span></div></td>" +
                             "<td><div><select id='cmb_otroservicio2_provee" + conta_filas_otroservicio2 + "' name='cmb_otroservicio2_provee' class='select_otroservicio_otroservicios' style='width: 100%;' onchange='selCmbProveeOtS2(this);'><option value='"+item.idproveedor+"' selected='selected'>"+item.nomempresa+"</option></select>" +
                             /*                        "<td><div><span id='spn_otroservicio2_marpro'>"+item.marca+"</span></div></td>"+
                                                     "<td><div><span id='spn_otroservicio2_medpro'>"+item.nomumedida+"</span></div></td>"+*/

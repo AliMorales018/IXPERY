@@ -4,7 +4,7 @@ var solAscoServ;
 dolRowOtroSer2+= '<tr class="otrosepr-edit">';
 dolRowOtroSer2+= '<td><div><p class="text-center" id="p_otrosepr_num"></p></div></td>';
 dolRowOtroSer2+= '<td><div><span id="spn_otrosepr_nomserv" class="line-height-asoprod"></span></div></td>';
-dolRowOtroSer2+= '<td style="width: 280px"><div><select name="select_filtrar_insumoot2" class="select_equipo_equipos" style="width: 250px"></select></div></td>';
+dolRowOtroSer2+= '<td style="width: 280px"><div><select  name="select_filtrar_insumoot2" class="select_equipo_equipos" style="width: 250px"></select></div></td>';
 dolRowOtroSer2+= '<td hidden><div><span id="spn_otrosepr_idpreregsoli"></span></div></td>';
 dolRowOtroSer2+= '<td class="text-center"><div><a href="/servsolicitados" class="btn btn-sm-search"><i class="icon icon-plus2"></i></a></div></td>';
 dolRowOtroSer2+= '</tr>';
