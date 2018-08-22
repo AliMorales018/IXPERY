@@ -9,7 +9,7 @@ var jsonGuardarFullEq2 = {};
 var arrGuardarEquipo2 = [];
 
 var arrProEdit2 = [];
-//Comentario
+//Comentario Dante
 var contador_equipo2_s = 0;
 
 $(document).ready(function () {
