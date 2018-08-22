@@ -37,11 +37,13 @@ function CargarOtSerNRBDD(solAscoServ) {
     count_otroserpr = 0;
     $.ajax({
         method: "POST",
+        async: false,
         url: "/asociarservicio/verservicionbsolucion",
         data: {"i":idSolServSoli},
         success: function resultado(data) {
             if(data != 0) {
                 let JSONobjServSolic = JSON.parse(data);
+                $("table #tbody_asociarservsolic").empty();
                 $.each(JSONobjServSolic, function (obj, item) {
                     count_otroserpr++;
                     let rowCloneOtSer2=$(dolRowOtroSer2HTML).clone().prop({id:'row-otrosepr-' + count_otroserpr});
@@ -120,7 +122,7 @@ function save_servsoli_asociados() {
                 if ($(this).find('select[name=select_filtrar_insumoot2]').val() != null) {
                     idSolServSoli2 = soll;
                     idPreRegistro = $(this).find('span[id=spn_otrosepr_idpreregsoli]').text();
-                    idServSolic = $(this).find('select[id=select_filtrar_insumoot2]').val();
+                    idServSolic = $(this).find('select[name=select_filtrar_insumoot2]').val();
                     campos = idSolServSoli2 + "," + idPreRegistro + "," + idServSolic;
                     cadena = cadena + campos + ";";
                 }
