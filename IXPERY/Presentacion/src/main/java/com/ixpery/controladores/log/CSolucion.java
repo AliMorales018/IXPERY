@@ -115,8 +115,6 @@ public class CSolucion {
         return obSolucion.BuscarEmpleado(value);
     }
 
-
-
     @RequestMapping("/solucion/SesionSolucion")
     public @ResponseBody
     String CrearSessionSolucion(
