@@ -241,7 +241,7 @@ function abrir_asociar_ots2(){
         success: function resultado(data) {
             solAscoServv = data;
             //SESION CARGO
-            console.log("SESION ID CARGO: "+ solAscoServ);
+            console.log("SESION ID CARGO: "+ solAscoServv);
         },
         error: function errores(msg) {
             alert('Error: ' + msg.responseText);
