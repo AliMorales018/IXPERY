@@ -214,6 +214,7 @@ function InsUpdDelEquipo2() {
 function crearSesProvProd(idtr){
     let idProve;
     let idProd= $("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id = spn_equipo2_idproduc]").text();
+    let idProdSol= $("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id = spn_equipo2_idprodsol]").text();
     if(($("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id ^= spn_equipo2_idprovee]").text())!=='0' ){
         idProve=$("tbody#tbody_equipo2 tr#"+idtr).find("td div span[id ^= spn_equipo2_idprovee]").text();
     }else{
@@ -224,6 +225,7 @@ function crearSesProvProd(idtr){
     console.log("idProducto: "+idProd);
     $.ajax({
         method: "POST",
+        async: false,
         url: "/equipo2/sesproverod",
         data: {"prove": idProve,"prod": idProd},
         success: function resultado(valor) {
@@ -237,6 +239,7 @@ function crearSesProvProd(idtr){
         }
     });
 
+    SesionProductoSolucion(idProdSol);
 
 }
 
@@ -246,3 +249,26 @@ function abrir_equipo2_regprod(){
 function abrir_equipo2_regprove(){
      AddMenu(mProveedor);
 }
+
+
+
+function SesionProductoSolucion(prodsol) {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/equipo2/SesionProdSol",
+        data: {"prodsol": prodsol},
+        success: function(valor) {
+            console.log('valor prodsol');
+            console.log(valor);
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+
+}
+
+
