@@ -33,12 +33,12 @@ public class CHistorialPrecioOtServ {
         return modelView;
     }
 
-    @RequestMapping("/historialprecioOtServicio/busservsolic")
+/*    @RequestMapping("/historialprecioOtServicio/busservsolic")
     public @ResponseBody String BuscarProductoHP(
             @RequestParam(value="idProv") Integer idProv
     ) throws Exception {
         return obServSoli.BuscarServiciosCombo(new EProveedor(idProv));
-    }
+    }*/
 
    /*@RequestMapping("/historialprecioOtServicio/listar")
     public @ResponseBody String ListarHistorial(
