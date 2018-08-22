@@ -25,7 +25,7 @@ function addActividad(){
             "<div id='actividad_"+cont_actividades_tabla+"' class='actividad grid-container insert-actividad'>"+
                 "<div class='grid-x grid-padding-x' style='margin-bottom:10px'>"+
                     "<div class='cell large-12'>"+
-                       "<label class='text-primary title_actividad' style='font-size: 20px'><b>Actividad "+cont_actividades_tabla+"</b><i id='delete_actividad_"+cont_actividades_tabla+"' onclick='eliminar_contenedor_actividad(this);' class='icon-minus-row-service icon-minus2 delete_actividad'></i></label>"+
+                       "<label class='text-primary title_actividad' style='font-size: 20px'><b>Servicio "+cont_actividades_tabla+"</b><i id='delete_actividad_"+cont_actividades_tabla+"' onclick='eliminar_contenedor_actividad(this);' class='icon-minus-row-service icon-minus2 delete_actividad'></i></label>"+
                     "</div>"+
                 "</div>"+
                     "<div class='grid-x grid-padding-x'>"+
@@ -770,7 +770,7 @@ function BuscarSolucionServiciosCL() {
                         $("#container_actividades").append("<div id='actividad_"+cont_actividades_tabla+"' class='actividad grid-container'>"+
                                                                 "<div class='grid-x grid-padding-x' style='margin-bottom:10px'>"+
                                                                     "<div class='cell large-12'>"+
-                                                                        "<label class='text-primary title_actividad' style='font-size: 20px'><b>Actividad "+cont_actividades_tabla+"</b><i id='delete_actividad_"+cont_actividades_tabla+"' onclick='eliminar_contenedor_actividad(this);' class='icon-minus-row-service icon-minus2 delete_actividad'></i></label>"+
+                                                                        "<label class='text-primary title_actividad' style='font-size: 20px'><b>Servicio "+cont_actividades_tabla+"</b><i id='delete_actividad_"+cont_actividades_tabla+"' onclick='eliminar_contenedor_actividad(this);' class='icon-minus-row-service icon-minus2 delete_actividad'></i></label>"+
                                                                     "</div>"+
                                                                 "</div>"+
                                                                 "<div class='grid-x grid-padding-x data-actividad-edit'>"+
@@ -960,7 +960,7 @@ function BuscarSolucionServiciosCL() {
                         "<div id='actividad_1' class='actividad grid-container insert-actividad'>"+
                             "<div class='grid-x grid-padding-x' style='margin-bottom:10px'>"+
                                 "<div class='cell large-12'>"+
-                                    "<label class='text-primary title_actividad' style='font-size: 20px'><b>Actividad 1</b><i id='delete_actividad_1' onclick='eliminar_contenedor_actividad(this);' class='icon-minus-row-service icon-minus2 delete_actividad'></i></label>"+
+                                    "<label class='text-primary title_actividad' style='font-size: 20px'><b>Servicio 1</b><i id='delete_actividad_1' onclick='eliminar_contenedor_actividad(this);' class='icon-minus-row-service icon-minus2 delete_actividad'></i></label>"+
                                 "</div>"+
                             "</div>"+
                             "<div class='grid-x grid-padding-x'>"+
