@@ -65,7 +65,9 @@
                 <div class="grid-x grid-margin-x">
                     <div class="cell large-6 container-combo">
                         <div class="form-group">
-                            <label class="label text-primary" style="line-height: 1.5;"><b>SOLUCION 1</b></label>
+                            <span class="spn-otroservicio2-emp text-primary" style="font-size:14px;font-weight:bold"></span></br>
+                            <span class="spn-otroservicio2-pro text-primary" style="font-size:14px;font-weight:bold"></span></br>
+                            <span class="spn-otroservicio2-req text-primary" style="font-size:14px;font-weight:bold"></span>
                             <div hidden><label hidden id="lblidSol">1</label></div>
                         </div>
                     </div>
@@ -185,6 +187,9 @@
                 $("#tbody_otroservicio2").empty();
                 $("#tbody_otroservicionr2").empty();
 
+                $('.spn-otroservicio2-emp').html($(".spn-cotizacion-emp").text());
+                $('.spn-otroservicio2-pro').html($(".spn-cotizacion-pro").text());
+                $('.spn-otroservicio2-req').html($(".spn-cotizacion-req").text());
                 //RECORREMOS otroservicio PRODUCTOS REGISTRADOS
                 if (JSONobjGeneralServ2.items.length > 0) {
                     if (JSONobjGeneralServ2.items[1].items2.length > 0) {

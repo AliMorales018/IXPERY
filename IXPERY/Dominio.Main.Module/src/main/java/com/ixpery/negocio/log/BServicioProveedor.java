@@ -11,5 +11,22 @@ public class BServicioProveedor {
     public String BuscarProveServicioCombo(String var) throws Exception{
         return odSerProve.BuscarProveServicioCombo(var);
     }
+
+    public String BuscarAsociado(String idProv, String idServ) throws Exception {
+        return odSerProve.BuscarAsociado(idProv,idServ);
+    }
+
+    public String RegistrarAsociado(String json)throws Exception {
+        return odSerProve.RegistrarAsociado(json);
+    }
+
+    public String ActualizarHistorialPrecio(String json)throws Exception {
+        return odSerProve.ActualizarHistorialPrecio(json);
+    }
+
+    public void RegistrarHistorialPrecio(String json, String idProd, String fechaFin)throws Exception {
+        odSerProve.RegistrarHistorialPrecio(json, idProd, fechaFin);
+    }
+
 //FIN LUIS
 }
