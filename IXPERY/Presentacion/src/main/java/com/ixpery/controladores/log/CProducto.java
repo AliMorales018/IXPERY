@@ -191,7 +191,8 @@ public class CProducto {
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
-        session.setAttribute("productop", 0);
+        session.setAttribute("productop", null);
+        session.setAttribute("prodsol", null);
     }
 
 
