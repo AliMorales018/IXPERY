@@ -107,7 +107,9 @@
                     <div class="grid-x grid-margin-x">
                         <div class="cell large-6 container-combo">
                             <div class="form-group">
-                                <label class="label text-primary" style="line-height: 1.5;"><b>SELECCIONAR EQUIPOS Y MATERIALES</b></label>
+                                <span class="spn-equipo-emp text-primary" style="font-size:14px;font-weight:bold"></span></br>
+                                <span class="spn-equipo-pro text-primary" style="font-size:14px;font-weight:bold"></span></br>
+                                <span class="spn-equipo-req text-primary" style="font-size:14px;font-weight:bold"></span>
                             </div>
                         </div>
                     </div>

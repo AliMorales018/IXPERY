@@ -942,6 +942,7 @@ function BuscarSolucionEquipos(idSol){
     ++countss;
     console.log("id");
     console.log(id);
+
     if(id!="" || id!=undefined){
         $.ajax({
             method: "POST",
@@ -950,6 +951,9 @@ function BuscarSolucionEquipos(idSol){
             data: {"idsol": id},
             success: function resultado(valor) {
                 JSONobjGeneralEq = JSON.parse(valor);
+                $('.spn-equipo-emp').html($(".spn-solucion-emp").text());
+                $('.spn-equipo-pro').html($(".spn-solucion-pro").text());
+                $('.spn-equipo-req').html($(".spn-solucion-req").text());
                 if(JSONobjGeneralEq.items.length>0){
                     estOperaEq=1;
                     addEquiposUpdate_equipo(valor);
