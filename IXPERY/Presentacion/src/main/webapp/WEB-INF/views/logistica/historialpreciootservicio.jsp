@@ -225,7 +225,7 @@
     }
 
     function setSelect2_ProdHPOTS(){
-        $("#selectProducto_hp").select2({
+        $("#selectProducto_hpOtServ").select2({
             ajax: {
                 url: "/historialprecioOtServicio/busservsolic",
                 dataType: 'json',
