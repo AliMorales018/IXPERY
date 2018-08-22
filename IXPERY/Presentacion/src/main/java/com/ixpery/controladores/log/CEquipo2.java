@@ -192,4 +192,26 @@ public class CEquipo2 {
             return idProv+"@"+idProd;
         }
     }
+
+
+    @RequestMapping("/equipo2/SesionProdSol")
+    public @ResponseBody
+    String SesionProdSol(
+            @RequestParam(value = "prodsol") String prodsol,
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("prodsol", prodsol);
+        prodsol = session.getAttribute("prodsol").toString();
+        return prodsol;
+    }
+
+
+
+
+
+
 }
+
+
+

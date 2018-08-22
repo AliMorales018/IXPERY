@@ -1,3 +1,6 @@
+var conta_filas_otroservicio2;
+var conta_filas_otroservicionr2;
+
 var JSONobjGeneralServ2;
 //////ACTUALIZAR, INSERTAR, ELIMINAR EN BLOQUE
 var idRowProdSolOtS2="";
@@ -170,6 +173,7 @@ function selCmbProveeOtS2(obj){
     $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_idserprov]').text(idProdProv);
     subTot=parseFloat(data[0].precio)*parseFloat($("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_canser]').html());
     $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_subtot]').text(subTot);
+    $("#"+selectId).closest('tr').find('span[id=spn_otroservicio2_idprovee]').text(data[0].idproveedor);
 }
 
 function InsUpdDelOtroServ2() {
@@ -199,8 +203,8 @@ function InsUpdDelOtroServ2() {
 function crearSesProvSoli(idtr){
     let idProve;
     let idSoli= $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id = spn_otroservicio2_idsersoli]").text();
-    if(($("tbody#tbody_otroservicio2 tr#"+idtr).find("td div select[id ^= cmb_otroservicio2_provee]").val())!==null){
-        idProve=$("tbody#tbody_otroservicio2 tr#"+idtr).find("td div select[id ^= cmb_otroservicio2_provee]").select2('data')[0].idproveedor;
+    if(($("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id ^= spn_otroservicio2_idprovee]").text())!=='0'){
+        idProve=$("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id ^= spn_otroservicio2_idprovee]").text();
     }else{
         idProve="0";
     }
@@ -228,5 +232,25 @@ function abrir_prove_ot2(){
 AddMenu(mProveedor);
 }
 function abrir_asociar_ots2(){
-AddMenu(mAsociarServ);
+    let solAscoServv="";
+    $.ajax({
+        method: "POST",
+        async: false,
+        url:"/solucion/VerificarSesionSolucion",
+        data:{},
+        success: function resultado(data) {
+            solAscoServv = data;
+            //SESION CARGO
+            console.log("SESION ID CARGO: "+ solAscoServv);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+    AddMenu(mAsociarServ);
+    if( typeof CargarOtSerNRBDD !== 'undefined' && jQuery.isFunction(CargarOtSerNRBDD)) {
+        CargarOtSerNRBDD(solAscoServv);
+    }
+    // CargarOtSerNRBDD(solAscoServ);
 }

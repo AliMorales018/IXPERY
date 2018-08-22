@@ -4,7 +4,7 @@ var solAscoServ;
 dolRowOtroSer2+= '<tr class="otrosepr-edit">';
 dolRowOtroSer2+= '<td><div><p class="text-center" id="p_otrosepr_num"></p></div></td>';
 dolRowOtroSer2+= '<td><div><span id="spn_otrosepr_nomserv" class="line-height-asoprod"></span></div></td>';
-dolRowOtroSer2+= '<td style="width: 280px"><div><select name="select_filtrar_insumoot2" class="select_equipo_equipos" style="width: 250px"></select></div></td>';
+dolRowOtroSer2+= '<td style="width: 280px"><div><select  name="select_filtrar_insumoot2" class="select_equipo_equipos" style="width: 250px"></select></div></td>';
 dolRowOtroSer2+= '<td hidden><div><span id="spn_otrosepr_idpreregsoli"></span></div></td>';
 dolRowOtroSer2+= '<td class="text-center"><div><a href="/servsolicitados" class="btn btn-sm-search"><i class="icon icon-plus2"></i></a></div></td>';
 dolRowOtroSer2+= '</tr>';
@@ -37,11 +37,13 @@ function CargarOtSerNRBDD(solAscoServ) {
     count_otroserpr = 0;
     $.ajax({
         method: "POST",
+        async: false,
         url: "/asociarservicio/verservicionbsolucion",
         data: {"i":idSolServSoli},
         success: function resultado(data) {
             if(data != 0) {
                 let JSONobjServSolic = JSON.parse(data);
+                $("table #tbody_asociarservsolic").empty();
                 $.each(JSONobjServSolic, function (obj, item) {
                     count_otroserpr++;
                     let rowCloneOtSer2=$(dolRowOtroSer2HTML).clone().prop({id:'row-otrosepr-' + count_otroserpr});
@@ -120,7 +122,7 @@ function save_servsoli_asociados() {
                 if ($(this).find('select[name=select_filtrar_insumoot2]').val() != null) {
                     idSolServSoli2 = soll;
                     idPreRegistro = $(this).find('span[id=spn_otrosepr_idpreregsoli]').text();
-                    idServSolic = $(this).find('select[id=select_filtrar_insumoot2]').val();
+                    idServSolic = $(this).find('select[name=select_filtrar_insumoot2]').val();
                     campos = idSolServSoli2 + "," + idPreRegistro + "," + idServSolic;
                     cadena = cadena + campos + ";";
                 }
