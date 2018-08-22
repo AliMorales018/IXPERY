@@ -29,7 +29,7 @@ function addActividad(){
                     "</div>"+
                 "</div>"+
                     "<div class='grid-x grid-padding-x'>"+
-                    "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Nombre de actividad:</b></label><input type='text' class='data-control form-control'></div></div>"+
+                    "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Nombre de servicio:</b></label><input type='text' class='data-control form-control'></div></div>"+
                     "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Descripción:</b></label><input class='data-control form-control' type='text'></div></div>"+
                     "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Cantidad:</b></label><input class='data-control form-control' type='number' placeholder='Cantidad'></div></div>"+
                     "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Riesgo:</b></label><input class='data-control form-control' type='number' placeholder='Riesgo'></div></div>"+
@@ -775,7 +775,7 @@ function BuscarSolucionServiciosCL() {
                                                                 "</div>"+
                                                                 "<div class='grid-x grid-padding-x data-actividad-edit'>"+
                                                                     "<input class='id' style='display: none' value='"+item.idactividad+"'>"+
-                                                                    "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Nombre de actividad:</b></label><input class='data-control form-control' type='text' value='"+item.actividad+"'></div></div>"+
+                                                                    "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Nombre de servicio:</b></label><input class='data-control form-control' type='text' value='"+item.actividad+"'></div></div>"+
                                                                     "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Descripción:</b></label><input class='data-control form-control' type='text' value='"+item.descripcion+"'></div></div>"+
                                                                     "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Cantidad:</b></label><input class='data-control form-control' type='number' placeholder='Cantidad' value='"+item.cantidad+"'></div></div>"+
                                                                     "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Riesgo:</b></label><input class='data-control form-control' type='number' placeholder='Riesgo' value='"+item.riesgo+"'></div></div>"+
@@ -964,7 +964,7 @@ function BuscarSolucionServiciosCL() {
                                 "</div>"+
                             "</div>"+
                             "<div class='grid-x grid-padding-x'>"+
-                                "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Nombre de actividad:</b></label><input type='text' class='data-control form-control' type='text'></div></div>"+
+                                "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Nombre de servicio:</b></label><input type='text' class='data-control form-control' type='text'></div></div>"+
                                 "<div class='cell large-3'><div class='form-group'><label class='label text-primary'><b>Descripción:</b></label><input type='text' class='data-control form-control' type='text'></div></div>"+
                                 "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Cantidad:</b></label><input type='number' class='data-control form-control' type='number' placeholder='Cantidad'></div></div>"+
                                 "<div class='cell large-2'><div class='form-group'><label class='label text-primary'><b>Riesgo:</b></label><input type='text' class='data-control form-control' type='number' placeholder='Riesgo'></div></div>"+
