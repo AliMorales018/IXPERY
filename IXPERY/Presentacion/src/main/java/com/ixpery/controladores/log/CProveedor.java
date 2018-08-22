@@ -368,8 +368,7 @@ public class CProveedor {
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
-        session.setAttribute("proveedor", 0);
+        session.setAttribute("proveedorp", null);
     }
-
 
 }

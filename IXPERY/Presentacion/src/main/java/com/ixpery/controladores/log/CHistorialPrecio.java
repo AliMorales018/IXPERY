@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -61,9 +63,12 @@ public class CHistorialPrecio {
 
     @RequestMapping("/historialprecio/registrarasociado")
     public @ResponseBody String RegistrarAsociado(
-            @RequestBody String json
+            @RequestBody String json,
+            HttpServletRequest request
     ) throws Exception {
-         return obProductoProv.RegistrarAsociado(json);
+         HttpSession session = request.getSession();
+         Integer idProdSol = (Integer) session.getAttribute("prodsol");
+         return obProductoProv.RegistrarAsociado(json,idProdSol);
     }
 
     @RequestMapping("/historialprecio/listar")
@@ -89,9 +94,11 @@ public class CHistorialPrecio {
 
     @RequestMapping("/historialprecio/actualizarprecio")
     public @ResponseBody String ActualizarPrecio(
-            @RequestBody String json
+            @RequestParam(value="json1") String json1,
+            @RequestParam(value="json2") String json2,
+            @RequestParam(value="idProd") Integer idProd
     ) throws Exception {
-        return obProductoProv.ActualizarHistorialPrecio(json);
+        return obProductoProv.ActualizarHistorialPrecio(json1,json2,idProd);
     }
 }
 

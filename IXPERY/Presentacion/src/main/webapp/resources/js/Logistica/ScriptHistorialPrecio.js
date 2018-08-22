@@ -14,6 +14,7 @@ function llenar_combo_proveedor_producto_hp(id, text, id2, text2) {
         let newOption = new Option(data.text, data.id, false, false);
         //Proveedor
         $('#selectProveedor_hp').empty().append(newOption);
+        setSelect2_ProvHP();
     }
 
     let data2 = {id: id2 , text: text2};
@@ -69,7 +70,7 @@ function ListarHistorial_Precios(idSesionProv,idSesionProd,bandera){
                     $("#contasociar_pro_prov").css("visibility","visible");
                     $("#vppa").val("0");
                     $("#tbody_historialprecio").html("<tr><td colspan='5' class='text-center'><div class='p-3' style='font-size: 10px'>Seleccione proveedor y/o producto ó Asocie producto/proveedor</div></td></tr>");
-                    listar_historial_precios(idProv,idProd,null,"loadData");
+                    listar_historial_precios(idProv,idProd,"historial","loadData");
                 }
                 else{
                     $("#contasociar_pro_prov").css("visibility","hidden");
@@ -97,14 +98,17 @@ function listar_historial_precios(idProv,idProd,bandera,combos) {
             if(combos === "loadData"){
                 if(idProv === "0") {
                     llenar_combo_proveedor_producto_hp(null, null, JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                    ++contador_equipo2_s;
                     $("#selectProveedor_hp").removeAttr("disabled");
                     $("#selectProveedor_hp").empty();
                     setSelect2_ProvHP();
                 }
                 else{
-                    llenar_combo_proveedor_producto_hp(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                    if(bandera === "equipo2") {
+                        llenar_combo_proveedor_producto_hp(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3, JSONobj.pdt[0].pdt1, JSONobj.pdt[0].pdt7 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
+                        ++contador_equipo2_s;
+                    }
                 }
-                ++contador_equipo2_s;
             }
             else{
                 $("#btn_historialpre_nue").removeAttr("disabled");
@@ -236,14 +240,13 @@ function guardar_nuevo_Precio() {
                     $.ajax({
                         method: "POST",
                         url: "/historialprecio/actualizarprecio",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(ObjProdProvAct),
+                        data: {"json1":JSON.stringify(ObjProdProvAct),"json2":JSON.stringify(data),"idProd":idProducto},
                         success: function resultado(data) {
                             if (data === "0") {
                                 //Cargar otra vez la tabla
                                 ListarHistorial_Precios(null,null,"historial");
-                                if (typeof BuscarSolucionEquipos !== 'undefined' && jQuery.isFunction(BuscarSolucionEquipos)) {
-                                    BuscarSolucionEquipos();
+                                if (typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
+                                    BuscarSesionSol();
                                 }
                             }
                             else{
@@ -263,7 +266,7 @@ function guardar_nuevo_Precio() {
                         success: function resultado(data) {
                             if (data === "") {
                                 //Cargar otra vez la tabla
-                                ListarHistorial_Precios();
+                                ListarHistorial_Precios(null,null,"historial");
                                 if (typeof BuscarSesionSol !== 'undefined' && jQuery.isFunction(BuscarSesionSol)) {
                                     console.log("Recalculando Solución");
                                     BuscarSesionSol();

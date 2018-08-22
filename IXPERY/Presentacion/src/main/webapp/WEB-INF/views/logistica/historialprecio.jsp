@@ -93,7 +93,7 @@
             <div class="cell large-4">
                 <div class="form-group">
                     <label class="label text-primary" style="line-height: 1.5"><b>Proveedor:</b></label>
-                    <select id="selectProveedor_hp" onchange="ListarHistorial_Precios();">
+                    <select id="selectProveedor_hp" style="width: 100%;" onchange="ListarHistorial_Precios();">
                         <option></option>
                     </select>
                 </div>
@@ -101,7 +101,7 @@
             <div class="cell large-4">
                 <div class="form-group">
                     <label class="label text-primary" style="line-height: 1.5"><b>Producto:</b></label>
-                    <select id="selectProducto_hp" onchange="ListarHistorial_Precios();">
+                    <select id="selectProducto_hp" style="width: 100%;" onchange="ListarHistorial_Precios();">
                         <option></option>
                     </select>
                 </div>
@@ -181,7 +181,6 @@
                     if(id[0] !== "0"){
                         ListarHistorial_Precios(parseInt(id[0]),parseInt(id[1]),"equipo2");
                     }else{
-                        setSelect2_ProvHP();
                         listar_historial_precios("0",parseInt(id[1]),null,"loadData");
                     }
                 }
@@ -215,7 +214,7 @@
                 },
                 cache: true
             },
-            placeholder: 'Buscar proveedor . . .',
+            placeholder: 'Buscar proveedor por nombre y/o ruc . . .',
             escapeMarkup: function (markup) {
                 return markup;
             },
