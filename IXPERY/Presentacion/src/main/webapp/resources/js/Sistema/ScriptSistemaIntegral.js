@@ -585,6 +585,7 @@ function DestruirSesionCargoLaboral() {
     });
 }
 
+
 function DestruirSesionProducto() {
     $.ajax({
         method: "POST",
