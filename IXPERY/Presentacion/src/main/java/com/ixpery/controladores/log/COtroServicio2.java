@@ -83,13 +83,25 @@ public class COtroServicio2 {
     ) throws Exception {
         HttpSession session = request.getSession();
 
-        Integer idProv = (Integer) session.getAttribute("proveedorp");
-        Integer idServ = (Integer) session.getAttribute("productop");
+        Integer idProv = (Integer) session.getAttribute("proveedorpot");
+        Integer idServ = (Integer) session.getAttribute("otroserv");
 
         if (idServ == null || idProv == null){
             return "0";
         }else{
             return idProv+"@"+idServ;
         }
+    }
+//nuevo enviar a juan
+    @RequestMapping("/otroservicio2/SesionServSol")
+    public @ResponseBody
+    String SesionProdSol(
+            @RequestParam(value = "servsol") String servsol,
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("servsol", servsol);
+        servsol = session.getAttribute("servsol").toString();
+        return servsol;
     }
 }

@@ -61,10 +61,12 @@ public class DServicioSolicitados {
     public String VerHistorialPrecios(EServicioProveedor oeProvProd) throws Exception {
         listParameter.clear();
         SqlParameter pIdProv = new SqlParameter("idProv", oeProvProd.getIdproveedor().getIdproveedor());
-        SqlParameter pIdProd = new SqlParameter("idProd", oeProvProd.getIdservsol().getIdservsol());
+        SqlParameter pIdProd = new SqlParameter("idServ", oeProvProd.getIdservsol().getIdservsol());
         listParameter.add(pIdProv);
         listParameter.add(pIdProd);
-        return com.EjecutaConsultaJson("filtrar_historial_precio_item3", listParameter);
+        String a= com.EjecutaConsultaJson("filtrar_historial_precio_item3", listParameter);
+        a=jsonGeneral.JsonConvertInvert(a);
+        return a;
     }
    /*NUEVA FUNCION QUE USA DANTE PARA HISTORIAL PRECIOS*/
     /*public String VerHistorialPrecios(EServicioProveedor oeProvProd) throws Exception {

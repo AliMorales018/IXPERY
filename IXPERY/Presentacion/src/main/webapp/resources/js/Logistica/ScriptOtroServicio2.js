@@ -202,7 +202,8 @@ function InsUpdDelOtroServ2() {
 
 function crearSesProvSoli(idtr){
     let idProve;
-    let idSoli= $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id = spn_otroservicio2_idsersoli]").text();
+    let idSoli=     $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id = spn_otroservicio2_idsersoli]").text();
+    let idServSol=  $("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id = spn_otroservicio2_idservicsolu]").text();
     if(($("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id ^= spn_otroservicio2_idprovee]").text())!=='0'){
         idProve=$("tbody#tbody_otroservicio2 tr#"+idtr).find("td div span[id ^= spn_otroservicio2_idprovee]").text();
     }else{
@@ -226,6 +227,8 @@ function crearSesProvSoli(idtr){
             alert('Error: ' + msg.responseText);
         }
     });
+SesionServicioSolucion(idServSol);
+
 }
 
 function abrir_prove_ot2(){
@@ -253,4 +256,23 @@ function abrir_asociar_ots2(){
         CargarOtSerNRBDD(solAscoServv);
     }
     // CargarOtSerNRBDD(solAscoServ);
+}
+
+function SesionServicioSolucion(idServSol) {
+    $.ajax({
+        method: "POST",
+        async: false,
+        url: "/otroservicio2/SesionServSol",
+        data: {"servsol": idServSol},
+        success: function(valor) {
+            console.log('valor prodsol');
+            console.log(valor);
+            // alert("La sesion de solucion es: " + valor);
+        },
+        error: function errores(msg) {
+            alert('Error: ' + msg.responseText);
+        }
+    });
+
+
 }
