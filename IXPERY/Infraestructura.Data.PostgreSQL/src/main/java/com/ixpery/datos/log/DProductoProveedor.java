@@ -1,9 +1,13 @@
 package com.ixpery.datos.log;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ixpery.datos.tools.DConexion;
 import com.ixpery.datos.tools.JsonGeneral;
 import com.ixpery.utilitario.DtUtilitario;
 import com.ixpery.utilitario.SqlParameter;
+import com.sun.deploy.net.HttpRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,20 +39,41 @@ public class DProductoProveedor {
         }
     }
 
-    public String RegistrarAsociado(String json) throws Exception{
+    public String RegistrarAsociado(String json, Integer idProdSol) throws Exception{
         json = jg.JsonConvert(json);
         listaParametros.clear();
         SqlParameter pjson = new SqlParameter("json", json);
         listaParametros.add(pjson);
-        return com.EjecutaConsultaJson("gen_verificar_insertar_json",listaParametros);
+        String a = com.EjecutaConsultaJson("gen_verificar_insertar_json",listaParametros);
+        //Regostrar Id ProductoSolucion - Registrar Id ProductoProveedor
+        if (idProdSol != null) {
+            listaParametros.clear();
+
+            JsonParser parser = new JsonParser();
+            JsonObject root = parser.parse(json).getAsJsonObject();
+            Integer idProdProveedor = root.get("46713").getAsJsonArray().get(0).getAsJsonObject().get("467131").getAsInt();
+
+            SqlParameter idProdSolu = new SqlParameter("idProSol", idProdSol);
+            SqlParameter idProdProv = new SqlParameter("idProdProv", idProdProveedor);
+            listaParametros.add(idProdSolu);
+            listaParametros.add(idProdProv);
+            com.TransUnica("historialprecio_prodsol",listaParametros);
+        }
+        return a;
     }
 
-    public String ActualizarHistorialPrecio(String json) throws Exception{
-        json = jg.JsonConvert(json);
+    public String ActualizarHistorialPrecio(String json1,String json2, Integer idProd) throws Exception{
+        json1 = jg.JsonConvert(json1);
         listaParametros.clear();
-        SqlParameter pjson = new SqlParameter("json", json);
+        SqlParameter pjson = new SqlParameter("json", json1);
         listaParametros.add(pjson);
-        return com.EjecutaConsultaJson("gen_guardar",listaParametros);
+        String a = com.EjecutaConsultaJson("gen_guardar",listaParametros);
+        //Recalcular
+        listaParametros.clear();
+        SqlParameter pJson = new SqlParameter("json",json2);
+        SqlParameter pValues = new SqlParameter("values", "467132"+","+idProd+",0,1");
+        com.TransUnica("gen_insertar_historial_precio",listaParametros);
+        return a;
     }
 
     public void RegistrarHistorialPrecio(String json, String idProd, String fechFin) throws  Exception{
