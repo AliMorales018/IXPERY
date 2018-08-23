@@ -246,6 +246,8 @@
 </div>
 <!-- Actividades -->
 
+<div style="margin-top: 200px"></div>
+
 <script src="${urlPublic}/js/Logistica/ScriptServicios.js"></script>
 
 <script>

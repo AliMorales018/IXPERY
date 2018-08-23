@@ -118,7 +118,7 @@ function listar_historial_precios(idProv,idProd,bandera,combos) {
                     ++contador_equipo2_s;
                 }
                 if (JSONobj.ppr.length > 0) {
-                    if (JSONobj.ppr.length === 1 && JSONobj.ppr[0].ppr4 === null) {
+                    if (JSONobj.ppr.length === 1 && JSONobj.ppr[0].ppr4 === 0) {
                         $("#tbody_historialprecio").html("<tr class='no-registers act-precio'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'><input type='hidden' value='" + JSONobj.ppr[0].ppr1 + "'>Ingrese un precio para el producto.</div></td></tr>");
                         $("#contenedor_nuevo_precio").css("visibility", "visible");
                         $("#btn_historialpre_save").removeAttr("disabled");
@@ -162,6 +162,8 @@ function asociar_prod_prov(){
             "ppr3": {
                         "prd1": parseInt($("#selectProveedor_hp").val())
                     },
+            "ppr4": 0,
+            "ppr8": "1",
         }]
     };
     $.ajax({
