@@ -232,7 +232,8 @@ public class DEquipo {
                     oeProdSolucion.setEstado("1");
                     oeProdSolucion.setFecharegistro(timestamp.toString());
                     //CAMBIAR LUEGO POR LA SESSIÓN
-                    oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
+//                    oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
+                    oeProdSolucion.setUserregistro(listProdSolucion.get(i).getUserregistro());
                     oeProdSolucion.setEnviadocotizar("1");
                     oeProdSolucion.setIdprereg(listPreRegProducto.get(i).getIdprereg());
 
@@ -263,7 +264,9 @@ public class DEquipo {
                 oeProdSolucion.setEstado("1");
                 oeProdSolucion.setFecharegistro(timestamp.toString());
                 //CAMBIAR LUEGO POR LA SESSIÓN
-                oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
+//                oeProdSolucion.setUserregistro("LUIS AZALDE LEYVA");
+                oeProdSolucion.setUserregistro(listProdSolucion.get(i).getUserregistro());
+
                 oeProdSolucion.setEnviadocotizar("1");
                 oeProdSolucion.setIdprereg(listPreRegProducto.get(i).getIdprereg());
 

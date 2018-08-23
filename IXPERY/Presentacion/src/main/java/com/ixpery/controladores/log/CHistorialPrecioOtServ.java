@@ -128,9 +128,11 @@ public class CHistorialPrecioOtServ {
 
     @RequestMapping("/historialprecioOtServicio/actualizarprecio")
     public @ResponseBody String ActualizarPrecio(
-            @RequestBody String json
+            @RequestParam(value="json1") String json1,
+            @RequestParam(value="json2") String json2,
+            @RequestParam(value="idServ") Integer idServ
     ) throws Exception {
-        return obServicioProv.ActualizarHistorialPrecio(json);
+        return obServicioProv.ActualizarHistorialPrecio(json1,json2,idServ);
     }
     @RequestMapping("/historialprecioOtServicio/register2")
     public @ResponseBody String Registrar2(

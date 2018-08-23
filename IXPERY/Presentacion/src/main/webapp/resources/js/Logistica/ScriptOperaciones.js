@@ -4,18 +4,27 @@ var setOperaciones = true;
 var countsc = 0;
 var countso = 0;
 var isolOperaciones;
+var iproope = 0;
+var iempop = 0;
 
 var countSelOpe = false;
+var flatSelectOper = true;
 
 
 
 $(document).ready(function () {
+    BuscarSolucionPendiente();
     BuscarSolucionesPendientes();
 
+
+});
+
+function BuscarSolucionPendiente() {
     $("#selectEmpresa_Proyecto_Sol_Opera").select2({
         ajax: {
             url: "/operaciones/BuscarSolucionPendiente",
             dataType: 'json',
+            async: false,
             delay: 250,
             data: function (params) {
                 return {
@@ -34,11 +43,12 @@ $(document).ready(function () {
         },
         placeholder: 'Buscar por empresa o solución . . .',
         escapeMarkup: function (markup) { return markup; },
-        minimumInputLength: 3,
+        // minimumInputLength: 3,
         templateResult: formatRepo,
         templateSelection: formatRepoSelection
     });
-});
+}
+
 
 function formatRepo (repo) {
     if (repo.loading) {
@@ -68,6 +78,7 @@ function BuscarSolucionOperaciones(id){
 
         $.ajax({
             method: "POST",
+            async:false,
             url: "/operaciones/buscaroperacionsol",
             data: {"sol": id},
             success: function resultado(valor) {
@@ -90,12 +101,23 @@ function BuscarSolucionOperaciones(id){
 
 function Registrar_Operaciones() {
     if($("#selectEmpresa_Proyecto_Sol_Opera").val()!==null){
-
+        let idEmp;
+        let idPro;
+        let idSol;
         let data = $("#selectEmpresa_Proyecto_Sol_Opera").select2('data');
 
-        let idEmp=data[0].idempresa;
-        let idPro=data[0].idproyecto;
-        let idSol=data[0].id;
+        if(flatSelectOper === true){
+            idEmp=data[0].idempresa;
+            idPro=data[0].idproyecto;
+            idSol=data[0].id;
+        }
+        else{
+            idEmp = iempop;
+            idPro = iproope
+            idSol = isolOperaciones;
+            flatSelectOper = true;
+        }
+
 
         let txtOfer=$("#txt_validezofer_opera").val();
         let txtEntre=$("#txt_timeentre_opera").val();
@@ -329,6 +351,8 @@ function BuscarSolucionesPendientes(){
                     html += `<td><div style="width: 15px" class="text-span"><span name="spn-operaciones-num">${i + 1}</span></div></td>`;
                     html += `<td style="display: none"><div><span name="spn-operaciones-idreq">${arrayData[i].idreq}</span></div></td>`;
                     html += `<td style="display: none"><div><span name="spn-operaciones-idsol">${arrayData[i].idsol}</span></div></td>`;
+                    html += `<td style="display: none"><div><span name="spn-operaciones-idpro">${arrayData[i].idproyecto}</span></div></td>`;
+                    html += `<td style="display: none"><div><span name="spn-operaciones-idemp">${arrayData[i].idempresa}</span></div></td>`;
                     html += `<td><div style="width: 250px" class="text-span"><span name="spn-operaciones-nomreq">${arrayData[i].requerimiento}</span></div></td>`;
                     html += `<td><div style="width: 100px" class="text-span"><span name="spn-operaciones-regreq">${arrayData[i].fecharegistro_rq}</span></div></td>`;
                     html += `<td><div style="width: 250px" class="text-span"><span name="spn-operaciones-nomsol">${arrayData[i].solucion}</span></div></td>`;
@@ -341,18 +365,69 @@ function BuscarSolucionesPendientes(){
                 $('tbody#tbody-solucion-operaciones').html(html)
                     .on('click', 'tr', function(){
                         let actual = $(this);
+
+                        let nomOperacion = $(this).find('span[name=spn-operaciones-nomsol]').text();
+
                         ireqSolucion = $(this).find('span[name=spn-operaciones-idreq]').text();
                         isolOperaciones = $(this).find('span[name=spn-operaciones-idsol]').text();
+                        iproope = $(this).find('span[name=spn-operaciones-idpro]').text();
+                        iempop = $(this).find('span[name=spn-operaciones-idemp]').text();
+
+
+
+                        $('tbody#tbody-solucion-operaciones tr').removeClass('row-selected');
+                        actual.addClass('row-selected');
+
+
+                        flatSelectOper = false;
                         SesionSolucionOpe(isolOperaciones);
                         console.log("session");
                         console.log(isolOperaciones);
                         for (let i = 0; i < length; ++i) {
                             if(arrayData[i].idreq.toString() === ireqSolucion){
                                 if(arrayData[i].idsol.toString() !== '0'){
-                                    $('input[name="txt-operaciones-nom"]').val(arrayData[i].operaciones);
+                                    // $('input[name="txt-operaciones-nom"]').val(arrayData[i].operaciones);
                                     $('input[name="txt-operaciones-fch"]').val(arrayData[i].fecharegistro_sol);
                                     $('select[name="cmb-operaciones-enc"]').html(new Option('soli','1',true,true));
                                     $('textarea[name="tar-operaciones-des"]').val('descripcion');
+                                    $('#selectEmpresa_Proyecto_Sol_Opera').val(isolOperaciones);
+                                    // $('#selectEmpresa_Proyecto_Sol_Opera').text(arrayData[i].operaciones);
+                                    $('#selectEmpresa_Proyecto_Sol_Opera').html(`<option value="${parseInt(isolOperaciones)}" selected="selected">${nomOperacion}</option>>`);
+
+
+                                    // $("#selectEmpresa_Proyecto_Sol_Opera").select2({
+                                    //     ajax: {
+                                    //         url: "/operaciones/BuscarSolucionPendiente",
+                                    //         dataType: 'json',
+                                    //         async: false,
+                                    //         delay: 250,
+                                    //         data: function (params) {
+                                    //             console.log('nomOperacion');
+                                    //             console.log(nomOperacion);
+                                    //             return {
+                                    //                 q: nomOperacion
+                                    //             };
+                                    //         },
+                                    //         processResults: function (data, params) {
+                                    //             $.each(data.items, function(i, d) {
+                                    //                 data.items[i]['id'] = d.idsol;
+                                    //             });
+                                    //             console.log('data.items');
+                                    //             console.log(data.items);
+                                    //             return {
+                                    //                 results: data.items
+                                    //             };
+                                    //         },
+                                    //         cache: true
+                                    //     },
+                                    //     placeholder: 'Buscar por empresa o solución . . .',
+                                    //     escapeMarkup: function (markup) { return markup; },
+                                    //     // minimumInputLength: 3,
+                                    //     templateResult: formatRepo,
+                                    //     templateSelection: formatRepoSelection
+                                    // });
+
+
                                 }
                                 else{
                                     // LimpiarCampos();
@@ -360,13 +435,18 @@ function BuscarSolucionesPendientes(){
                                 $('.spn-operaciones-emp').html(`<span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
                                 $('.spn-operaciones-pro').html(`<span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
                                 $('.spn-operaciones-req').html(`<span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
+
+
                             }
                         }
+
+
+                        BuscarSolucionOperaciones(isolOperaciones);
                         AddSetOperaciones();
 
-                        $('tbody#tbody-solucion-operaciones tr').removeClass('row-selected');
-                        actual.addClass('row-selected');
 
+
+                        // $('#selectEmpresa_Proyecto_Sol_Opera').val('JJ');
                     });
 
             }

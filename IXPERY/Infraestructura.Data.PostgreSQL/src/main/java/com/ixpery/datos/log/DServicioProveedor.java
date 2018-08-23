@@ -51,12 +51,18 @@ public class DServicioProveedor {
         return com.EjecutaConsultaJson("gen_verificar_insertar_json",listaParametros);
     }
 
-    public String ActualizarHistorialPrecio(String json) throws Exception{
-        json = jg.JsonConvert(json);
+    public String ActualizarHistorialPrecio(String json1, String json2, Integer idServ) throws Exception{
+        json1 = jg.JsonConvert(json1);
         listaParametros.clear();
-        SqlParameter pjson = new SqlParameter("json", json);
+        SqlParameter pjson = new SqlParameter("json", json1);
         listaParametros.add(pjson);
-        return com.EjecutaConsultaJson("gen_guardar",listaParametros);
+        String a= com.EjecutaConsultaJson("gen_guardar",listaParametros);
+        //Recalcular
+        listaParametros.clear();
+        SqlParameter pJson = new SqlParameter("json",json2);
+        SqlParameter pValues = new SqlParameter("values", "467762"+","+idServ+",0,3");
+        com.TransUnica("gen_insertar_historial_precio",listaParametros);
+        return a;
     }
 
     public void RegistrarHistorialPrecio(String json, String idProd, String fechFin) throws  Exception{
