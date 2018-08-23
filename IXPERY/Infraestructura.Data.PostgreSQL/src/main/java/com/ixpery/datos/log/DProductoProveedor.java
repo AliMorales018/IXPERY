@@ -9,6 +9,7 @@ import com.ixpery.utilitario.DtUtilitario;
 import com.ixpery.utilitario.SqlParameter;
 import com.sun.deploy.net.HttpRequest;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class DProductoProveedor {
 
     public String ActualizarHistorialPrecio(String json1,String json2, Integer idProd) throws Exception{
         json1 = jg.JsonConvert(json1);
+        json2 = jg.JsonConvert(json2);
         listaParametros.clear();
         SqlParameter pjson = new SqlParameter("json", json1);
         listaParametros.add(pjson);
@@ -71,7 +73,11 @@ public class DProductoProveedor {
         //Recalcular
         listaParametros.clear();
         SqlParameter pJson = new SqlParameter("json",json2);
+        System.out.println("JSON ENVIADO: "+json2);
+        System.out.println("CADENA ENVIADA: "+"467132"+","+idProd+",0,1");
         SqlParameter pValues = new SqlParameter("values", "467132"+","+idProd+",0,1");
+        listaParametros.add(pJson);
+        listaParametros.add(pValues);
         com.TransUnica("gen_insertar_historial_precio",listaParametros);
         return a;
     }
@@ -81,8 +87,8 @@ public class DProductoProveedor {
             System.out.println(json);
             listaParametros.clear();
             json = jg.JsonConvert(json);
-            System.out.println(json);
-            System.out.println("467132"+","+idProd+","+fechFin+","+"1");
+            System.out.println("JSON REGISTER: "+json);
+            System.out.println("CADENA REGISTER: "+"467132"+","+idProd+","+fechFin+","+"1");
             SqlParameter pJson = new SqlParameter("json",json);
             SqlParameter pValues = new SqlParameter("values", "467132"+","+idProd+","+fechFin+","+"1");
             listaParametros.add(pJson);
