@@ -215,7 +215,7 @@
                 },
                 cache: true
             },
-            placeholder: 'Buscar proveedor . . .',
+            placeholder: 'Buscar proveedor por nombre y/o ruc . . .',
             escapeMarkup: function (markup) {
                 return markup;
             },

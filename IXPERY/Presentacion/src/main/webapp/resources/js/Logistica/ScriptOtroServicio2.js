@@ -7,7 +7,7 @@ var idRowProdSolOtS2="";
 var sSolucionOtSer2="";
 var rowEqui2ObjIn = {};
 var rowOtroSer2ObjOut = {};
-
+var contador_otroservicio2_s=0;
 var jsonGuardarFullOtroSer2 = {};
 var arrGuardarOtroSer2 = [];
 

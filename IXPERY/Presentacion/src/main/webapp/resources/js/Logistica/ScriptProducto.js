@@ -4,7 +4,7 @@ dollyRowProducto+= '<tr class="producto-edit">';
 dollyRowProducto+= '<td><div><p class="text-center" id="p_producto_num"></p></div></td>';
 dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_idpro"/></div></td>';
 dollyRowProducto+= '<td><div><span id="spn_producto_nombre"/></div></td>';
-dollyRowProducto+= '<td><div><span id="spn_producto_famil"/></div></td>';
+dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_famil"/></div></td>';
 dollyRowProducto+= '<td><div><span id="spn_producto_categ"/></div></td>';
 dollyRowProducto+= '<td><div><span id="spn_producto_umedi"/></div></td>';
 dollyRowProducto+= '<td><div><span id="spn_producto_codig"/></div></td>';
@@ -19,7 +19,7 @@ dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_insum"/
 dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_pfina"/></div></td>';
 dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_einsu"/></div></td>';
 dollyRowProducto+= '<td style="display:none"><div><span id="spn_producto_epfin"/></div></td>';
-dollyRowProducto+= '<td><div class="text-center"><button type="button"><i class="icon-cross icon-hp-desh"></i></button></div></td>';
+dollyRowProducto+= '<td style="display:none"><div class="text-center"><button type="button"><i class="icon-cross icon-hp-desh"></i></button></div></td>';
 dollyRowProducto+= '</tr>';
 
 var dollyRowProductoHTML = $.parseHTML(dollyRowProducto);
@@ -168,8 +168,8 @@ function formatRepoFamilia (repo) {
     if (repo.loading) {
         return repo.text;
     }
-    var markup = "<div class='selectempresa2-result-familia'><span class='selectempresa2-span-equiporesult'>FAMILIA: </span>"+repo.familia+"</div>"+
-                 "<div class='selectempresa2-result-categoria'><span class='selectempresa2-span-equiporesult'>CATEGORIA: </span>"+repo.categoria+"</div>";
+    var markup = "<div class='selectempresa2-result-familia'><span class='selectempresa2-span-equiporesult'>FAMILIA: </span>"+repo.familia+"</div>";
+                 // "<div class='selectempresa2-result-categoria'><span class='selectempresa2-span-equiporesult'>CATEGORIA: </span>"+repo.categoria+"</div>";
     return markup;
 }
 
@@ -203,7 +203,7 @@ function formatRepoSelectionUme (repo) {
 
 function limpiarTotalProd() {
     var arrayCajas=["txt_producto_nombb","txt_producto_codd","txt_producto_sminn","txt_producto_saldd","txt_producto_modee",
-        "txt_producto_marcc","txt_producto_idprodd","txt_producto_busnom"]
+        "txt_producto_marcc","txt_producto_idprodd"]
 
     var arrayCombo = ["cmb_producto_famii","cmb_producto_catee","cmb_producto_umedd"];
     limpiaCombo(arrayCombo);
@@ -240,7 +240,7 @@ function limpiarCajas(arrayCajas){
         $("#"+idCajas).val('');
     }
 }
-function CargarJS_producto(estado, childNodes, reloadTabla) {
+/*function CargarJS_producto(estado, childNodes, reloadTabla) {
     listarFami_producto("cmb_producto_famii","");
     listarUmedida_producto("cmb_producto_umedd","");
     listarEsta_producto("contentcheck_producto");
@@ -250,7 +250,7 @@ function CargarJS_producto(estado, childNodes, reloadTabla) {
     nomBody_producto = "tbody_producto";
     //ID del Body
     idPriFilaBody_producto = "firstRowBody_producto";
-}
+}*/
 function convertUpperCase(e) {
     e.value = e.value.toUpperCase();
 }
