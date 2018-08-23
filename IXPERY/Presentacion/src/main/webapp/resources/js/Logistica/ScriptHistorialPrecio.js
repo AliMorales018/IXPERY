@@ -239,6 +239,7 @@ function guardar_nuevo_Precio() {
                             }
                         ]
                     };
+                    data.ppr[0].ppr1 = idProdProv;
                     $.ajax({
                         method: "POST",
                         url: "/historialprecio/actualizarprecio",
