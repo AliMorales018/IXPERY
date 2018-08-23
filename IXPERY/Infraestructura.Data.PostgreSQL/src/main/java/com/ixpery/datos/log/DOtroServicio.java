@@ -276,13 +276,6 @@ public class DOtroServicio {
         return json;
     }
 
-
-
-
-
-
-
-
     //LUIS 18/07/2018 02:30 AM
     public List<EEquipo> BuscarEquipoSolucion(String campos) throws Exception {
 

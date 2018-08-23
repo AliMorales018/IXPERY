@@ -15,11 +15,12 @@ function llenar_combo_proveedor_producto_hpots(id, text, id2, text2) {
         let newOption = new Option(data.text, data.id, false, false);
         //Proveedor
         $('#selectProveedor_hpOtServ').empty().append(newOption);
+        setSelect2_ProvHPOTS();
     }
 
     let data2 = {id: id2 , text: text2};
     let newOption2 = new Option(data2.text, data2.id, false, false);
-    //Producto
+    //Servicio
     $('#selectProducto_hpOtServ').empty().append(newOption2);
     $('#selectProducto_hpOtServ').attr("disabled",true);
 }
@@ -102,8 +103,6 @@ function listar_historial_preciosots(idProv,idServ,bandera,combos) {
             console.log(JSONobj);
             if(combos === "loadData"){
                 if(idProv === "0") {
-                    //comenté la línea de abajo pq servicio no tiene marca ni modelo
-                    // llenar_combo_proveedor_producto_hpots(null, null, JSONobj.pdt[0].sso1, JSONobj.pdt[0].sso3 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
                     llenar_combo_proveedor_producto_hpots(null, null, JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + "-" + " - " + "-");
                     ++contador_otroservicio2_s;
                     $("#selectProveedor_hpOtServ").removeAttr("disabled");
@@ -112,8 +111,6 @@ function listar_historial_preciosots(idProv,idServ,bandera,combos) {
                 }
                 else{
                     if(bandera === "otroservicio2") {
-                        //comenté la linea de abajo pq no tengo modelo ni marca
-                        // llenar_combo_proveedor_producto_hpots(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3,JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + JSONobj.pdt[0].pdt11 + " - " + JSONobj.pdt[0].pdt12);
                         llenar_combo_proveedor_producto_hpots(JSONobj.emp[0].emp2, JSONobj.emp[0].emp4 + " - " + JSONobj.emp[0].emp3, JSONobj.sso[0].sso1, JSONobj.sso[0].sso3 + " - " + "-" + " - " + "-");
                         ++contador_otroservicio2_s;
                     }
@@ -128,7 +125,7 @@ function listar_historial_preciosots(idProv,idServ,bandera,combos) {
                     ++contador_otroservicio2_s;
                 }
                 if (JSONobj.spr.length > 0) {
-                    if (JSONobj.spr.length === 1 && JSONobj.spr[0].spr4 === null) {
+                    if (JSONobj.spr.length === 1 && JSONobj.spr[0].spr4 === 0) {
                         $("#tbody_historialprecioOtServ").html("<tr class='no-registers act-precio'><td colspan='11' class='text-center'><div class='p-3' style='font-size: 10px'><input type='hidden' value='" + JSONobj.spr[0].spr1 + "'>Ingrese un precio para el servicio.</div></td></tr>");
                         $("#contenedor_nuevo_precioOtServ").css("visibility", "visible");
                         $("#btn_historialpreotserv_save").removeAttr("disabled");
@@ -172,6 +169,8 @@ function asociar_prod_provots(){
             "spr3": {
                 "prd1": parseInt($("#selectProveedor_hpOtServ").val())
             },
+            "spr4": 0,
+            "spr5": "1",
         }]
     };
     $.ajax({
@@ -250,8 +249,7 @@ function guardar_nuevo_PrecioOtServ() {
                     $.ajax({
                         method: "POST",
                         url: "/historialprecioOtServicio/actualizarprecio",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(ObjServProvAct),
+                        data: {"json1":JSON.stringify(ObjServProvAct),"json2":JSON.stringify(data),"idServ":idServicio},
                         success: function resultado(data) {
                             if (data === "0") {
                                 //Cargar otra vez la tabla
@@ -272,12 +270,12 @@ function guardar_nuevo_PrecioOtServ() {
                 else {
                     $.ajax({
                         method: "POST",
-                        url: "/historialprecioOtServicio/register",
+                        url: "/historialprecioOtServicio/register2",
                         data: {"json": JSON.stringify(data), "idProd": idServicio, "fechafin": FechaFin},
                         success: function resultado(data) {
                             if (data === "") {
                                 //Cargar otra vez la tabla
-                                ListarHistorial_PreciosOtServ();
+                                ListarHistorial_PreciosOtServ(null,null,"historial");
                                 if (typeof BuscarOtroServicio !== 'undefined' && jQuery.isFunction(BuscarOtroServicio)) {
                                     console.log("Recalculando Solución");
                                     BuscarOtroServicio();

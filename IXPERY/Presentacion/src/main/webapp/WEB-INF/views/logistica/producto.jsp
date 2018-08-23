@@ -161,7 +161,7 @@
                         <button type="button" id="btn_producto_busnom" class="btn btn-sm-search" onclick="CargarProductos();"><i class="icon icon-search4"></i></button>
                     </div>
                 </th>
-                <th class="p-3">Familia</th>
+                <th style="display: none;" class="p-3">Familia</th>
                 <th class="p-3">Categoría</th>
                 <th class="p-3">U. Medida</th>
                 <th class="p-3">Código</th>
@@ -176,7 +176,7 @@
                 <th style="display: none;" class="p-3">P.Final</th>
                 <th style="display: none;" class="p-3">Estado Insumo</th>
                 <th style="display: none;" class="p-3">Estado P.Final</th>
-                <th class="text-center p-3">Ver</th>
+                <th style="display: none;" class="p-3">Ver</th>
             </tr>
             </thead>
             <tbody id="tbody_producto">

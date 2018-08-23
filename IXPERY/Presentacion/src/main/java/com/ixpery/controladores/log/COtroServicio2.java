@@ -64,17 +64,17 @@ public class COtroServicio2 {
 
     @RequestMapping("/otroservicio2/sesproverod")
     public @ResponseBody  String CrearSesProvSoli(
-            @RequestParam(value = "prove") String prove,
-            @RequestParam(value = "soli") String soli,
+            @RequestParam(value = "prove") Integer prove,
+            @RequestParam(value = "soli") Integer soli,
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
-        session.setAttribute("proveedor", prove);
-        session.setAttribute("sersolicitado", soli);
+        session.setAttribute("proveedors", prove);
+        session.setAttribute("sersolicitados", soli);
 
-        String proveedor = session.getAttribute("proveedor").toString();
-        String servicio = session.getAttribute("sersolicitado").toString();
-        return "proveedor: "+proveedor+" sersolicitado: "+servicio;
+        String proveedor = session.getAttribute("proveedors").toString();
+        String servicio = session.getAttribute("sersolicitados").toString();
+        return "proveedors: "+proveedor+" sersolicitados: "+servicio;
     }
 
     @RequestMapping("/otroservicio2/getsesionpp")
@@ -83,8 +83,8 @@ public class COtroServicio2 {
     ) throws Exception {
         HttpSession session = request.getSession();
 
-        Integer idProv = (Integer) session.getAttribute("proveedorpot");
-        Integer idServ = (Integer) session.getAttribute("otroserv");
+        Integer idProv = (Integer) session.getAttribute("proveedors");
+        Integer idServ = (Integer) session.getAttribute("sersolicitados");
 
         if (idServ == null || idProv == null){
             return "0";
@@ -92,6 +92,7 @@ public class COtroServicio2 {
             return idProv+"@"+idServ;
         }
     }
+
 //nuevo enviar a juan
     @RequestMapping("/otroservicio2/SesionServSol")
     public @ResponseBody
