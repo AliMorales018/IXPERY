@@ -16,6 +16,7 @@ public class DSolucion {
     private DtUtilitario com = new DtUtilitario(c.ConectarBD());
     private List<SqlParameter> listParametros = new ArrayList<>();
     private static String getNameTableSolucion() { return "46071"; }
+    private static String getTableSolucion() { return "sol"; }
     private static String getNameTableEmpleado() { return "46227"; }
 
     private JsonGeneral jsonGeneral = new JsonGeneral();
@@ -145,6 +146,27 @@ public class DSolucion {
             return null;
         }
     }
+
+    public String VerificarCampoSolucion(String id, String campo) throws Exception {
+        id = jsonGeneral.StringConvert(id);
+        listParametros.clear();
+        SqlParameter pTab = new SqlParameter("tab", getTableSolucion());
+        SqlParameter pValue = new SqlParameter("value", id);
+        SqlParameter pCamTab1 = new SqlParameter("campTab1", campo);
+        SqlParameter pCamTab2 = new SqlParameter("campTab2", "");
+        listParametros.add(pTab);
+        listParametros.add(pValue);
+        listParametros.add(pCamTab1);
+        listParametros.add(pCamTab2);
+        String json = com.EjecutaConsultaJson("gen_buscar", listParametros);
+        if(!json.equals("0")){
+            json =  jsonGeneral.JsonConvertInvert(json);
+        }
+        return json;
+    }
+
+
+
 
 
 

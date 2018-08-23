@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+//CEquipo3
 @Controller
 public class CEquipo3 {
     ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beansBusiness.xml");
@@ -162,18 +162,50 @@ public class CEquipo3 {
 
     @RequestMapping("/equipo3/sesproverod")
     public @ResponseBody  String CrearSesProdProv(
-            @RequestParam(value = "prove") String prove,
-            @RequestParam(value = "prod") String prod,
+            @RequestParam(value = "prove") Integer prove,
+            @RequestParam(value = "prod") Integer prod,
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
-        session.setAttribute("proveedor", prove);
-        session.setAttribute("producto", prod);
+        session.setAttribute("proveedorp", prove);
+        session.setAttribute("productop", prod);
 
 //        Ejemplo para llamar la sesion de la solucion
 //        Integer solucion = Integer.parseInt(session.getAttribute("solucion").toString());
-        String proveedor = session.getAttribute("proveedor").toString();
-        String producto = session.getAttribute("producto").toString();
-        return "proveedor: "+proveedor+" producto: "+producto;
+        String proveedor = session.getAttribute("proveedorp").toString();
+        String producto = session.getAttribute("productop").toString();
+        return proveedor+"@"+producto;
+    }
+
+    @RequestMapping("/equipo3/getsesionpp")
+    public @ResponseBody  String GetSesionSesProdProv(
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+
+        Integer idProv = (Integer) session.getAttribute("proveedorp");
+        Integer idProd = (Integer) session.getAttribute("productop");
+
+        if (idProd == null || idProv == null){
+            return "0";
+        }else{
+            return idProv+"@"+idProd;
+        }
+    }
+
+
+    @RequestMapping("/equipo3/SesionProdSol")
+    public @ResponseBody
+    Integer SesionProdSol(
+            @RequestParam(value = "prodsol") Integer prodsol,
+            HttpServletRequest request
+    ) throws Exception {
+        HttpSession session = request.getSession();
+        session.setAttribute("prodsol", prodsol);
+        prodsol = (Integer) session.getAttribute("prodsol");
+        return prodsol;
     }
 }
+
+
+

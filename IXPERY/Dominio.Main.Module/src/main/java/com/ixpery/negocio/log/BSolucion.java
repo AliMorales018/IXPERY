@@ -53,5 +53,12 @@ public class BSolucion {
         return  odSol.LastId();
     }
 
+    public String VerificarCampoSolucion(String id, String campo) throws Exception{
+        return odSol.VerificarCampoSolucion(id, campo);
+    }
+
+
+
+
 
 }

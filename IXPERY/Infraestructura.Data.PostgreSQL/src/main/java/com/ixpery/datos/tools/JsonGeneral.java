@@ -278,6 +278,25 @@ public class JsonGeneral {
         return retorno;
     }
 
+    public String SimpleConvert(String campos){
+        String ret="";
+
+
+
+
+
+
+        return ret;
+    }
+
+
+
+
+
+
+
+
+
 
 
 
