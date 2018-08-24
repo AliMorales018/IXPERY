@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -121,9 +123,12 @@ public class CHistorialPrecioOtServ {
     }
     @RequestMapping("/historialprecioOtServicio/registrarasociado")
     public @ResponseBody String RegistrarAsociado(
-            @RequestBody String json
+            @RequestBody String json,
+            HttpServletRequest request
     ) throws Exception {
-        return obServicioProv.RegistrarAsociado(json);
+        HttpSession session = request.getSession();
+        Integer idServSol = (Integer) session.getAttribute("servsol");
+        return obServicioProv.RegistrarAsociado(json,idServSol);
     }
 
     @RequestMapping("/historialprecioOtServicio/actualizarprecio")

@@ -75,10 +75,20 @@
 
 <!-- Date -->
 <div class="l-container-sm">
-    <div class="grid-x grid-padding-x">
-        <div class="cell large-12">
-            <label class="text-f" id="lbl_equipo2_fecha">${fecha}</label>
+    <div class="grid-x align-center align-top">
+        <div class="cell large-2">
+            <label class="text-f" id="lbl_solucion_fecha" >${fecha}</label>
         </div>
+        <div class="cell large-8">
+            <div class="grid-x align-center align-top">
+                <div class="cell text-center" style="visibility:visible">
+                    <div style="margin-bottom: 5px"><span class="spn-equipo2-emp text-primary" style="font-size:14px;font-weight:bold"></span></div>
+                    <div style="margin-bottom: 5px"><span class="spn-equipo2-pro text-primary" style="font-size:14px;font-weight:bold"></span></div>
+                    <div><span class="spn-equipo2-req text-primary" style="font-size:12px;font-weight:bold"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="cell large-2"></div>
     </div>
 </div>
 <!-- End Date -->
@@ -88,18 +98,7 @@
     <div id="equipo_2" class="actividad grid-container">
         <!-- Table -->
         <div class="grid-x grid-padding-x">
-            <div class="cell large-9">
-                <div class="grid-x grid-margin-x" >
-                    <div class="cell large-6 container-combo" >
-                        <div class="form-group">
-                            <span class="spn-equipo2-emp text-primary" style="font-size:14px;font-weight:bold"></span></br>
-                            <span class="spn-equipo2-pro text-primary" style="font-size:14px;font-weight:bold"></span></br>
-                            <span class="spn-equipo2-req text-primary" style="font-size:14px;font-weight:bold"></span>
-                            <div hidden><label hidden id="lblidSol">1</label></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="cell large-9">
                 <div class="grid-x grid-margin-x">
                     <div class="cell large-6 container-combo">

@@ -432,9 +432,9 @@ function BuscarSolucionesPendientes(){
                                 else{
                                     // LimpiarCampos();
                                 }
-                                $('.spn-operaciones-emp').html(`<span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
-                                $('.spn-operaciones-pro').html(`<span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
-                                $('.spn-operaciones-req').html(`<span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
+                                $('.spn-cotizacion-emp').html(`<span style="font-size:14px">${arrayData[i].nomempresa}</span>`);
+                                $('.spn-cotizacion-pro').html(`<span style="font-size:14px">${arrayData[i].nomproyecto}</span>`);
+                                $('.spn-cotizacion-req').html(`<span style="font-size:12px">${arrayData[i].requerimiento}</span>`);
 
 
                             }
@@ -465,9 +465,9 @@ function BuscarSolucionesPendientes(){
 
 
 function LimpiarCamposCot() {
-    $('.spn-operaciones-emp').html('');
-    $('.spn-operaciones-pro').html('');
-    $('.spn-operaciones-req').html('');
+    $('.spn-cotizacion-emp').html('');
+    $('.spn-cotizacion-pro').html('');
+    $('.spn-cotizacion-req').html('');
 }
 
 

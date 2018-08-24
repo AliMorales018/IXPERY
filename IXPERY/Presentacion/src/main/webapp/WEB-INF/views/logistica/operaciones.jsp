@@ -34,8 +34,8 @@
         .row-selected{
             /*JS*/
             color: #D34539;
-            border-top: .13rem solid grey;
-            border-bottom: .13rem solid grey;
+            border-top: .13rem solid #D34539;
+            border-bottom: .13rem solid #D34539;
         }
 
 
@@ -86,11 +86,21 @@
 <!-- End Buttons -->
 
 <!-- Date -->
-<div class="l-container-sm">
-    <div class="grid-x grid-padding-x">
-        <div class="cell large-12">
-            <label class="text-f" id="lbl_operaciones_fecha">${fecha}</label>
+<div name="div-cotizacion-frm" class="content">
+    <div class="grid-x align-top">
+        <div class="cell large-2">
+            <label class="text-f" id="lbl_solucion_fecha" >${fecha}</label>
         </div>
+        <div class="cell large-8">
+            <div class="grid-x align-center align-top">
+                <div class="cell text-center" style="visibility:visible">
+                    <div style="margin-bottom: 5px"><span class="spn-cotizacion-emp text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                    <div style="margin-bottom: 5px"><span class="spn-cotizacion-pro text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                    <div><span class="spn-cotizacion-req text-primary" style="font-size:10px;font-weight:bold"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="cell large-2"></div>
     </div>
 </div>
 <!-- End Date -->

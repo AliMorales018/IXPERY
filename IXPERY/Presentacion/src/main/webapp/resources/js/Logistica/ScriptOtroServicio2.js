@@ -227,12 +227,12 @@ function crearSesProvSoli(idtr){
             alert('Error: ' + msg.responseText);
         }
     });
-SesionServicioSolucion(idServSol);
+    SesionServicioSolucion(idServSol);
 
 }
 
 function abrir_prove_ot2(){
-AddMenu(mProveedor);
+    AddMenu(mProveedor);
 }
 function abrir_asociar_ots2(){
     let solAscoServv="";

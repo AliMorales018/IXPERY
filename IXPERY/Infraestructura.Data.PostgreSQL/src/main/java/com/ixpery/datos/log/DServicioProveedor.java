@@ -1,5 +1,7 @@
 package com.ixpery.datos.log;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ixpery.datos.tools.DConexion;
 import com.ixpery.datos.tools.JsonGeneral;
 import com.ixpery.utilitario.DtUtilitario;
@@ -43,16 +45,32 @@ public class DServicioProveedor {
         }
     }
 
-    public String RegistrarAsociado(String json) throws Exception{
+    public String RegistrarAsociado(String json, Integer idServSol) throws Exception{
         json = jg.JsonConvert(json);
         listaParametros.clear();
         SqlParameter pjson = new SqlParameter("json", json);
         listaParametros.add(pjson);
-        return com.EjecutaConsultaJson("gen_verificar_insertar_json",listaParametros);
+        String a= com.EjecutaConsultaJson("gen_verificar_insertar_json",listaParametros);
+        //Regostrar Id ServicioSolucion - Registrar Id ServivicioProveedor
+        if (idServSol != null) {
+            listaParametros.clear();
+
+            JsonParser parser = new JsonParser();
+            JsonObject root = parser.parse(json).getAsJsonObject();
+            Integer idServProveedor = root.get("46776").getAsJsonArray().get(0).getAsJsonObject().get("467761").getAsInt();
+
+            SqlParameter idServSolu = new SqlParameter("idProSol", idServSol);
+            SqlParameter idServProv = new SqlParameter("idProdProv", idServProveedor);
+            listaParametros.add(idServSolu);
+            listaParametros.add(idServProv);
+            com.TransUnica("historialprecio_servsol",listaParametros);
+        }
+        return a;
     }
 
     public String ActualizarHistorialPrecio(String json1, String json2, Integer idServ) throws Exception{
         json1 = jg.JsonConvert(json1);
+        json2 = jg.JsonConvert(json2);
         listaParametros.clear();
         SqlParameter pjson = new SqlParameter("json", json1);
         listaParametros.add(pjson);
@@ -60,7 +78,11 @@ public class DServicioProveedor {
         //Recalcular
         listaParametros.clear();
         SqlParameter pJson = new SqlParameter("json",json2);
+        System.out.println("JSON ENVIADO: "+json2);
+        System.out.println("CADENA ENVIADA: "+"467762"+","+idServ+",0,3");
         SqlParameter pValues = new SqlParameter("values", "467762"+","+idServ+",0,3");
+        listaParametros.add(pJson);
+        listaParametros.add(pValues);
         com.TransUnica("gen_insertar_historial_precio",listaParametros);
         return a;
     }

@@ -96,13 +96,13 @@ public class COtroServicio2 {
 //nuevo enviar a juan
     @RequestMapping("/otroservicio2/SesionServSol")
     public @ResponseBody
-    String SesionProdSol(
-            @RequestParam(value = "servsol") String servsol,
+    Integer SesionProdSol(
+            @RequestParam(value = "servsol") Integer servsol,
             HttpServletRequest request
     ) throws Exception {
         HttpSession session = request.getSession();
         session.setAttribute("servsol", servsol);
-        servsol = session.getAttribute("servsol").toString();
+        servsol = (Integer) session.getAttribute("servsol");
         return servsol;
     }
 }
