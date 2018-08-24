@@ -16,8 +16,8 @@ public class BServicioProveedor {
         return odSerProve.BuscarAsociado(idProv,idServ);
     }
 
-    public String RegistrarAsociado(String json)throws Exception {
-        return odSerProve.RegistrarAsociado(json);
+    public String RegistrarAsociado(String json, Integer idServSol)throws Exception {
+        return odSerProve.RegistrarAsociado(json,idServSol);
     }
 
     public String ActualizarHistorialPrecio(String json1, String json2, Integer idServ)throws Exception {

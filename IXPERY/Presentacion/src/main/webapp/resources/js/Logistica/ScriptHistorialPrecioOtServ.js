@@ -70,8 +70,6 @@ function ListarHistorial_PreciosOtServ(idSesionProv,idSesionServ,bandera){
             data: {"idProv":idProv,"idServ":idServ},
             success: function resultado(data) {
                 if(data === "0"){
-                    console.log('data ListarHistorial_PreciosOtServ');
-                    console.log(data);
                     $("#contenedor_nuevo_precioOtServ").css("visibility", "hidden");
                     $("#contasociar_pro_provots").css("visibility","visible");
                     $("#vppahis").val("0");
@@ -246,6 +244,7 @@ function guardar_nuevo_PrecioOtServ() {
                             }
                         ]
                     };
+                    data.spr[0].spr1 = idServProv;
                     $.ajax({
                         method: "POST",
                         url: "/historialprecioOtServicio/actualizarprecio",
