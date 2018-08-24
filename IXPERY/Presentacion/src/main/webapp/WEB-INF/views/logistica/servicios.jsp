@@ -124,7 +124,7 @@
         </div>
     </div>
     <div class="cell small-12 medium-4">
-        <!-- Notify -->
+        <!-- Notify Icon -->
     </div>
 </div>
 <!-- End Buttons -->
