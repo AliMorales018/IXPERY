@@ -183,7 +183,8 @@
                 conta_filas_otroservicio2=0;
                 conta_filas_otroservicionr2=0;
                 JSONobjGeneralServ2 = JSON.parse(valor);
-                // alert(JSON.stringify(JSONobj));
+                console.log("OTRO SERVICIO RETORNO DE LA BD MICKY");
+                console.log(JSON.stringify(JSONobj));
                 $("#tbody_otroservicio2").empty();
                 $("#tbody_otroservicionr2").empty();
 

@@ -253,8 +253,8 @@ function guardar_nuevo_PrecioOtServ() {
                             if (data === "0") {
                                 //Cargar otra vez la tabla
                                 ListarHistorial_PreciosOtServ(null,null,"historial");
-                                if (typeof BuscarSolucionOtroServis !== 'undefined' && jQuery.isFunction(BuscarSolucionOtroServis)) {
-                                    BuscarSolucionOtroServis();
+                                if (typeof BuscarOtroServicio !== 'undefined' && jQuery.isFunction(BuscarOtroServicio)) {
+                                    BuscarOtroServicio();
                                 }
                             }
                             else{
